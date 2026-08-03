@@ -1,0 +1,379 @@
+{
+  "domain": "grant-writing",
+  "batch": 5,
+  "ids": [
+    "grant-writing.compliance.sam-registration",
+    "grant-writing.compliance.rfp-deconstruction",
+    "grant-writing.compliance.deadline-discipline",
+    "grant-writing.compliance.grants-gov-submission",
+    "grant-writing.compliance.eligibility",
+    "grant-writing.compliance.terms-acceptance",
+    "grant-writing.compliance.regranting",
+    "grant-writing.compliance.single-audit"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.compliance.sam-registration",
+      "label": "SAM.gov registration",
+      "tier": 1,
+      "cluster": "compliance",
+      "prereqs": [],
+      "one_line": "Register your entity in SAM.gov with a Unique Entity ID so you can legally apply for and receive federal awards.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.landscape.funder-types", "grant-writing.landscape.grants-gov-search"],
+      "know_what": [
+        "the Unique Entity ID (UEI) — the 12-character SAM.gov identifier that replaced the DUNS number in 2022 and is required on every federal application",
+        "the annual renewal requirement — a SAM.gov registration must be revalidated at least once every 12 months or the entity drops to inactive",
+        "entity validation — SAM.gov confirms the legal business name and physical address against IRS records (EIN match) before the UEI is issued",
+        "Reps & Certs — the representations and certifications (debarment, lobbying, tax) that accompany every registration and flow into applications",
+        "active vs inactive status — only an active registration is accepted by Grants.gov; a lapsed one rejects your submission at the portal",
+        "2 CFR 25 — the regulation requiring SAM registration as a condition of receiving any federal award or subaward",
+        "the free registration fact — GSA never charges for SAM.gov, and third-party sites that bill for 'registration help' are a known scam vector"
+      ],
+      "know_how": [
+        "register at SAM.gov with an entity administrator account and complete the full entity registration, including the UEI and Reps & Certs",
+        "enter the legal business name exactly as it appears on your EIN confirmation from the IRS, or validation fails",
+        "renew the registration at least 60 days before the 12-month anniversary, because reactivation after lapse can take 5-10 business days",
+        "verify active status on the SAM.gov entity page before starting any federal application, not after drafting",
+        "update Reps & Certs whenever entity information (address, officials, NAICS codes) changes, since stale data blocks award acceptance",
+        "link the SAM.gov registration to Grants.gov once so the portal pulls your entity profile into every Workspace application"
+      ],
+      "habits": [
+        "keeping a calendar reminder for SAM renewal set 60 days before the 12-month anniversary, and treating the lapse date as a hard deadline",
+        "checking SAM active status at the start of every federal opportunity, before any drafting hours are spent",
+        "using the IRS-confirmed legal name on every form, never the operating name, to keep validation clean",
+        "billing nothing for registration — flagging any third-party SAM 'service' that asks for payment as a scam",
+        "re-running the entity validation check when the IRS EIN or mailing address changes, before it bites a submission"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high",
+        "foundation": "low",
+        "corporate": "low"
+      },
+      "checkpoint": "Register your entity in SAM.gov, confirm the UEI appears in an active registration, and name the displayed 12-month renewal date with a calendar entry set at least 60 days before it.",
+      "common_failure": "Letting the registration lapse, so a finished application is rejected at the Grants.gov portal; entering the operating name instead of the IRS legal name and failing entity validation; paying a third-party site for what GSA provides free; starting the registration the week of a deadline when activation can take 5-10 business days.",
+      "sources": [
+        "SAM.gov — GSA entity registration and UEI guidance",
+        "2 CFR Part 25 — Universal Identifier & Central Contractor Registration",
+        "Grants.gov Learning Center — SAM registration requirements"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.rfp-deconstruction",
+      "label": "NOFO deconstruction",
+      "tier": 1,
+      "cluster": "compliance",
+      "prereqs": [],
+      "one_line": "Extract deadlines, eligibility, page limits, and review criteria from a Notice of Funding Opportunity so you plan the response before writing.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.landscape.funder-types", "grant-writing.landscape.grants-gov-search"],
+      "know_what": [
+        "the NOFO's anatomy — the section-by-section Notice of Funding Opportunity on Grants.gov: agency, Assistance Listing number, eligibility, page limits, review criteria, and submission deadlines",
+        "the 5:00 pm ET deadline convention — most federal applications close at 5:00 pm Eastern Time on the due date, regardless of your time zone",
+        "review criteria and point weights — the scored sections and their percentages (e.g., approach 30%, need 20%) that the agency will use to rank applications",
+        "page limits and formatting rules — narrative caps (e.g., 25 pages), font and margin requirements, and which attachments count against the cap",
+        "mandatory vs optional attachments — the difference between forms and documents required for a complete application and those that are voluntary",
+        "amendments — agencies revise NOFOs; the revised version and its change history on Grants.gov override anything you drafted against the original",
+        "the funding opportunity description (FOD) vs the application guide — the NOFO announces the competition, the agency's application guide carries the mechanics"
+      ],
+      "know_how": [
+        "read the NOFO twice: once for deadlines and eligibility, once for page limits, review criteria, and attachment requirements",
+        "build a one-page compliance sheet listing every deadline, page limit, eligibility condition, and review criterion with its point weight",
+        "extract the review criteria into a draft scoring table before writing, so the narrative is structured to answer them",
+        "date-stamp the NOFO version you are drafting against and re-check Grants.gov for amendments at least weekly",
+        "flag agency-specific requirements (forms, formats, registrations) that differ from the Grants.gov standard",
+        "note the Assistance Listing number and search for the program's prior-year NOFO and awarded abstracts to see what scored"
+      ],
+      "habits": [
+        "producing the compliance sheet before the outline, never after the draft",
+        "checking Grants.gov for NOFO amendments on every project team meeting until submission",
+        "reading the eligibility and page-limit sections aloud to a second person before committing hours",
+        "filing every NOFO version and amendment notice in the opportunity folder so the drafting baseline is provable",
+        "re-reading the review criteria immediately before the final revision pass to catch drift from the scoring rubric"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high",
+        "foundation": "low",
+        "corporate": "low"
+      },
+      "checkpoint": "From a real NOFO, produce a one-page compliance sheet naming every deadline, page limit, eligibility condition, and review criterion with its point weight — completed before drafting begins.",
+      "common_failure": "Drafting against an amended-out NOFO because the revision was never checked; skipping page-limit details until the final hour; discovering mid-draft that your entity is ineligible; treating a proposal template as the agency's requirements and missing agency-specific forms.",
+      "sources": [
+        "Grants.gov — Understanding the NOFO / funding opportunity resources",
+        "NIH — How to Read a Funding Opportunity Announcement (grants.nih.gov)",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.deadline-discipline",
+      "label": "Deadline discipline",
+      "tier": 1,
+      "cluster": "compliance",
+      "prereqs": [],
+      "one_line": "Work backward from a hard submission time to a writing and review schedule, and submit with margin instead of in the last hour.",
+      "hours": 5,
+      "soft_prereqs": ["grant-writing.portfolio.pipeline-tracker", "grant-writing.proposal.revision-loop"],
+      "know_what": [
+        "the 5:00 pm ET cutoff — federal applications close at 5:00 pm Eastern Time on the due date; the portal stops accepting at that instant",
+        "the reverse timeline — planning backward from the due date: final review, internal deadline, attachment assembly, and draft milestones",
+        "the 24-48 hour margin — the convention of landing the submission at least a full day early, because the portal, not your writing, is the last dependency",
+        "Grants.gov Workspace — the online environment where you assemble and test-submit an application before the real deadline",
+        "portal maintenance windows — Grants.gov posts scheduled outages; a planned submission during one is a self-inflicted miss",
+        "the tracking number — Grants.gov's submission receipt (GRANT number) that proves the application arrived before the cutoff"
+      ],
+      "know_how": [
+        "build a reverse timeline from the 5:00 pm ET due date: narrative freeze, internal review, attachments, and validation, each with a named owner",
+        "set the internal submission deadline 3-5 days before the federal deadline so reviewer feedback has a landing spot",
+        "plan to submit at least 24-48 hours before the cutoff, then use the slack for validation-error fixes",
+        "test the application in Workspace before the real submission to catch form and attachment problems early",
+        "confirm receipt via the Grants.gov tracking number and save the confirmation page and downloaded package",
+        "check the Grants.gov system status page before the final submission window and reschedule around announced maintenance"
+      ],
+      "habits": [
+        "never planning to submit on the due date — treating the internal deadline as the real one",
+        "building slack into every milestone, because drafts always slip and the portal never waits",
+        "submitting and confirming the tracking number before the final day, never on it",
+        "treating Grants.gov downtime as a certainty to plan around, not a risk to accept",
+        "keeping the reverse timeline visible on the project tracker so no milestone drifts silently"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Build a reverse timeline for a real NOFO with named internal milestones that lands submission at least 24 hours before the 5:00 pm ET cutoff, and submit a test application to your Grants.gov workspace.",
+      "common_failure": "Treating the due date as the submission date, so a single validation error or portal outage becomes a missed deadline; drafting up to the final hour with no review margin; forgetting that 5:00 pm ET is a hard cutoff, not a target window.",
+      "sources": [
+        "Grants.gov — Deadline and system status guidance",
+        "Beverly Browning, Grant Writing For Dummies — timeline planning",
+        "Carlson & O'Neal-McElrath, Winning Grants Step by Step"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.grants-gov-submission",
+      "label": "Grants.gov submission",
+      "tier": 2,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.sam-registration"],
+      "one_line": "Assemble and submit an application through Grants.gov — forms, attachments, validation — without tripping the portal's rejections.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.compliance.rfp-deconstruction", "grant-writing.compliance.deadline-discipline"],
+      "know_what": [
+        "the SF-424 family — the Application for Federal Assistance (SF-424) plus the SF-424A budget form and SF-424B assurances that anchor most federal applications",
+        "standard vs agency-specific forms — some competitions replace the standard set with agency forms, and the NOFO's instructions control",
+        "Workspace — Grants.gov's online application assembly environment, where you complete forms, attach documents, and validate",
+        "validation errors and warnings — hard errors block submission; warnings submit but flag issues; both must be read before the deadline",
+        "attachment requirements — PDF format, named files, page limits, and file-size caps (many agencies cap individual attachments at 10 MB)",
+        "the tracking number — the GRANT number returned at submission that is your proof the application was received before the cutoff"
+      ],
+      "know_how": [
+        "build the application in Grants.gov Workspace, completing every required form field with data from a single source of truth",
+        "convert attachments to PDF, name them exactly as the NOFO specifies, and verify each is under the agency's page and size caps",
+        "run validation the day before submission, fix every error, and review every warning rather than dismissing it",
+        "submit at least 24-48 hours before the 5:00 pm ET deadline so validation failures have time to be repaired",
+        "save the tracking number and download a copy of the submitted package for the award file",
+        "use the Grants.gov help desk and Knowledge Base when a form or validation error is not self-explanatory"
+      ],
+      "habits": [
+        "running validation the day before submission, never the hour of",
+        "keeping attachments under page and file-size limits and re-checking them at assembly, not at draft",
+        "reading every validation warning as a question to answer, not a box to ignore",
+        "archiving the submitted package, tracking number, and dated confirmation in the opportunity folder",
+        "building a reusable checklist of the SF-424 fields your organization always enters, to cut re-entry errors"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high",
+        "foundation": "low",
+        "corporate": "low"
+      },
+      "checkpoint": "Submit a complete application through Grants.gov Workspace that passes validation with zero errors, and capture the tracking number and a downloaded copy of the submitted package.",
+      "common_failure": "Fixing validation errors under deadline pressure after the margin was spent; forgetting an attachment until the system lists it missing; uploading a corrupt or oversized PDF that the portal silently rejects; assuming the SF-424 family applies when the agency specified different forms.",
+      "sources": [
+        "Grants.gov — Workspace user guide and How to Apply instructions",
+        "Grants.gov — SF-424 forms and instructions",
+        "2 CFR 200.313 — Federal financial reporting forms reference"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.eligibility",
+      "label": "Eligibility check",
+      "tier": 2,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.rfp-deconstruction"],
+      "one_line": "Confirm your entity type, geography, and track record satisfy every threshold before committing hours to an application.",
+      "hours": 5,
+      "soft_prereqs": ["grant-writing.landscape.funder-fit", "grant-writing.compliance.sam-registration"],
+      "know_what": [
+        "the eligible-applicant categories — 501(c)(3) nonprofits, units of government (state, local, Tribal), and institutions of higher education, with for-profits excluded from most federal competitions",
+        "the NOFO's Eligible Applicants section — the verbatim list of entity types, geographic areas, and track-record conditions that gate entry",
+        "geographic eligibility — service-area requirements (e.g., rural counties, specific states) that disqualify otherwise capable applicants",
+        "entity-type exclusions — competitions limited to units of government or IHEs where a 501(c)(3) cannot apply at all",
+        "applicant-type codes — the standardized categories (e.g., 'A' for nonprofits, '25' for government) agencies use in their forms",
+        "eligibility as a precondition — an active SAM registration and, often, a UEI are part of being eligible to apply, not just to receive"
+      ],
+      "know_how": [
+        "read the NOFO's Eligible Applicants section verbatim and map each condition to your entity's actual status",
+        "check the geographic scope against your service area before drafting, not after",
+        "confirm the entity type — 501(c)(3) determination letter, unit-of-government status, or IHE accreditation — with the document that proves it",
+        "verify prerequisite registrations (SAM active, UEI current) as part of the eligibility determination",
+        "document the determination in one line with the NOFO section cited, and re-run it if the NOFO is amended",
+        "check whether the competition requires a consortium, partnership, or match as a condition of eligibility, and confirm you can meet it"
+      ],
+      "habits": [
+        "checking eligibility before writing a word of the narrative, as a binary gate",
+        "treating 501(c)(3) status as qualifying for some, not all, competitions",
+        "re-verifying eligibility after every NOFO amendment, since criteria change",
+        "keeping the IRS determination letter, state registration, and SAM status in one place so the check takes minutes",
+        "recording the eligibility determination and its source in the opportunity folder for later auditors and reviewers"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce a written eligibility determination for a real NOFO, quoting the exact Eligible Applicants language that admits or excludes your entity, before any drafting hours are spent.",
+      "common_failure": "Assuming 501(c)(3) status opens every federal door; missing a unit-of-government or IHE-only restriction until after weeks of drafting; ignoring the geographic service-area condition; treating eligibility as a paperwork detail rather than the first gate.",
+      "sources": [
+        "Grants.gov — Search and eligibility filters documentation",
+        "National Council of Nonprofits — federal grants eligibility guidance",
+        "IRS — 501(c)(3) determination and public charity status"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.terms-acceptance",
+      "label": "Award terms review",
+      "tier": 3,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.grants-gov-submission", "grant-writing.compliance.eligibility"],
+      "one_line": "Review the notice of award's terms and conditions and flag anything you cannot commit to before you accept the money.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.budget.allowable-costs", "grant-writing.stewardship.reporting-calendar"],
+      "know_what": [
+        "the notice of award (NoA) — the document that makes the grant official and carries the terms, period of performance, and budget",
+        "2 CFR 200's subparts — Subpart A (definitions), C (pre-award requirements), D (post-award requirements), E (cost principles), and F (audit requirements), which govern federal awards",
+        "general vs specific conditions — standard terms that apply to every award plus agency- or award-specific special conditions",
+        "the period of performance — the start and end dates within which the money can be spent, and whether extension is possible",
+        "payment method — advance payment vs reimbursement, and the cash-flow difference between them for your organization",
+        "reporting requirements — the scheduled interim and final reports (financial and narrative) with their due dates",
+        "match and cost-share commitments — the matching dollars the award requires you to raise or spend"
+      ],
+      "know_how": [
+        "read the NoA's terms and conditions in full, including the general terms attached as an appendix, before signing",
+        "extract every commitment — period of performance, payment method, match, reporting dates, special conditions — into a one-page terms summary",
+        "flag any term the organization cannot commit to (cash-flow, match, staffing, data sharing) and escalate before acceptance",
+        "calendar the reporting due dates and the period-of-performance end from the NoA, not from memory",
+        "check the award's cost principles under 2 CFR 200 Subpart E for anything that changes how the budget may be spent",
+        "confirm the acceptance mechanism and its deadline, since some awards require an explicit acceptance or drawdown setup"
+      ],
+      "habits": [
+        "reviewing terms before the acceptance deadline, never after spending begins",
+        "treating the NoA terms as binding commitments, not boilerplate",
+        "putting every reporting date from the NoA on the calendar the day the award arrives",
+        "re-reading special conditions when anything about the project changes mid-period",
+        "keeping the NoA and terms summary in the award file with the application package"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Review a real notice of award and produce a commitment summary listing the period of performance, payment method, match, and reporting dates, flagging every term the organization cannot accept before signing.",
+      "common_failure": "Accepting the award without reading the terms, then discovering a special condition that changes the project; missing a reimbursement-only payment method that the organization cannot cash-flow; treating 2 CFR 200 as uniform and missing the agency's specific conditions.",
+      "sources": [
+        "2 CFR Part 200 — Uniform Administrative Requirements, Cost Principles, and Audit Requirements for Federal Awards",
+        "GSA — Federal award terms and conditions template",
+        "National Council of Nonprofits — federal award management guidance"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.regranting",
+      "label": "Regranting & subawards",
+      "tier": 3,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.eligibility", "grant-writing.compliance.grants-gov-submission"],
+      "one_line": "Pass federal or foundation funds through to subrecipients with written subawards and their own compliance duties.",
+      "hours": 10,
+      "soft_prereqs": ["grant-writing.stewardship.narrative-reporting", "grant-writing.compliance.single-audit"],
+      "know_what": [
+        "the subaward vs contract distinction (2 CFR 200.1) — a subrecipient carries out part of the program and is subject to the award's requirements; a contractor provides goods or services for a fee",
+        "the pass-through entity — the recipient that flows funds down and keeps oversight duty under 2 CFR 200 Subpart D",
+        "the written subaward — the required agreement naming scope, budget, period, reporting, and audit responsibilities of the subrecipient",
+        "flow-down provisions — the federal requirements (2 CFR 200, single-audit, records) that must be passed through in the subaward agreement",
+        "subrecipient monitoring — the pass-through entity's duty to review subrecipient reports, expenditures, and performance on a schedule",
+        "subrecipient risk assessment — evaluating a subrecipient's financial and management capacity before awarding, per 2 CFR 200.332",
+        "foundation and intermediary regranting — private funders and United Ways that pass their own grants down with simpler but still written agreements"
+      ],
+      "know_how": [
+        "classify each flow-through as subaward or contract using the 2 CFR 200.330 indicators (programmatic responsibility, compliance, contribution to the program)",
+        "issue a written subaward for every pass-through, naming scope, approved budget, period of performance, and reporting cadence",
+        "run a subrecipient risk assessment before the award and set monitoring intensity accordingly",
+        "monitor subrecipients on a published schedule — reports, expenditure review, and site visits — and document each review",
+        "flow down the federal requirements the subaward inherits, including 2 CFR 200 and single-audit duties",
+        "collect and review the subrecipient's reports before releasing the next drawdown or installment"
+      ],
+      "habits": [
+        "writing the subaward agreement before passing any money, never after",
+        "monitoring on a schedule, not on exception — the first missed report is a process gap, not a surprise",
+        "treating every flow-through as requiring a written agreement, even small foundation regrants",
+        "documenting each monitoring contact so the audit trail shows the oversight happened",
+        "reclassifying a relationship when the work changes — a contractor who starts doing program work has become a subrecipient"
+      ],
+      "know_why": {
+        "claim": "Passing funds through to local organizations builds capacity where the work lives, and the pass-through entity's job is to monitor, not to do the work itself.",
+        "because": "federal agencies and foundations fund intermediaries precisely because a local pass-through can reach and develop organizations the original funder cannot, and the written subaward plus scheduled monitoring is what makes the chain auditable under 2 CFR 200 Subpart D.",
+        "disputed_by": "some program officers argue pass-through is risk-shifting — paying an intermediary to do what should have been funded directly — and that the subrecipient-monitoring burden becomes a bureaucratic tax on the small organizations it claims to build up.",
+        "source": "2 CFR 200 Subpart D (pass-through entity requirements) vs practitioner debate in the National Council of Nonprofits' regranting and subaward guidance"
+      },
+      "school_weights": {},
+      "checkpoint": "Draft a written subaward agreement for a real flow-through grant stating the subrecipient's scope, budget, period, reporting cadence, and audit duties, with a monitoring schedule of named due dates.",
+      "common_failure": "Passing money without a written subaward and losing the audit trail; classifying a contractor as a subrecipient (or vice versa) and applying the wrong requirements; skipping subrecipient monitoring until the single audit finds it missing; failing to flow down the federal conditions the subaward inherits.",
+      "sources": [
+        "2 CFR 200 Subpart D — Post-Federal Award Requirements for Pass-Through Entities",
+        "National Council of Nonprofits — subaward and regranting guidance",
+        "Council on Foundations — regranting and donor-advised fund practice"
+      ]
+    },
+    {
+      "id": "grant-writing.compliance.single-audit",
+      "label": "Single audit readiness",
+      "tier": 4,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.regranting"],
+      "one_line": "Track federal expenditures to the $750,000 threshold and prepare the documentation a single audit will demand.",
+      "hours": 12,
+      "soft_prereqs": ["grant-writing.budget.budget-basics", "grant-writing.stewardship.narrative-reporting"],
+      "know_what": [
+        "the $750,000 threshold (2 CFR 200.501) — a non-federal entity that expends $750,000 or more in federal awards in its fiscal year must have a single audit",
+        "the Schedule of Expenditures of Federal Awards (SEFA) — the required listing of every federal award with its Assistance Listing number and expenditures",
+        "Assistance Listing numbers (the former CFDA) — the catalog identifiers each federal program is reported under in the SEFA",
+        "major program determination — the risk-based selection of which federal programs the auditor tests in depth",
+        "2 CFR 200 Subpart F — the audit requirements, including auditor selection, the audit report, and corrective action",
+        "the audit findings and corrective action plan — the deficiencies the auditor reports and the pass-through or agency response they demand",
+        "subrecipient expenditure inclusion — a pass-through entity counts subaward expenditures in its own SEFA and federal-expenditure total"
+      ],
+      "know_how": [
+        "track federal expenditures by award and Assistance Listing continuously, reconciling to the general ledger at least quarterly",
+        "monitor cumulative federal spend against the $750,000 threshold so the audit obligation is known before year-end, not after",
+        "prepare the SEFA listing every federal award with its Assistance Listing number, direct and pass-through amounts, and total",
+        "identify major programs using the 2 CFR 200.518 risk criteria (Type A vs Type B thresholds) before the auditor does",
+        "assemble the award file — NOFO, notice of award, terms, amendments, and correspondence — for auditor access",
+        "coordinate with the chosen auditor on scope, timeline, and the compliance supplement for each program",
+        "draft a corrective action plan for any finding, addressing the root cause with named owners and dates"
+      ],
+      "habits": [
+        "tracking federal expenditures as a running number, not a year-end reconstruction",
+        "reconciling the SEFA to the general ledger before the auditor asks for it",
+        "keeping every award's Assistance Listing number in the award file from day one",
+        "treating the $750,000 threshold as a live risk to monitor, since one large award can cross it",
+        "preparing the corrective action plan before the audit closes, while the evidence is fresh"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high",
+        "foundation": "low",
+        "corporate": "low"
+      },
+      "checkpoint": "Prepare a Schedule of Expenditures of Federal Awards for your entity listing every federal award under its Assistance Listing number, and state whether total federal expenditures crossed the $750,000 single-audit threshold.",
+      "common_failure": "Discovering the threshold was crossed at year-end with no expenditure documentation in place; filing a SEFA with wrong Assistance Listing numbers; forgetting that subaward dollars count in the pass-through entity's own total; treating the single audit as the auditor's problem until findings arrive.",
+      "sources": [
+        "2 CFR 200 Subpart F — Audit Requirements (single audit, $750,000 threshold)",
+        "OMB Compliance Supplement — program-specific audit guidance",
+        "AICPA — Single Audit Guide (Government Auditing Standards practice)"
+      ]
+    }
+  ]
+}

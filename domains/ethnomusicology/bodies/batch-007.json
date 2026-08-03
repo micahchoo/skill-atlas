@@ -1,0 +1,290 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 7,
+  "ids": [
+    "ethnomusicology.archiving.metadata",
+    "ethnomusicology.archiving.file-standards",
+    "ethnomusicology.archiving.preservation",
+    "ethnomusicology.archiving.cataloging",
+    "ethnomusicology.archiving.community-return",
+    "ethnomusicology.archiving.legacy-collections"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.archiving.metadata",
+      "label": "Recording metadata",
+      "tier": 4,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.fieldwork.recording"],
+      "soft_prereqs": ["ethnomusicology.ethics.ip"],
+      "one_line": "Describe a field recording with enough metadata — who, what, when, where, instrument, genre, rights — to be findable and usable, using a standard like Dublin Core or LCMPI MARC fields.",
+      "hours": 10,
+      "know_what": [
+        "Dublin Core — the 15-element metadata standard (title, creator, date, coverage, format, rights…) that lets a stranger find and use a recording without asking its collector",
+        "LCMPI MARC fields — the Library of Congress Medium of Performance codes recorded in MARC catalog fields (e.g., 048) that index which instruments a recording uses, separately from genre",
+        "who/what/when/where — the core event facts: performers and roles, the piece and genre, the date, and the place, captured at recording time because they cannot be reliably reconstructed later",
+        "instrument vs genre — two distinct metadata axes (medium of performance, musical kind), each with its own vocabulary and each searchable independently",
+        "the rights statement — who owns the recording, who may hear it, and any restrictions, written into the metadata record rather than left in a separate consent file",
+        "the recording identifier — the accession-ready number (e.g., a collection prefix plus take number) that ties a file to its metadata record and its rights record",
+        "extent — the unit of description: how much material the record covers (duration, takes, participants), so the record describes one item and not a season of fieldwork",
+        "the schema mismatch — a Dublin Core record and a MARC record organize the same facts differently, so the schema is chosen to match the receiving archive, not your convenience"
+      ],
+      "know_how": [
+        "Record who, what, when, where, instrument, genre, and rights in the field at the moment of recording, from the slate and the conversation, not from memory after the trip",
+        "Fill a Dublin Core record for one recording — title, creator, contributor, date, coverage, description, format, identifier, rights — with each element used as the standard defines it",
+        "Assign LCMPI codes for the instruments played (MARC 048) so the item is retrievable by medium of performance in a MARC-based catalog",
+        "Write the rights status into the metadata (open, restricted, community-only, closed) matching exactly what the consultant consented to",
+        "Create one record per take or session linked to its file by identifier, so no recording exists in the archive without its description",
+        "Cross-check every metadata value against the slate and field notes; a date or name that disagrees goes back to the source before it is entered"
+      ],
+      "habits": [
+        "Capture metadata at recording time — slate first, record second — because 'that session' loses its dates and names within weeks",
+        "Give the place precisely (village, district, region), so future researchers can disambiguate places that share a name",
+        "When a performer is unknown, record the gap explicitly (instrument, style, region) instead of leaving a blank that reads as an oversight",
+        "Ask the consultant for the genre name in their own language, then add your analyst category as a second entry",
+        "Treat the rights field as load-bearing: an empty rights field can make a recording unusable by anyone, no matter how good the sound"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high" },
+      "checkpoint": "Take one of your own field recordings and produce a Dublin Core record for it — who, what, when, where, instrument, genre, and rights each filled from the field documentation — that a cataloger can import into a standard system without asking you a single clarifying question.",
+      "common_failure": "Writing metadata as an afterthought from memory weeks after the trip: the date is approximate, the performer list incomplete, and the rights field blank — so the recording is findable in name only and may be legally unusable, exactly the shelf of noise archives warn against.",
+      "sources": [
+        "Dublin Core Metadata Element Set (ISO 15836)",
+        "Library of Congress Medium of Performance Thesaurus (LCMPT) and MARC 048 field documentation",
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects"
+      ]
+    },
+    {
+      "id": "ethnomusicology.archiving.file-standards",
+      "label": "File standards & digitization",
+      "tier": 4,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.fieldwork.recording"],
+      "soft_prereqs": ["ethnomusicology.archiving.metadata"],
+      "one_line": "Convert a field recording into archival file standards — WAV/BWF 96 kHz/24-bit masters, lossless or compressed access copies, checksums, named per a convention — so it survives.",
+      "hours": 12,
+      "know_what": [
+        "WAV/BWF at 96 kHz/24-bit — the archival master format per IASA TC 04, preserving full dynamic range and headroom so every future generation copies from a complete original",
+        "BWF — Broadcast Wave Format, the WAV variant carrying a timestamp and a bext metadata chunk that lets an archive identify the file without opening it",
+        "the master/access split — one uncompressed master kept untouched plus derived access copies for listening; no one works on the master, ever",
+        "lossless vs compressed access copies — FLAC preserves every bit for working copies; MP3/AAC at 256-320 kbps serve casual listening and are never archival",
+        "the checksum — a cryptographic digest (MD5 or SHA-256) of a file used to prove a copy is bit-identical; the unit of trust in a digital archive",
+        "the naming convention — a documented pattern like collection-creator-date-take (e.g., jones_2024-06-14_t02.wav) that sorts, disambiguates, and survives transfer between systems",
+        "format obsolescence — the reason uncompressed standards win: a proprietary codec can die with its vendor, while PCM WAV decodes with no codec at all",
+        "the unprocessed master — the master is never EQ'd, noise-reduced, or normalized; processing happens only on copies, and the raw capture is preserved"
+      ],
+      "know_how": [
+        "Convert a field recording to BWF at 96 kHz/24-bit as the master, keeping the original capture untouched as source material if it differs in format",
+        "Derive access copies from the master — FLAC for working, MP3 at 256-320 kbps for listening — and never run processing on the master itself",
+        "Compute a checksum (MD5 or SHA-256) for every master and store the digests in a manifest file that travels with the collection",
+        "Name files per a written convention — collection, creator, date, take, extension — and record the convention in the collection documentation",
+        "Verify a transfer by recomputing checksums after copying and comparing to the manifest, instead of trusting the copy dialog or a listening test",
+        "Embed BWF metadata in the bext chunk — title, originator, date, description — so the file carries its identity even if the catalog is lost",
+        "Document the digitization chain — source, recorder, software, settings — so a future engineer can reproduce how the file was made"
+      ],
+      "habits": [
+        "Treat the master as a museum object: once written, it is only read, never edited",
+        "Reach for the checksum before the listening test — two files that sound identical can still differ byte for byte",
+        "Name every file as if a stranger will sort the folder without the catalog open",
+        "When a format choice is offered, pick the one with no codec dependency (PCM WAV over a proprietary codec)",
+        "Write the naming convention down before the hundredth file exists, not after"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high" },
+      "checkpoint": "Take a raw field recording and produce an archival package: a BWF master at 96 kHz/24-bit with embedded metadata, FLAC and MP3 access copies derived from it, an MD5 or SHA-256 checksum manifest verified by recomputation, and every file named per your written convention.",
+      "common_failure": "Doing all the work on the original: normalizing, EQing, and saving over the field capture, so the master is a processed artifact and the true recording is gone — the one irreversible mistake in the chain, because no software restores what was overwritten.",
+      "sources": [
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects",
+        "Library of Congress Recommended Formats Statement",
+        "PREMIS Data Dictionary for Preservation Metadata"
+      ]
+    },
+    {
+      "id": "ethnomusicology.archiving.preservation",
+      "label": "Long-term preservation",
+      "tier": 5,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.archiving.file-standards"],
+      "soft_prereqs": [],
+      "one_line": "Store a digital collection so it survives a decade — redundant copies, verified checksums, format migration on a schedule, no single point of failure.",
+      "hours": 12,
+      "know_what": [
+        "redundant copies — the 3-2-1 rule: at least three copies, on two different media types, one off-site; a single drive is a bet, not a backup",
+        "verified checksums — the scheduled re-verification of stored files against the manifest, because drives decay silently and 'it was fine last year' is not a check",
+        "format migration — re-wrapping or re-encoding at-risk formats on a written schedule (every 5-10 years) so files never outlive their codec or container",
+        "no single point of failure — the design property that losing one drive, one building, or one cloud account loses nothing irreplaceable",
+        "bit rot — the physical decay of storage (magnetic, optical, flash) that corrupts copies even when nobody touches them",
+        "LTO tape — the offline archival medium with 30-year ratings that archives trust for long-term copies, versus consumer disks rated for 3-5 years",
+        "the refresh cycle — copying data onto fresh media before the old media's rated lifespan ends, on a calendar not a whim",
+        "preservation vs backup — backup guards against accidents (deleted files, ransomware); preservation guards against decay and obsolescence, a different discipline with different schedules"
+      ],
+      "know_how": [
+        "Set up three copies — primary working storage, a second local copy, and an off-site copy (cloud or LTO) — and document where each lives and who owns it",
+        "Run a scheduled checksum verification (quarterly or annually) comparing stored files against the manifest, and repair any mismatch from another copy",
+        "Audit the collection for at-risk formats — proprietary codecs, old containers — and migrate them on a written 5-10 year cycle, logging each migration",
+        "Keep at least one copy on media independent of the others (different technology, different vendor), so one failure mode cannot kill two copies",
+        "Write a one-page preservation plan — copies, checksum schedule, migration cycle, responsible person — and review it annually",
+        "Test restoration, not just storage: periodically read a file back from each medium and verify it, because a backup you have never restored is a rumor",
+        "Track media age and refresh before rated end-of-life — consumer disks at 3-5 years, LTO per its 30-year rating"
+      ],
+      "habits": [
+        "Assume every copy will fail eventually, and ask which copy you lose when it does",
+        "Put checksum verification on the calendar like a fire drill, not a good intention",
+        "When a new format appears, ask what will read it in ten years before adopting it",
+        "Treat the off-site copy as non-negotiable — a fire that takes the house takes the archive if there is only one site",
+        "Never trust a restore until you have done one; pull a random file from each copy each year and verify it"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high", "interpretive": "low" },
+      "checkpoint": "Write a one-page preservation plan for your collection — at least three copies on two media types with one off-site, a scheduled checksum verification cycle, and a dated format-migration schedule — then execute one full verification pass and restore a test file from the off-site copy bit-identically.",
+      "common_failure": "Treating backup as preservation: one external drive (or one cloud sync) holding the only copy, never checksummed and never restored, so the first silent drive failure or deleted-folder accident destroys years of irreplaceable fieldwork with no second copy to repair from.",
+      "sources": [
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects",
+        "Library of Congress National Recording Preservation Plan",
+        "PREMIS Data Dictionary for Preservation Metadata"
+      ]
+    },
+    {
+      "id": "ethnomusicology.archiving.cataloging",
+      "label": "Collection cataloging",
+      "tier": 5,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.archiving.metadata"],
+      "soft_prereqs": ["ethnomusicology.archiving.file-standards"],
+      "one_line": "Catalog a small collection — accession numbers, item-level records, finding aid — so a stranger can locate a specific recording within a day.",
+      "hours": 15,
+      "know_what": [
+        "the accession number — the unique identifier assigned when material enters a collection (e.g., AWM 2024-01), the spine that every catalog record hangs on",
+        "the accession record — the register entry logging what arrived, from whom, when, and any restrictions, the first document of ownership",
+        "the item-level record — one catalog entry per recording covering content, performers, date, place, medium, and access status, linked by accession number",
+        "the finding aid — the collection-level guide (provenance, scope, arrangement, item list) that lets a researcher navigate the collection and locate a specific recording",
+        "the archival hierarchy — fonds → series → item — the descriptive levels that tell you how much detail belongs at each layer",
+        "controlled vocabulary — the fixed terms (LCMPI for medium, a genre thesaurus, LCSH for topics) that make searching work, because free-text keywords fail at scale",
+        "the authority file — the canonical list of names (performers, ensembles, communities) with variants, so 'Nusrat' and 'Nusrat Fateh Ali Khan' resolve to one person",
+        "access restrictions in the record — the catalog marks who may use an item (open, community-only, restricted), so the catalog itself enforces consent"
+      ],
+      "know_how": [
+        "Assign an accession number to a new acquisition and enter it in the accession register with source, date, and restrictions, before any other cataloging",
+        "Create an item-level record per recording — content, performers, date, place, medium, duration, access status — linked to its accession number",
+        "Write a finding aid for a small collection: provenance note, scope and content summary, arrangement, and an item list a stranger can navigate",
+        "Apply controlled vocabulary (LCMPI for instruments, a genre thesaurus, LCSH for topics) instead of free-text description",
+        "Resolve performer names against an authority file, linking spelling variants to one canonical entry",
+        "Record access restrictions in each item record, so the catalog answers 'can I listen?' without opening the file",
+        "Order the collection (by date, event, or performer) before writing the finding aid, and describe that order in it"
+      ],
+      "habits": [
+        "Assign the accession number the day material arrives, before anything else happens to it",
+        "Catalog at the level of use: describe the item enough to find it, not so much that records take as long as the fieldwork",
+        "When two spellings of a name appear, check the authority file instead of silently creating two entries",
+        "State restrictions in every record, even when the answer is 'open' — silence reads as permission",
+        "Test the catalog with a stranger's question and fix whatever they cannot find"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high", "interpretive": "low" },
+      "checkpoint": "Catalog a small collection (10-20 recordings) end to end: accession numbers in a register, an item-level record per recording using controlled vocabulary, and a finding aid — then have someone who has never seen the collection locate a specific recording by performer, date, or instrument within a day using only your records.",
+      "common_failure": "Cataloging for yourself instead of for a stranger: free-text notes, no accession numbers, and names spelled however the moment felt — records that let you find your own recordings but make them invisible and unsearchable to anyone else, which defeats the purpose of an archive.",
+      "sources": [
+        "Society of American Archivists, Describing Archives: A Content Standard (DACS)",
+        "Library of Congress Medium of Performance Thesaurus (LCMPT)",
+        "Archive of World Music (Harvard) cataloging practice"
+      ]
+    },
+    {
+      "id": "ethnomusicology.archiving.community-return",
+      "label": "Return to communities",
+      "tier": 6,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.ethics.repatriation"],
+      "soft_prereqs": ["ethnomusicology.ethics.ownership"],
+      "one_line": "Deliver recordings back to the source community in usable form — copies, players, community archive, screening — and hand over control of their use.",
+      "hours": 10,
+      "know_what": [
+        "community return — delivering recordings to the source community in usable form: copies on media they can play, players if needed, screenings, and a local archive",
+        "the community copy — the physical or digital set handed over to the community without strings, distinct from the archive's preservation master",
+        "the community archive — a locally held, community-governed collection (e.g., the Ara Irititja project in central Australia), the endpoint of true return",
+        "the TK label — Local Contexts' Traditional Knowledge labels, which let communities mark how their material may be used, layered on top of legal copyright",
+        "the screening — the public playback event in the community where recordings are heard by the people who made them, often for the first time in decades",
+        "players and formats — the practical condition of return: a BWF master is not playable in a village, so the copy's format is chosen for the community's actual equipment",
+        "graduated control — the negotiated split: the community decides access for its own members, the archive holds preservation and scholarly access per agreement",
+        "the return agreement — the written document defining copies, formats, access rules, and re-return rights, signed by archive and community representatives"
+      ],
+      "know_how": [
+        "Prepare the community copy in a format the community's own equipment can play, and include players when the community asks for them",
+        "Organize a screening in the community — invite performers and their families, play the recordings, record reactions and corrections — as part of the return event",
+        "Negotiate the return agreement item by item: what copies go to the community, who decides access, what the archive may do with its master",
+        "Apply TK labels or a community rights statement to returned material, so community rules ride with the recordings instead of living in an inaccessible legal file",
+        "Help establish a community archive where asked — storage, cataloging help, training — rather than dropping files and leaving",
+        "Document the return itself — what was handed over, when, to whom, under what agreement — in both the archive's record and the community's own record",
+        "Hand over decision rights in the agreement: the community's permission governs access to its own recordings, including scholarly use"
+      ],
+      "habits": [
+        "Ask what form of return the community wants before deciding what to hand over — a screening, copies, a community archive, or all three",
+        "Test the copy on the community's player, not yours, before calling it returned",
+        "When the archive and the community disagree about a recording, resolve toward the community's decision in the agreement",
+        "Treat the screening as a research event: the reactions are evidence about the music's meaning that no other method yields",
+        "Record the return in writing and keep the agreement where both sides can find it"
+      ],
+      "know_why": {
+        "claim": "The archive's proper end is to hand control of recordings to the source community — copies, players, and decision rights over access — because the recordings are the community's cultural property, not the collector's.",
+        "because": "The recordings document music made by the community's own members, and holding them under archival authority reproduces the extractive relation fieldwork was supposed to end; a community can only use and manage what it actually controls.",
+        "disputed_by": "the documentary/preservation camp — archives following IASA TC 04 and institutions like the Archive of World Music — which holds that professional custody is what keeps fragile recordings alive and accessible to scholarship, and that unconditional handover can strand material in communities without the means to preserve it; the negotiated answer is graduated control, community copies plus archive-held preservation masters.",
+        "source": "Anthony Seeger, 'Ethnomusicologists, Archives, Professional Organizations, and the Shifting Ethics of Intellectual Property' (1996); Local Contexts, Traditional Knowledge (TK) Labels; Sally Treloyn & Andrea Emberly, 'Sustaining Traditions' (2014); IASA TC 04"
+      },
+      "school_weights": { "applied": "high", "documentary": "low" },
+      "checkpoint": "Return one collection to its source community end to end: a playable copy delivered on the community's own equipment (or with players), a screening held and documented, and a signed return agreement defining access rights — with the community's permission now governing who may use the recordings.",
+      "common_failure": "Delivering copies and calling it return: handing over unplayable master files, or holding a screening and walking away — no agreement, no access rights transferred, no community archive — so the community has the files but no control, and the relationship the return was meant to repair stays extractive.",
+      "sources": [
+        "Local Contexts, Traditional Knowledge (TK) Labels (Jane Anderson, Kim Christen)",
+        "Anthony Seeger, 'Ethnomusicologists, Archives, Professional Organizations, and the Shifting Ethics of Intellectual Property' (1996)",
+        "Sally Treloyn & Andrea Emberly, 'Sustaining Traditions: Ethnomusicological Collections, Access and Sustainability in Australia' (2014)",
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects"
+      ]
+    },
+    {
+      "id": "ethnomusicology.archiving.legacy-collections",
+      "label": "Legacy collections",
+      "tier": 6,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.archiving.preservation"],
+      "soft_prereqs": ["ethnomusicology.archiving.metadata"],
+      "one_line": "Triage an undocumented legacy collection — deteriorating reels or cassettes, unknown performers — and set digitization priorities you can defend.",
+      "hours": 15,
+      "know_what": [
+        "the legacy collection — undocumented holdings of reels, cassettes, and discs from earlier fieldwork eras (often 1950s-70s) with incomplete or lost documentation",
+        "the deterioration clock — magnetic tape's chemical and physical decay (binder hydrolysis, oxide shedding) that makes every un-digitized reel a race against time",
+        "sticky-shed syndrome — the binder breakdown on many 1970s-80s tapes that makes them shed oxide and squeal during playback; detectable on the reel, temporarily treatable",
+        "baking — the temporary fix (e.g., 50-55°C for several hours in a dehydrator) that re-bonds sticky-shed tape for a few playbacks, long enough to digitize",
+        "digitization priority — the triage ordering: at-risk media first (deteriorating, playback-obsolescent formats), then documented items, then the rest",
+        "the unknown-performer problem — reels with no labels or logs, whose identification may require consulting the community, since the music itself rarely names itself",
+        "the defensible priority — a written digitization order justified by risk, documentation value, and community interest, not by which reel is on top of the pile",
+        "IASA TC 04 risk categories — the guidelines' ranking of audio carriers by preservation urgency, the field's standard triage frame"
+      ],
+      "know_how": [
+        "Survey the collection first: inventory every item — format, condition, labels, any documentation — before touching a playback machine",
+        "Rank items by IASA TC 04 risk criteria — media type, physical condition, playback obsolescence — and write the digitization order with a rationale for each decision",
+        "Test a suspect reel for sticky shed (a short playback pass, listening for squeal and watching for oxide) and bake it before attempting the full transfer",
+        "Digitize at-risk items first at archival standard (BWF 96 kHz/24-bit, higher for damaged sources), documenting the playback chain for each",
+        "Pair each digitized item with whatever documentation exists, marking gaps (unknown performer, no date) explicitly rather than filling them by guess",
+        "Consult the community for identification where possible — an unknown voice may be recognized by elders, converting a gap into documentation",
+        "Keep the original medium after digitization, stored for the record, and log its condition for the next review",
+        "Maintain the digitization log — item, format, playback equipment, operator, checksum — so the collection's provenance survives the transfer"
+      ],
+      "habits": [
+        "Triage by risk, not by interest — the deteriorating reel beats the fascinating one, every time",
+        "When a label is missing, write 'unknown' in the record rather than inferring from the music, which corrupts the archive",
+        "Bake only when the tape shows sticky shed, and never as routine — heat is a risk that must be earned",
+        "Assume undocumented reels need community help to identify, and plan the consultation into the project",
+        "Keep the survey document current — the collection changes with every playback and every digitization"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high" },
+      "checkpoint": "Triage a legacy collection of 20+ items: complete an item-by-item inventory with condition assessments, produce a written digitization priority list ranked by IASA TC 04 risk with a rationale for each decision, and digitize the top three at-risk items to BWF with checksums and a playback-chain log.",
+      "common_failure": "Digitizing whatever is on top of the pile — usually the accessible, labeled items — while the deteriorating, undocumented reels decay unplayed: the collection's most at-risk material survives last, and sticky-shed tapes cross the point of no return before anyone tests them.",
+      "sources": [
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects (carrier risk assessment)",
+        "IASA TC 05, Handling and Storage of Audio and Video Carriers",
+        "Association for Recorded Sound Collections (ARSC) Guide to Audio Preservation"
+      ]
+    }
+  ]
+}

@@ -39,13 +39,13 @@
     }
   ],
   "clusters": [
-    { "id": "landscape", "name": "Funder landscape", "gist": "Where the money actually lives — federal, foundation, corporate, and regranting pipelines — and how to match your work to a funder before writing a word." },
-    { "id": "strategy", "name": "Program strategy", "gist": "Shaping the work so it is fundable and measurable: problem, theory of change, logic model, objectives, and the evaluation plan that proves them." },
-    { "id": "proposal", "name": "Proposal craft", "gist": "The documents that get read and scored — LOI, outline, narrative, abstract — and the revision loop that makes them submittable." },
-    { "id": "budget", "name": "Budgeting", "gist": "Turning the program into numbers that survive review: line items, personnel, indirect costs, match, and the narrative that justifies them." },
-    { "id": "compliance", "name": "Compliance & submission", "gist": "The mechanics that disqualify otherwise good proposals: registrations, eligibility, portals, deadlines, award terms, and audit readiness." },
-    { "id": "stewardship", "name": "Stewardship & renewal", "gist": "Keeping the money once it lands — reporting, relationships, site visits, and converting results into the next ask." },
-    { "id": "portfolio", "name": "Portfolio management", "gist": "Running grant-seeking as a system — pipeline tracking, calendars, win/loss learning, and capacity — instead of one proposal at a time." }
+    { "id": "landscape", "icon": "🏛️", "name": "Funder landscape", "gist": "Where the money actually lives — federal, foundation, corporate, and regranting pipelines — and how to match your work to a funder before writing a word." },
+    { "id": "strategy", "icon": "🧭", "name": "Program strategy", "gist": "Shaping the work so it is fundable and measurable: problem, theory of change, logic model, objectives, and the evaluation plan that proves them." },
+    { "id": "proposal", "icon": "✍️", "name": "Proposal craft", "gist": "The documents that get read and scored — LOI, outline, narrative, abstract — and the revision loop that makes them submittable." },
+    { "id": "budget", "icon": "💰", "name": "Budgeting", "gist": "Turning the program into numbers that survive review: line items, personnel, indirect costs, match, and the narrative that justifies them." },
+    { "id": "compliance", "icon": "⚖️", "name": "Compliance & submission", "gist": "The mechanics that disqualify otherwise good proposals: registrations, eligibility, portals, deadlines, award terms, and audit readiness." },
+    { "id": "stewardship", "icon": "🤝", "name": "Stewardship & renewal", "gist": "Keeping the money once it lands — reporting, relationships, site visits, and converting results into the next ask." },
+    { "id": "portfolio", "icon": "📚", "name": "Portfolio management", "gist": "Running grant-seeking as a system — pipeline tracking, calendars, win/loss learning, and capacity — instead of one proposal at a time." }
   ],
   "spine": [
     "grant-writing.proposal.loi",

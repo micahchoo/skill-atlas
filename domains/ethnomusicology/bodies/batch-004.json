@@ -1,0 +1,299 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 4,
+  "ids": [
+    "ethnomusicology.transcription.transcription-software",
+    "ethnomusicology.transcription.limits",
+    "ethnomusicology.analysis.scale-mode-analysis",
+    "ethnomusicology.analysis.rhythm-analysis",
+    "ethnomusicology.analysis.cultural-interpretation",
+    "ethnomusicology.analysis.comparison"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.transcription.transcription-software",
+      "label": "Transcription software",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": [],
+      "one_line": "Use Audacity or Transcribe! to slow, loop, and EQ a recording, and produce a transcription whose tricky passages you can defend measure by measure.",
+      "hours": 10,
+      "know_what": [
+        "Audacity — the free cross-platform editor that is the field's workhorse, with Change Tempo, Change Speed, EQ filters, and a spectrogram view for transcription",
+        "Transcribe! (Seventh String) — the commercial slow-down tool built for transcription, with per-track EQ, automatic note detection, and repeatable loop regions",
+        "pitch-preserving slowdown — the DSP feature (Audacity's Change Tempo, or WSOLA) that slows audio without the chipmunk transposition, letting you work at 40-75% speed and still hear the real pitches",
+        "the loop region — a 3-5 second A-B selection replayed continuously, the standard working unit because the ear cannot hold a longer stretch accurately",
+        "band EQ — high-passing around 80-100 Hz to kill room rumble and low-passing or notching to expose a buried line under an interfering instrument",
+        "the spectrogram view — Audacity's spectral display of partials and formants, the tie-breaker when two hearings of a pitch conflict",
+        "the workflow rule — the software is a prosthetic ear, not a judge: it does not decide pitches, it makes your decisions checkable"
+      ],
+      "know_how": [
+        "Set the speed to 50% with pitch preservation before notating, and re-verify every written note at full speed afterward",
+        "Mark loop regions on the tricky passages — 3-5 seconds each — and replay them until the figure is fully written, before moving on",
+        "Apply band EQ to isolate the instrument you transcribe: high-pass at 80-100 Hz against rumble, notch or low-pass against an interfering voice or drone",
+        "Switch to the spectrogram view when hearings conflict and read the partials to settle the pitch instead of guessing",
+        "Work in speed layers: 75% for the phrase and meter skeleton, 50% for details, 40% or below for ornaments, checking each layer against full speed",
+        "Keep the project organized in named tracks — original, slowed, EQ'd — so every reading in the final score is reproducible from the session",
+        "Export the transcribed region and do a final full-speed check of the whole passage before captioning the score"
+      ],
+      "habits": [
+        "Set up the slow/loop/EQ workspace before listening, so the listening time goes to the music, not the menu",
+        "Always confirm the final reading at full speed — a slowed loop can manufacture artifacts, like a vibrato heard as two distinct pitches",
+        "Keep loops short — 3-5 seconds — because a longer loop blurs the ear's target",
+        "When a pitch is uncertain, check the spectrogram before writing it, and note the confirmation",
+        "Record the speed and filter settings in the score's caption so the reading is checkable"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Transcribe a 60-second passage you have never heard using Audacity or Transcribe!: work at 40-75% speed with pitch preservation, loop 3-5 second regions, use EQ or the spectrogram to resolve at least two ambiguous passages, and produce a score you can defend measure by measure at full speed.",
+      "common_failure": "Using the slow-down as a crutch for the whole file instead of targeted loops, or slowing with Change Speed instead of Change Tempo so the pitch drops and the music becomes unrecognizable — every decision is then made against a distorted artifact and the final score fails a full-speed check.",
+      "sources": [
+        "Audacity manual (audacityteam.org), Change Tempo and spectrogram documentation",
+        "Seventh String Transcribe! documentation",
+        "Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction (Myers ed., 1992)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.transcription.limits",
+      "label": "Limits of notation",
+      "tier": 6,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation", "ethnomusicology.transcription.tuning-pitch"],
+      "soft_prereqs": [],
+      "one_line": "State what your notation cannot show — timbre, microtiming, performance nuance — using Seeger's prescriptive/descriptive distinction, and choose a notation that fits your analytical claim.",
+      "hours": 10,
+      "know_what": [
+        "Seeger's prescriptive/descriptive distinction (1958) — prescriptive notation tells a performer what to do, descriptive records what was heard, and no single notation does both",
+        "timbre — the sound quality (a kora's attack, a throat singer's overtones) that staff notation cannot encode, recoverable only by listening or spectrogram",
+        "microtiming — sub-beat deviations, down to tens of milliseconds (a percussionist behind the beat, a singer's rubato), that note values and barlines average away",
+        "performance nuance — ornamentation, portamento, breath, dynamic shaping, the layer conventionally dropped as 'expression'",
+        "the analytical claim as notation driver — the notation choice follows the claim: pitch structure calls for staff, timing calls for a timeline or graphical rendering",
+        "graphical notation — waveform and spectrogram renderings (Sonic Visualiser, Praat) that show what the staff drops, at the cost of easy reading",
+        "the map-territory error — treating the score as the music; a transcription is an analysis artifact, and its caption must say what it omits"
+      ],
+      "know_how": [
+        "Before notating, list what your claim needs — pitch, timing, timbre — and choose the notation that actually carries it",
+        "Write the caption naming the notation system, labeling it prescriptive or descriptive in Seeger's terms, and listing the features deliberately omitted",
+        "When a feature defeats staff notation, switch notation for that feature — a timeline row for timing, a spectrogram for timbre — rather than forcing it onto the staff",
+        "Report microtiming deviations in milliseconds or cents where they carry meaning, instead of rounding them into the grid",
+        "Re-listen to the recording against the completed score and mark every place the score simplifies, so the reader can hear the difference",
+        "State the claim the notation serves, so the reader can judge whether the omissions matter for it"
+      ],
+      "habits": [
+        "Ask before choosing: what does this notation claim to show, and what does it silently drop?",
+        "Treat a suspiciously clean score as a warning sign, not an achievement",
+        "Keep a margin layer for what the notation cannot carry, so no information is silently discarded",
+        "When asked what the piece sounds like, reach for the recording, not the score",
+        "Keep the measured and the approximated distinct in the notes, and say which is which in the caption"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "low", "interpretive": "high" },
+      "checkpoint": "Given a 30-second passage that defeats staff notation — microtiming, timbre, or nuance — write a one-page caption: name the notation chosen, label it prescriptive or descriptive in Seeger's terms, list the features deliberately omitted, and cite the analytical claim the choice serves.",
+      "common_failure": "Reaching for staff notation by default and letting the clean score stand for the music: microtiming averaged into the grid, timbre dropped as 'expression,' and the analysis then done on the score rather than the sound — the map is mistaken for the territory.",
+      "sources": [
+        "Charles Seeger, 'Prescriptive and Descriptive Music-Writing' (1958)",
+        "Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction (Myers ed., 1992)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005), chapter on transcription"
+      ]
+    },
+    {
+      "id": "ethnomusicology.analysis.scale-mode-analysis",
+      "label": "Scale & mode analysis",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": ["ethnomusicology.transcription.tuning-pitch"],
+      "one_line": "Classify a piece's scale or mode system — raga, maqam, sléndro/pélog, pentatonic set — from measured intervals, and name the system the tradition itself uses.",
+      "hours": 20,
+      "know_what": [
+        "raga — the North Indian melodic system in which the scale (thaat) is only a frame; identity lives in phrase grammar (pakad), the primary note (vadi), ornamentation, and mood",
+        "maqam — the Arab modal system built from tetrachords (ajnas), with microtonal intervals and melodic development rules; the octave scale alone does not define it",
+        "sléndro and pélog — the Javanese/Balinese tuning systems: 5-tone sléndro with near-equal steps of roughly 240 cents, and 7-tone pélog with unequal steps, both played in subsets that must be measured, not assumed",
+        "the pentatonic set — the five-note collection (e.g., anhemitonic C-D-E-G-A) that recurs worldwide; classifying it as 'pentatonic' is the start of analysis, not the conclusion",
+        "the cent — 100 cents per equal-tempered semitone, the field's lingua franca for reporting tunings the staff cannot show (Ellis's 1885 system)",
+        "interval measurement — extracting fundamental frequency from sustained tones in Praat or Sonic Visualiser and converting the ratios to cents",
+        "the tradition's own name — the emic category (this is raga Bhairavi, this is maqam Rast) that the analyst must match before importing analyst categories",
+        "the mode as behavior — a mode is a set of moves, not a set of notes: which degrees are stressed, which are avoided, how phrases begin and end"
+      ],
+      "know_how": [
+        "Extract the pitch collection first: measure the fundamental frequency of each scale degree on a sustained note in Praat or Sonic Visualiser and convert to cents",
+        "Report the measured cents against equal temperament — e.g., sléndro degrees near 0, 230, 480, 700, 960 cents — instead of rounding to staff positions",
+        "Match the measured collection against the tradition's own scale names before applying any imported category",
+        "Identify the mode by its defining behavior beyond the scale: for raga, the pakad and vadi; for maqam, the jins chain and starting tone; for a pentatonic set, the interval pattern (anhemitonic vs hemitonic)",
+        "State the tuning basis in the analysis caption — measured cents or assumed equal temperament — so the reader can judge the classification",
+        "Take two independent measurements of each degree and report the spread, discarding measurements taken during obvious ornamentation",
+        "Account for the instrument's fixed tuning (a gamelan's sléndro is a property of the instrument) before judging any single performance 'out of tune'"
+      ],
+      "habits": [
+        "Measure first, name second: read the cents before applying any scale label",
+        "When a scale 'looks like' a familiar one, verify it against the tradition's own names before writing it down",
+        "Report tuning deviations in cents rather than rounding into the tempered grid",
+        "Remember the mode is a behavior, not a collection: ask what the tradition does with the scale",
+        "Note the instrument and its tuning constraints alongside every measurement"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Given a recording, measure the pitch collection of a scale passage in cents with two independent measurements per degree, classify it against the tradition's own system — raga, maqam, sléndro/pélog, or pentatonic variant — and write a caption stating the tuning basis and the deviations from equal temperament.",
+      "common_failure": "Classifying by ear and rounding into a familiar scale: labeling a sléndro as 'pentatonic' or a maqam as 'a minor scale with a quarter-tone,' skipping the cent measurement — the imported category then carries Western assumptions the tradition does not share, and the analysis is wrong at the foundation.",
+      "sources": [
+        "Nazir Jairazbhoy, The Rāgs of North Indian Music (1971)",
+        "Habib Hassan Touma, The Music of the Arabs (1996)",
+        "Jaap Kunst, Music in Java (1949)",
+        "Alexander Ellis, 'On the Musical Scales of Various Nations' (1885)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.analysis.rhythm-analysis",
+      "label": "Rhythmic analysis",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": [],
+      "one_line": "Describe a piece's rhythmic structure — metrical framework, timeline, polyrhythm, improvisatory variation — in terms the musicians would recognize.",
+      "hours": 20,
+      "know_what": [
+        "the metrical framework — the isochronous pulse grid (e.g., 4/4) Western notation assumes; many traditions do not organize time that way",
+        "the timeline — the repeating reference pattern (the West African bell pattern, the Afro-Cuban clave) that an ensemble orients to, often not on the 'downbeat' Western meter expects",
+        "additive meter — rhythm built from unequal groupings (aksak: 7/8 as 2+2+3 or 3+2+2) that barlines can carry only if the grouping is set right",
+        "tala — the Indian rhythmic cycle (tintal 16 beats as 4+4+4+4, jhaptal 10 as 2+3+2+3) organized as a repeating cycle with claps and waves, not a measure",
+        "polyrhythm — simultaneous conflicting layers at different beat ratios (3 against 2, 12 against 16) that a single staff stacks awkwardly",
+        "the tuplet — the notational patch (triplets, quintuplets) used to force non-isochronous or cross rhythms onto the metrical grid",
+        "improvisatory variation — rhythm as variation on a template where the grid is background, not law (jazz, maqam, and much ritual music)",
+        "the emic rhythmic category — the musicians' own name and account of the pattern (clave, timeline, tala name) that the analysis must preserve"
+      ],
+      "know_how": [
+        "Find the timeline first: tap the repeating reference pattern — bell, clave, drum cycle — before describing any single part",
+        "Identify the cycle and its internal grouping: for tala, count the beats and the subdivisions (tintal 4+4+4+4, jhaptal 2+3+2+3), naming the cycle if it has one",
+        "Set barlines to the actual groupings for additive meters (2+2+3, 3+3+2) instead of forcing the passage into 4/4",
+        "Map the polyrhythm by the beat ratio between layers (3:2, 12:16) and notate each layer against the timeline rather than against a single downbeat",
+        "Separate the musicians' own rhythmic categories from analyst categories, and label each claim accordingly",
+        "Choose the notation from the structure: metrical staff for isochronous music, a timeline-plus-parts diagram for cycle-based music",
+        "Check the reading with a musician who knows the tradition: can they reproduce the structure you drew, and do they recognize it in their own terms?"
+      ],
+      "habits": [
+        "Never draw barlines before you can tap the timeline",
+        "When a rhythm 'won't fit,' suspect the grid, not the music",
+        "Name the pattern in the tradition's terms when it has one — clave, timeline, tala name",
+        "Keep the timeline visible in the analysis, since the parts relate to it",
+        "Test the notation by clapping it back: if a performer cannot reproduce your rhythm from the score, the notation is wrong"
+      ],
+      "know_why": {
+        "claim": "Western metrical notation can represent non-Western rhythm adequately: additive and cycle-based meters are notatable if barlines follow the real groupings and tuplets and timeline diagrams carry the rest.",
+        "because": "Notation is a tool, not a theory: with correctly grouped barlines, tuplets, and a supplementary timeline, a competent reader can reconstruct an aksak 7/8 or a 16-beat tala well enough to analyze and compare it — and giving up notation for rhythm would forfeit the comparability the field's analyses depend on.",
+        "disputed_by": "Kofi Agawu and the critics of 'structural listening' hold that Western notation is not a neutral grid but a theory: it hears meter where other traditions hear timelines, hierarchy where they hear cycles, and the tuplets that 'patch' the grid still force the music through a Western lens, systematically misrepresenting what is actually played.",
+        "source": "Kofi Agawu, 'Structural Analysis or Cultural Analysis? Competing Perspectives on the \"Standard Pattern\" of West African Rhythm' (Journal of the American Musicological Society 59/1, 2006); Simha Arom, African Polyphony and Polyrhythm (1991); Martin Clayton, Time in Indian Music (2000)"
+      },
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Given a recording with non-isochronous or cycle-based rhythm, produce an analysis that names the timeline or tala with its internal grouping, maps the layers' beat ratios, and sets notation to the actual groupings — then have a musician who knows the tradition confirm the structure in their own terms.",
+      "common_failure": "Imposing 4/4 and tuplet-patching the discrepancies: an aksak 7/8 becomes '4/4 with a funny accent,' the timeline is read as an off-beat error, and the analysis describes a grid the musicians never played — the emic structure is lost entirely.",
+      "sources": [
+        "Kofi Agawu, Representing African Music (2003)",
+        "Simha Arom, African Polyphony and Polyrhythm (1991)",
+        "Martin Clayton, Time in Indian Music (2000)",
+        "Konstantin Brăiloiu, 'Le rythme aksak' (1951)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.analysis.cultural-interpretation",
+      "label": "Cultural interpretation",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.foundations.music-culture-concept", "ethnomusicology.transcription.notation"],
+      "soft_prereqs": ["ethnomusicology.fieldwork.participant-observation"],
+      "one_line": "Interpret a musical feature — a mode, a drum pattern, a song text — as cultural meaning (function, identity, emotion) in the tradition's own terms, following Merriam's 'music in culture'.",
+      "hours": 25,
+      "know_what": [
+        "'music in culture' — Merriam's frame (The Anthropology of Music, 1964): music is part of culture and its meanings are assigned by social context",
+        "'music as culture' — Feld's reframing: music does not just sit in culture but constitutes it; sound structures social life (Sound and Sentiment, 1982)",
+        "Merriam's tripartite model — conceptualization (beliefs about music), behavior (who performs, when, how), and sound; a full interpretation connects all three",
+        "Merriam's functions — what music does: emotional expression, aesthetic enjoyment, entertainment, communication, symbolic representation, and the rest of the ten",
+        "function vs meaning — what music accomplishes versus what it says; the two are often conflated and must be kept distinct in the write-up",
+        "emic interpretation — meaning in the tradition's own terms, grounded in consultants' accounts rather than the analyst's associations",
+        "the consultants' voice — the primary evidence for meaning; every meaning claim should be attributable to a consultant, an observation, or a text",
+        "thick description — Geertz's method (1973) of reading meaning from action and context, the interpretive school's working procedure",
+        "sound as social structure — Feld's Kaluli analysis: bird calls, weeping, and song linked in a single system of meaning, the model for this kind of interpretation"
+      ],
+      "know_how": [
+        "Take one musical feature — a mode, a drum pattern, a song text — and ask first what it does in its context, then what it says",
+        "Collect consultants' accounts of the feature's meaning before offering your own, and attribute every meaning claim to its source",
+        "Connect the three layers of Merriam's model: the belief about the music, the behavior around it, and the sound itself",
+        "Write the interpretation with evidence: quote the consultant, cite the recorded passage, name the occasion and setting",
+        "Check the reading against the emic account — would the tradition recognize the meaning you propose? If not, revise or label it as your own reading",
+        "Keep function and meaning in separate labeled columns in the draft, weaving them only when both are solid",
+        "Re-listen to the recording with the proposed meaning in view, and test whether the sound actually supports it"
+      ],
+      "habits": [
+        "Ask consultants what the music means before deciding yourself",
+        "Treat a meaning claim without a consultant, observation, or text behind it as a hypothesis, not a finding",
+        "Keep the sound in view: interpretation that ignores the music is anthropology, not ethnomusicology",
+        "Run each interpretation through Merriam's triad — belief, behavior, sound — and check that all three are connected",
+        "Re-listen to the recording after forming the interpretation: does the sound make sense in those terms?"
+      ],
+      "know_why": {
+        "claim": "Musical meaning is assigned by context — music 'in culture,' in Merriam's phrase: a drum pattern or mode carries the meaning its society gives it, so interpretation must start from the social context, not the sound alone.",
+        "because": "The same sound means different things in different societies — a drum rhythm can be a work signal, a funeral lament, or a courtship call — so the analyst who reads meaning off the sound alone imports their own culture's associations; grounding interpretation in context is what makes it accountable to the tradition.",
+        "disputed_by": "Steven Feld and the 'music as culture' camp hold that music is not a passive carrier of externally assigned meanings but itself constitutes social life — sound structures feeling and society, as in his Kaluli analysis — so treating music as merely 'in' culture misses the cultural work the music itself is doing.",
+        "source": "Alan P. Merriam, The Anthropology of Music (1964); Steven Feld, Sound and Sentiment: Birds, Weeping, Poetics, and Song in Kaluli Expression (1982)"
+      },
+      "school_weights": { "interpretive": "high", "scientific": "low" },
+      "checkpoint": "Given a musical feature from your fieldwork or a recording, write a 500-word interpretation: the function, the meaning in consultants' own terms quoted and attributed, the belief and behavior layers connected to the sound, with every claim traceable to a consultant, observation, or recorded passage.",
+      "common_failure": "Interpreting from the analyst's own musical associations: a drum pattern 'feels sad' to you, so it is a lament — with no consultant evidence, no context, and no connection to the tradition's own categories — the reading says more about the analyst's culture than about the music.",
+      "sources": [
+        "Alan P. Merriam, The Anthropology of Music (1964)",
+        "Steven Feld, Sound and Sentiment (1982)",
+        "Clifford Geertz, The Interpretation of Cultures (1973)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.analysis.comparison",
+      "label": "Cross-cultural comparison",
+      "tier": 6,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.analysis.formal-analysis", "ethnomusicology.analysis.cultural-interpretation"],
+      "soft_prereqs": [],
+      "one_line": "Compare two traditions on a single dimension — melody, rhythm, function — with a controlled method like Lomax's cantometrics or a parameter you define, while acknowledging what the comparison flattens.",
+      "hours": 20,
+      "know_what": [
+        "controlled comparison — comparing two traditions on one defined dimension with explicit criteria, so the result is checkable rather than impressionistic",
+        "cantometrics — Lomax's coding system (Folk Song Style and Culture, 1968): roughly 3,000 songs coded on 37 scales — vocal timbre, phrasing, orchestral texture — to map singing styles worldwide",
+        "the coding scheme — a fixed rubric with named categories and anchors (e.g., a 1-5 scale for melodic range defined by interval examples) applied by raters to every sample item",
+        "the dimension — the single feature compared (melody, rhythm, function); comparing two things at once usually means neither is done carefully",
+        "the sample — the defined set of performances coded; a comparison's scope is bounded by its sample, and a claim about 'African rhythm' is really a claim about the sample behind it",
+        "inter-rater reliability — the check that two coders score the same item the same way; disagreement exposes vague categories",
+        "the flattening — what comparison necessarily drops: context, meaning, emic categories, and individual creativity, all of which a coding scale averages away",
+        "repertory vs performance — comparing what is played (repertory) and how it is played (performance) are different projects with different evidence"
+      ],
+      "know_how": [
+        "Define the dimension and the sample before coding: what is compared, how many performances from each tradition, from what sources",
+        "Build the coding scheme with explicit categories and anchors — every scale value defined by an example a second coder can apply",
+        "Apply the scheme to both traditions' samples, coding blind to your hypothesis where possible to avoid biasing the ratings",
+        "Report inter-rater reliability when more than one coder is involved, and fix the categories it exposes as vague",
+        "State in the write-up what the comparison flattens — context, meaning, emic categories, individual variation — and why the dimension still earns its comparison",
+        "Compare the same dimension with the same instrument: two things given the same name are not the same thing unless the coding says so",
+        "Bound the conclusion by the sample: say which corpus the finding is about, and refuse to extend it beyond the coded performances"
+      ],
+      "habits": [
+        "Before comparing, write down what the comparison will flatten — and keep that list visible in the analysis",
+        "Ask whose categories the comparison uses; if they are the analyst's, say so",
+        "Pilot the coding scheme on a few items before the full run, and revise the categories that collapse under use",
+        "Treat a cross-cultural 'similarity' as a hypothesis about both traditions, checked in each, not a free-standing fact",
+        "When a comparison claims something big, ask which sample it is actually about before accepting it"
+      ],
+      "know_why": {
+        "claim": "Controlled comparison is the scientific core of ethnomusicology: coding performances on defined scales — as Lomax's cantometrics did for roughly 3,000 songs across more than 200 cultures — lets claims about musical style be tested across traditions instead of asserted impressionistically.",
+        "because": "A single tradition's analysis cannot answer distributional questions — where a style occurs, what correlates with it — and only a systematic, replicable coding scheme applied to a defined sample yields results another researcher can check, which is what separates comparative claims from travel writing.",
+        "disputed_by": "the interpretive school, which calls cantometrics reductionist and decontextualizing: a performance's coded 'vocal rasp' or 'texture' strips away meaning, emic categories, and local context, so the comparison compares fragments and mistakes its own coding categories for musical reality — Feld's critique of Lomax's linguistic model is the canonical statement.",
+        "source": "Alan Lomax, Folk Song Style and Culture (1968); Steven Feld, 'Linguistic Models in Ethnomusicology' (Ethnomusicology 18/2, 1974); Bruno Nettl, The Study of Ethnomusicology (2005), comparative chapters"
+      },
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Compare two traditions on one defined dimension: build a coding scheme with explicit anchors, code a defined sample of at least five performances from each tradition, report the results with the scheme attached so a colleague could replicate the coding, and write up both the finding and what the comparison flattens.",
+      "common_failure": "Comparing with no defined scheme: 'African drumming is more rhythmic than Western' — a conclusion with no coded dimension, no sample, and no acknowledgment of what is dropped, which a single counter-example destroys and which hands the interpretive school its case.",
+      "sources": [
+        "Alan Lomax, Folk Song Style and Culture (1968)",
+        "Steven Feld, 'Linguistic Models in Ethnomusicology' (Ethnomusicology 18/2, 1974)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005), comparative chapters"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,355 @@
+{
+  "domain": "archival-sciences",
+  "batch": 3,
+  "ids": [
+    "archival-sciences.appraisal.disposition",
+    "archival-sciences.appraisal.accessioning",
+    "archival-sciences.appraisal.macro-appraisal",
+    "archival-sciences.appraisal.appraisal-report",
+    "archival-sciences.appraisal.sampling",
+    "archival-sciences.appraisal.reappraisal",
+    "archival-sciences.arrangement.series-identification"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.appraisal.disposition",
+      "label": "Disposition",
+      "tier": 2,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.appraisal.retention-schedules"
+      ],
+      "soft_prereqs": ["archival-sciences.foundations.record-lifecycle"],
+      "one_line": "Execute approved disposition — archive transfer, certified destruction, or hold — so records leave the office legally instead of by accident.",
+      "hours": 6,
+      "know_what": [
+        "Disposition — the authorized final act for records: transfer to archives, certified destruction, or continued retention, executed only on the authority of a retention schedule line or an appraisal decision",
+        "Certified destruction — destroying records by an approved method (cross-cut shredding, incineration, contracted destruction service) and completing a destruction certificate — date, volume, series, authorizing line, method — that makes the act evidence",
+        "Archive transfer — moving records to archival custody with a transfer document, box list, and custody-transfer date, so legal responsibility passes to the archive deliberately",
+        "Legal hold — an order to suspend disposition of records relevant to litigation, FOIA, or an investigation; destroying records under hold is spoliation regardless of what the schedule says",
+        "Retention schedule as authority — the schedule line (series, retention period, action) is the only lawful basis for destruction in most jurisdictions, e.g., U.S. federal agencies under 44 U.S.C. § 3303a",
+        "Disposition log — the running register of what left the office, when, by what authority, and by what method; the audit trail that proves destruction was not accidental",
+        "Suspense items — records past their retention period whose destruction is pending a legal-hold check or administrative review"
+      ],
+      "know_how": [
+        "Read the schedule line for a series and state the authorized action, retention period, and triggering event before touching the material",
+        "Run a certified destruction: pull the files, check the hold register, destroy by the approved method, and complete the destruction certificate in the same session",
+        "Complete an archive transfer: packing list, box labels, transfer agreement signed by both offices, and a receipt of transfer recording date and box count",
+        "Check for legal holds before any disposition by querying the hold register or the office's legal counsel when a series sits near active litigation",
+        "Log every disposition event in the disposition register with series, volume, authority, method, and date",
+        "Escalate when the schedule is silent: a series with no disposition authorization stays put until the schedule is amended"
+      ],
+      "habits": [
+        "Treat 'time to destroy' as a decision point requiring authority, not a cleanup chore",
+        "When a box is about to leave, ask 'is this under hold?' before asking 'is this old?'",
+        "Log the destruction before the bin lid closes — the certificate is the point of no return",
+        "Cite the schedule line out loud when authorizing destruction: 'series X, 7 years, destroy'",
+        "Flag schedule-silent series for amendment instead of improvising a retention call"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "postcustodial": "low" },
+      "checkpoint": "Given ten boxes of temporary records and their office retention schedule, execute disposition on each: state the schedule line, check the hold register, and complete either a destruction certificate or a transfer agreement with date and box count — with zero dispositions performed without written authority.",
+      "common_failure": "Destroying on memory ('those are old, get rid of them') instead of on the schedule line, then discovering one of the destroyed boxes was under legal hold — destruction during a hold is spoliation with sanctions, and the missing certificate makes the loss indefensible.",
+      "sources": [
+        "U.S. Federal Records Act, 44 U.S.C. ch. 31 (esp. § 3303a on disposal authorization)",
+        "ARMA International, Generally Accepted Recordkeeping Principles (GARP)",
+        "Society of American Archivists, Dictionary of Archives Terminology — 'disposition', 'destruction'",
+        "National Archives and Records Administration, Disposition of Federal Records guidance"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.accessioning",
+      "label": "Accessioning",
+      "tier": 3,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.appraisal.disposition"
+      ],
+      "soft_prereqs": ["archival-sciences.foundations.archival-ethics"],
+      "one_line": "Process an accession — verify the deed of gift, inventory what physically arrived, assign the accession number — so the archive has legal and physical control from day one.",
+      "hours": 8,
+      "know_what": [
+        "Accession — the physical and legal act of accepting records into the archive; the moment archival control begins",
+        "Accession number — the unique identifier assigned at intake (e.g., year-sequence 2024-015), the anchor for every later description, storage, and retrieval event",
+        "Deed of gift — the legal instrument transferring title and, where agreed, copyright from donor to repository; its signed, dated terms define what the archive may do with the material",
+        "Deposit agreement — the alternative for loaned material: the archive holds and services records the donor still owns, with access terms spelled out",
+        "Legal control — ownership, rights, and restrictions established by the signed instrument, verified before processing begins",
+        "Physical control — knowing what arrived: box count, container list, extent in linear feet, and shelf location, recorded at intake",
+        "Accession record — the intake form capturing donor, date, deed reference, box count, condition notes, and restrictions; the accession's birth certificate",
+        "Preliminary inventory — the container-level list made at intake, before any arrangement, distinguishing what arrived from what the deed promised",
+        "Restrictions at intake — donor-imposed access limits (e.g., 'closed until 2040', 'researcher permission required') that must be captured in the donor's own words before the deed is signed"
+      ],
+      "know_how": [
+        "Verify the deed of gift before shelving: signed, dated, describes the material, transfers title, states restrictions — return unsigned or incomplete deeds to the donor for correction",
+        "Assign the accession number at intake using the repository's scheme (e.g., YYYY-NNN) and record it on every container label and the accession record",
+        "Produce the preliminary inventory: count boxes, list contents at container level, note condition and hazards (mold, insects, photographs, media), and total the extent in linear feet",
+        "Reconcile arrival against the deed or transfer list and flag discrepancies (missing boxes, extra material) in writing to the donor before acceptance",
+        "Register the accession in the repository's accession database or register with donor, date, number, extent, and restrictions",
+        "Place physical-control markers the moment boxes land: container labels with the accession number, a temporary location record, and a shelf list"
+      ],
+      "habits": [
+        "Ask 'is the deed signed and dated?' before any further conversation about the material",
+        "Record the accession number everywhere at once — labels, log, finding-aid draft — so it cannot drift",
+        "Treat what arrived, not what was promised, as the truth, and note the difference in writing",
+        "Capture donor restrictions at the intake meeting, in the donor's own words, before the deed is finalized",
+        "Never process, describe, or shelve material without an accession number attached"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "postcustodial": "low", "community": "low" },
+      "checkpoint": "Given a donor box with a draft deed of gift and no accession record, complete the intake: verify or reject the deed, assign an accession number, write a container-level preliminary inventory with extent and condition notes, and register the accession in the repository log — all before any arrangement begins.",
+      "common_failure": "Shelving first, paperwork later: boxes enter storage with no accession number and no verified deed, so the archive holds material it has no legal right to, cannot track, and cannot produce for reference — a custody gap that legal discovery and donor disputes expose painfully.",
+      "sources": [
+        "Society of American Archivists, Dictionary of Archives Terminology — 'accession', 'deed of gift'",
+        "Menzi Behrnd-Klodt, Navigating Legal Issues in Archives (2008)",
+        "Society of American Archivists, Donor Relations resources and sample deeds of gift",
+        "Library of Congress, Acquisition of Archival Materials guidance"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.macro-appraisal",
+      "label": "Macro-appraisal",
+      "tier": 4,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.appraisal.appraisal-criteria"
+      ],
+      "soft_prereqs": ["archival-sciences.foundations.archive-history"],
+      "one_line": "Run Terry Cook's macro-appraisal — evaluate the creating function and its documentation, not individual records — to appraise a whole agency's output at once.",
+      "hours": 10,
+      "know_what": [
+        "Macro-appraisal — Terry Cook's method, developed for Library and Archives Canada: appraise the creating function and the citizen-state interaction it evidences, not the content of individual records",
+        "Function-based appraisal — the unit of analysis is the function (regulating, licensing, investigating) and its documentation, chosen before any series is opened",
+        "Citizen-state interaction — the moment government action touches a citizen (a license issued, a claim adjudicated, a benefit denied); Cook's test for what deserves documentation",
+        "Micro-appraisal — Schellenberg's content-based alternative: evidential and informational tests applied record by record, series by series",
+        "Structural-functional analysis — mapping the creator's mandate, activities, and record-keeping systems to locate where significant documentation is generated",
+        "Significance — a function is significant when it is high-impact, costly, controversial, precedent-setting, or touches many citizens; documentation of significant functions gets acquisition priority",
+        "Whole-of-agency appraisal — Cook's claim that one macro study can cover an entire organization's output, replacing series-by-series judgment",
+        "Documentation gap — the output of macro-appraisal: functions ranked, targeted series named, and existing holdings compared to find what is under- or over-kept"
+      ],
+      "know_how": [
+        "Map an agency's functions: read its mandate, organization chart, and annual reports; list the functions and rank them by impact and citizen contact",
+        "Locate documentation of each significant function by following the agency's own record-keeping systems — file plans, databases, case-management systems",
+        "Run the citizen-interaction test: for each function, name the concrete interaction a record evidences (a permit granted, a complaint resolved, a claim denied)",
+        "Produce the macro-appraisal output: a ranked list of functions and the documentation targeted for each, before any series-level judgment",
+        "Compare the functional map against existing holdings to find documentation gaps and over-kept functions",
+        "Translate macro decisions into series-level disposition: name which series evidence the significant functions and route those to the archives"
+      ],
+      "habits": [
+        "Start with the mandate, not the boxes: 'what is this office for?' before 'what's in here?'",
+        "Rank functions before ranking records",
+        "When a series looks dull, ask what function it serves before discarding it",
+        "Ask 'what would the citizen need to know about this office?' instead of 'what is interesting?'",
+        "File the function map with the appraisal so the reasoning survives staff changes"
+      ],
+      "know_why": {
+        "claim": "Appraise the creating function and its documentation, not the individual records — a whole agency's output can be appraised at once by studying what the creator was for.",
+        "because": "record-by-record appraisal cannot scale to modern government volume and mistakes what is interesting for what is significant; the function is the stable unit, so appraisal becomes a study of mandate and citizen interaction rather than a lottery over series content.",
+        "disputed_by": "Schellenberg's micro-appraisal tradition (evidential and informational value applied record by record) and critics such as Barbara Craig argue macro-appraisal's functional judgments are just as subjective, are made before any records are examined and so are harder to audit, and can discard records whose significance only emerges from their content.",
+        "source": "Terry Cook, 'Macroappraisal in Theory and Practice: Origins, Characteristics, and Implementation' (2004-05), Archivaria 59; T.R. Schellenberg, Modern Archives: Principles and Techniques (1956); Barbara L. Craig, Archival Appraisal: Theory and Practice (2004)"
+      },
+      "school_weights": { "postcustodial": "high", "custodial": "low", "community": "low" },
+      "checkpoint": "Given one government agency's mandate, organization chart, and a box list of its series, produce a macro-appraisal: rank the functions by impact and citizen interaction, name the documentation that evidences the top functions, and recommend keep-or-discard at the series level — without opening a single record.",
+      "common_failure": "Sliding back into content appraisal: opening series and judging 'interestingness' record by record — exactly the micro method macro-appraisal was designed to replace — producing decisions that cannot scale and cannot be justified by function.",
+      "sources": [
+        "Terry Cook, 'Macroappraisal in Theory and Practice: Origins, Characteristics, and Implementation' (2004-05), Archivaria 59",
+        "Terry Cook, 'Macro-Appraisal and Functional Analysis: Documenting Governance Rather Than Government' (2004)",
+        "Barbara L. Craig, Archival Appraisal: Theory and Practice (2004)",
+        "Library and Archives Canada, appraisal methodology documentation"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.appraisal-report",
+      "label": "Appraisal report",
+      "tier": 4,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.appraisal.appraisal-criteria"
+      ],
+      "soft_prereqs": ["archival-sciences.records-management.records-inventories"],
+      "one_line": "Write an appraisal report that records criteria, evidence, and the disposition recommendation, so the decision survives review years later.",
+      "hours": 8,
+      "know_what": [
+        "Appraisal report — the written record of an appraisal decision: criteria applied, evidence examined, and the disposition recommendation, dated and signed",
+        "Criteria section — the stated basis of the call: Schellenberg's evidential and informational tests, a macro-functional analysis, the retention schedule, a duplication check",
+        "Evidence examined — the concrete material the decision rests on: box counts, series descriptions, function maps, consultations with creators and users",
+        "Disposition recommendation — the actionable output: transfer, destroy, sample, or reappraise, with volume and location for each action",
+        "Decision trail — the report's ability to reconstruct the reasoning years later so a successor can defend or revisit the call",
+        "Appraisal documentation practice — filing the report with the accession record and disposition log so appraisal is auditable, as institutionalized in NARA and Library and Archives Canada disposition processes",
+        "Duplication check — the recorded step of asking who else holds this material before recommending permanent retention"
+      ],
+      "know_how": [
+        "Write the report in four sections — scope, criteria, evidence, recommendation — so a reviewer can check each claim",
+        "Quote the exact criteria applied (e.g., 'evidential value for the agency's regulatory function under Schellenberg's test')",
+        "List evidence with volumes: series names, linear feet or file counts, dates examined, consultations conducted",
+        "State the disposition recommendation with an action verb and a target (transfer to archives, destroy after legal-hold check, sample at 1-in-20)",
+        "Attach the report to the accession record and disposition log so the decision chain reads backward",
+        "Include the weighed-and-rejected counterargument (e.g., informational value judged low because the data survives in a database)"
+      ],
+      "habits": [
+        "Write the recommendation in one sentence and the evidence in a list — reviewers read the sentence first",
+        "When a call is marginal, say so in the report ('retained on balance of duplication risk') instead of hiding the doubt",
+        "Date and sign every report; an undated appraisal decision is not evidence",
+        "Re-read the report a week later and ask whether a stranger could defend the call from it alone",
+        "Keep the report with the accession, not in a separate appraisal folder, so processing staff inherit the decision"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given one series and its appraisal evidence (box list, creator interview notes, duplication check), write a one-page appraisal report with scope, criteria, evidence, and a dated disposition recommendation, such that a colleague unfamiliar with the series can defend the call from the report alone.",
+      "common_failure": "Keeping the decision in the archivist's head: disposition happens, the report is never written, and when a successor or auditor asks why the series is here or gone, the reasoning is unrecoverable — the appraisal is undone by its own lack of documentation.",
+      "sources": [
+        "Barbara L. Craig, Archival Appraisal: Theory and Practice (2004)",
+        "National Archives and Records Administration, appraisal and disposition documentation practices",
+        "Society of American Archivists, Dictionary of Archives Terminology — 'appraisal report'",
+        "International Council on Archives, appraisal documentation guidance"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.sampling",
+      "label": "Sampling large series",
+      "tier": 5,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.appraisal.macro-appraisal"
+      ],
+      "soft_prereqs": [],
+      "one_line": "Sample a large homogeneous series — case files, forms — with a statistical or purposive scheme, keeping representative evidence without keeping everything.",
+      "hours": 8,
+      "know_what": [
+        "Statistical sampling — keeping a random, mathematically representative slice of a series (e.g., every Nth case file) so the kept subset stands in for the whole population",
+        "Purposive sampling — keeping cases chosen for a defined reason (first of each year, landmark rulings, worst-case outcomes) to preserve particular evidence statistics would miss",
+        "Systematic sampling — the simplest statistical scheme: order the series, choose a random start between 1 and N, then take every Nth item (1-in-20, 1-in-50)",
+        "Stratified sampling — splitting the population by a meaningful variable (decade, district, case type) and sampling within each stratum so every subgroup is represented",
+        "Sampling frame — the complete, ordered list of items the sample is drawn from; a defective frame invalidates any scheme",
+        "1-in-N scheme — the archival default for case files and forms (e.g., 1-in-20 or 1-in-50), documented with interval and rationale",
+        "Representativeness — the property that lets the sample stand in for the whole; lost when the selection rule correlates with the variable of interest",
+        "Sampling plan — the written record of frame, scheme, interval, and rationale, filed with the appraisal report",
+        "Frame retention — keeping the sampling frame and plan so researchers can reconstruct what the sample represents and what the denominator was"
+      ],
+      "know_how": [
+        "Decide statistical vs purposive: use statistical when the series is homogeneous and the goal is representative evidence; purposive when particular cases carry defined value (first, worst, precedent-setting)",
+        "Build the sampling frame: a complete, ordered, deduplicated list of the series' items, citing its source (box list, register, database export)",
+        "Run a systematic sample: pick a random start between 1 and N, take every Nth item, and record the start and N in the plan",
+        "Run a stratified sample: divide by the variable that matters (decade, district), sample within each stratum, and note stratum sizes",
+        "Write the sampling plan before pulling files: frame, scheme, interval, rationale, and what the sample is meant to prove",
+        "Pull the sample physically and mark it in the frame so the non-selected items can be certified for destruction against the same list"
+      ],
+      "habits": [
+        "Ask what the sample must prove before choosing the scheme — representative evidence or particular cases?",
+        "Write the interval down before pulling a single file ('1-in-50 from a random start at file 23')",
+        "When a series is heterogeneous, stratify instead of hoping the random draw spreads evenly",
+        "Save the frame with the plan — a sample without its frame is evidence without a denominator",
+        "Treat the sampled items as an accession and the rest as a certified destruction, both documented"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "low" },
+      "checkpoint": "Given a 4,000-file case series with a box list, write and execute a sampling plan: choose statistical or purposive with stated rationale, build the frame, run the scheme (e.g., 1-in-50 systematic or stratified), and produce a kept-file list and a destroy list whose counts sum to the frame total.",
+      "common_failure": "Sampling by convenience: keeping 'interesting' cases or grabbing the top of each box, which is neither representative nor purposive — the kept slice silently misrepresents the population, and the missing documentation means no one can say what was lost.",
+      "sources": [
+        "National Archives and Records Administration, case-file sampling guidance",
+        "Terry Cook, 'Macroappraisal in Theory and Practice' (2004-05) — sampling as the disposition tool for large homogeneous series",
+        "The National Archives (UK), Appraisal Policy (2019)",
+        "Society of American Archivists, Dictionary of Archives Terminology — 'sampling'"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.reappraisal",
+      "label": "Reappraisal & deaccessioning",
+      "tier": 5,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.appraisal.appraisal-report"
+      ],
+      "soft_prereqs": [],
+      "one_line": "Reappraise an existing holding against current criteria and draft deaccession recommendations with the evidence trail an institution can act on.",
+      "hours": 10,
+      "know_what": [
+        "Reappraisal — re-evaluating an existing holding against current criteria and current knowledge, possibly reversing the original accession decision",
+        "Deaccessioning — removing material already in the archive: transfer to another repository, return to donor, or destruction, each requiring policy authority and documentation",
+        "Deaccession policy — the institution's written rule set (many repositories model one on the American Alliance of Museums' deaccessioning standards) governing when and how holdings may be removed",
+        "Evidence trail — the documented chain from original appraisal report and accession record through reappraisal criteria, consultations, and recommendation, so the removal is defensible",
+        "Deaccession taboo — the professional norm, strongest in the Jenkinson tradition, that once archives are accepted they are kept forever; deaccessioning is treated as failure or betrayal",
+        "Criteria drift — the legitimate trigger: the collecting mandate, evidence of use, duplication, or creator context changed since the original appraisal",
+        "Return to donor — a deaccession option where the material was deposited, or where donor agreements permit reclaiming",
+        "Transfer to another repository — placing deaccessioned material where it fits another institution's mandate, keeping it in the documentary record",
+        "Ongoing appraisal — the shift from deciding once at acquisition to reviewing the holding continuously against the current mandate"
+      ],
+      "know_how": [
+        "Re-run the current appraisal criteria against a holding — mandate fit, use evidence, duplication, condition, creator context — and write the comparison",
+        "Draft the deaccession recommendation: criteria, evidence, proposed disposition (transfer, return, destruction), and the policy section that authorizes it",
+        "Consult before recommending: the donor, other repositories with matching mandates, and the institution's legal counsel for deed or grant constraints",
+        "Build the evidence trail: cite the original accession record and appraisal report, the reappraisal criteria, and the consultation notes",
+        "Route the recommendation through the repository's deaccession review (board or committee) and record the decision with the accession",
+        "Execute the approved deaccession like any disposition: transfer agreement or destruction certificate, logged in the disposition register"
+      ],
+      "habits": [
+        "Ask 'would this be accessioned today?' before defending a holding by inertia",
+        "When a holding no longer fits, name the criterion that changed instead of the sentiment",
+        "Document the reappraisal before anyone moves the boxes",
+        "Check the deed of gift for restrictions before proposing any deaccession — donor terms may forbid it",
+        "Treat a deaccession as a disposition event with the same paperwork as a destruction"
+      ],
+      "know_why": {
+        "claim": "Reappraisal and deaccessioning are legitimate collection management: when the criteria that justified acquisition change, the holding should be re-examined and, where warranted, removed with a documented trail.",
+        "because": "a repository's mandate, the evidence of use, and duplication all shift over time; holding material that no longer fits the mandate consumes scarce space and staff while serving no researcher, and an evidence trail makes the removal as auditable as the original acquisition decision.",
+        "disputed_by": "the custodial and Jenkinson-inherited tradition treats deaccessioning as a professional taboo — 'once archived, always' — arguing archives are permanent memory and reappraisal is a rationalization for collection cuts; the community archives school adds that outside institutions deaccessioning community records reproduces the harm of the original acquisition.",
+        "source": "Hilary Jenkinson, A Manual of Archive Administration (1922); Barbara L. Craig, Archival Appraisal: Theory and Practice (2004); Society of American Archivists, appraisal and deaccessioning resources; American Alliance of Museums, deaccessioning standards (museum analogue)"
+      },
+      "school_weights": { "access-first": "high", "preservation-first": "low", "community": "low" },
+      "checkpoint": "Given one accession whose mandate fit has lapsed (a non-core donated series with documented low use and duplication), produce a reappraisal: re-run the current criteria, draft the deaccession recommendation with a transfer-or-return disposition, assemble the evidence trail from the original accession record, and route it through a review — no removal happens without the written decision.",
+      "common_failure": "Failing at one of two extremes: treating holdings as sacred so the stacks fill with unrequested material while mandates shift, or deaccessioning on budget pressure with no evidence trail — removing material the way it was acquired, by whim. The first fills the stacks with dead weight; the second makes the removal indefensible.",
+      "sources": [
+        "Hilary Jenkinson, A Manual of Archive Administration (1922)",
+        "Barbara L. Craig, Archival Appraisal: Theory and Practice (2004)",
+        "Society of American Archivists, appraisal and deaccessioning resources",
+        "American Alliance of Museums, deaccessioning standards (museum analogue)"
+      ]
+    },
+    {
+      "id": "archival-sciences.arrangement.series-identification",
+      "label": "Series identification",
+      "tier": 3,
+      "cluster": "arrangement",
+      "prereqs": [
+        "archival-sciences.foundations.provenance"
+      ],
+      "soft_prereqs": [],
+      "one_line": "Identify the series inside a body of records by shared function and form, so folders group the way the creator grouped them.",
+      "hours": 6,
+      "know_what": [
+        "Series — a body of records filed together under one system (alphabetical, chronological, numerical) or produced by one activity, sharing a function and a form",
+        "Series identification — recognizing series boundaries from filing evidence before arrangement, so folders group the way the creator grouped them",
+        "Filing system as evidence — folder labels, file codes, and numbering that reveal the creator's own series structure (case-number prefixes, chronological runs, subject codes)",
+        "Shared function — the activity the records serve (licensing, payroll, correspondence); records of one function usually form one series",
+        "Shared form — uniform document type or template (claim forms, dockets, ledgers) that marks a series even when the function spans several activities",
+        "File codes — creator-assigned classifications (numeric, alphabetic, subject) that name series boundaries from within the records",
+        "Series vs subseries — splitting a series where the filing system or activity changed inside it (e.g., correspondence files divided at a reorganization)",
+        "Interfile detection — spotting stray material filed out of system (misfiles, reference copies) that does not belong to the series it sits in"
+      ],
+      "know_how": [
+        "Survey the boxes for filing evidence first — labels, codes, numbering, form types — before deciding any boundary",
+        "Apply the two tests to each candidate series: one shared function and one filing system; split when either changes",
+        "Follow file codes to their source: a numeric run that restarts is two series; a change in the code scheme marks a boundary",
+        "Separate misfiles and reference copies from the series they sit in, flagging them for the arrangement plan",
+        "Name each identified series and draft its scope note — function, form, date range, volume — before the arrangement plan",
+        "Confirm series boundaries against the creator's own records (file plan, register, database) when one survives"
+      ],
+      "habits": [
+        "Read the labels before the folders — the creator's system is the first witness",
+        "When two filing systems meet in one box, assume a series boundary until the evidence says otherwise",
+        "Ask 'what function does this file serve?' to resolve ambiguous boundaries",
+        "Note the creator's file codes as you go; they are the cheapest series map you will ever get",
+        "Doubt a series that mixes forms — uniform form is as strong a signal as uniform function"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given one unprocessed body of records (e.g., ten boxes of an office's papers with labels, codes, and mixed forms), identify the series: state each series' function, form, date range, and volume, and produce the series list the arrangement plan will use — with every boundary defended by filing evidence.",
+      "common_failure": "Imposing your own subject headings on the material ('miscellaneous', 'personal', 'business') instead of reading the creator's filing system, which shreds the series structure and forces a full re-arrangement later — misgrouped folders have to be re-identified at full reprocessing cost.",
+      "sources": [
+        "Fredric M. Miller, Arranging and Describing Archives and Manuscripts (1990)",
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956) — the series as the basic unit of arrangement",
+        "Society of American Archivists, Dictionary of Archives Terminology — 'series'",
+        "Mark A. Greene and Dennis Meissner, 'More Product, Less Process' (2005) — series-level identification as the processing default"
+      ]
+    }
+  ]
+}

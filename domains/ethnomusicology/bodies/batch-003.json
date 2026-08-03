@@ -1,0 +1,341 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 3,
+  "ids": [
+    "ethnomusicology.fieldwork.interviewing",
+    "ethnomusicology.fieldwork.participant-observation",
+    "ethnomusicology.fieldwork.field-notes",
+    "ethnomusicology.transcription.lab-notation",
+    "ethnomusicology.transcription.rhythm-meter",
+    "ethnomusicology.transcription.tuning-pitch",
+    "ethnomusicology.transcription.graphical-notation"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.fieldwork.interviewing",
+      "label": "Ethnographic interviewing",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.access"],
+      "soft_prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Run a 30-minute open-ended ethnographic interview that elicits a musician's own account of their practice, using follow-up and silence instead of a fixed questionnaire.",
+      "hours": 15,
+      "know_what": [
+        "the open-ended question — a question with no expected answer shape ('How did you learn to play?'), as opposed to the closed or leading question that steers the answer",
+        "the follow-up — the second question built from what the consultant just said, which is where the real account emerges; without it you have a survey",
+        "silence as a tool — waiting through the pause after an answer, because consultants often add the important thing after deciding you are actually listening",
+        "the 30-minute interview — the standard working unit: short enough to keep energy and focus, long enough for one sustained topic to open up",
+        "the emic account — the musician's own categories and explanations, which the interview exists to capture rather than to verify against your prior theory",
+        "communicative competence — Briggs's point that how a community talks (who may ask, who may answer) shapes what an interview can yield",
+        "the native-language record — the ideal of capturing the account in the consultant's own language, so later translation does not flatten it",
+        "reciprocity in conversation — interviews are exchanges: your own answers and background disclosures affect what the consultant is willing to say"
+      ],
+      "know_how": [
+        "Open with a broad question about the person's own practice ('Tell me about your instrument') and let the first answer set the topic, rather than reading a prepared list",
+        "Build each follow-up from the consultant's last statement, echoing their wording back to show you heard it and invite elaboration",
+        "Count to five in silence after an answer before asking the next question, and write down what comes in the pause",
+        "Ask one question at a time, and when a question fails, re-ask it grounded in what the consultant actually said rather than rephrasing toward your expected answer",
+        "Close the interview by asking what you missed — the question that often produces the most candid material of the session",
+        "Record the interview with consent, and in the notes mark verbatim speech separately from your paraphrase so the record never conflates them",
+        "Re-listen to the recording within a few days and transcribe the passages you will quote, checking your memory of the session against the audio"
+      ],
+      "habits": [
+        "Treat the consultant as the expert: your job is to get out of the way of the account, not to steer it toward your research questions",
+        "When you notice yourself asking a question whose answer you already expect, stop and rephrase it open-ended",
+        "Wait through silence instead of filling it with a new question or a paraphrase of the last answer",
+        "Write the follow-up in your head from the consultant's words, not from your interview guide",
+        "After each interview, note what you did not ask, as material for the next session rather than a failure",
+        "Say what you are and why you are asking, because the consultant's trust in that answer is part of the data"
+      ],
+      "know_why": null,
+      "school_weights": { "interpretive": "high", "scientific": "low" },
+      "checkpoint": "Run a 30-minute open-ended interview with a musician about their own practice: open with a broad question, follow up at least three times on the consultant's own statements, tolerate a counted silence after an answer, and produce session notes that separate at least one verbatim quote from your paraphrase.",
+      "common_failure": "Smuggling the questionnaire back in: coming with a list of prepared questions and treating the session as filling them in, so you get yes/no answers and your own topics while the consultant's actual account never surfaces — the interview becomes a survey with worse response rates.",
+      "sources": [
+        "Barz & Cooley (eds.), Shadows in the Field: New Perspectives for Fieldwork in Ethnomusicology (2008)",
+        "James Spradley, The Ethnographic Interview (1979)",
+        "Charles Briggs, Learning How to Ask: A Sociolinguistic Appraisal of the Role of the Interview in Social Science Research (1986)",
+        "Jeff Todd Titon, 'Knowing Fieldwork' in Shadows in the Field (2008)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.fieldwork.participant-observation",
+      "label": "Participant observation",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.access"],
+      "soft_prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Attend and participate in a music event without disrupting it, then describe what changed about your access and understanding because you participated.",
+      "hours": 15,
+      "know_what": [
+        "participant observation — the Malinowskian core method: joining the activity you study so that access and understanding come through participation, not just watching",
+        "the participation spectrum — from passive observer to full participant; fieldwork moves along it deliberately rather than picking one pole",
+        "the 'going native' risk — the point where participation overtakes observation and you stop noticing what a stranger would need explained, losing the analytical frame",
+        "the observer effect — your presence and participation change the event (who performs, what gets played); noting how is part of the data",
+        "the role statement — how you introduce what you are doing, which shapes what people show you and what they hide",
+        "the insider/outsider trade — the insider hears what members hear, the outsider sees what members take for granted; both are partial",
+        "participation as access — playing, singing, or helping is often what gets you admitted to spaces observation alone cannot enter",
+        "the observation point — your physical and social position (where you sit, who you are near) determines what you can see and hear"
+      ],
+      "know_how": [
+        "Before each event, set the participation level deliberately: what you will do, what you will watch, and what you will record during it",
+        "Introduce your role briefly to the people who need to know, and note what changed in the event after they knew",
+        "Participate at the level offered — sit in the rehearsal, help set up, learn the clap pattern — and record what that participation taught you that watching did not",
+        "Watch for the moment participation starts masking observation, and step back physically or note it explicitly in the jottings",
+        "Document the event from your observation point: what you could see, hear, and not see from where you were",
+        "Note everything that changed because you were there — who you were seated next to, which pieces got played, what people said about the recorder",
+        "Convert each participation experience into a field-note entry on the same day, with your role in the event stated in the entry"
+      ],
+      "habits": [
+        "Ask before every event: what does this participation buy me in access, and what does it cost me in observation?",
+        "When the event stops being strange, note that — the moment things look natural is when you have gone native and need distance",
+        "Keep a running account of what your presence changed, treating it as evidence rather than contamination",
+        "Test what you learned by participating against what you saw as an observer, and write the difference",
+        "Let the community set your participation level; refuse what they do not offer, and accept what they insist on"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Attend a music event as a participant — rehearsing, performing, or assisting at the level offered — and write a field-note entry naming your participation role, what access it gained you, what changed in the event because you were present, and one thing your position kept you from seeing.",
+      "common_failure": "Falling off one end of the spectrum: staying a passive observer so the group never lets you in and you learn nothing beyond what a stranger could see, or going native so completely that you stop recording and cannot say what you learned that a participant would not already know.",
+      "sources": [
+        "Bronislaw Malinowski, Argonauts of the Western Pacific (1922), Introduction",
+        "Kathleen & Billie DeWalt, Participant Observation: A Guide for Fieldworkers (2011)",
+        "Paul Berliner, The Soul of Mbira (1978), on learning to play as a field method",
+        "Barz & Cooley (eds.), Shadows in the Field (2008)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.fieldwork.field-notes",
+      "label": "Field notes",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.prep"],
+      "soft_prereqs": ["ethnomusicology.fieldwork.interviewing", "ethnomusicology.fieldwork.participant-observation"],
+      "one_line": "Convert jottings made in the field into daily expanded notes with time, place, and people indexed, within 24 hours, so they are usable evidence later.",
+      "hours": 12,
+      "know_what": [
+        "jottings — the brief words, sketches, and timestamps scribbled during the event itself, the raw trigger for the full notes written later",
+        "expanded notes — the full prose account built from jottings the same day, with scene, action, and speech rendered in enough detail to ground later writing",
+        "the 24-hour rule — expand jottings within a day, because memory loss is steepest in the first 24 hours and the notes must come from the event, not from reconstruction",
+        "headnotes — Ottenberg's term for what you remember but never wrote down; they silently shape your writing unless the notes discipline them",
+        "the index — the running record of time, place, and people that turns a pile of notes into retrievable evidence",
+        "the observation/interpretation split — what you saw vs what you think it meant, which the notes must keep visibly separate",
+        "the verbatim quote — speech captured in the consultant's own words, the most durable evidence an interview yields",
+        "the daily entry — the unit of note-taking: one dated entry per event or day, written while memory still holds the texture"
+      ],
+      "know_how": [
+        "Write jottings during the event — short words, names, timestamps, a sketch of the layout — enough to trigger full recall, without letting note-taking dominate the event",
+        "Expand jottings into full notes within 24 hours, writing as much concrete detail as the session yields while memory is fresh",
+        "Head each entry with date, place, and people present, and keep a running index of the same so any entry is findable months later",
+        "Separate observation, what you were told, and what you infer, labeling each in the entry rather than mixing them",
+        "Capture verbatim quotes in the notes in the consultant's language, marked as quotes so they are never mistaken for paraphrase",
+        "Date and cross-reference entries that continue a topic, so the material for a chapter or analysis is traceable",
+        "Review the week's notes against the recording log, and mark what is documented in audio and what exists only in the notes"
+      ],
+      "habits": [
+        "Treat the notes as the primary evidence: if it is not in the notes, it did not happen for the analysis",
+        "Write the day's notes before anything else — before unpacking, before socializing — while the day is still intact",
+        "When an observation feels too obvious to write, write it anyway; the obvious is the first thing memory drops",
+        "Read last week's notes weekly and flag questions for the field, so the notes drive the fieldwork",
+        "Keep the index as you go, never reconstructing it at the end of the trip",
+        "Mark every quote's speaker and context, so no word is ever orphaned from who said it and why"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce a week of daily expanded field-note entries, each derived from same-day jottings within 24 hours, with date, place, and people indexed, observation separated from interpretation, and at least one verbatim quote per interview entry — entries another researcher could cite as evidence.",
+      "common_failure": "Letting the notes accumulate as jottings and 'writing them up' days or weeks later: the entries then come from memory of the memory, headnotes replace evidence, and the analysis is built on what you remember rather than what you recorded.",
+      "sources": [
+        "Emerson, Fretz & Shaw, Writing Ethnographic Fieldnotes (2nd ed., 2011)",
+        "Roger Sanjek (ed.), Fieldnotes: The Makings of Anthropology (1990)",
+        "Simon Ottenberg, 'Thirty Years of Fieldnotes in the Field' in Fieldnotes (1990)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.transcription.lab-notation",
+      "label": "LAB shorthand notation",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": [],
+      "one_line": "Write and read Seeger's LAB shorthand — letter names, accidentals, bars — to capture a melodic line on the fly, faster than full staff notation.",
+      "hours": 12,
+      "know_what": [
+        "LAB shorthand — Seeger's letter-name system (A-G, sharps and flats, barlines) for writing a melodic line faster than staff notation can be drawn",
+        "the letter name — the pitch written as its note name (C, E-flat, F-sharp), which encodes the pitch class directly without a staff position to read",
+        "the accidental — the sharp, flat, or natural written beside the letter, the LAB way of showing chromatic alteration",
+        "the barline — the vertical stroke that groups the line into measures, carrying the meter information the letters alone do not",
+        "duration in LAB — note lengths marked by conventional signs (stem flags or symbols) on the letters, kept simpler than staff notation",
+        "the prescriptive/descriptive pairing — Seeger's 1958 argument that shorthand records what was heard (descriptive), complementing rather than replacing prescriptive staff scores",
+        "the melodic line — the single-voice target of LAB: what it captures on the fly is one line, not a texture",
+        "the on-the-fly use — transcription at listening speed, the reason LAB exists: staff notation cannot be written as fast as a line can be heard"
+      ],
+      "know_how": [
+        "Write a heard melodic line in letters with accidentals and barlines as it plays, at listening speed, without pausing the recording",
+        "Group the line into bars by the accents you hear, marking the meter the same way you would before drawing staff barlines",
+        "Mark pitch deviations LAB cannot show (bent tones, microtonal inflections) with a symbol or margin note rather than forcing them onto the letters",
+        "Read back a LAB transcription aloud or on an instrument, checking each letter against the recording",
+        "Convert a LAB line to staff notation when the analysis needs it, keeping the shorthand as the working record",
+        "Choose LAB deliberately — for a fast melodic pass or field jotting — and staff or graphical notation when the music needs more than letters can carry",
+        "Caption a LAB transcription with the conventions used, so a reader knows what the shorthand claims"
+      ],
+      "habits": [
+        "Reach for LAB when the music is a fast single line and staff notation would take three times as long to write",
+        "Write the letter you hear, not the letter you expect from the harmony or scale",
+        "Mark anything the letters cannot hold in the margin immediately, before the sound is gone",
+        "Re-listen to each bar after writing it, keeping the loop short enough to verify",
+        "Keep LAB lines in the field notebook as primary evidence, and convert only what the analysis will actually quote"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high", "interpretive": "low" },
+      "checkpoint": "Notate a 30-second single-line melody in LAB shorthand at listening speed — letter names, accidentals, and barlines grouped by heard accents — then read it back on an instrument and verify every pitch and bar against the recording, with conventions captioned.",
+      "common_failure": "Treating LAB as slow staff notation with letters instead of its own fast system: writing letter by letter from a paused recording, so the shorthand never becomes quicker than the staff and the on-the-fly advantage — the whole reason it exists — is never reached.",
+      "sources": [
+        "Charles Seeger, 'Prescriptive and Descriptive Music-Writing' (1958)",
+        "Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction (Myers ed., 1992)",
+        "Mantle Hood, The Ethnomusicologist (1971)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.transcription.rhythm-meter",
+      "label": "Rhythm & meter notation",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": ["ethnomusicology.analysis.emic-etic"],
+      "one_line": "Notate non-isochronous and additive rhythms — aksak meters like Bulgarian 7/8, West African bell timelines, clave — with tuplets, changing meters, and stroke notation, without forcing them into 4/4.",
+      "hours": 25,
+      "know_what": [
+        "akṣak — Brăiloiu's term for the additive, non-isochronous meters of the Balkans and Anatolia: equal short units grouped unevenly, e.g., Bulgarian 7/8 as 2+2+3",
+        "additive meter — a meter built by summing unequal groups (2+2+3, 3+2+2), notated with the grouping shown rather than hidden under a single time signature",
+        "the bell timeline — the repeating West African rhythmic pattern (e.g., the 12-pulse Ewe timeline) that anchors an ensemble; parts are heard against it, not against a metronome beat",
+        "clave — the Afro-Cuban two-bar rhythmic cell (3-2 or 2-3 son clave) that organizes the ensemble's parts and is heard as a timeline, not as syncopation against a hidden beat",
+        "the felt beat vs the notated beat — in timeline-based music the isochronous pulse is often not what performers orient to; notation must follow the orientation, not the clock",
+        "tuplets — the notation of unequal or swung subdivisions (triplets, quintuplets) that do not fit the prevailing grid",
+        "stroke notation — the convention of writing strokes (x or slash heads, e.g., on a single line) for unpitched percussion parts, where staff positions would imply pitch",
+        "changing meter — the time-signature shift mid-passage, the standard notation for metric asymmetry and the honest alternative to squeezing everything into 4/4"
+      ],
+      "know_how": [
+        "Find the rhythmic anchor first — bell, clave, drum pattern, or dance step — and notate the parts against it, before assigning any time signature",
+        "Count an aksak meter as its groupings (7/8 = 2+2+3) and write the grouping explicitly, either in the signature or with beaming that shows it",
+        "Write percussion and timeline parts in stroke notation on a single line, marking the strokes the performers actually play rather than inferred pitches",
+        "Use tuplets and dotted groupings for subdivisions that do not sit on the grid, and check each one against the recording",
+        "Change the meter signature where the accent pattern actually changes, rather than smoothing the change into a constant signature",
+        "Loop a 3-5 second chunk and tap the groupings before notating, letting the heard accents set the meter",
+        "Notate the timeline once and reference parts to it, so the transcription shows the ensemble's shared orientation instead of seven independent lines"
+      ],
+      "habits": [
+        "Ask what the performers orient to — the beat, the bell, the clave — before choosing how to bar the music",
+        "Write the grouping you hear (2+2+3), not the signature you expect from the region or genre",
+        "When a part looks syncopated against your meter, suspect your meter before suspecting the musicians",
+        "Keep the timeline visible in the transcription, because it is the reference the parts relate to",
+        "Mark swung or unequal subdivisions explicitly instead of letting them read as straight"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "high" },
+      "checkpoint": "Transcribe a 30-second passage in an additive or timeline-based rhythm — aksak (e.g., Bulgarian 7/8), a West African bell timeline, or clave — with the grouping written (2+2+3), the timeline or clave shown as the anchor, stroke notation for unpitched parts, and every bar verified against the recording without forcing the passage into 4/4.",
+      "common_failure": "Barring by habit instead of by hearing: squeezing an aksak or timeline passage into 4/4, writing the bell or clave as 'syncopation' against a beat the performers never orient to, and thereby transcribing the analyst's grid rather than the rhythm — a score that reads clean and plays wrong.",
+      "sources": [
+        "Constantin Brăiloiu, 'Le rythme aksak' (1951), trans. in Problems of Ethnomusicology (1984)",
+        "Simha Arom, African Polyphony and Polyrhythm (1991), on timelines and polyrhythm",
+        "John Miller Chernoff, African Rhythm and African Sensibility (1979)",
+        "Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction (Myers ed., 1992)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.transcription.tuning-pitch",
+      "label": "Tuning & pitch measurement",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": ["ethnomusicology.analysis.emic-etic"],
+      "one_line": "Measure and notate a non-equal-tempered tuning in cents and Hz (e.g., sléndro/pélog, maqam quarter tones) with a tuner or software, and show the deviations from the tempered scale.",
+      "hours": 20,
+      "know_what": [
+        "the cent — the logarithmic unit of pitch (100 cents = one equal-tempered semitone) that lets any interval be measured and compared regardless of absolute frequency",
+        "Hz (hertz) — the unit of fundamental frequency; measuring a pitch's Hz gives an absolute value the staff cannot state",
+        "equal temperament (12-TET) — the Western default grid dividing the octave into 12 equal semitones; the reference against which deviations are reported",
+        "the deviation — the measured distance in cents of a performed pitch from the nearest 12-TET degree, e.g., a sléndro pitch sitting 30 cents off its 'closest' tempered note",
+        "sléndro and pélog — the two Javanese tuning systems, neither of which matches the equal-tempered grid; the classic case for reporting tuning in cents",
+        "maqam quarter tones — the microtonal intervals of Arab music theory (e.g., the half-flat), another case the staff can only approximate and cents can state exactly",
+        "tuner software — a chromatic tuner app or plugin that displays a pitch's cents deviation live, the field tool for measuring a single note",
+        "the measurement protocol — stating the reference (e.g., A4 = 440 Hz), the method, and the sample, so another researcher can reproduce the numbers"
+      ],
+      "know_how": [
+        "Measure a single sustained pitch with a chromatic tuner or tuner app, reading both the note name and the cents deviation, and record the Hz where the tuner shows it",
+        "State the reference for every measurement — A4 = 440 Hz or the ensemble's own pitch standard — because cents claims are meaningless without it",
+        "Measure an entire scale (e.g., a sléndro or pélog set) note by note and tabulate the intervals in cents, showing each interval's deviation from 12-TET",
+        "Check the Hz reading against the audio in software (a spectrum view in Sonic Visualiser or Praat) when the tuner is unstable on a noisy or ornamented note",
+        "Report measured tunings as ranges, not single points, when the pitch bends or varies between repetitions of the same degree",
+        "Notate the measured pitch by writing the staff position plus the cents deviation (e.g., E +32), never by rounding to the nearest tempered note",
+        "Compare two performances or two ensembles' tunings using the same protocol, so the comparison is apples to apples"
+      ],
+      "habits": [
+        "When a pitch sounds 'out of tune' against the piano, reach for the tuner and measure it before deciding anything",
+        "Write the deviation in cents beside the note in every transcription of a non-tempered tradition",
+        "Ask what the musicians themselves call the tuning before reporting it in your categories",
+        "State the reference frequency in every write-up, because an unanchored cents number is no number",
+        "Sample several notes of the same degree before reporting its pitch, since performance varies"
+      ],
+      "know_why": {
+        "claim": "Measuring non-Western tunings in cents and Hz against the equal-tempered scale is the only way to make tuning claims checkable — a reproducible number another researcher can verify and compare across ensembles.",
+        "because": "Tuning is the one musical property where words fail: 'lower than ours' or 'close to minor third' cannot be verified or compared, while a cents measurement can be re-taken, checked against the recording, and tabulated across performances — which is why the scientific school treats measurement as the basis of any tuning claim.",
+        "disputed_by": "the interpretive camp holds that measuring against the tempered grid is an etic imposition: it forces a 12-TET reference frame onto systems built on other interval logics, and the resulting deviations say more about the analyst's grid than about the music's own tuning — the measurement should be reported, but never taken as the tuning's truth.",
+        "source": "Jaap Kunst, Music in Java: Its History, Its Theory and Its Technique (1949, 1973); Mantle Hood, The Ethnomusicologist (1971) and his Javanese/Balinese tuning documentation; Harold Powers, 'Mode' in The New Grove Dictionary of Music and Musicians (1980)"
+      },
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Measure a non-tempered scale (e.g., a sléndro or pélog set, or maqam quarter tones) note by note with a tuner or software: produce a table of the intervals in cents with each degree's deviation from 12-TET, state the reference frequency and method, and notate the result with cents written beside each pitch.",
+      "common_failure": "Rounding instead of measuring: reporting a sléndro or quarter-tone pitch as its nearest tempered note — 'it's basically a minor third' — so the very thing that makes the tuning distinctive is erased, and the claim is untestable because the number was never taken.",
+      "sources": [
+        "Jaap Kunst, Music in Java (1949, 3rd ed. 1973)",
+        "Mantle Hood, The Ethnomusicologist (1971)",
+        "Harold Powers, 'Mode' in The New Grove Dictionary of Music and Musicians (1980)",
+        "Sonic Visualiser user documentation (Centre for Digital Music, Queen Mary University of London)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.transcription.graphical-notation",
+      "label": "Graphical notation",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": ["ethnomusicology.transcription.transcription-software"],
+      "one_line": "Produce a graphical transcription — waveform- or spectrogram-based, using Sonic Visualiser or Praat — for a passage that defeats staff notation, and annotate the features you mean.",
+      "hours": 15,
+      "know_what": [
+        "the waveform — the amplitude-over-time display in Sonic Visualiser or Praat; shows loudness, attack, and duration but no pitch",
+        "the spectrogram — the frequency-over-time display (pitch as darkness on a vertical axis); the default view for seeing what staff notation cannot show",
+        "Sonic Visualiser — the open-source audio viewer built for music analysis (Centre for Digital Music), with waveform, spectrogram, and annotation layers",
+        "Praat — the phonetic analysis tool whose spectrograms and pitch tracks measure fundamental frequency over time, the standard for voice and intonation studies",
+        "the annotation layer — the labeled region or point (in Sonic Visualiser, a text or time-instance layer) that names the feature the transcription claims",
+        "the melograph — Seeger's mid-century mechanical pitch-tracking device, the ancestor of today's spectrogram-based transcription",
+        "the caption — the written key stating what each annotation means and what the display does not show, without which the image is unreadable",
+        "the features staff notation drops — microtonal inflection, glissando, vocal timbre, attack shape, ensemble blend — the reasons a passage may need graphical notation"
+      ],
+      "know_how": [
+        "Load the passage in Sonic Visualiser or Praat and set the spectrogram view: frequency range and window size chosen so the features you need (pitch bands, formants, attacks) are visible",
+        "Zoom to the passage or phrase that defeats staff notation and identify the features worth showing — a bend, a microtonal slide, an overtone pattern",
+        "Mark each feature on an annotation layer with a label and a time range, so every claim in the transcription is named and locatable",
+        "Export the annotated image (or save the project) and pair it with a caption stating the display settings, the conventions, and what is deliberately omitted",
+        "Check the spectrogram reading against your ears, and mark the features that are visible but inaudible as machine-only observations",
+        "Use Praat's pitch track to measure a fundamental-frequency contour (e.g., a vocal glide) and report the Hz range the staff cannot state",
+        "Combine views deliberately — waveform for attacks, spectrogram for pitch, annotation for claims — rather than exporting a raw image and calling it transcription"
+      ],
+      "habits": [
+        "Reach for graphical notation when the music carries its identity in features the staff drops, not as a default for every passage",
+        "Annotate every feature you mean, and never export a bare spectrogram as if it spoke for itself",
+        "Write the caption before exporting the image, while the display settings are still in front of you",
+        "Check each annotated feature against the recording at least once before finalizing",
+        "Keep the raw audio and the project file with the exported image, so the transcription is reproducible"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high", "scientific": "low" },
+      "checkpoint": "Produce an annotated graphical transcription of a passage that defeats staff notation — spectrogram or waveform from Sonic Visualiser or Praat with every claimed feature (bend, glide, attack, overtone) marked on a labeled annotation layer and timestamped, exported with a caption stating display settings and conventions.",
+      "common_failure": "Exporting a spectrogram and calling it analysis: the image is posted with no annotation, no caption, and no stated display settings, so the reader cannot tell which features the transcriber means or whether the display was set to show them — a picture that functions as decoration, not evidence.",
+      "sources": [
+        "Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction (Myers ed., 1992), on the melograph and graphical methods",
+        "Sonic Visualiser documentation (Centre for Digital Music, Queen Mary University of London)",
+        "Paul Boersma & David Weenink, Praat: doing phonetics by computer (software documentation)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,345 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 5,
+  "ids": [
+    "ethnomusicology.analysis.emic-etic",
+    "ethnomusicology.analysis.performance-analysis",
+    "ethnomusicology.ethnography.reflexivity",
+    "ethnomusicology.ethnography.voice",
+    "ethnomusicology.ethnography.structure",
+    "ethnomusicology.ethnography.venues",
+    "ethnomusicology.ethnography.multi-sited"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.analysis.emic-etic",
+      "label": "Emic & etic analysis",
+      "tier": 6,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.analysis.cultural-interpretation"],
+      "soft_prereqs": ["ethnomusicology.foundations.disciplinary-debates"],
+      "one_line": "Separate insider categories (emic) from analyst categories (etic) in your analysis and label each claim, so a reader always knows whose concept is being used.",
+      "hours": 12,
+      "know_what": [
+        "emic — Kenneth Pike's coinage (from 'phonemic'): the categories and distinctions that are meaningful to insiders of the culture, discovered by asking them, not by measuring",
+        "etic — Pike's companion term (from 'phonetic'): the analyst's categories, chosen for comparability across traditions whether or not insiders recognize them",
+        "Harris's etics — Marvin Harris's reframing (1976): etic descriptions must be testable and cross-culturally comparable, while emic ones answer only to the insider's judgment",
+        "the phoneme/phone analogy — the source of the terms: /b/ vs [b], where emic distinctions change meaning and etic ones are merely observable differences",
+        "insider category names — maqam, raga, pathet, gongan: the tradition's own theory of its music, the emic vocabulary analysis must elicit before importing its own",
+        "analyst categories — cents, Hz, scale degrees, Western form labels: imported tools that may or may not map onto the distinctions insiders actually make",
+        "the category clash — the analytic moment: an insider distinction your grid cannot see (e.g., two maqam variants a Western ear hears as one scale), which is data, not noise",
+        "the label — the write-up convention: every claim tagged emic or etic with the category named, so the reader always knows whose concept is in play"
+      ],
+      "know_how": [
+        "Elicit the insider categories first: ask musicians to name, distinguish, and rank their own units (pieces, modes, forms) before importing any analyst grid",
+        "Test a candidate emic category by sorting: give consultants performances or examples and ask which belong together and why, recording their reasons verbatim",
+        "Build the etic grid after the emic map exists, choosing analyst measures (Hz, cents, formal labels) that can see the distinctions insiders made",
+        "Label every claim in the write-up — emic or etic, with the category named and, for emic terms, the consultant who defined it and the translation",
+        "When emic and etic categories clash, report both and analyze the gap instead of rounding one away",
+        "Run the label test on your own draft: if you cannot say whose concept a claim uses, rewrite the claim until you can",
+        "Cite emic terms in the original with a gloss (e.g., 'pathet — the Javanese modal category'), so the reader can trace the category to its source"
+      ],
+      "habits": [
+        "Ask 'whose category is this?' of every analytical claim before writing it down",
+        "Learn the tradition's own theory of its music before importing your own grid",
+        "When a distinction matters to musicians but not to your measures, treat it as data, not as noise to be smoothed over",
+        "Keep a running emic glossary — term, translation, gloss, and the consultant who supplied it",
+        "Never write a scale, mode, or form name without tagging it emic or etic"
+      ],
+      "know_why": null,
+      "school_weights": { "interpretive": "high", "scientific": "high" },
+      "checkpoint": "Given a passage of your own analysis, label every category claim emic or etic with the category named and sourced, and show at least one insider distinction (e.g., two named maqam variants) that your etic grid initially missed — with the emic term glossed and attributed to a consultant.",
+      "common_failure": "Using 'emic' and 'etic' as vague honorifics — calling anything insider-flavored 'emic' with no sourced category behind it, and treating the etic grid (cents, Western scale degrees) as neutral when it is itself a cultural product — so the labels add noise instead of precision and the reader still cannot tell whose concept is in play.",
+      "sources": [
+        "Kenneth Pike, Language in Relation to a Unified Theory of the Structure of Human Behavior (1967 ed.)",
+        "Marvin Harris, 'History and Significance of the Emic/Etic Distinction' (Annual Review of Anthropology, 1976)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005), on emic/etic analysis"
+      ]
+    },
+    {
+      "id": "ethnomusicology.analysis.performance-analysis",
+      "label": "Performance analysis",
+      "tier": 6,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.analysis.formal-analysis"],
+      "soft_prereqs": ["ethnomusicology.analysis.comparison"],
+      "one_line": "Analyze variation across performances of the 'same' piece — ornamentation, microtiming, improvisation — and account for it as performance practice, not error.",
+      "hours": 20,
+      "know_what": [
+        "performance practice — the tradition-specific conventions governing how a piece is realized in performance: ornamentation, tempo, microtiming, improvisation",
+        "the performance set — the analytic unit: several performances of the 'same' item, ideally the same musician or ensemble across occasions, compared directly",
+        "ornamentation — the added notes and inflections (trills, mordents, grace notes, slides) a tradition treats as the performer's right and duty, not as decoration over a fixed text",
+        "microtiming — sub-pulse timing deviations invisible in standard notation that carry identity, such as jazz swing ratios around 1.5:1 to 1.8:1 or the 'push' of a funk groove",
+        "improvisation — composition-in-performance (Nettl's frame), ranging from ornamentation to entire sections (taqsim, alap, a jazz solo), governed by the tradition's own rules",
+        "the work concept — the Western art-music assumption of a fixed piece standing above its performances, the default frame against which variation gets measured as deviation",
+        "the comparison transcript — two performances aligned at a structural anchor (the same phrase or section) to expose where they differ and where they agree",
+        "musicking — Christopher Small's term for all musical activity as an act of relationship, making the performance itself, not the score, the primary object of study"
+      ],
+      "know_how": [
+        "Build the comparison set: collect three or more performances of the same item by the same musician or ensemble, noting date, venue, and occasion for each",
+        "Align the performances at a structural anchor — the same phrase or section — and overlay them to expose ornament and timing differences",
+        "Mark every difference — added notes, timing shifts, registral changes — and classify each as tradition-licensed ornament or substantive change",
+        "Measure microtiming with a waveform or spectrogram (e.g., in Sonic Visualiser) rather than trusting the ear, reporting deviations in milliseconds or swing ratios",
+        "Ask the performers what they hear as 'the same piece' across their own performances and what they are free to change, recording their answers",
+        "Write each finding as performance practice: name the convention, cite the example with a timestamp, and state what a performer would be licensed to do",
+        "Compare at least two performers' readings of the same item and analyze what the differences reveal about each performer's choices"
+      ],
+      "habits": [
+        "Treat a single hearing of a performance as one datum, never as the piece itself",
+        "Before calling a deviation an error, ask which tradition convention could license it",
+        "Collect the same item in multiple performances before analyzing any one of them",
+        "Listen for what is changed, not just what is repeated — the variation is where the meaning lives",
+        "Check every microtiming claim against measured data, not impressions"
+      ],
+      "know_why": {
+        "claim": "Variation across performances of the 'same' piece — ornamentation, microtiming, improvisation — is not error or noise but the substance of the music: the music is the act of performing, not the score or the fixed work.",
+        "because": "Following Small's 'musicking,' a piece exists only in its performances, so each rendition's ornaments, timing shifts, and improvisation are where performers exercise meaning and identity; analyzing them as deviations from a platonic text misreads the tradition's own understanding of what it is doing.",
+        "disputed_by": "score-based musicology and the work-concept camp — following Goehr's account of the imaginary museum of musical works — which treat the fixed piece as the primary object and each performance as an approximation measured against the text, for whom variation is error or at best imperfect fidelity.",
+        "source": "Christopher Small, Musicking: The Meanings of Performing and Listening (1998); Lydia Goehr, The Imaginary Museum of Musical Works (1992); Bruno Nettl with Melinda Russell, In the Course of Performance (1998)"
+      },
+      "school_weights": { "interpretive": "high", "scientific": "high" },
+      "checkpoint": "Compare three performances of the same item by the same musician or ensemble and produce an annotated comparison — every ornament, microtiming shift, and improvisation marked with a timestamp, each attributed to a named performance-practice convention or flagged as substantive change — that a performer from the tradition would recognize as their practice, not their error.",
+      "common_failure": "Analyzing one recording as 'the piece' and treating variation across takes as error or noise, so the ornaments and timing shifts that carry a tradition's identity get flattened into a single 'best' performance — and the analysis has nothing to say about why musicians play the 'same' piece differently every time.",
+      "sources": [
+        "Christopher Small, Musicking: The Meanings of Performing and Listening (1998)",
+        "Bruno Nettl with Melinda Russell, In the Course of Performance: Studies in the World of Musical Improvisation (1998)",
+        "Ingrid Monson, Saying Something: Jazz Improvisation and Interaction (1996)",
+        "Anders Friberg & Johan Sundberg, 'Swing Ratios and Ensemble Timing in Jazz Performance' (Journal of the Acoustical Society of America, 1995)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethnography.reflexivity",
+      "label": "Reflexivity",
+      "tier": 6,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.analysis.cultural-interpretation"],
+      "soft_prereqs": ["ethnomusicology.fieldwork.participant-observation"],
+      "one_line": "Write a reflexive passage positioning yourself — access, biases, relationships, how you changed the room — into the account, instead of writing as an invisible narrator.",
+      "hours": 12,
+      "know_what": [
+        "reflexivity — the practice of accounting for the researcher's position — access, biases, relationships, effects — inside the text, rather than narrating as an invisible observer",
+        "positionality — the social location (gender, class, ethnicity, nationality, institutional role) that shapes what you can see, hear, and be told in the field",
+        "the reflexive turn — the post-Writing Culture (1986) insistence that the ethnographer's presence be part of the account, not a secret to be edited out",
+        "the access biography — how you got in: the gatekeepers, introductions, and permissions that made the research possible, and the conditions attached",
+        "the observer effect — how your presence changed the scene: the extra rehearsal, the formalized ritual, the performance for the recorder",
+        "biases — the prior assumptions you carry into the field and must name, because they shape what you notice and how you interpret it",
+        "relationships — the friendships, obligations, and debts fieldwork creates, which both enable and constrain what you can write",
+        "the position statement — the convention of a brief, specific passage early in the ethnography that locates the author for the reader"
+      ],
+      "know_how": [
+        "Write the access biography in 150-300 words: who introduced you, what was said, what conditions were attached to entry",
+        "Name the observer effect concretely — what changed in the room because you were there — with an observed example from your field notes",
+        "State your positionality where it bears on the evidence: gender where gendered spaces shaped access, language where interpretation ran through an interpreter",
+        "Keep the reflexive passage disciplined: report position only where it affects the data, and cut self-narration that does not",
+        "Correlate position with evidence in the text: when a relationship changes what a consultant will say, say so at that point in the account",
+        "Test the passage against the subject: would consultants recognize themselves and their music, or does the author now fill the frame?",
+        "Place the position statement in the introduction or the methods section, not scattered through the text as asides"
+      ],
+      "habits": [
+        "Ask of every claim: how do I know this, and from where in my position do I know it?",
+        "Notice when your presence changes the event and record the change in the field notes the same day",
+        "Write the position passage early in the project and revise it when fieldwork disproves it",
+        "When self-narration grows, re-read and cut whatever does not serve the evidence",
+        "Track relationships as data: who would and would not speak to you, and why"
+      ],
+      "know_why": {
+        "claim": "The researcher must appear in the account — access, biases, relationships, and effects on the scene — because knowledge is produced from a positioned person, and hiding the position hides the production of the knowledge.",
+        "because": "The reflexive turn (post-1986, Writing Culture) holds that an invisible narrator implies an impossible god's-eye view; naming how you got access, what you could and could not hear, and how you changed the room lets readers weigh the evidence instead of taking it on faith.",
+        "disputed_by": "the 'vanity ethnography' critique — from readers and practitioners inside the field — that sustained self-narration displaces the subjects the ethnography exists to represent, turning the study into the researcher's story; the disciplined response is to report position only where it bears on the evidence.",
+        "source": "James Clifford & George Marcus, Writing Culture (1986); Gregory Barz & Timothy Cooley, Shadows in the Field (2nd ed., 2008); Clifford Geertz, 'Notes on the Balinese Cockfight' (1973)"
+      },
+      "school_weights": { "interpretive": "high", "documentary": "low" },
+      "checkpoint": "Write a 300-500-word reflexive passage for your own study — access biography, observer effect with a concrete observed example, and the positionality that shaped what you could hear — in which every sentence either bears on the evidence or is cut.",
+      "common_failure": "Failing at one of two poles: writing as an invisible narrator, so the reader cannot weigh the evidence, or writing reflexivity as autobiography, so the author fills the frame and the music disappears — the second is the vanity-ethnography trap that gives the practice its bad name.",
+      "sources": [
+        "James Clifford & George Marcus, Writing Culture (1986)",
+        "Gregory Barz & Timothy Cooley, Shadows in the Field (2nd ed., 2008)",
+        "Michelle Kisliuk, Seize the Dance! BaAka Musical Life and the Ethnography of Performance (1998)",
+        "Clifford Geertz, 'Notes on the Balinese Cockfight' (1973)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethnography.voice",
+      "label": "Voice & polyphony",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "soft_prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Compose a passage that represents a consultant's voice — quoted, translated, contextualized — alongside your own analysis, so the two are distinct yet both present.",
+      "hours": 15,
+      "know_what": [
+        "quoted consultant voice — a musician's or elder's words quoted directly, presented as evidence and as presence, not as decoration for the author's prose",
+        "polyphony — Bakhtin's term for a text with several voices that are not merged; in ethnography, consultant voices that speak alongside the author's analysis",
+        "dialogic ethnography — Dennis Tedlock's program of presenting the ethnographer-consultant exchange itself rather than only its digested results",
+        "translation practice — rendering quoted speech knowing every translation is interpretation; the convention of glossing key emic terms in the original",
+        "contextualization — the frame around a quote: who the speaker is, in what situation they spoke, in what language, to whom",
+        "the speaking-for problem — Linda Alcoff's question of when, and whether, the ethnographer is entitled to represent others' positions at all",
+        "the consultant's authority — the speaker's standing as the source of insider knowledge, which quoting makes visible and analysis must not overwrite",
+        "editing ethics — the choices of what to quote and what to cut, which ultimately determine whose voice the finished text carries"
+      ],
+      "know_how": [
+        "Quote consultants by name or role, with their permission, giving speaker, situation, and language for each quote",
+        "Present emic terms with translation and gloss at first use (e.g., 'nyama — the Mande term for the potency in performance')",
+        "Keep consultant voice and authorial analysis distinct on the page, with quote blocks or attributions that mark whose words these are",
+        "Translate with the original alongside, or in notes, wherever the emic term carries meaning the English loses",
+        "Check each quote back with the speaker where possible, confirming they recognize their words and their context",
+        "Let two consultants' differing accounts stand side by side rather than merging them into one tidy version — the disagreement is data",
+        "Attribute interpretive claims to the author and knowledge claims to their source, so the reader always knows who is speaking"
+      ],
+      "habits": [
+        "Before quoting, ask whose voice this passage needs and whose voice it currently has",
+        "Keep emic terms in the original on first use with a gloss, so translation never silently flattens meaning",
+        "When two consultants disagree, resist the urge to reconcile — record both and analyze the difference",
+        "Re-read the finished passage and count the author's words against the consultants' words",
+        "Record the consent to quote in the field notes, with the conditions the speaker attached"
+      ],
+      "know_why": null,
+      "school_weights": { "interpretive": "high", "applied": "high" },
+      "checkpoint": "Compose a 500-word passage on one topic containing at least two consultants' quoted voices — each with speaker, situation, and language stated, emic terms glossed in the original, authorial analysis clearly separated — and confirm the speakers recognize their words and context.",
+      "common_failure": "Quoting consultants as wallpaper: names attached but no situation or language, emic terms silently flattened into bland English, and the author's analysis woven so tightly through the quotes that the reader cannot tell whose words are whose — the polyphony collapses into a single ventriloquized voice.",
+      "sources": [
+        "Dennis Tedlock, The Spoken Word and the Work of Interpretation (1983)",
+        "Steven Feld, Sound and Sentiment: Birds, Weeping, Poetics, and Song in Kaluli Expression (1982)",
+        "Linda Alcoff, 'The Problem of Speaking for Others' (Cultural Critique, 1991)",
+        "Ruth Finnegan, The Hidden Musicians: Music-Making in an English Town (1989)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethnography.structure",
+      "label": "Ethnographic structure",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "soft_prereqs": [],
+      "one_line": "Structure a full ethnographic argument — chapter or article — with an introduction that states the claim, evidence chapters, and a conclusion, so a reader can state your thesis after one read.",
+      "hours": 20,
+      "know_what": [
+        "the thesis statement — the claim the whole piece argues, stated in the introduction so a reader can repeat it after one read",
+        "the evidence chapter — a chapter or section organized to build the argument from analyzed material (transcriptions, quotes, observations), not to catalog fieldwork data",
+        "the introduction's job — orient the reader, state the claim, preview the argument's shape, and position the work in the literature",
+        "the conclusion's job — return to the claim with the evidence assembled, state what changed, and name the limits of the argument",
+        "the argumentative spine — the three to five moves the piece makes, each with its own evidence, traceable from introduction to conclusion",
+        "the literature review's place — the engagement with prior work that frames the claim, inside the introduction or as a dedicated early chapter",
+        "the chapter abstract — the one-paragraph preview that lets an editor or reader test the chapter's argument before reading it",
+        "the one-read test — giving the introduction and conclusion alone to a fresh reader, who must be able to state the thesis"
+      ],
+      "know_how": [
+        "Write the thesis statement first, as one sentence a reader could repeat, and keep it pinned where every revision can be checked against it",
+        "Draft the argumentative spine — three to five moves from claim to conclusion — before writing any chapter",
+        "Shape each evidence chapter around one move: state it, show it with analyzed material, interpret it, connect it to the thesis",
+        "Write the introduction last, from the finished argument, so it previews what the piece actually does rather than what you hoped it would",
+        "End each chapter by stating what it established and what the next chapter takes from it",
+        "Run the one-read test on the draft: a reader who has not seen the piece states the thesis after reading the introduction and conclusion",
+        "Cut any chapter that does not advance the spine, and merge any two chapters that advance the same move"
+      ],
+      "habits": [
+        "Keep the thesis statement pinned where every draft revision can be checked against it",
+        "Outline before drafting, and re-outline when a chapter drifts from the spine",
+        "Write the introduction last, not first",
+        "At the end of each chapter, ask what the reader now knows that they did not before",
+        "When the piece stalls, return to the spine and find which move is missing its evidence"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce a full ethnographic article or chapter draft — an introduction stating the claim, three to five evidence sections each built on analyzed material, and a conclusion returning to the claim — and pass the one-read test: a reader who has not seen the piece states your thesis correctly after one read.",
+      "common_failure": "Writing the material as a tour of the fieldwork — first the festival, then the musicians, then the recording session — with no thesis the chapters serve, so the introduction promises a claim the evidence chapters never make and the conclusion has nothing to return to.",
+      "sources": [
+        "Bruno Nettl, The Study of Ethnomusicology (2005), writing and publication chapters",
+        "Gregory Barz & Timothy Cooley, Shadows in the Field (2nd ed., 2008), writing chapters",
+        "A recent article in Ethnomusicology or Ethnomusicology Forum, analyzed for structure"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethnography.venues",
+      "label": "Publication venues",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "soft_prereqs": [],
+      "one_line": "Match a finished piece of writing to a real venue — Ethnomusicology, Yearbook for Traditional Music, Ethnomusicology Forum, an edited volume — and reformat it to that venue's stated conventions.",
+      "hours": 8,
+      "know_what": [
+        "Ethnomusicology — the Society for Ethnomusicology's journal (since 1953), the field's flagship: peer-reviewed articles around 8,000 words with abstract and labeled examples",
+        "Yearbook for Traditional Music — the ICTM's journal, historically the home of repertoire studies and tradition-focused descriptive work",
+        "Ethnomusicology Forum — the British Forum for Ethnomusicology's journal, more open than the flagship to experimental and reflexive writing",
+        "the edited volume — a thematic collection (often in the SEM series or a university press) with chapter-length contributions commissioned to a theme",
+        "the call for papers — the venue's announced theme and deadline that gates submission, sometimes by invitation",
+        "peer review — the anonymous review process (often double-blind) whose reports, not the editor's taste alone, gate acceptance",
+        "the venue's stated conventions — length, citation style (author-date vs footnotes), abstract format, figures and audio examples, anonymity of submission",
+        "the abstract — the 150-250-word summary editors and readers use to judge the piece before reading it"
+      ],
+      "know_how": [
+        "Match the piece to the venue: name the journal, read its recent issues, and check that your argument fits its actual published range, not its description",
+        "Read the venue's instructions for authors and reformat the piece to them — length, citation system, abstract, supplementary material — item by item",
+        "Write the abstract to the venue's length (150-250 words) and to its audience, stating the claim and the material it rests on",
+        "Prepare audio and visual examples per the venue's rules — supplementary files, embedded players, permissions for every quoted example",
+        "Submit with a cover letter naming the piece's contribution and its fit to the venue",
+        "Respond to reviewer reports point by point: revise where the criticism is grounded, argue where it is not, and document both in the resubmission",
+        "Keep a submission log — venue, dates, outcome — and retarget the piece to the next venue when one rejects it"
+      ],
+      "habits": [
+        "Read the last three issues of a venue before submitting anything to it",
+        "Match the piece to the venue before polishing it to the venue's length, not after",
+        "Draft the abstract first as a contract with the reader, then write the piece to it",
+        "Treat rejection as a fit problem: retarget, revise, resubmit",
+        "Keep permissions for quoted audio and text in hand before submission, not after acceptance"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Take a finished piece of writing and prepare it for submission to one named venue — Ethnomusicology, Yearbook for Traditional Music, Ethnomusicology Forum, or an edited volume — reformatted to that venue's stated conventions (length, citation style, abstract, audio permissions), ready to submit.",
+      "common_failure": "Submitting the same generic paper to any journal: no venue-specific reformatting, an abstract written for a different audience, and audio examples without permissions — so the piece is desk-rejected or sent back for revision before a single reviewer reads the argument.",
+      "sources": [
+        "Ethnomusicology (SEM journal) instructions for authors",
+        "Yearbook for Traditional Music (ICTM) instructions for authors",
+        "Ethnomusicology Forum (BFE) instructions for authors",
+        "SEM annual conference call for papers and submission portal"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethnography.multi-sited",
+      "label": "Multi-sited ethnography",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "soft_prereqs": ["ethnomusicology.fieldwork.prep"],
+      "one_line": "Design a multi-sited study tracing one music across locations — a diaspora community, a festival circuit, streaming platforms — with a method specified for each site.",
+      "hours": 15,
+      "know_what": [
+        "multi-sited ethnography — George Marcus's program (1995): one object of study followed across several locations, instead of one community studied in place",
+        "following the people — tracing a music community as it moves (diaspora, migration), with field sites in both the home and the destination contexts",
+        "following the thing — tracing an object (an instrument, a recording, a genre label) as it circulates, examining what changes at each exchange",
+        "following the metaphor — tracing a category (e.g., 'world music,' 'tradition,' 'authenticity') across sites where it means different things",
+        "the diaspora site — fieldwork in a migrant community that maintains a music in a new context, alongside or instead of the home site",
+        "the festival circuit — the network of festivals a genre circulates through, each with its own audience, stage, and gatekeeping",
+        "streaming platforms — the contemporary distribution site (Spotify, YouTube) where circulation, metadata, and algorithmic discovery shape what counts as the music",
+        "site-method fit — the requirement that each site gets its own method and evidence type, not the same fieldwork pasted everywhere",
+        "the coherence problem — the standing risk that multiple sites produce fragments with no single argument holding them together"
+      ],
+      "know_how": [
+        "Define the object first — the people, thing, or metaphor you are following — in one sentence that holds across every site",
+        "Choose sites for what each contributes to the object's movement, not for convenience, and name the connection between them",
+        "Specify a method and evidence type for each site — participant observation at the festival, interviews in the diaspora, platform data for streaming — and state how they are comparable",
+        "Budget time per site and resist depth inflation: multi-sited work trades single-site depth for coverage, and the trade must be justified explicitly",
+        "Trace the same unit across sites — a song, a recording, a ritual — so the sites share a spine of comparison",
+        "Write the thesis that holds the sites together — the argument about circulation, transformation, or identity — before drafting any single-site chapter",
+        "Check each site chapter against the shared object: does it advance what the object became at this stop?"
+      ],
+      "habits": [
+        "Ask of every site: what does this location change about the music?",
+        "Keep the one-sentence object on the wall and re-read it when a site drifts from it",
+        "Log the same data types at every site (repertoire, interviews, recordings) so comparison stays possible",
+        "When a site threatens to become its own monograph, cut scope, not coherence",
+        "Name the connections between sites in the text, so the reader sees a circuit, not a list"
+      ],
+      "know_why": null,
+      "school_weights": { "interpretive": "high", "documentary": "low" },
+      "checkpoint": "Produce a multi-sited study design for one music traced across three locations — e.g., a diaspora community, a festival circuit, and streaming platforms — with the shared object stated in one sentence, a named method and evidence type for each site, and the connection between sites specified.",
+      "common_failure": "Calling three unrelated field trips 'multi-sited': sites chosen by convenience with no shared object, no per-site method, and no argument connecting them — so the study fragments into separate mini-ethnographies that neither compare nor cohere.",
+      "sources": [
+        "George Marcus, 'Ethnography in/of the World System: The Emergence of Multi-Sited Ethnography' (Annual Review of Anthropology, 1995)",
+        "Mark Slobin, Subcultural Sounds: Micromusics of the West (1993)",
+        "Timothy Taylor, Global Pop: World Music, World Markets (1997)"
+      ]
+    }
+  ]
+}

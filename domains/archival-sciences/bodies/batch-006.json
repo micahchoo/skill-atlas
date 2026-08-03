@@ -1,0 +1,358 @@
+{
+  "domain": "archival-sciences",
+  "batch": 6,
+  "ids": [
+    "archival-sciences.preservation.reformatting-options",
+    "archival-sciences.preservation.conservation-triage",
+    "archival-sciences.preservation.digital-preservation",
+    "archival-sciences.preservation.format-migration",
+    "archival-sciences.access.reading-room",
+    "archival-sciences.access.reference-interview",
+    "archival-sciences.access.outreach"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.preservation.reformatting-options",
+      "label": "Reformatting options",
+      "tier": 3,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.handling-and-storage"],
+      "soft_prereqs": ["archival-sciences.preservation.environment-control"],
+      "one_line": "Choose the reformatting that fits the material — microfilm vs digitization, surrogate vs original — weighing use, condition, and cost.",
+      "hours": 8,
+      "know_what": [
+        "Preservation surrogate — a reformatted copy (microfilm master or digital file) that stands in for the original so the original can be retired from handling; distinct from a reference copy made for convenience",
+        "Silver-gelatin microfilm — the archival medium of record: silver-gelatin emulsion on polyester base, rated for a century-plus of life under ISO 18911 cold, dry storage, and legible with nothing more than light and a lens",
+        "Digitization — a raster surrogate (TIFF, JPEG2000) that is instantly searchable and network-deliverable but tied to software, hardware, and ongoing fixity management for its survival",
+        "FADGI guidelines — the Federal Agencies Digital Initiatives grid rating still-image capture 1-4 stars on resolution, color, and sharpness; most archives capture text at 300-600 dpi, 24-bit color",
+        "ANSI/AIIM MS23 and ISO 18901 — the standards governing microfilm image quality and processing; a master that fails the density and resolution targets is not a preservation copy",
+        "Use case — the first variable: high research demand and remote users argue for digitization; low use on a 200-year horizon argues for a filmed master",
+        "Condition — the second variable: an item too fragile or tightly bound to scan flat (brittle paper, oversize, crammed bindings) may film better, or need conservation before either solution",
+        "Cost — the third variable: microfilming runs roughly $1-3 per frame with quality control at scale; digitization costs cents per page but adds storage, metadata, and fixity costs for as long as the files must live",
+        "Dual-solution reformatting — film a preservation master, then digitize from the film: the film hedges against digital loss and the scans provide access",
+        "Surrogate vs original — reformatting does not destroy the original; the archive retires the original to storage and serves the surrogate, so retention policy still governs the original itself"
+      ],
+      "know_how": [
+        "Run the three-way decision per collection: list use (request frequency, remote demand), condition (fold test, bindings, format), and budget, then choose microfilm master, digitization, or both",
+        "Film at 35mm with a planetary camera for bound and oversize items, and reject the processed master unless it meets the ANSI/AIIM MS23 resolution and density targets",
+        "Digitize for access at 300 dpi minimum for text, 24-bit color, TIFF, with a color target (e.g., ColorChecker) in frame for calibration",
+        "Store silver-gelatin masters in cold, dry vault conditions per ISO 18911 (below 21°C, 30-40% RH) and never serve the master — make a separate service duplicate",
+        "Write the reformatting decision into a project plan with per-series rationale so a future archivist can see why microfilm was chosen over scans (or vice versa)",
+        "When both are affordable, film first and scan from the film, so the access files derive from the preservation copy rather than from repeated handling of the original",
+        "Build a per-series cost sheet — filming vendor quotes, scanning time, storage, and metadata — before committing to a solution"
+      ],
+      "habits": [
+        "Ask what a researcher in 2080 will need before asking what today's users want",
+        "Treat every scan as an access copy until a digital preservation strategy exists for the file format",
+        "Question 'digitize everything' campaigns: digitization without fixity and a storage budget is not preservation",
+        "When an item fails the fold test, stop planning scanning and start planning handling or filming",
+        "Revisit the microfilm-vs-digital choice when storage or labor costs shift — a 20-year-old decision may no longer be right"
+      ],
+      "know_why": {
+        "claim": "Microfilm is the preservation surrogate of record; digitization is an access surrogate and becomes preservation only when wrapped in a digital preservation program.",
+        "because": "Silver-gelatin microfilm on polyester base is legible with no technology beyond light and a lens, has a rated life measured in decades to centuries under ISO 18911 storage, and needs no format migration; a digital file is tied to software, hardware, and continuous fixity management, and every migration step is a fresh risk of loss or alteration.",
+        "disputed_by": "Digital-first archivists and the born-digital preservation community (Paul Conway, the FADGI/digitization-for-access camp) argue that microfilm is itself just another obsolete format — expensive to shoot, miserable to access, and eventually undigitizable — and that properly managed digital surrogates with checksums and OAIS/PREMIS metadata are the real preservation copies.",
+        "source": "Mary Lynn Ritzenthaler, Preserving Archives and Manuscripts (2nd ed., SAA, 2010); ISO 18911 (storage of processed safety photographic film); Paul Conway, 'Preservation in the Age of Google' (2010)"
+      },
+      "school_weights": { "preservation-first": "high", "access-first": "low" },
+      "checkpoint": "Given ten items (a 1920s newspaper run, an oversize map, a fragile bound minute book, a frequently requested photograph series, an acetate film reel, a 200-year-old ledger, a set of blueprints, a scrapbook of pasted ephemera, a fax-copied ledger, a born-digital series), produce a one-page reformatting plan naming microfilm, digitization, or both per item with the use/condition/cost reasoning and a per-series cost estimate — a colleague must be able to defend every choice from the plan alone.",
+      "common_failure": "Defaulting to digitization because users and funders demand images, then parking the TIFFs on a shared drive with no fixity or format plan — the surrogate outlives neither the hardware nor the workflow that made it. The mirror failure is filming everything 'because film lasts', producing masters nobody uses while researchers keep handling the originals for lack of an access copy.",
+      "sources": [
+        "Mary Lynn Ritzenthaler, Preserving Archives and Manuscripts (2nd ed., SAA, 2010)",
+        "FADGI, Technical Guidelines for Digitizing Cultural Heritage Materials",
+        "ISO 18901 and ISO 18911 (microfilm processing and storage standards)",
+        "ANSI/AIIM MS23 (microfilm quality and control)"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.conservation-triage",
+      "label": "Conservation triage",
+      "tier": 3,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.handling-and-storage"],
+      "soft_prereqs": ["archival-sciences.preservation.disaster-response"],
+      "one_line": "Triage an item's condition — tear, mold, brittle paper — into stabilize-now or refer-to-conservator, documenting exactly what you did and didn't do.",
+      "hours": 8,
+      "know_what": [
+        "Triage — sorting material by condition into stabilize-now (safe to handle with basic supplies) or refer-to-conservator (damage beyond non-specialist care); not repairing everything in sight",
+        "Fold test — the brittle-paper screen: fold a corner once or twice; if it breaks or cracks along the crease, the sheet is brittle and must not be flattened, machine-copied, or pressure-treated",
+        "Mold — active (soft, pigmented, odorous, spreading) vs dormant (staining, powdery residue): active mold means quarantine, no handling, and conservator or industrial-hygiene review before treatment",
+        "Foxing — small reddish-brown spots from iron and mold metabolites in the paper; cosmetic in most cases, so triage labels it stabilize-and-monitor rather than treat",
+        "Japanese tissue mends — thin kozo-fiber paper (e.g., Tengujo) adhered with wheat starch paste for simple edge tears; the standard non-specialist stabilization, reversible with water",
+        "Encapsulation — sealing a brittle or torn sheet between two sheets of Mylar (polyester) with no adhesive, so it can be handled and scanned without further damage",
+        "Condition report — the written record (photographs, damage sketch, dimensions, pH spot-test result, prior treatments) that turns triage from opinion into evidence",
+        "pH testing — surface measurement with a pH pen or colorimetric strips; paper below pH 5.5 is acid-degrading and a candidate for deacidification referral",
+        "Referral threshold — media that flakes or powders (chalk pastel, gouache), iron gall ink corrosion, active mold, insect infestation, and tears that enter the text block go to a conservator, full stop",
+        "Do no harm — the triage principle: a wrong intervention (tape, lamination, pressing a brittle sheet) is worse than no intervention, because unskilled repair destroys evidence"
+      ],
+      "know_how": [
+        "Run the triage sequence on an item: inspect in good light, photograph the condition, do the fold test, pH-test the paper, then sort into stabilize-now / monitor / refer-to-conservator",
+        "Mend a clean edge tear with wheat starch paste and a thin Japanese tissue strip, trimmed to the tear and never overlapping text",
+        "Quarantine suspected active mold: seal the item in a polyethylene bag labeled 'MOLD — DO NOT OPEN', move it to an isolated area, and notify a supervisor before any further handling",
+        "Encapsulate a brittle or torn single sheet between two Mylar sheets with a small margin, and label the sleeve with the call number before refiling",
+        "Write a one-page condition report per damaged item — photos before and after, actions taken, items referred — and file it with the collection file",
+        "Spot-test paper with a pH pen or strip, record the reading in the condition report, and refer items below pH 5.5 for deacidification rather than attempting it",
+        "When in doubt, do nothing except document — the default outcome for anything you cannot name with confidence is referral, not intervention"
+      ],
+      "habits": [
+        "Photograph the damage before touching the item — the 'before' image is the evidence that protects you later",
+        "Ask 'can I name the damage and the treatment?' — if not, the item goes to a conservator, not the workbench",
+        "Reach for a pencil, not a pen, when noting anything near collection material",
+        "Never apply pressure or heat to anything that fails the fold test",
+        "Treat tape as an alarm: pressure-sensitive tape on a page usually means someone already tried to repair it, and the repair belongs to a conservator"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "preservation-first": "high", "access-first": "low" },
+      "checkpoint": "Given five damaged items (a brittle ledger failing the fold test, a book with active mold on the cover, a letter with a clean edge tear, a pastel portrait with flaking media, a map with foxing), produce a triage worksheet classifying each as stabilize-now, monitor, or refer-to-conservator with the evidence, and stabilize the two safe items (mend the tear, encapsulate or flat-store the map) without causing new damage — a conservator reviewing the worksheet must agree with every referral.",
+      "common_failure": "Fixing what you can see instead of diagnosing what you can't: applying tape or lamination to a brittle page, or brushing 'clean' active mold, each of which permanently worsens the item and often removes evidence. The other plateau is over-referral — sending every foxed page to a conservator because the stabilize-now category never got practiced with confidence.",
+      "sources": [
+        "Mary Lynn Ritzenthaler, Preserving Archives and Manuscripts (2nd ed., SAA, 2010)",
+        "NEDCC Preservation Leaflets (mending, mold, and conservation referral)",
+        "American Institute for Conservation, Caring for Your Treasures",
+        "Society of American Archivists, Dictionary of Archives Terminology"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.digital-preservation",
+      "label": "Digital preservation",
+      "tier": 7,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.records-management.born-digital-transfer", "archival-sciences.preservation.digitization-for-access"],
+      "soft_prereqs": [],
+      "one_line": "Run a digital preservation program — checksum fixity checks, format monitoring, PREMIS/OAIS metadata — so files survive media and format obsolescence.",
+      "hours": 20,
+      "know_what": [
+        "Fixity — the property that a file's bits are unchanged over time, verified by comparing a freshly computed checksum (SHA-256 recommended; MD5 is legacy) against the value recorded at ingest",
+        "Checksum — a hash digest computed over a file's bytes; any single bit flip changes the digest, so a fixity audit is a bit-level health check",
+        "OAIS — the Open Archival Information System reference model (ISO 14721): SIP, AIP, and DIP information packages plus six functional entities, including Preservation Planning",
+        "PREMIS — the Preservation Metadata: Implementation Strategies data dictionary: events (ingest, validation, migration, fixity check), agents, objects, and rights — the standard vocabulary for recording what was done to a file",
+        "Format registry — a machine-readable catalog of format identities and risks; PRONOM (UK National Archives) and UDFR are the reference registries, queried by tools like DROID",
+        "NDSA Levels of Digital Preservation — the maturity grid from the National Digital Stewardship Alliance: level 1 = 2 copies and fixity at ingest; level 4 = 3 copies, scheduled fixity audits, and full metadata",
+        "3-2-1 rule — the storage heuristic: 3 copies, on 2 different media types, 1 offsite; LTO tape, spinning disk, and cloud object storage are the common mix",
+        "Bit rot — physical decay of storage media and gradual corruption of bits in place; the failure mode fixity auditing exists to catch",
+        "Significant properties — the characteristics that must survive (text content, layout, structure, provenance) for a digital object to remain authentic and usable — the target you preserve, not the format",
+        "Digital preservation system — a managed platform (Archivematica, Preservica, or a home-built BagIt-plus-fixity pipeline) that automates ingest, validation, storage, and audit; ad hoc copies on drives are not a program"
+      ],
+      "know_how": [
+        "Compute and record a checksum at ingest for every file (e.g., sha256sum), store it in the preservation metadata, and re-verify on a schedule — NDSA level 2 periodic, level 4 scheduled — with a tool such as Fixity or Archivematica",
+        "Package files at ingest as BagIt bags (bag-info.txt, manifest-sha256.txt) so fixity travels with the content between systems",
+        "Run format identification on ingest with DROID against PRONOM and record the PUID (e.g., fmt/18 for PDF 1.4) in the metadata",
+        "Write a PREMIS event for each action — ingest, validation, migration, fixity check — with date, agent, outcome, and resulting checksum, so the file's history is auditable",
+        "Monitor format risk quarterly by re-running DROID and reading PRONOM risk flags for formats approaching end-of-life",
+        "Apply the 3-2-1 rule to the storage plan and verify restores, not just writes: pull a random file from each medium and check its checksum annually",
+        "Draft the archive's digital preservation policy naming the fixity schedule, storage tiers, and the accountable person — the policy is what survives staff turnover"
+      ],
+      "habits": [
+        "Checksum at ingest, never later — fixity you cannot compare against is fixity you do not have",
+        "When a file fails a fixity check, stop and trace the copy chain before restoring from any single copy",
+        "Treat 'it is on the server' as a claim to verify, not a fact",
+        "Record every action as a PREMIS event in the moment, never reconstruct it from memory at the end of the quarter",
+        "Before adopting a new format, check PRONOM and the Library of Congress Sustainability of Formats site — the risk answer exists before you commit"
+      ],
+      "know_why": {
+        "claim": "Bit-level preservation — verified fixity across redundant copies — is the core preservation act; emulation and format migration are access strategies layered on top of verified bits, not competing alternatives.",
+        "because": "You cannot preserve what you cannot prove is unchanged: media decay and bit rot are the first threats, and only checksums make them observable. OAIS and PREMIS describe the program and record its events but preserve nothing by themselves; a working archive keeps the bits verified and duplicated, then decides per object how to make them usable later.",
+        "disputed_by": "Emulation advocates (Jeff Rothenberg's 'Avoiding Technological Quicksand' and the EaaSI — Emulation as a Service Infrastructure — community) argue that preserving the original environment is the only way to preserve authentic behavior and experience, and that migration is inherently lossy; migration-based practitioners reply that emulation preserves look-and-feel but still depends on bit-level preservation beneath it.",
+        "source": "OAIS Reference Model (ISO 14721); PREMIS Data Dictionary (Library of Congress); NDSA Levels of Digital Preservation; David S. H. Rosenthal, 'Keeping Bits Safe: How Hard Can It Be?' (2010); Jeff Rothenberg, 'Avoiding Technological Quicksand' (1995)"
+      },
+      "school_weights": { "postcustodial": "high", "preservation-first": "high", "custodial": "low" },
+      "checkpoint": "Ingest a test collection of ten files of mixed formats: compute SHA-256 checksums, package them as BagIt bags, run DROID/PRONOM identification, record a PREMIS ingest event for each, and write the fixity schedule into a one-page digital preservation policy. Then corrupt one byte in a copy, run the fixity check, and identify the failing file by checksum mismatch — the audit must catch the corruption.",
+      "common_failure": "Building the metadata layer before the fixity layer: drafting an OAIS diagram and PREMIS templates while files sit on a shared drive with no checksums, so when a drive fails nobody can tell which copy is authentic. The other plateau is fixity theater — running checksum audits but never testing restores, so a detected failure finds that the only good copy sat on the same dying disk.",
+      "sources": [
+        "OAIS Reference Model (ISO 14721)",
+        "PREMIS Data Dictionary (Library of Congress)",
+        "NDSA Levels of Digital Preservation",
+        "David S. H. Rosenthal, 'Keeping Bits Safe: How Hard Can It Be?' (2010)",
+        "BagIt File Packaging Format, RFC 8493"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.format-migration",
+      "label": "Format migration",
+      "tier": 7,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.digitization-for-access"],
+      "soft_prereqs": ["archival-sciences.preservation.digital-preservation"],
+      "one_line": "Plan a format migration — legacy formats to PDF/A, validating content before and after — so obsolescence doesn't equal loss.",
+      "hours": 8,
+      "know_what": [
+        "Format migration — copying a digital object from an obsolescent format to a current or archival one (e.g., DOC to PDF/A) so the content remains usable; distinct from refreshing, which only copies bits",
+        "PDF/A — the archival PDF subset (ISO 19005): self-contained, embedded fonts, no audio, video, or JavaScript; PDF/A-1b (ISO 19005-1:2005) is the common archival target",
+        "Content validation — checking before and after migration that the significant properties survived: page count, text layer, images, layout, and embedded data such as spreadsheet formulas",
+        "veraPDF — the open-source PDF/A validator that checks a file against ISO 19005 conformance rules and reports violations such as a missing embedded font",
+        "JHOVE — the JSTOR/Harvard Object Validation Environment for characterizing formats (PDF, TIFF, JPEG, WAVE, XML) and reporting structural validity",
+        "DROID and PRONOM — format identification by PUID and the risk registry used to decide which formats are migration candidates",
+        "Significant properties — the documented set of characteristics a migration must preserve (for a spreadsheet: values, formulas, formatting; for a scan: bit depth, resolution, color) — the contract of the migration",
+        "Lossy vs lossless — lossy encodings (JPEG2000, MP3) discard data; migrations should preserve the master or convert losslessly and keep lossy versions as access derivatives",
+        "Migration log — a PREMIS migration event per file or batch recording source format, target format, tool and version, date, validator results, and the pre/post validation evidence"
+      ],
+      "know_how": [
+        "Identify migration candidates by re-running DROID and reading PRONOM risk flags, then rank by volume, use, and risk (e.g., 50,000 obsolete .doc files versus 200 aging TIFF masters)",
+        "Choose the target format from the institutional policy and registry evidence — PDF/A-1b for documents, TIFF for images, WAVE for audio — not from what the office suite exports by default",
+        "Validate before migrating: run JHOVE and veraPDF and extract the significant properties (page count, text layer, embedded data) as the baseline",
+        "Run the migration in batches with a tool (LibreOffice headless conversion, veraPDF for validation, or a commercial migration service), never by opening and re-saving thousands of files by hand",
+        "Validate after migrating: re-run JHOVE and veraPDF on the output and diff the significant properties against the baseline, rejecting any file that lost content",
+        "Sample-check migrations at a defined rate — validate 100% of a pilot batch of 50 files, then 10% of subsequent batches — by opening and comparing renderings",
+        "Record a PREMIS migration event per file or per batch with tool and version, and keep the original file until the migrated copy passes validation"
+      ],
+      "habits": [
+        "Validate before and after, never just after — without a baseline you cannot prove the migration preserved anything",
+        "Migrate to the archive format, not the latest office format — PDF/A outlives the software that wrote it",
+        "When a validation fails, stop the batch and fix the cause rather than migrating around the failure",
+        "Keep the source-format copy until the target has been validated and access-tested",
+        "Re-check migrated files with JHOVE on a schedule — a 'migrated' format still decays if it was written with font-embedding or color-profile violations"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "high", "preservation-first": "high", "custodial": "low" },
+      "checkpoint": "Migrate a pilot of ten legacy files (a mix of .doc, .xls, and .wpd or similar) to PDF/A-1b: record DROID PUIDs, extract and document significant properties, run veraPDF before and after, and produce a migration log with pre/post validation results and one PREMIS event per file. At least nine of ten files must pass veraPDF after migration, and the log must show the baseline for each.",
+      "common_failure": "Converting without validating content — exporting 10,000 .doc files to PDF/A and discovering a year later that page breaks, headers, or embedded charts silently changed, because success was judged by file count rather than property preservation. The other classic: migrating to PDF but not PDF/A, leaving a file that still depends on fonts and viewers — a migration that merely moves the obsolescence problem forward.",
+      "sources": [
+        "veraPDF project documentation",
+        "JHOVE (JSTOR/Harvard Object Validation Environment)",
+        "PRONOM and DROID (UK National Archives)",
+        "PREMIS Data Dictionary (Library of Congress)",
+        "ISO 19005-1:2005 (PDF/A-1)"
+      ]
+    },
+    {
+      "id": "archival-sciences.access.reading-room",
+      "label": "Reading room service",
+      "tier": 2,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "soft_prereqs": [],
+      "one_line": "Run a reading-room shift — register researchers, enforce the rules, track retrievals — so material is used without being lost, damaged, or stolen.",
+      "hours": 8,
+      "know_what": [
+        "Registration — the mandatory first step: researcher presents photo ID, completes a registration form (name, affiliation, research topic), and agrees in writing to the reading-room rules before any material is served",
+        "Research card — the durable registration record (often with a photo or number) that links every later request and retrieval to one researcher",
+        "Reading-room rules — the written custody controls: pencils only, no food or drink, no bags or coats at the desk, one box at a time, no flash photography, white gloves for photographs and fragile media, no removing material",
+        "Pull slip — the request form carrying box, series, and folder identifiers that the researcher fills out; it becomes the retrieval-log entry and the reshelving instruction",
+        "Retrieval workflow — request → finding-aid check → pull from stacks → delivery to the desk → supervised use → reshelving, each step recorded so material is never unaccounted",
+        "Paging turnaround — the measured time from request to delivery; a service metric, with same-hour delivery for stacks material a common target",
+        "Security controls — sightlines from the reference desk, staff supervision of the room, bag checks on exit, and camera coverage in stack areas; the defense against theft and mutilation",
+        "White gloves — required for photographs, negatives, and items with fragile media so skin oils and abrasion do not damage surfaces; not required for ordinary paper, where gloves reduce dexterity and page-turning control",
+        "Reference statistics — the count of researchers, requests, retrievals, and refusals logged per shift; the numbers that justify staffing and prove the room is used"
+      ],
+      "know_how": [
+        "Run a shift end to end: register newcomers (ID, form, rules acknowledgement), issue research cards, take pull slips, retrieve boxes from stacks, deliver with a folder count, and log each transaction",
+        "Enforce the rules without friction: state them at registration, remind once when broken, and suspend service for repeat violations — citing the written rule, not personal judgment",
+        "Handle a rule violation (a pen at a desk, food in a bag): stop the researcher, document the incident, secure the material, and apply the consequence the policy states",
+        "Track every retrieval: match pull slips to delivered and returned boxes, and reconcile the count at the end of the shift so no box is left unaccounted",
+        "Use white gloves for photographs and fragile media and clean bare hands for ordinary paper, knowing which is which before the box reaches the desk",
+        "Fill the shift's reference log: researcher count, requests by series, retrievals, refusals with reasons, and turnaround times",
+        "Conduct the closing sweep: collect pull slips, count boxes against the log, shelve returns, and check the room for stray material or notes left behind"
+      ],
+      "habits": [
+        "Count boxes out and count them back — the box count is the shift's security audit",
+        "When a researcher asks for 'everything on X', walk them to the finding aid instead of pulling boxes speculatively",
+        "Watch hands, not faces: note how researchers handle paper and intervene at the first fold or paperclip",
+        "Write the refusal down with the rule cited — an undocumented denial is an unenforceable one",
+        "Treat every reshelving as a verification: the box that came back must match the slip that went out"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "access-first": "high", "postcustodial": "low" },
+      "checkpoint": "Run a supervised reading-room shift with three mock researchers: register each with ID and form, take three pull slips, retrieve and deliver three boxes with folder counts, catch and stop one deliberate rules violation (a pen at a desk), and reconcile all boxes and slips in the closing sweep. The shift log must let a colleague reconstruct every retrieval and the violation.",
+      "common_failure": "Treating the room as a place to be nice rather than a custody boundary: letting regulars skip registration, tolerating pens 'just this once', or losing track of boxes during a busy shift. Theft and mutilation in archives almost always exploit exactly these informal exceptions — one missing folder in a late-returned box is how collections quietly lose their evidence.",
+      "sources": [
+        "ALA, Guidelines for the Security of Rare Book, Manuscript, and Other Special Collections (2009)",
+        "Gregory S. Hunter, Developing and Maintaining Practical Archives (3rd ed., 2020)",
+        "SAA, Reference and Access: Innovative Practices for Archives and Special Collections (2014)"
+      ]
+    },
+    {
+      "id": "archival-sciences.access.reference-interview",
+      "label": "Reference interview",
+      "tier": 2,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "soft_prereqs": ["archival-sciences.access.reading-room"],
+      "one_line": "Conduct a reference interview — open question, restated need, material proposed — so you find what the researcher actually needs, not just what they first asked for.",
+      "hours": 8,
+      "know_what": [
+        "Reference interview — the structured conversation that converts a researcher's first request into a retrievable query; the highest-leverage minutes of reference work",
+        "Open question — a prompt that cannot be answered yes or no ('Tell me about your research', 'What do you hope to find?') that lets the researcher reveal the actual need",
+        "Closed question — a yes/no or one-word question ('Do you want the 1920s?') used to narrow after the open phase, not before it",
+        "Restated need — the paraphrase that confirms understanding: 'So you need the mill's personnel files, 1930-1950, to trace a grandfather's pension' — the researcher corrects it until it is right",
+        "Question negotiation — Robert S. Taylor's four levels of a request (visceral, conscious, formalized, compromised): the ask on the desk is always the compromised version of a vaguer need",
+        "Known-item vs subject request — 'the 1932 annual report' (locate a specific item) versus 'anything about the strike' (explore a subject); each needs a different retrieval strategy",
+        "Finding-aid translation — mapping the clarified need onto series and containers: which series evidences this activity, what date range, what name or geographic scope",
+        "Probing follow-ups — second-round questions ('Do you need originals or will copies do?', 'Have you seen the finding aid yet?') that resolve ambiguity before retrieval",
+        "RUSA Guidelines — the Reference and User Services Association's Behavioral Performance guidelines (approachability, interest, listening, searching, follow-up), the professional standard for the exchange"
+      ],
+      "know_how": [
+        "Open with an open question and let the researcher talk for a full minute before proposing anything",
+        "Restate the need in your own words and ask the researcher to confirm or correct — repeat until the restatement is accepted",
+        "Classify the request as known-item or subject and choose the retrieval path: finding-aid lookup for known items, series reasoning for subjects",
+        "Probe with closed questions to fix the parameters: date range, creator, format (text, photographs, maps), and whether copies will do",
+        "Map the clarified need onto specific series in the finding aid and name the likely containers before pulling anything",
+        "Close the loop: tell the researcher what was found (or not) and record the exchange in the reference log with the final query",
+        "When the request is out of scope, redirect: name a sibling collection, another institution, or a published source rather than guessing within your own stacks"
+      ],
+      "habits": [
+        "Assume the first request is never the real need — there is always a level beneath it",
+        "Paraphrase before retrieving; never pull boxes for an unclarified request",
+        "When a user says 'I want to know about the factory', think series first — which record series evidences the factory?",
+        "Let silence work: researchers fill pauses with the details they did not think to mention",
+        "Log the interview's final query at the desk, not from memory after the shift"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "community": "high" },
+      "checkpoint": "Take three reference requests (one vague subject, one known item with a wrong date, one out of scope) from mock researchers: run each through open question → restatement → probing → series mapping, and write the final query and the proposed containers on a reference form. A colleague must be able to retrieve the right series from the form alone, and the out-of-scope request must end with a documented redirect.",
+      "common_failure": "Answering the first ask: a researcher says 'I need the 1940 census records' and gets pulled census microfilm, when a two-minute interview would have revealed the real need was a grandfather's naturalization file — an hour of retrieval for the wrong material. The other plateau is interrogation: firing closed questions from the start, which gets the researcher to say what they think you want and buries the need deeper.",
+      "sources": [
+        "Robert S. Taylor, 'Question-Negotiation and Information Seeking in Libraries' (College & Research Libraries, 1968)",
+        "RUSA, Guidelines for Behavioral Performance of Reference and Information Service Providers",
+        "Catherine Sheldrick Ross, Conducting the Reference Interview (2nd ed., 2019)",
+        "SAA, Reference and Access: Innovative Practices for Archives and Special Collections (2014)"
+      ]
+    },
+    {
+      "id": "archival-sciences.access.outreach",
+      "label": "Outreach",
+      "tier": 2,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "soft_prereqs": ["archival-sciences.access.reference-interview"],
+      "one_line": "Plan an outreach program — exhibition, social posts, workshop — with a measurable engagement goal, converting holdings into an audience.",
+      "hours": 8,
+      "know_what": [
+        "Engagement goal — the measurable outcome of an outreach activity (attendance, registrations, social reach, new researchers served) that lets you judge success instead of activity",
+        "SMART goal — Specific, Measurable, Achievable, Relevant, Time-bound; e.g., 'reach 500 new followers and 20 reference inquiries from social posts by June'",
+        "Exhibition — a curated public presentation of holdings, physical (display cases, labels, interpretive text) or online (Omeka S, CollectionBuilder, or a static exhibit site)",
+        "Social media program — a publishing calendar of collection posts (e.g., #ArchivesMonth, #OnThisDay, 'From the Collections') with platform-appropriate formats and a defined cadence",
+        "Workshop — a hands-on teaching session (archival research skills, family history, primary-source literacy) that converts holdings into skills, often run with schools or historical societies",
+        "Audience segmentation — dividing potential users (genealogists, students, journalists, community historians) and designing an outreach channel per segment rather than one generic post",
+        "Engagement metrics — reach (how many saw it), engagement rate (likes, comments, shares per impression), click-throughs, workshop attendance, and post-visit reference requests; the numbers that justify the program",
+        "Online exhibit platform — software for presenting digitized holdings with narrative (Omeka S, CollectionBuilder); distinguishes a curated exhibit from a pile of scanned images",
+        "Community partnership — a co-produced activity with a school, local historical society, or community group, where the audience is defined before the content is"
+      ],
+      "know_how": [
+        "Write the engagement goal before the activity: pick the metric (attendance, registrations, reach), set a number and a date, and state who the audience is",
+        "Plan an exhibition cycle: select holdings with a narrative arc, write labels at a defined reading level, install with security and handling safeguards, and schedule a takedown date",
+        "Run a social program on a cadence (e.g., two posts a week for a month): pick the collection, write the caption, cite the call number, and track reach and engagement per post",
+        "Design a workshop backward from the outcome — 'by the end, participants can request a folder in the reading room' — and build the exercise that proves it",
+        "Choose the channel per segment: family-history workshops for genealogists, primary-source sessions for teachers, exhibit openings for the public — not one post for everyone",
+        "Measure and report: after each activity, record the metric against the goal and write a one-paragraph outcome note for the annual report",
+        "Recruit one partner (school, historical society, community group) per program and agree on the audience and division of labor in writing"
+      ],
+      "habits": [
+        "Ask 'who is this for and what should they do afterward?' before planning any activity",
+        "Count what matters: attendance and reference follow-ups, not just posts published",
+        "Cite call numbers in every caption and label — outreach that sends people to the finding aid is outreach that becomes use",
+        "Recycle research: turn one well-documented collection into an exhibit, a post series, and a workshop rather than planning three separate projects",
+        "Evaluate after the event while the numbers are fresh, and change the next activity on the evidence"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "community": "high", "custodial": "low" },
+      "checkpoint": "Plan and run one outreach activity (a one-room exhibit, a two-week social post series, or a 90-minute workshop) with a written SMART engagement goal — e.g., 40 attendees at the workshop, 15 registration-form completions, or 500 post impressions and 10 reference inquiries. Report the measured outcome against the goal with the numbers, and list one change for the next activity based on the result.",
+      "common_failure": "Doing outreach as activity, not engagement: posting photos with no goal, no call number, and no follow-up measurement, so the program produces impressions instead of researchers — and dies at the first budget review because it can show no outcome. The other classic: building an exhibit around what is easiest to digitize rather than what the audience segment needs, so the room is empty despite beautiful labels.",
+      "sources": [
+        "Laura A. Millar, Archives: Principles and Practices (2nd ed., 2017), outreach chapter",
+        "Society of American Archivists, Archival Outreach resources and 'Year of the Archives'",
+        "Library of Congress, Teaching with Primary Sources program",
+        "Omeka S and CollectionBuilder documentation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,347 @@
+{
+  "domain": "archival-sciences",
+  "batch": 4,
+  "ids": [
+    "archival-sciences.arrangement.physical-arrangement",
+    "archival-sciences.arrangement.rehousing",
+    "archival-sciences.arrangement.mplp",
+    "archival-sciences.arrangement.container-listing",
+    "archival-sciences.arrangement.item-level-arrangement",
+    "archival-sciences.description.dacs",
+    "archival-sciences.description.authority-control"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.arrangement.physical-arrangement",
+      "label": "Physical arrangement",
+      "tier": 4,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.series-identification"],
+      "soft_prereqs": ["archival-sciences.foundations.original-order"],
+      "one_line": "Physically order folders into series and subseries on the shelf per the arrangement plan, so the collection reads as the creator's own system.",
+      "hours": 8,
+      "know_what": [
+        "Series — a body of records with a common function or activity and a single arrangement; the primary unit of physical arrangement",
+        "Subseries — a subdivision within a series (incoming/outgoing correspondence, decades of a photograph series), created only where the series is too large to navigate as one run",
+        "Original order — the creator's own filing system; physical arrangement preserves it rather than imposing a topical or alphabetical ideal",
+        "Shelf order vs intellectual order — you arrange physically once, and the finding aid later expresses the same hierarchy; the two must never diverge",
+        "Folder-level ordering — the granularity at which arrangement actually happens: series → subseries → folder sequence, with items staying in their folders",
+        "Box numbering — sequential container numbers assigned only after the folder order is final, so labels, container lists, and the shelf agree",
+        "Intra-series ordering rules — correspondence usually chronological, subject files alphabetical; the choice follows the creator's practice, not your preference",
+        "Oversized separation — items that cannot fit standard folders are pulled into an oversized sequence with a cross-reference note left at the original location",
+        "Provenance boundaries — two creators' material never shares a box or runs together on the shelf without a clear break; mixing destroys the evidence of the fonds",
+        "Backlog-aware arrangement — unprocessed accessions get the same series logic applied at higher speed, with the same decisions documented"
+      ],
+      "know_how": [
+        "Lay out the entire accession according to the arrangement plan — series and subseries in the plan's order — before placing a single folder on the shelf",
+        "Order folders within each series chronologically or per the creator's filing codes, filing loose items into the folder where the plan says they belong",
+        "Use temporary pencil or flag numbering during arrangement, then assign final box numbers once, in a single pass, so labels and list never drift",
+        "Record every order decision as you go — series, subseries, folder sequence, deviations — so the description step has ground truth instead of memory",
+        "Verify the physical shelf order against the written arrangement plan before rehousing begins, correcting mismatches while folders are still in hand",
+        "Where the creator's order is unclear, preserve the existing sequence and flag it in the notes rather than 'improving' it on your own judgment"
+      ],
+      "habits": [
+        "Ask 'what did the creator's filing system look like?' before moving anything",
+        "When you pull an item to examine it, return it to its exact spot before touching the next one",
+        "Number boxes once, at the end of arrangement, never incrementally as you go",
+        "Treat any reordering as a documented decision, not a housekeeping chore",
+        "When order is ambiguous, write down what you found rather than silently choosing an order"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high" },
+      "checkpoint": "Given a 10-box accession and a written arrangement plan, arrange the folders into series and subseries per the plan, assign final box and folder numbers, and verify that the shelf order matches the plan with zero mismatches across all boxes.",
+      "common_failure": "Rearranging as you go: starting at box 1 and reordering folders one at a time, which produces a shelf order that drifts from the plan and a numbering scheme that must be redone. The result is double-handling — every box is touched twice, and the physical order no longer matches the description you eventually write.",
+      "sources": [
+        "T.R. Schellenberg, 'Arrangement,' in Modern Archives: Principles and Techniques (1956)",
+        "Kathleen D. Roe, Arranging and Describing Archives and Manuscripts (SAA, 2005)",
+        "Society of American Archivists, Dictionary of Archives Terminology — series, subseries, original order"
+      ]
+    },
+    {
+      "id": "archival-sciences.arrangement.rehousing",
+      "label": "Rehousing",
+      "tier": 4,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.series-identification"],
+      "soft_prereqs": ["archival-sciences.preservation.handling-and-storage"],
+      "one_line": "Rehouse material in acid-free folders and boxes sized to the material, so the container stops doing damage the environment would otherwise do.",
+      "hours": 6,
+      "know_what": [
+        "Acid-free folders — lignin-free paper buffered to pH 7.5-8.5, the default housing for paper records; 'acid-free' means pH 7 or above",
+        "Buffered vs unbuffered — buffered folders neutralize acids but can harm color photographs and some textiles; match the enclosure to the material's chemistry",
+        "PAT-tested enclosures — photographic materials need enclosures that pass the Photographic Activity Test (ISO 18916 / ANSI IT9.2), typically unbuffered",
+        "Box types — drop-front boxes for frequent use, record cartons for bulk paper, flat boxes for oversized material; the box is chosen by the material's size, never the reverse",
+        "Polyester (Mylar) sleeves — inert, transparent housing for fragile or frequently handled items such as photographs and clippings",
+        "Lignin and permanence — paper permanence rests on pH and lignin content; NISO Z39.48 defines what 'permanent' paper is, and rehousing stock should meet it",
+        "Damaging fasteners — rubber bands, metal clips, and staples corrode and embrittle over time; removal or replacement is a rehousing decision, not a luxury",
+        "Box sizing rules — a box must hold material without slumping or crushing; oversized items are never folded to fit a smaller container",
+        "Labeling conventions — box labels carry collection ID and sequential box number on the short end for shelf scanning; folders carry series and folder numbers",
+        "Rehousing vs climate — proper enclosures buy time against an imperfect environment; they do not replace environmental control"
+      ],
+      "know_how": [
+        "Select the enclosure by material: buffered letter/legal folders for paper, unbuffered PAT-tested sleeves for prints and negatives, polyester sleeves for fragile items",
+        "Measure the material before choosing boxes — flat boxes for anything wider than about 12 inches, drop-front boxes for collections with heavy reference use",
+        "Remove rubber bands, metal clips, and staples where they threaten the record, replacing them with rust-free paper clips or nothing at all",
+        "Unfold only documents that genuinely need flattening, and never force a crease; marginal cases get flagged rather than flattened",
+        "Rehouse in original-order sequence, moving one folder at a time so the creator's order survives the transfer intact",
+        "Label each box with collection ID and box number as it is completed, so the shelf run is usable the moment rehousing ends",
+        "Note pre-existing damage (mold, tears, acidity) on the folder while the item is in hand, feeding it to conservation triage later"
+      ],
+      "habits": [
+        "Ask 'what is this material made of?' before choosing an enclosure",
+        "When buffered vs unbuffered is uncertain, follow the material's documented need rather than the cheaper default",
+        "Never close a box that requires crushing — a lid that won't shut is a housing failure, not a packing skill",
+        "Check the old enclosure when an item moves; acidic folders pass their damage forward",
+        "Record damage while you hold the item, because you will not have this access again"
+      ],
+      "know_why": null,
+      "school_weights": { "preservation-first": "high" },
+      "checkpoint": "Given one box of mixed material (letters, color prints, an oversized map), rehouse it so every item sits in a correctly sized, chemically appropriate enclosure — PAT-tested unbuffered sleeves for the prints, buffered folders for the letters, a flat box for the map — with original order intact and a labeled box ready for the shelf, inspectable in under 15 minutes by a second person.",
+      "common_failure": "Buying one box size and one folder type for everything: oversized items get folded to fit, photographs go into buffered folders that accelerate their yellowing, and the rehousing quietly does new damage while appearing to protect. The consequence is faster deterioration of exactly the items the rehousing was meant to save.",
+      "sources": [
+        "NISO Z39.48-1992, Permanence of Paper for Publications and Documents in Libraries and Archives",
+        "ISO 18916:2007, Photography — Processed Photographic Materials — Photographic Activity Test (PAT)",
+        "NEDCC Preservation Leaflets — Storage Enclosures and Rehousing"
+      ]
+    },
+    {
+      "id": "archival-sciences.arrangement.mplp",
+      "label": "MPLP minimal processing",
+      "tier": 5,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.arrangement-plan"],
+      "soft_prereqs": ["archival-sciences.foundations.original-order"],
+      "one_line": "Apply Greene & Meissner's More Product Less Process — default to minimal processing, keep original order, skip item-level detail — and cut a backlog's processing time from years to months.",
+      "hours": 8,
+      "know_what": [
+        "MPLP — More Product, Less Process, Greene & Meissner's 2005 argument that traditional processing standards are the cause of backlogs, not their cure",
+        "Minimal-processing default — arrange and describe at series level, add folder lists only where they buy access, and skip item-level detail unless the material demands it",
+        "Backlog scale — survey data showed backlogs in the tens of thousands of linear feet that would take decades to centuries to clear at prevailing processing rates",
+        "The real cost driver — folder- and item-level arrangement and description, not rehousing, consumes most processing hours; cutting that labor is where the time goes",
+        "Original order as MPLP's ally — where the creator's order is usable, minimal processing is mostly rehousing plus a series-level description",
+        "'Good enough' description — a finding aid that gets a researcher to the right series and folder and ships this year beats a perfect one that never ships",
+        "Accession-level processing — treat backlogs as accessions: rehouse, describe at series level, open for use, and revisit detail only on demand",
+        "MPLP's deliberate exceptions — item-level work still pays for high-use, high-value, or visually rich material such as photographs and literary manuscripts",
+        "Fasteners and unfolding — MPLP leaves paper clips, staples, and folds alone unless they threaten the record; conservation is a separate step with its own queue",
+        "The Goldilocks principle — process 'just enough' for access; too much detail wastes the hours, too little leaves researchers guessing"
+      ],
+      "know_how": [
+        "Default every new processing project to series-level arrangement and description, escalating to folder or item level only with a documented justification",
+        "Set a per-linear-foot time budget before starting (a few hours per linear foot for minimal processing, versus the tens of hours full item-level work can absorb), and treat exceeding it as a decision, not an accident",
+        "Write the series-level description first, then decide whether folder lists pay for themselves on high-use series, brittle material, or complex correspondence",
+        "Preserve original order and impose arrangement only where the creator's order is unusable or the series structure is invisible",
+        "Skip non-essential conservation during processing — do not unfold everything or remove every fastener; flag items that need attention instead",
+        "Track your own throughput in linear feet processed per month and compare it against the backlog to prove the months-not-years claim on your own numbers"
+      ],
+      "habits": [
+        "Ask 'what does a researcher need in order to find this?' rather than 'what could someone someday want to know about it?'",
+        "When you catch yourself unfolding every letter or dating every item, stop and ask whether it changes access",
+        "Treat the backlog as the enemy: unprocessed holdings are inaccessible holdings, whatever their archival value",
+        "Push back on item-level requests with their real cost — 'that is 40 hours for one box; what does it unlock?'",
+        "Revisit collection-level priorities monthly instead of perfecting one series indefinitely"
+      ],
+      "know_why": {
+        "claim": "Backlogs persist because traditional processing demands item-level arrangement and description; defaulting to series-level minimal processing is the responsible default because it turns inaccessible holdings into usable ones in years, not decades.",
+        "because": "Greene & Meissner's survey of U.S. repositories found backlogs measured in tens of thousands of linear feet that would take decades to centuries to clear at prevailing rates — and the dominant cost driver is folder- and item-level labor, not rehousing. A series-level finding aid is enough for most researchers to reach the right folders, so the marginal value of item-level detail rarely justifies withholding an entire collection from use while it is 'finished.' Minimal processing is not a quality cut; it is a reallocation of scarce hours from invisible perfection to visible access.",
+        "disputed_by": "Reference archivists and researchers who serve item-dependent scholarship — photograph and literary-manuscript users, community-archives users, and special-collections curators — who argue that series-level description hides the item-level evidence that distinguishes archival research from a database search, and that MPLP merely converts a processing backlog into a reference-services backlog of 'processed but impenetrable' collections.",
+        "source": "Mark A. Greene and Dennis Meissner, 'More Product, Less Process: Revamping Traditional Archival Processing,' The American Archivist 68, no. 2 (2005): 208-263"
+      },
+      "school_weights": { "access-first": "high", "custodial": "low", "preservation-first": "low" },
+      "checkpoint": "Given a 50-linear-foot backlog, produce a processing plan that brings the whole accession to series-level description with a box/folder list, complete it within a per-linear-foot time budget you set in advance (for example, under 4 hours per linear foot), and open the collection to researchers, with the plan and elapsed time written down.",
+      "common_failure": "Approving MPLP in principle and then full-processing anyway: unfolding documents, removing every fastener, and writing item-level notes because stopping early 'feels wrong.' The consequence is precisely the backlog MPLP exists to eliminate — you spend eight months perfecting one series while 500 linear feet stay closed to researchers.",
+      "sources": [
+        "Mark A. Greene and Dennis Meissner, 'More Product, Less Process: Revamping Traditional Archival Processing,' The American Archivist 68, no. 2 (2005): 208-263",
+        "Mark A. Greene, 'MPLP: It's Not Just for Processing Anymore,' The American Archivist 73, no. 1 (2010): 175-203",
+        "Society of American Archivists, Dictionary of Archives Terminology — minimal processing"
+      ]
+    },
+    {
+      "id": "archival-sciences.arrangement.container-listing",
+      "label": "Container listing",
+      "tier": 5,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.physical-arrangement"],
+      "soft_prereqs": ["archival-sciences.description.dacs"],
+      "one_line": "Produce a container list — box and folder numbers with brief contents — that can feed a finding aid without re-opening the boxes.",
+      "hours": 8,
+      "know_what": [
+        "Container list — the box-and-folder inventory that maps reference codes to physical locations; the workhorse section of the finding aid",
+        "Sequential container numbering — box numbers and folder numbers (e.g., box 12, folders 1-14) assigned to match labels on the physical boxes exactly",
+        "Brief contents — folder titles short enough to scan at a glance: a noun phrase plus a date range, never an item inventory",
+        "Finding-aid feed — the container list becomes the finding aid's container list section, so it must be written well enough that the boxes never need reopening",
+        "Reference code — collection ID plus series, box, and folder (e.g., MSS 456, box 12, folder 3), the string researchers and staff cite to request material",
+        "Folder title grammar — DACS title rules apply at folder level: no leading articles, creator-derived names, and dates in a standard form",
+        "List depth — lists normally stop at folder level; item-level entries are reserved for small or high-value series",
+        "Extent capture — linear feet and folder counts recorded during listing feed statistics, appraisal, and the finding aid's extent statement",
+        "Unidentified material — folders with no date or title are listed as such with bracketed estimated dates, never silently assigned one",
+        "Location vs intellectual order — the container list records where things physically sit; the finding aid expresses the intellectual structure above it"
+      ],
+      "know_how": [
+        "Number boxes and folders in one pass from the arranged physical order, keeping labels and list byte-identical",
+        "Write each folder title as a brief noun phrase with a date range, applying DACS title rules — no leading articles, standard date forms",
+        "Record extent while listing: count folders per box and linear feet per series, in the units the finding aid will report",
+        "Flag folders needing attention (fragile, restricted, unidentified) in the list rather than stopping the listing run to fix them",
+        "Build the list directly in the tool the finding aid will use — ArchivesSpace container records or EAD <c> elements — so it imports without retyping",
+        "Spot-check the finished list by pulling five random boxes and confirming every listed folder exists and every label matches"
+      ],
+      "habits": [
+        "Write every folder title as if a researcher will read it standing at the shelf, not as a note to yourself",
+        "Never write a title you could not defend against the creator's own filing logic",
+        "When a date is uncertain, record the range you can prove and bracket the rest",
+        "Update the list the moment a box moves; a stale container list is worse than none",
+        "Read your titles aloud for scanability — a title that needs two passes gets rewritten"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high" },
+      "checkpoint": "Given 6 arranged boxes, produce a container list in which every box and folder carries a sequential number matching its physical label, every folder has a DACS-style title with a date range, extent is totaled per series, and a spot check of 5 random boxes finds zero mismatches between list and shelf.",
+      "common_failure": "Writing the container list from memory after the boxes are shelved, or copying labels without checking contents — folders end up titled 'Misc.' fourteen times and the numbers drift from the physical boxes. The consequence is a finding aid that sends researchers to the wrong boxes and a reference desk that learns to distrust the list.",
+      "sources": [
+        "Kathleen D. Roe, Arranging and Describing Archives and Manuscripts (SAA, 2005)",
+        "Describing Archives: A Content Standard, 2nd ed. (SAA, 2013), rules 2.3 (title) and 2.4 (date)",
+        "ArchivesSpace documentation — container records and container profiles"
+      ]
+    },
+    {
+      "id": "archival-sciences.arrangement.item-level-arrangement",
+      "label": "Item-level arrangement",
+      "tier": 6,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.mplp"],
+      "soft_prereqs": ["archival-sciences.description.dacs"],
+      "one_line": "Arrange an item-level collection — photographs, correspondence — where order and provenance live per item, documenting every order decision.",
+      "hours": 10,
+      "know_what": [
+        "Item-level collections — photographs, correspondence, diaries, and artifacts in which each item is a discrete unit carrying its own evidence of creator and date",
+        "Item-level order — a sequence decided item by item: chronological for correspondence, chronological or topical for photographs, often mirroring the creator's own albums or files",
+        "Per-item provenance — each item can name its own creator, date, and context; arrangement expresses that granular provenance instead of forcing a series structure over it",
+        "Verso and mount evidence — handwritten captions, stamps, and postmarks on photographs and envelopes carry the dating and identification that legitimately drive ordering",
+        "Original item order — where the creator's item order survives (an album, a bound volume, an original file), it is preserved; a chronological sequence is imposed only where no order survives",
+        "Decision documentation — every reorder and every date assignment is written down; item-level arrangement without documentation is guesswork wearing the costume of scholarship",
+        "Caption transcription — captions are transcribed verbatim, with the archivist's own inferences marked in brackets",
+        "The MPLP tension — item-level work is the deliberate exception to minimal processing, justified only where the collection's value actually lives at item level",
+        "Housing interaction — item-level order and housing happen together: prints are sleeved as they are ordered so the physical sequence equals the intellectual one",
+        "Finding-aid expression — item-level arrangement surfaces as an itemized container list or as the order of digitized objects"
+      ],
+      "know_how": [
+        "Survey the whole collection item by item once — creator evidence, date evidence, format — before deciding any order",
+        "Sort items into a candidate chronological sequence, then test it against internal evidence: postmarks, letterheads, album order, internal references",
+        "Preserve intact creator groupings — albums, bound volumes, original files — as units rather than dissolving them into a global chronological sequence",
+        "Document each order and date decision in the processing notes: what was moved, why, and what evidence supports the date chosen",
+        "Transcribe captions and versos verbatim, bracketing your own inferences so the creator's words and your guesses never blur",
+        "Sleeve and house items as you order them, so the physical sequence and the written list can never diverge",
+        "When two date clues conflict, state the evidence for your choice in the description instead of silently picking one"
+      ],
+      "habits": [
+        "Treat every item as evidence first: 'what does this photograph or letter prove, and to whom?'",
+        "Read versos and postmarks before touching the order — the evidence is on the back",
+        "When an item's date is uncertain, keep it adjacent to its proven neighbors rather than guessing a slot",
+        "Record a decision the moment you make it; item-level memory does not survive a processing pause",
+        "Ask whether item-level arrangement is warranted at all before starting — MPLP is the default, this is the exception"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "access-first": "low" },
+      "checkpoint": "Given a box of 200 unsorted photographs with mixed captions, arrange them into a defensible chronological order, preserve any intact creator groupings such as albums, document at least 10 order and date decisions with their evidence in writing, and produce an item-level list in which every item's sequence matches its physical placement, verifiable by a second person pulling 10 random items.",
+      "common_failure": "Arranging item-level collections by intuition: sorting photographs by how they look or correspondence by topic, then discarding the evidence trail — captions, postmarks, album order — that made the order defensible. The result is an order that looks neat, cannot be justified to researchers or donors, and destroys the per-item provenance that was the reason for item-level treatment in the first place.",
+      "sources": [
+        "Kathleen D. Roe, Arranging and Describing Archives and Manuscripts (SAA, 2005)",
+        "Joan M. Schwartz, 'We Make Our Tools and Our Tools Make Us: Lessons from Photographs for the Practice, Politics, and Poetics of Diplomatics,' Archivaria 40 (1995)",
+        "Society of American Archivists, Dictionary of Archives Terminology — item, original order"
+      ]
+    },
+    {
+      "id": "archival-sciences.description.dacs",
+      "label": "DACS content standard",
+      "tier": 4,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.arrangement.series-identification"],
+      "soft_prereqs": ["archival-sciences.foundations.provenance"],
+      "one_line": "Apply Describing Archives: A Content Standard — required and optional elements, levels of description, grammar rules — to a description you write.",
+      "hours": 10,
+      "know_what": [
+        "DACS — Describing Archives: A Content Standard, 2nd ed. (SAA, 2013); the U.S. content standard stating what to write in a description, independent of how it is encoded",
+        "Required elements — reference code (2.1), name and location of repository (2.2), title (2.3), date (2.4), extent (2.5), name of creator(s) (2.6), and level of description (2.7) must appear at every level",
+        "Levels of description — collection/fonds, series, file, item; each level repeats the required elements for its own unit",
+        "Multilevel description — describe each level once, from general to specific, without repeating detail that belongs to a lower level",
+        "Scope and content (2.9) — a prose statement of what the unit is and contains, written to support retrieval rather than to serve as a table of contents",
+        "Date grammar (2.4) — single dates, inclusive ranges, and predominant dates in a standard form, e.g., '1980-1995, bulk 1985-1990'",
+        "Title rules (2.3) — titles formed from the creator's name plus a term for the unit ('Jane Doe papers'), with no leading articles",
+        "Extent (2.5) — quantity stated in linear feet and container counts, e.g., '12.5 linear feet (25 boxes)'",
+        "Optional elements — biographical history (2.8), conditions governing access (2.10), physical characteristics (2.13), appraisal (2.17), system of arrangement (2.19), related materials (2.22), and others; optional means a decision point, not a default",
+        "DACS vs ISAD(G) — DACS is the U.S. implementation mapped to ISAD(G) elements; the mapping matters for EAD and MARC crosswalks and international exchange"
+      ],
+      "know_how": [
+        "Write the seven required elements at collection level first, then descend to series and file or item, applying the required set at each level",
+        "Apply multilevel description: at each level give only the information that belongs to that level, demoting series detail to the series description",
+        "Format dates per DACS — '1985 May 4', '1980-1995', '1980-1995, bulk 1985-1990' — and never mix informal forms like 'the 1980s' into a compliant description",
+        "State extent in linear feet with container counts, counting what you actually measured during arrangement",
+        "Title units as creator plus nature of the unit, dropping leading articles and prepositions",
+        "Write scope and content as one to three paragraphs of prose describing what the unit contains and why it matters, not a list of folder titles",
+        "Consult DACS rules 2.1-2.28 directly when an element is ambiguous — the standard is the authority, not the nearest finding aid template",
+        "Run a rule-by-rule self-check against the DACS element list before calling a description compliant"
+      ],
+      "habits": [
+        "Ask 'which level am I describing?' at the start of every element",
+        "When tempted to put series detail into the collection-level description, demote it instead",
+        "Look up the rule rather than imitating a neighbor's finding aid — templates drift, DACS does not",
+        "Treat required elements as non-negotiable and optional elements as decisions to make explicitly",
+        "Read your own description as a researcher: can they tell the reference desk exactly what to request?"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given one arranged series with a known creator and dates, write the seven DACS required elements at collection and series levels plus scope and content, with dates in DACS grammar and extent in linear feet with containers, and pass a rule-by-rule self-check against DACS 2.1-2.9 with no required element missing.",
+      "common_failure": "Copying the structure of an existing finding aid instead of consulting DACS: required elements get treated as optional ('we don't have exact dates'), dates are written inconsistently, and collection-level descriptions silently absorb series detail. The consequence is descriptions that fail the standard, cannot be crosswalked to EAD or MARC, and mislead researchers about what the collection actually contains.",
+      "sources": [
+        "Describing Archives: A Content Standard, 2nd ed. (Society of American Archivists, 2013)",
+        "ISAD(G): General International Standard Archival Description, 2nd ed. (ICA, 2000)",
+        "SAA DACS implementation documentation and element crosswalks"
+      ]
+    },
+    {
+      "id": "archival-sciences.description.authority-control",
+      "label": "Authority control",
+      "tier": 5,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.dacs"],
+      "soft_prereqs": ["archival-sciences.description.finding-aid"],
+      "one_line": "Create and reconcile name and subject authority records against VIAF and LCNAF so one creator is spelled and linked identically across every finding aid.",
+      "hours": 8,
+      "know_what": [
+        "Authority record — a file that fixes the authorized form of a name or subject plus its variants, so one creator is spelled and linked identically everywhere it appears",
+        "VIAF — the Virtual International Authority File (OCLC), which aggregates national authority files (LCNAF, BnF, DNB, and others) into one lookup with stable IDs",
+        "LCNAF — the Library of Congress Name Authority File, the U.S. national name authority, maintained cooperatively through NACO",
+        "NACO and the PCC — the Name Authority Cooperative Program under the Program for Cooperative Cataloging; member libraries contribute new authority records to LCNAF",
+        "Authorized access point — the canonical heading ('Smith, John, 1938-2009') used in MARC 1xx/7xx fields and in finding-aid name elements",
+        "Variant forms — alternate spellings, pseudonyms, married names, and name changes, linked to the authorized form so any search path resolves",
+        "Subject authorities — authority control extends beyond names to LCSH headings, FAST terms, and genre terms (the territory of the subject-indexing node)",
+        "Reconciliation — matching local names against VIAF or LCNAF and linking them, typically semi-automated with OpenRefine's reconciliation service",
+        "MARC authority fields — 100/700 (personal names), 110/710 (corporate names), 600/650 (subjects) carry the authority-controlled headings in catalog records",
+        "Identifiers over strings — the VIAF or LCNAF identifier is the durable link; display strings change, IDs do not, so the ID is what gets stored"
+      ],
+      "know_how": [
+        "Search LCNAF and VIAF for every creator name before creating anything new, reusing the existing authorized form and ID when one exists",
+        "Reconcile a local name list against VIAF (for example, via OpenRefine's VIAF reconciliation service), sorting matches, near-matches, and misses into three explicit piles",
+        "Create a NACO-compliant authority record only when no authorized form exists, recording variant forms and the sources consulted",
+        "Link the authority ID into finding aids and catalog records so every description of one creator resolves to a single node in the graph",
+        "Apply the authorized form with dates and qualifiers — 'Smith, John, 1938-2009' — to disambiguate two same-named creators",
+        "When spellings conflict across finding aids, standardize every occurrence to the authority form and record the variants; never standardize to the prettier spelling",
+        "Document the sources consulted for each authority decision in the record's sources-consulted note"
+      ],
+      "habits": [
+        "Assume every name already has an authority record; search before you create",
+        "When two spellings appear in your data, fix both to the authorized form and keep the variant — never pick the more attractive one",
+        "Store the VIAF or LCNAF identifier, not just the display string, in your metadata",
+        "Ask 'is this the same person as that one?' before merging — identity is the hard judgment, spelling is the easy one",
+        "When a heading lacks dates or qualifiers, add them from evidence rather than leaving the name ambiguous"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "postcustodial": "high" },
+      "checkpoint": "Given a list of 25 creator names from five finding aids, with spelling variants and two likely duplicates, resolve each name to an LCNAF or VIAF authorized form and ID, merge the two duplicates, and produce a reconciliation table (local name, authorized form, VIAF ID) with zero unresolved variant spellings and both duplicates correctly identified.",
+      "common_failure": "Creating authority records from scratch without searching LCNAF or VIAF, or spelling the same creator differently across finding aids because nobody reconciled them. The consequence is that a search for one person returns partial results per spelling, the creator links across the archive break, and staff spend years merging headings that should have been linked once.",
+      "sources": [
+        "VIAF (Virtual International Authority File), OCLC — https://viaf.org",
+        "LC Name Authority File (LCNAF) and NACO documentation, Library of Congress — https://id.loc.gov",
+        "OpenRefine reconciliation service documentation for VIAF"
+      ]
+    }
+  ]
+}

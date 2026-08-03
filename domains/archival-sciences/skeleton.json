@@ -1,0 +1,529 @@
+{
+  "domain": "archival-sciences",
+  "level": "serious amateur aiming at professional competence",
+  "schools": [
+    {
+      "id": "custodial",
+      "name": "Custodial school",
+      "optimises_for": "physical custody of records as the basis of archival authority — one archive per record, controlled environment, an unbroken chain of custody",
+      "gives_up": "speed and scale — born-digital custody at volume is impractical, and distributed stewardship escapes its control model",
+      "quarrels_with": ["postcustodial", "community"]
+    },
+    {
+      "id": "postcustodial",
+      "name": "Postcustodial school",
+      "optimises_for": "describing and preserving records where they are created, especially digital — remote stewardship, distributed custody, intervention at the point of creation",
+      "gives_up": "the guarantees of controlled physical custody — a single climate, a single chain of custody, one authoritative copy",
+      "quarrels_with": ["custodial"]
+    },
+    {
+      "id": "access-first",
+      "name": "Access-first school",
+      "optimises_for": "use — reference service, digitization for access, user-centered finding aids, outreach that turns holdings into audiences",
+      "gives_up": "stewardship depth — less investment in the description and preservation that happen beneath the surface of discovery",
+      "quarrels_with": ["preservation-first"]
+    },
+    {
+      "id": "preservation-first",
+      "name": "Preservation-first school",
+      "optimises_for": "longevity of the physical and digital record — environmental control, conservation, fixity — on the argument that an inaccessible record still exists, a lost one doesn't",
+      "gives_up": "broad access — throughput, digitization for use, and discovery come second to keeping the thing alive",
+      "quarrels_with": ["access-first"]
+    },
+    {
+      "id": "community",
+      "name": "Community archives school",
+      "optimises_for": "records of and by marginalized communities — participatory control, community ownership of description and access, social justice mandates",
+      "gives_up": "institutional neutrality — the archive openly takes sides with its community and rejects custody claims over other people's records",
+      "quarrels_with": ["custodial"]
+    }
+  ],
+  "clusters": [
+    { "id": "foundations", "icon": "📚", "name": "Records & archival theory", "gist": "What a record is, why provenance and original order bind groups of records together, and the historical arc of the archival function — the vocabulary every later cluster argues in." },
+    { "id": "appraisal", "icon": "⚖️", "name": "Appraisal & acquisition", "gist": "Deciding enduring value — Schellenberg's criteria, Terry Cook's macro-appraisal, retention schedules, disposition, and the accessioning that makes a decision legally real." },
+    { "id": "arrangement", "icon": "🗂️", "name": "Arrangement & processing", "gist": "Record groups, series, and subseries; respecting original order while making material usable; MPLP's minimal-processing default for backlogs that would otherwise take decades." },
+    { "id": "description", "icon": "📝", "name": "Description & finding aids", "gist": "Turning arrangement into finding aids and metadata — DACS, EAD, MARC-21, authority control — so a researcher can find and navigate the collection without staff help." },
+    { "id": "preservation", "icon": "🛡️", "name": "Preservation & conservation", "gist": "Keeping the record alive: environmental control, safe handling, reformatting and digitization, disaster response, and digital preservation with fixity and format monitoring." },
+    { "id": "access", "icon": "🔍", "name": "Access & reference", "gist": "Serving the record to people — reading rooms, reference interviews, restrictions, privacy, copyright, outreach — and the policies that decide who sees what, when." },
+    { "id": "records-management", "icon": "💼", "name": "Records management & born-digital", "gist": "The front end of the lifecycle: active records, retention schedule authoring, ERM, email and database archives, and transferring born-digital material into the archive intact." }
+  ],
+  "spine": [
+    "archival-sciences.foundations.what-is-record",
+    "archival-sciences.foundations.provenance",
+    "archival-sciences.appraisal.appraisal-criteria",
+    "archival-sciences.arrangement.arrangement-plan",
+    "archival-sciences.description.finding-aid",
+    "archival-sciences.preservation.digitization-for-access",
+    "archival-sciences.access.reference-services"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.foundations.what-is-record",
+      "label": "What is a record",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Distinguish a record from a document or stray information artifact by its provenance and purpose, so you can scope what an archive keeps and defend that scope.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.foundations.archival-function",
+      "label": "The archival function",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Place any archives task — appraisal, arrangement, description, preservation, access — on the archival workflow and say which function it serves and what it feeds.",
+      "hours": 5
+    },
+    {
+      "id": "archival-sciences.foundations.archive-history",
+      "label": "History of archival theory",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Sketch the theory's arc — Jenkinson's passive custody, Schellenberg's active appraisal, Terry Cook's postcustodial turn — so current debates have named ancestors.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.foundations.archival-institutions",
+      "label": "Archives vs. libraries vs. museums",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Sort archives, libraries, museums, and records centers by mandate and material, so you apply the right professional rules in the right building.",
+      "hours": 5
+    },
+    {
+      "id": "archival-sciences.foundations.provenance",
+      "label": "Provenance",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["archival-sciences.foundations.what-is-record"],
+      "one_line": "Trace any body of records to the office or person that created it and use that creator link to explain why the records belong together as one group.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.foundations.record-lifecycle",
+      "label": "Records lifecycle & continuum",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "one_line": "Track one record through creation, active use, retention, and disposition on the lifecycle or continuum model, naming where each archival intervention happens.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.foundations.archival-ethics",
+      "label": "Archival ethics",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "one_line": "Apply the SAA Code of Ethics to a donor-restriction or privacy dilemma and write a reasoned call instead of an instinctive one.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.foundations.original-order",
+      "label": "Original order",
+      "tier": 3,
+      "cluster": "foundations",
+      "prereqs": ["archival-sciences.foundations.provenance"],
+      "one_line": "Reconstruct the order a creator kept records in — from folder labels, dates, and numbering — so arrangement reflects function instead of your own subject logic.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.appraisal.retention-schedules",
+      "label": "Reading retention schedules",
+      "tier": 1,
+      "cluster": "appraisal",
+      "prereqs": [],
+      "one_line": "Read an office's retention schedule and sort a mixed batch into permanent, temporary, or destroy, citing the schedule line that justifies each call.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.appraisal.disposition",
+      "label": "Disposition",
+      "tier": 2,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.appraisal.retention-schedules"],
+      "one_line": "Execute approved disposition — archive transfer, certified destruction, or hold — so records leave the office legally instead of by accident.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.appraisal.appraisal-criteria",
+      "label": "Appraisal criteria",
+      "tier": 3,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.foundations.provenance"],
+      "one_line": "Judge a body of records' enduring value with Schellenberg's evidential and informational tests, and state the keep-or-discard call in one paragraph.",
+      "hours": 12
+    },
+    {
+      "id": "archival-sciences.appraisal.accessioning",
+      "label": "Accessioning",
+      "tier": 3,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.appraisal.disposition"],
+      "one_line": "Process an accession — verify the deed of gift, inventory what physically arrived, assign the accession number — so the archive has legal and physical control from day one.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.appraisal.macro-appraisal",
+      "label": "Macro-appraisal",
+      "tier": 4,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.appraisal.appraisal-criteria"],
+      "one_line": "Run Terry Cook's macro-appraisal — evaluate the creating function and its documentation, not individual records — to appraise a whole agency's output at once.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.appraisal.appraisal-report",
+      "label": "Appraisal report",
+      "tier": 4,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.appraisal.appraisal-criteria"],
+      "one_line": "Write an appraisal report that records criteria, evidence, and the disposition recommendation, so the decision survives review years later.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.appraisal.sampling",
+      "label": "Sampling large series",
+      "tier": 5,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.appraisal.macro-appraisal"],
+      "one_line": "Sample a large homogeneous series — case files, forms — with a statistical or purposive scheme, keeping representative evidence without keeping everything.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.appraisal.reappraisal",
+      "label": "Reappraisal & deaccessioning",
+      "tier": 5,
+      "cluster": "appraisal",
+      "prereqs": ["archival-sciences.appraisal.appraisal-report"],
+      "one_line": "Reappraise an existing holding against current criteria and draft deaccession recommendations with the evidence trail an institution can act on.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.arrangement.series-identification",
+      "label": "Series identification",
+      "tier": 3,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.foundations.provenance"],
+      "one_line": "Identify the series inside a body of records by shared function and form, so folders group the way the creator grouped them.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.arrangement.arrangement-plan",
+      "label": "Arrangement plan",
+      "tier": 4,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.appraisal.appraisal-criteria", "archival-sciences.foundations.original-order"],
+      "one_line": "Plan an accession's arrangement — record groups, series, subseries mirroring creator functions — on paper before touching a single folder.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.arrangement.physical-arrangement",
+      "label": "Physical arrangement",
+      "tier": 4,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.series-identification"],
+      "one_line": "Physically order folders into series and subseries on the shelf per the arrangement plan, so the collection reads as the creator's own system.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.arrangement.rehousing",
+      "label": "Rehousing",
+      "tier": 4,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.series-identification"],
+      "one_line": "Rehouse material in acid-free folders and boxes sized to the material, so the container stops doing damage the environment would otherwise do.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.arrangement.mplp",
+      "label": "MPLP minimal processing",
+      "tier": 5,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.arrangement-plan"],
+      "one_line": "Apply Greene & Meissner's More Product Less Process — default to minimal processing, keep original order, skip item-level detail — and cut a backlog's processing time from years to months.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.arrangement.container-listing",
+      "label": "Container listing",
+      "tier": 5,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.physical-arrangement"],
+      "one_line": "Produce a container list — box and folder numbers with brief contents — that can feed a finding aid without re-opening the boxes.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.arrangement.item-level-arrangement",
+      "label": "Item-level arrangement",
+      "tier": 6,
+      "cluster": "arrangement",
+      "prereqs": ["archival-sciences.arrangement.mplp"],
+      "one_line": "Arrange an item-level collection — photographs, correspondence — where order and provenance live per item, documenting every order decision.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.description.dacs",
+      "label": "DACS content standard",
+      "tier": 4,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.arrangement.series-identification"],
+      "one_line": "Apply Describing Archives: A Content Standard — required and optional elements, levels of description, grammar rules — to a description you write.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.description.finding-aid",
+      "label": "Finding aid",
+      "tier": 5,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.dacs", "archival-sciences.arrangement.arrangement-plan"],
+      "one_line": "Write a DACS-compliant finding aid — collection-level and series-level descriptions, biographical note, scope and content — a researcher can use without staff help.",
+      "hours": 15
+    },
+    {
+      "id": "archival-sciences.description.authority-control",
+      "label": "Authority control",
+      "tier": 5,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.dacs"],
+      "one_line": "Create and reconcile name and subject authority records against VIAF and LCNAF so one creator is spelled and linked identically across every finding aid.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.description.ead",
+      "label": "EAD encoding",
+      "tier": 6,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.finding-aid"],
+      "one_line": "Encode a finding aid in EAD XML that validates against the EAD3 schema and renders in a discovery portal.",
+      "hours": 12
+    },
+    {
+      "id": "archival-sciences.description.marc",
+      "label": "MARC-21 catalog records",
+      "tier": 6,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.dacs", "archival-sciences.description.finding-aid"],
+      "one_line": "Convert a collection description into MARC-21 records that load into OCLC, so archives holdings surface in library catalogs.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.description.subject-indexing",
+      "label": "Subject & genre indexing",
+      "tier": 6,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.authority-control"],
+      "one_line": "Index a collection with LCSH and form/genre terms, describing what the records are rather than what they mean.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.description.metadata-standards",
+      "label": "Metadata standards selection",
+      "tier": 7,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.ead"],
+      "one_line": "Choose a metadata standard per object type — Dublin Core for digital objects, PREMIS for preservation, EAD for finding aids — and justify the choice.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.preservation.environment-control",
+      "label": "Environmental control",
+      "tier": 1,
+      "cluster": "preservation",
+      "prereqs": [],
+      "one_line": "Specify the archival storage environment — 65°F ±2, 35-45% relative humidity, under 500 lux with no UV — and verify it with a datalogger.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.preservation.handling-and-storage",
+      "label": "Handling & storage",
+      "tier": 2,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.environment-control"],
+      "one_line": "Handle and store records safely — nitrile gloves for photographs, supports for bound volumes, upright or flat boxing — so use and storage don't damage them.",
+      "hours": 6
+    },
+    {
+      "id": "archival-sciences.preservation.disaster-response",
+      "label": "Disaster response",
+      "tier": 2,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.environment-control"],
+      "one_line": "Run the first 48 hours of a disaster — salvage priorities, freezing wet records, freeze-drying referral — so the collection's loss stays partial.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.preservation.reformatting-options",
+      "label": "Reformatting options",
+      "tier": 3,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.handling-and-storage"],
+      "one_line": "Choose the reformatting that fits the material — microfilm vs digitization, surrogate vs original — weighing use, condition, and cost.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.preservation.conservation-triage",
+      "label": "Conservation triage",
+      "tier": 3,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.handling-and-storage"],
+      "one_line": "Triage an item's condition — tear, mold, brittle paper — into stabilize-now or refer-to-conservator, documenting exactly what you did and didn't do.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.preservation.digitization-for-access",
+      "label": "Digitization for access",
+      "tier": 6,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.description.finding-aid"],
+      "one_line": "Run a digitization project end to end — scan at 300-600 dpi TIFF with a target, name files per scheme, link surrogates to descriptions — so users get images, not the originals.",
+      "hours": 25
+    },
+    {
+      "id": "archival-sciences.preservation.digital-preservation",
+      "label": "Digital preservation",
+      "tier": 7,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.records-management.born-digital-transfer", "archival-sciences.preservation.digitization-for-access"],
+      "one_line": "Run a digital preservation program — checksum fixity checks, format monitoring, PREMIS/OAIS metadata — so files survive media and format obsolescence.",
+      "hours": 20
+    },
+    {
+      "id": "archival-sciences.preservation.format-migration",
+      "label": "Format migration",
+      "tier": 7,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.digitization-for-access"],
+      "one_line": "Plan a format migration — legacy formats to PDF/A, validating content before and after — so obsolescence doesn't equal loss.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.access.reading-room",
+      "label": "Reading room service",
+      "tier": 2,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "one_line": "Run a reading-room shift — register researchers, enforce the rules, track retrievals — so material is used without being lost, damaged, or stolen.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.access.reference-interview",
+      "label": "Reference interview",
+      "tier": 2,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "one_line": "Conduct a reference interview — open question, restated need, material proposed — so you find what the researcher actually needs, not just what they first asked for.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.access.outreach",
+      "label": "Outreach",
+      "tier": 2,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.foundations.archival-function"],
+      "one_line": "Plan an outreach program — exhibition, social posts, workshop — with a measurable engagement goal, converting holdings into an audience.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.access.copyright",
+      "label": "Copyright determinations",
+      "tier": 3,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.access.reference-interview"],
+      "one_line": "Make a defensible copyright call for copying or publishing archival material — unpublished status, duration, fair use — and record the reasoning.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.access.user-studies",
+      "label": "User studies",
+      "tier": 3,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.access.outreach", "archival-sciences.access.reference-interview"],
+      "one_line": "Run a small user study — log reference questions, track finding-aid success — and turn the findings into one description or access change.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.access.restrictions-and-privacy",
+      "label": "Restrictions & privacy",
+      "tier": 5,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.description.dacs", "archival-sciences.access.reference-interview"],
+      "one_line": "Apply access restrictions — donor-imposed, statutory, privacy-based — to a request and cite the authority for denying or redacting, documenting the review.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.access.reference-services",
+      "label": "Reference services",
+      "tier": 7,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.description.finding-aid", "archival-sciences.preservation.digitization-for-access"],
+      "one_line": "Run a reference service — interview, retrieval via finding aids, service to in-person and remote users — with policies and statistics, not just ad hoc answers.",
+      "hours": 12
+    },
+    {
+      "id": "archival-sciences.records-management.active-records",
+      "label": "Active records systems",
+      "tier": 1,
+      "cluster": "records-management",
+      "prereqs": [],
+      "one_line": "Set up an office file plan — series folders, naming conventions, version control — so current records are findable without IT archaeology.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.records-management.records-inventories",
+      "label": "Records inventories",
+      "tier": 2,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.active-records"],
+      "one_line": "Run a records inventory — walk the office, list every series with volume and format — producing the data a retention schedule is built from.",
+      "hours": 8
+    },
+    {
+      "id": "archival-sciences.records-management.retention-schedule-authoring",
+      "label": "Retention schedule authoring",
+      "tier": 2,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.active-records"],
+      "one_line": "Write a retention schedule for an office — every series, retention period, legal hold — so destruction is authorized and auditable, not accidental.",
+      "hours": 12
+    },
+    {
+      "id": "archival-sciences.records-management.electronic-records-management",
+      "label": "Electronic records management",
+      "tier": 2,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.active-records"],
+      "one_line": "Tame a shared drive or ERM system — classification scheme, capture rules, disposal triggers — so digital records are managed in place instead of accumulating forever.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.records-management.email-archiving",
+      "label": "Email archiving",
+      "tier": 3,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.electronic-records-management"],
+      "one_line": "Set up email capture — journaling, retention categories, export to the archive — so institutional memory survives staff departures.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.records-management.database-archiving",
+      "label": "Database archiving",
+      "tier": 3,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.electronic-records-management"],
+      "one_line": "Plan the archive of a database — export to CSV or SIARD, document schema and context — so structured data outlives its system.",
+      "hours": 10
+    },
+    {
+      "id": "archival-sciences.records-management.born-digital-transfer",
+      "label": "Born-digital transfer",
+      "tier": 4,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.appraisal.accessioning", "archival-sciences.records-management.electronic-records-management"],
+      "one_line": "Transfer born-digital records into the archive — write-blocked copies, checksums, technical environment documented — so digital acquisitions arrive intact and provable.",
+      "hours": 12
+    }
+  ]
+}

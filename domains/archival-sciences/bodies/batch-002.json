@@ -1,0 +1,358 @@
+{
+  "domain": "archival-sciences",
+  "batch": 2,
+  "ids": [
+    "archival-sciences.foundations.archival-function",
+    "archival-sciences.foundations.archive-history",
+    "archival-sciences.foundations.archival-institutions",
+    "archival-sciences.foundations.record-lifecycle",
+    "archival-sciences.foundations.archival-ethics",
+    "archival-sciences.foundations.original-order",
+    "archival-sciences.appraisal.retention-schedules"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.foundations.archival-function",
+      "label": "The archival function",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Place any archives task — appraisal, arrangement, description, preservation, access — on the archival workflow and say which function it serves and what it feeds.",
+      "hours": 5,
+      "know_what": [
+        "Archival function — the professional task of preserving records as evidence across time, distinct from the archive as building or institution; the function exists wherever it is performed",
+        "The archival workflow — appraisal → accessioning → arrangement → description → preservation → access; each function consumes the output of the one before it",
+        "Appraisal — the function of deciding which records have enduring value; the gate that controls what the rest of the workflow ever sees",
+        "Arrangement — organizing records into the creator's hierarchy (record group, series, file) so their evidentiary relationships survive",
+        "Description — turning arrangement into finding aids and metadata (DACS, EAD) so records can be found without staff help",
+        "Preservation — environmental control (65°F ±2, 35-45% RH, under 500 lux), safe handling, and reformatting that keep the record usable across time",
+        "Access and reference — registration, retrieval, reference interviews, and restrictions that serve the record to a user under control",
+        "Records management — the front-end function: file plans, inventories, retention schedules, and capture of active records before they are archival",
+        "Archivist vs records manager — the archivist takes custody at disposition; the records manager stewards records during active life; the boundary shifts for born-digital records"
+      ],
+      "know_how": [
+        "Assign any task to its function — 'scan this daguerreotype' is preservation, 'answer this request' is reference — and name the function it feeds",
+        "Trace one record through all six functions and say which role or institution performs each step",
+        "Map a job description's duties onto the archival functions and spot the function the role omits",
+        "Diagnose a stalled workflow by finding the upstream function that never happened (unappraised records reaching description, undescribed records reaching reference)",
+        "Explain to a stakeholder why functions must run in order: appraisal before accessioning, description before access",
+        "Describe an archive's operation as a one-page function map — inputs, outputs, dependencies"
+      ],
+      "habits": [
+        "Name the function before doing the task: 'this is arrangement' or 'this is reference'",
+        "When a workflow breaks, look one step upstream for the missing function",
+        "Quote the function when scoping work with non-archivists",
+        "Keep the function map current as the institution's work changes",
+        "Never let access run ahead of description — the finding aid is the retrieval path"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "high" },
+      "checkpoint": "Given ten tasks (scan a map, write a finding aid, approve a destruction list, register a researcher, rehouse a box, inventory an office, answer an email request, appraise a series, digitize a photograph, apply a restriction), assign each to its archival function and name the function it feeds, with no more than one mis-assignment.",
+      "common_failure": "Running functions as isolated departments — describing records that were never appraised, or preserving holdings with no access pathway. Each gap looks like someone else's job, so the archive ends up with well-kept boxes no one can find and records no one decided to keep.",
+      "sources": [
+        "Society of American Archivists, Dictionary of Archives Terminology — archival functions entries",
+        "Fredric M. Miller, Arranging and Describing Archives and Manuscripts (1990)",
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956)",
+        "Society of American Archivists, 'What Are Archives?'"
+      ]
+    },
+    {
+      "id": "archival-sciences.foundations.archive-history",
+      "label": "History of archival theory",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Sketch the theory's arc — Jenkinson's passive custody, Schellenberg's active appraisal, Terry Cook's postcustodial turn — so current debates have named ancestors.",
+      "hours": 8,
+      "know_what": [
+        "Jenkinson's passive custody — the archivist as impartial guardian who does not appraise; records arrive after their administrative life ends (A Manual of Archive Administration, 1922)",
+        "Schellenberg's active appraisal — the archivist decides value with evidential and informational tests; born of the flood of U.S. federal records after the 1930s-40s (Modern Archives, 1956)",
+        "Respect des fonds — the 1841 French ministerial circular that rooted provenance and original order as the arrangement principles",
+        "The Dutch Manual — Muller, Feith, and Fruin (1898), the first codified arrangement rules for municipal archives, still cited for original order",
+        "Terry Cook's postcustodial turn — archivists intervene at the point of creation and steward records in place rather than awaiting custody (1990s)",
+        "Macroappraisal — Cook's function-based appraisal: appraise the function and the citizen-state interaction, not individual records",
+        "The postmodern turn — archives as constructed memory, not neutral storage; Derrida's Archive Fever (1995) and Cook's memory essays",
+        "Margaret Cross Norton — the American pioneer who tied archives to administration, arguing records serve the creating government first",
+        "The U.S. National Archives founded 1934 — the institutional catalyst for Schellenberg's appraisal doctrine and federal records management",
+        "Memory vs evidence — the standing dispute over whether archives preserve neutral evidence or construct what society remembers"
+      ],
+      "know_how": [
+        "Sketch the theory's arc in three sentences: Jenkinson's custody → Schellenberg's appraisal → Cook's postcustodial turn",
+        "Attribute any practice to its era: passive custody is Jenkinson, item-level appraisal of value is Schellenberg, intervention at creation is Cook",
+        "Explain why appraisal exists: the volume of modern public records made 'keep everything' impossible",
+        "Compare Jenkinson and Schellenberg on the question 'who decides what to keep?' in one paragraph",
+        "Trace provenance's career from the 1841 circular to PREMIS and OAIS metadata",
+        "Place a current debate (e.g., community archives) on the custody-to-postcustody arc"
+      ],
+      "habits": [
+        "When defending a practice, name its ancestor: 'this is Schellenberg's position because...'",
+        "When a new theory appears, locate it on the arc before evaluating it",
+        "Ask whose memory an appraisal decision preserves — the postmodern question",
+        "Treat the history as live ammunition for today's debates, not exam trivia",
+        "Notice when a 'neutral' practice is actually one era's position in disguise"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "postcustodial": "high" },
+      "checkpoint": "Given ten practice statements (e.g., 'the archivist must not judge value,' 'appraise the function, not the record,' 'arrange by the creator's own order'), attribute each to Jenkinson, Schellenberg, or Cook and state the era it emerged from, with no more than two errors.",
+      "common_failure": "Learning the names as trivia without the through-line, so a new proposal ('let the community decide') seems exotic instead of a position on a 200-year argument. The history only pays off when each school is a live alternative you can actually hold.",
+      "sources": [
+        "Hilary Jenkinson, A Manual of Archive Administration (1922)",
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956)",
+        "S. Muller, J.A. Feith, R. Fruin, Manual for the Arrangement and Description of Archives (1898)",
+        "Terry Cook, 'What is Past is Prologue: A History of Archival Ideas Since 1898' (1997)",
+        "Jacques Derrida, Archive Fever: A Freudian Impression (1995)"
+      ]
+    },
+    {
+      "id": "archival-sciences.foundations.archival-institutions",
+      "label": "Archives vs. libraries vs. museums",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Sort archives, libraries, museums, and records centers by mandate and material, so you apply the right professional rules in the right building.",
+      "hours": 5,
+      "know_what": [
+        "Archive — an institution keeping unique, organic records as evidence, arranged by provenance and served under access controls; the archival rules of this tree apply here",
+        "Library — collects published, reproducible works cataloged at item level (MARC, RDA); no custody-of-evidence mandate, no original order",
+        "Museum — collects objects and artifacts for artifactual and exhibition value; governed by SPECTRUM-style collection management, loans, and conservation, not archival description",
+        "Records center — stores semi-active records of the creating agency pending disposition; the agency keeps legal custody and access control; not a public research archive",
+        "Special collections — the library unit that houses manuscripts and rare books and borrows archival principles (provenance, original order) inside a library",
+        "Manuscripts repository — an archives-like unit for personal papers, common in university libraries, applying archival arrangement to non-government records",
+        "Institutional types — government archives (national, state, municipal), university archives, corporate archives, historical societies; each answers to a different mandate and legal frame",
+        "Mandate — the charter or statute that defines what an institution may collect; professional rules apply inside the mandate's scope",
+        "Hybrid buildings — one institution often runs archives, special collections, and a records center; the rule sets must stay distinct even when the shelving is not"
+      ],
+      "know_how": [
+        "Sort any item to its institution: a published book to the library, a maquette to the museum, a mayor's correspondence to the archive, an agency's semi-active case files to the records center",
+        "Apply the right rule set per institution: DACS and EAD for archives, RDA and MARC for libraries, SPECTRUM for museums, the retention schedule for the records center",
+        "State an institution's mandate from its founding documents and use it to defend a collecting decision",
+        "Explain to a patron why the archive cannot lend records the way a museum lends artifacts",
+        "Identify which professional literature governs a task from the institution type alone",
+        "Draw the custody line: who owns the records and who may access them in each institution type"
+      ],
+      "habits": [
+        "Ask 'what is this institution's mandate?' before applying any professional rule",
+        "When a library acquires manuscripts, switch to archival rules without being told",
+        "Never treat the records center as the archive: semi-active is not yet archival",
+        "When institution types blur (a historical society running a library), keep the rule sets separate",
+        "Say 'this is a museum question' out loud rather than guessing a library or archive answer"
+      ],
+      "know_why": null,
+      "school_weights": { "community": "high" },
+      "checkpoint": "Given eight items (a first-edition novel, a sculptor's maquette, a mayor's correspondence, an agency's semi-active case files, a published music CD, a family photograph album, a student thesis, a framed map), assign each to archive, library, museum, or records center and name the governing rule, with no more than one error.",
+      "common_failure": "Applying one institution's rules everywhere — cataloging manuscripts like books item by item, or weeding archives by the library's deselection logic. The consequence is destroyed evidentiary structure or, in a records center, unauthorized destruction of records the agency still owns.",
+      "sources": [
+        "Society of American Archivists, Dictionary of Archives Terminology and 'What Are Archives?'",
+        "Fredric M. Miller, Arranging and Describing Archives and Manuscripts (1990)",
+        "Society of American Archivists, 'So You Want to Be an Archivist'",
+        "Collections Trust, SPECTRUM — The UK Museum Collections Management Standard"
+      ]
+    },
+    {
+      "id": "archival-sciences.foundations.record-lifecycle",
+      "label": "Records lifecycle & continuum",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": [
+        "archival-sciences.foundations.archival-function"
+      ],
+      "soft_prereqs": ["archival-sciences.appraisal.retention-schedules"],
+      "one_line": "Track one record through creation, active use, retention, and disposition on the lifecycle or continuum model, naming where each archival intervention happens.",
+      "hours": 6,
+      "know_what": [
+        "Lifecycle stages — creation, active use, semi-active retention, disposition; the record moves forward along one line and ends",
+        "Disposition — the terminal stage: transfer to archives as permanent, certified destruction, or continued hold; nothing else is legal",
+        "Records center — the semi-active staging ground between the office and the archive, where retention clocks run",
+        "Retention schedule — the instrument fixing how long each series is kept and what happens at the end; the lifecycle's operating manual",
+        "Continuum model — Frank Upward's four dimensions, create, capture, organize, pluralize; the record exists in multiple simultaneous contexts and never dies (1996-97)",
+        "The four continuum axes — transaction (create), evidence (capture), memory (organize), identity (pluralize); one record is simultaneously all four",
+        "Archival intervention point — lifecycle: at disposition, when the archive receives 'dead' records; continuum: at capture, when metadata and context are born with the record",
+        "ISO 15489 — the records-management standard that operationalizes continuum-style thinking for active records systems",
+        "DIRKS — the Australian methodology (Designing and Implementing Recordkeeping Systems) built from continuum theory",
+        "Digital reality — born-digital records live in systems where one record sits in multiple contexts at once, which the linear model cannot describe"
+      ],
+      "know_how": [
+        "Plot any record on the lifecycle: name its current stage, the owner (office, records center, archive), and the next scheduled intervention",
+        "For each stage, state the responsible party and the instrument: file plan at creation, retention schedule in active use, transfer in semi-active, appraisal and disposition at the end",
+        "Map an archival function to its stage: appraisal and accessioning at disposition, capture and metadata at creation",
+        "Run the continuum's four dimensions on one record — an email is a transaction when sent, evidence when captured, memory when organized, identity when pluralized — naming an intervention at each",
+        "Compare the two models on the same record and state which interventions each makes visible and which it hides",
+        "Use the model to find gaps: a record with no schedule line, or a born-digital file captured without metadata"
+      ],
+      "habits": [
+        "When a record arrives, ask 'which stage, and who owns it now?'",
+        "For digital records, think continuum: simultaneous contexts, not one path to death",
+        "Name the stage when planning an intervention: 'this is a capture-time fix, not a disposition-time fix'",
+        "When the lifecycle says destroy, ask the continuum question: what else is this record simultaneously evidence of?",
+        "Treat the model as a management tool, not a description of nature"
+      ],
+      "know_why": {
+        "claim": "The linear lifecycle — creation, active use, retention, disposition — is the right frame for managing records, because it assigns each stage a named owner and a schedulable intervention.",
+        "because": "with an owner and an instrument at every stage (file plan at creation, retention schedule in active use, records center in semi-active, appraisal and disposition at the end), recordkeeping becomes an auditable process rather than a series of accidents.",
+        "disputed_by": "Frank Upward and the Australian continuum school argue the record is never born and never dies — it exists simultaneously in the dimensions create, capture, organize, and pluralize, always open to reinterpretation — so the linear model misdescribes digital records and postpones archival thinking to the end of the process; Sue McKemmish and the postcustodial school apply the same critique, insisting metadata and context must be captured at creation, not at disposition.",
+        "source": "Frank Upward, 'Structuring the Records Continuum' (Archives and Manuscripts, 1996-97); Sue McKemmish, 'Yesterday, Today and Tomorrow: A Continuum of Responsibility' (2001); ISO 15489-1; the lifecycle-continuum debate in Archives and Manuscripts and Archivaria"
+      },
+      "school_weights": { "postcustodial": "high" },
+      "checkpoint": "Given a record (a signed contract, an email thread, a case file), write its lifecycle path — stage, owner, instrument, and scheduled intervention at each step — then re-describe the same record on the continuum's four dimensions. Each description must name at least one intervention the other model misses.",
+      "common_failure": "Treating the lifecycle as a description of nature: waiting for records to 'die' before archiving them, so born-digital records arrive at the archive stripped of the metadata and context only capture-time intervention could save. The mirror error is quoting the continuum to avoid ever scheduling destruction.",
+      "sources": [
+        "Frank Upward, 'Structuring the Records Continuum' (Archives and Manuscripts, 1996-97)",
+        "Sue McKemmish, 'Yesterday, Today and Tomorrow: A Continuum of Responsibility' (2001)",
+        "ISO 15489-1:2016, Information and documentation — Records management",
+        "U.S. Federal Records Act, 44 U.S.C. ch. 31"
+      ]
+    },
+    {
+      "id": "archival-sciences.foundations.archival-ethics",
+      "label": "Archival ethics",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": [
+        "archival-sciences.foundations.archival-function"
+      ],
+      "soft_prereqs": ["archival-sciences.access.reference-interview"],
+      "one_line": "Apply the SAA Code of Ethics to a donor-restriction or privacy dilemma and write a reasoned call instead of an instinctive one.",
+      "hours": 8,
+      "know_what": [
+        "SAA Code of Ethics — the 2020 revision's eight principles: professional relationships, judgment, authenticity, access and use, privacy, security/protection, sustainability, trust",
+        "Core values — the code's paired statement: access, accountability, democracy, diversity, history, memory, preservation, professionalism, responsible stewardship, transparency",
+        "Donor restrictions — limits written into the deed of gift (sealed series, consent requirements) that bind the archive; negotiate scope and review dates at accession, not after",
+        "Privacy — the duty to balance access against the personal privacy of record subjects, sharpest in personnel, medical, and student records",
+        "Authenticity — the obligation not to alter records or their context, including metadata, in ways that mislead",
+        "Judgment — the principle that the archivist's professional judgment must not be distorted by institutional or personal interests",
+        "Conflicts of interest — appraising, describing, or restricting records in which the archivist has a personal stake; the remedy is recusal and documented handoff",
+        "The neutrality debate — whether archives can be neutral custodians; the community archives school argues neutrality is a fiction that protects existing power",
+        "Documentation — the ethical act of recording decisions (restriction reviews, appraisal calls) so successors and users can audit them",
+        "Professional relationships — obligations of candor to donors, users, and colleagues, including no self-dealing in acquisitions"
+      ],
+      "know_how": [
+        "Apply the code to a dilemma in writing: name the principle, weigh the stakeholders, state the decision and its justification",
+        "Negotiate a donor restriction at the deed-of-gift stage with a review date and a named authority to lift it",
+        "Review a privacy-sensitive request (sealed personnel file) and document the grant or denial citing the code's access-and-use and privacy principles",
+        "Recognize a conflict of interest and execute the recusal: hand the decision off and document it",
+        "Draft the one-page decision memo an ethics committee could uphold or overturn",
+        "Write the restriction language into the finding aid so staff apply it without re-litigating it"
+      ],
+      "habits": [
+        "Cite the principle by name when making a call: 'this is a privacy call under access and use'",
+        "Write the reasoning before the answer when a dilemma appears",
+        "Prefer documented, reviewable restrictions over unwritten promises to donors",
+        "Re-read the code when a call feels instinctive — instinct is where bias hides",
+        "When neutrality is claimed, ask who benefits from the claim"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "community": "high" },
+      "checkpoint": "Given three dilemmas (a donor demands a 99-year seal; a researcher requests personnel files; a colleague proposes destroying records before appraisal), write a one-page decision memo per dilemma citing the SAA principle, the stakeholders, and the reasoning. Each memo must survive a colleague's ethics review.",
+      "common_failure": "Treating ethics as instinct: making the privacy call without citing the principle, so the decision cannot be defended or audited. The mirror failure is accepting every donor restriction without review, permanently sealing records the public should eventually see — the archive betrays either the donor or the public, silently.",
+      "sources": [
+        "Society of American Archivists, 'SAA Core Values Statement and Code of Ethics' (2020)",
+        "Karen Benedict, Ethics and the Archival Profession: Introduction and Case Studies (2003)",
+        "Verne Harris, 'The Archival Sliver: A Perspective on the Construction of Social Memory in Archives and the Politics of Records' (2002)",
+        "Society of American Archivists, A Guide to Deeds of Gift"
+      ]
+    },
+    {
+      "id": "archival-sciences.foundations.original-order",
+      "label": "Original order",
+      "tier": 3,
+      "cluster": "foundations",
+      "prereqs": [
+        "archival-sciences.foundations.provenance"
+      ],
+      "soft_prereqs": ["archival-sciences.arrangement.series-identification"],
+      "one_line": "Reconstruct the order a creator kept records in — from folder labels, dates, and numbering — so arrangement reflects function instead of your own subject logic.",
+      "hours": 6,
+      "know_what": [
+        "Original order — the arrangement the creator gave the records; with provenance, the second fundamental principle of archival arrangement",
+        "Respect des fonds — the 1841 French ministerial circular that paired provenance with original order; the principle's birth certificate",
+        "The Dutch Manual — Muller, Feith, and Fruin (1898) codifying that the archive's own order must be preserved and reconstructed",
+        "The order as evidence — the sequence itself documents function: case files numbered by processing order, correspondence in the sequence of the office's business",
+        "Filing systems — the creator's codes: alphabetical, chronological, numeric, subject-code (registry) systems; reading them is how you reconstruct order",
+        "Reconstruction — recovering the creator's arrangement from folder labels, dates, and numbering after the physical order was disturbed",
+        "Original order vs pertinence — the rejected alternative of arranging by subject, which destroys the evidence of the creating function",
+        "Digital original order — in systems, order is logical (metadata, timestamps, folder trees) rather than physical; the principle survives as capture metadata",
+        "MPLP and original order — minimal processing keeps original order at series level and refuses item-level rearrangement as a default",
+        "When order fails — unknowable or meaningless order (a shoebox of unsorted papers): the archivist may impose order and must document the deviation"
+      ],
+      "know_how": [
+        "Reconstruct original order from folder labels, dates, and numbering for a disturbed box, and write the order map before touching the folders",
+        "Identify the filing system (alphabetical, chronological, numeric, subject-code) from the folder evidence alone",
+        "Document a deviation: when the original order is unknowable, impose a documented order and say so in the finding aid",
+        "Distinguish original order from storage convenience — what the creator did vs what the movers did",
+        "Decide when use-based arrangement is justified and record the reasoning",
+        "For digital records, find the original order in the metadata (created, modified, folder structure) instead of physical sequence"
+      ],
+      "habits": [
+        "Before reordering anything, photograph and note the existing order",
+        "When a box looks shuffled, hunt for the code: labels, dates, numbering, file codes",
+        "Ask 'what filing system produced this?' before touching a folder",
+        "Record every deviation from original order in the finding aid, never silently",
+        "When the creator's order encodes harm (surveillance files), name that too — order is not automatically virtuous"
+      ],
+      "know_why": {
+        "claim": "Respect for original order — keeping the creator's filing arrangement — is the basis of archival evidence, because the order itself documents the function that produced the records.",
+        "because": "relationships between records as filed (a numbered case sequence, an office's correspondence run) carry evidence no single document holds, and rearranging by subject or by use destroys those relationships permanently.",
+        "disputed_by": "the postcustodial school and the community archives movement argue original order fetishizes the creator's arrangement — assuming a single, knowable order that digital records often lack, and blocking use-based or community-defined arrangement of records whose creators are marginalized; Verne Harris calls the reverence for original order an inheritance of custody-era thinking about neutral creators.",
+        "source": "Hilary Jenkinson, A Manual of Archive Administration (1922); Muller, Feith & Fruin, Dutch Manual (1898); Verne Harris, 'The Archival Sliver' (2002); Michelle Caswell, Archiving the Unspeakable (2014); Terry Cook, 'The Concept of the Archival Fonds in the Post-Custodial Era' (1993)"
+      },
+      "school_weights": { "custodial": "high", "postcustodial": "low", "community": "low" },
+      "checkpoint": "Given a shuffled box of folders (mixed labels, dates, and numbered case files), reconstruct the creator's filing order, name the filing system, and produce a written order map a colleague can verify against the evidence — at least 9 of 10 placements must match the labels, dates, and numbers.",
+      "common_failure": "Reordering by neatness or subject ('alphabetize everything'), which destroys the evidence of the creating function; the mirror failure is insisting on original order where none survives, freezing the collection in permanent disorder. Both are silent: the damage only shows up when a researcher needs the sequence that no longer exists.",
+      "sources": [
+        "Hilary Jenkinson, A Manual of Archive Administration (1922)",
+        "S. Muller, J.A. Feith, R. Fruin, Manual for the Arrangement and Description of Archives (1898)",
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956)",
+        "Michelle Caswell, Archiving the Unspeakable: Silence, Memory, and the Photographic Record in Cambodia (2014)"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.retention-schedules",
+      "label": "Reading retention schedules",
+      "tier": 1,
+      "cluster": "appraisal",
+      "prereqs": [],
+      "soft_prereqs": ["archival-sciences.records-management.records-inventories"],
+      "one_line": "Read an office's retention schedule and sort a mixed batch into permanent, temporary, or destroy, citing the schedule line that justifies each call.",
+      "hours": 8,
+      "know_what": [
+        "Retention schedule — the instrument authorizing how long each record series is kept and what happens when time runs out: permanent transfer, temporary retention, or destruction",
+        "Series — the schedule's unit: a body of records filed under one system or produced by one activity",
+        "Retention period — fixed ('7 years from creation') or event-based ('7 years after case closed'); the trigger sets the clock",
+        "Trigger — the event that starts the retention clock: case closed, contract terminated, fiscal year end, employee separation",
+        "Disposition categories — permanent (archival), temporary (destroy after the period), destroy, and hold; the schedule's decision columns",
+        "General Records Schedules (GRS) — NARA's government-wide schedules covering common functions (personnel, finance, communications); agency-specific schedules cover the rest",
+        "Legal hold — a litigation, investigation, or audit freeze that suspends destruction even where the schedule says destroy",
+        "Schedule authority — destruction outside a schedule line is unauthorized disposition; in U.S. government it is a statutory violation (44 U.S.C. ch. 33)",
+        "Certificate of destruction — the record of what was destroyed, when, and under which schedule line, kept by the office that destroyed it"
+      ],
+      "know_how": [
+        "Read a schedule's columns and rows: match any record to its series line and quote the line's retention and disposition",
+        "Compute the disposition date: 'destroy 7 years after case closed' — find the close date, add 7 years",
+        "Sort a mixed batch into permanent, temporary, or destroy, citing the schedule line that justifies each call",
+        "Check for legal holds before any destruction run and stop the run if one exists",
+        "Verify a destruction is authorized: schedule line exists, trigger elapsed, no hold — then sign the certificate",
+        "Flag the unmatched record instead of guessing: a record with no line has no authorized disposition"
+      ],
+      "habits": [
+        "Never destroy without a schedule line and an elapsed trigger — cite both",
+        "When a record matches no line, flag it; never improvise a disposition",
+        "Check for holds before every destruction run, not after",
+        "Read the schedule as law: the line is the authority, not your judgment",
+        "When a series is renamed or merged, check the schedule line still matches before acting"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a one-page retention schedule and a mixed batch of ten records (contracts, case files, newsletters, personnel files, receipts), classify each as permanent, temporary-with-trigger, or destroy, citing the schedule line and the computed disposition date for each, with no more than one error.",
+      "common_failure": "Destroying on the retention period alone without checking the trigger — purging a case file 7 years after creation instead of 7 years after the case closed, destroying records that were still live. The mirror error is treating the schedule as optional guidance and destroying records with no line at all: unauthorized disposition that can become a legal liability.",
+      "sources": [
+        "NARA, General Records Schedules (archives.gov/records-mgmt/grs)",
+        "U.S. Code, 44 U.S.C. ch. 33, and 36 CFR 1220-1236",
+        "Society of American Archivists, Dictionary of Archives Terminology — retention schedule",
+        "ISO 15489-1:2016, Information and documentation — Records management"
+      ]
+    }
+  ]
+}

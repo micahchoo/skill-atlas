@@ -1,0 +1,314 @@
+{
+  "domain": "grant-writing",
+  "batch": 7,
+  "ids": [
+    "grant-writing.portfolio.pipeline-tracker",
+    "grant-writing.portfolio.goal-setting",
+    "grant-writing.portfolio.win-loss-review",
+    "grant-writing.portfolio.prospecting-rhythm",
+    "grant-writing.portfolio.opportunity-calendar",
+    "grant-writing.portfolio.capacity-planning",
+    "grant-writing.portfolio.diversification"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.portfolio.pipeline-tracker",
+      "label": "Pipeline tracker",
+      "tier": 1,
+      "cluster": "portfolio",
+      "prereqs": [],
+      "one_line": "Keep a live list of every opportunity with status, deadline, and owner so you always know what's in flight and what's due.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.landscape.funder-types"],
+      "know_what": [
+        "pipeline statuses — the shared stage vocabulary (research → LOI → full proposal → awarded → declined) that makes any row readable at a glance",
+        "owner per row — the single person accountable for each opportunity's next action",
+        "next action — the one concrete step, dated, that moves a row to the next status",
+        "aging — how long an opportunity has sat in one status; rows stuck 30+ days are the first sign of a broken pipeline",
+        "conversion ratio — the pipeline arithmetic (submissions vs awards) used to sanity-check revenue forecasts",
+        "single source of truth — the rule that the tracker, not anyone's memory, is where opportunity state lives"
+      ],
+      "know_how": [
+        "create one row per opportunity with status, deadline, owner, ask amount, and source portal",
+        "advance a row only when its next action completes — a status change is an event, not an edit",
+        "review the pipeline weekly with each row's owner and rewrite next actions in that session",
+        "log every declined decision with its date and reason so the tracker carries history, not just inventory",
+        "run a monthly aging report and force a decision on every row stuck 30+ days in one status",
+        "keep the tracker in one tool the whole team uses (spreadsheet, Airtable, or a CRM such as Salesforce NPSP) so a second spreadsheet of truth never appears"
+      ],
+      "habits": [
+        "checking the pipeline before agreeing to any new work — capacity starts with what is already in flight",
+        "writing the next action and its date onto every row in the same session you touch it",
+        "treating a row without an owner as an uncommitted opportunity",
+        "updating the tracker the day a decision lands, not the day after",
+        "reviewing the tracker with the team weekly, not only when a deadline looms"
+      ],
+      "know_why": null,
+      "school_weights": { "grantsmanship": "low" },
+      "checkpoint": "Maintain a tracker with at least 10 live opportunities where every row has a status from the shared vocabulary, a dated deadline, and a named owner, and no row has sat 30+ days without a logged next action.",
+      "common_failure": "Keeping the pipeline in one person's head or a private spreadsheet — the tracker dies at the first vacation or departure, and opportunities get missed because 'someone was handling it'.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Candid — grant tracking and pipeline resources",
+        "GrantStation — prospect tracking guidance"
+      ]
+    },
+    {
+      "id": "grant-writing.portfolio.goal-setting",
+      "label": "Portfolio goals",
+      "tier": 1,
+      "cluster": "portfolio",
+      "prereqs": [],
+      "one_line": "Set a revenue target and funder mix for the year so individual proposals serve a portfolio, not a whim.",
+      "hours": 5,
+      "soft_prereqs": ["grant-writing.budget.budget-basics"],
+      "know_what": [
+        "revenue target — the annual dollar amount grant-seeking must raise, split out from earned and committed income",
+        "funder mix — the intended split of that target across federal, foundation, corporate, and regranting sources",
+        "coverage gap — the difference between committed funding and the target, which is exactly what the pipeline must fill",
+        "portfolio goals vs single-ask goals — what one proposal must win vs what the year must raise",
+        "conversion-based pipeline volume — the asks needed to hit the target given your win rate (a 30% win rate implies 3-4x the target in submissions)",
+        "multi-year view — how this year's target connects to next year's already-committed vs still-to-raise revenue"
+      ],
+      "know_how": [
+        "derive the revenue target from the operating budget: what grants must cover after earned income and committed funds",
+        "set the funder mix by reverse-engineering from current sources — what each type gives today and what share you want it to become",
+        "estimate the pipeline volume the target implies using your conversion ratio before committing to the number",
+        "break the annual target into quarterly sub-targets aligned to the funding calendar's cycles",
+        "write the goals down where the pipeline tracker lives so every new opportunity is evaluated against them",
+        "review targets against actuals quarterly and re-forecast, not just at year end"
+      ],
+      "habits": [
+        "asking 'what does this year need to raise' before 'what should we apply for'",
+        "rechecking the mix whenever one source surprises — a big loss or a big award changes the goal",
+        "keeping the revenue target visible wherever proposals are discussed",
+        "testing each new opportunity against the mix: does it serve the goal or only the moment",
+        "reviewing targets against actuals monthly rather than annually"
+      ],
+      "know_why": null,
+      "school_weights": { "grantsmanship": "low" },
+      "checkpoint": "Produce a written annual revenue target with a funder-mix split, the coverage gap in dollars, and the pipeline volume implied by your conversion ratio.",
+      "common_failure": "Setting a target after the year is half over, or setting one number with no mix — the portfolio drifts toward whatever funder is easiest that month and the year ends with the wrong revenue shape.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Nonprofit Finance Fund — sustainability and revenue planning",
+        "Beverly Browning, Grant Writing For Dummies"
+      ]
+    },
+    {
+      "id": "grant-writing.portfolio.win-loss-review",
+      "label": "Win/loss debrief",
+      "tier": 2,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "one_line": "Debrief every decision — win, loss, no-decision — and extract the pattern that improves your next ask.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.portfolio.goal-setting"],
+      "know_what": [
+        "win/loss debrief — the structured review of every decision once the funder responds: win, loss, or no-decision",
+        "reviewer comments — the written scores and narrative feedback federal agencies return (e.g., NIH summary statements) and foundations rarely volunteer",
+        "no-decision — the silent pass (never invited to full proposal, never contacted), logged as its own outcome",
+        "decision log — the running record of outcomes and reasons that turns individual losses into portfolio data",
+        "outcome coding — bucketing each decision into fit, relationship, budget, competition, or craft so patterns become countable",
+        "debrief cadence — the rule that every decision is reviewed within days, while memory is fresh"
+      ],
+      "know_how": [
+        "request reviewer comments when the funder does not volunteer them — many foundations will share on request",
+        "run the debrief within a week of the decision: what worked, what did not, what you would change",
+        "enter the outcome and named reason into the decision log before starting the next proposal",
+        "code every loss into the same buckets so cross-proposal patterns become countable",
+        "look for patterns quarterly: losses concentrating in one funder type, one ask size, or one season",
+        "hand the debrief to the next writer of that funder's proposal so the lesson travels"
+      ],
+      "habits": [
+        "debriefing losses promptly instead of letting them go quiet",
+        "asking for feedback even on wins — 'what nearly lost us this one'",
+        "coding every outcome into the same buckets so patterns can be counted",
+        "checking the decision log before writing any new proposal for what this funder or type already taught you",
+        "treating a declined proposal as data, not failure"
+      ],
+      "know_why": null,
+      "school_weights": { "evaluation": "high", "grantsmanship": "low" },
+      "checkpoint": "Run a debrief within a week of a funder decision and enter the outcome, the named reason, and one change for the next ask into the decision log, quoting reviewer comments when available.",
+      "common_failure": "Debriefing only losses (or only wins), so the pattern comes out skewed — or holding the debrief so long after the decision that the record reads 'can't remember' and the lesson evaporates.",
+      "sources": [
+        "NIH — summary statement and review criteria guidance",
+        "The Grantsmanship Center Magazine — post-decision debrief discussions",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"
+      ]
+    },
+    {
+      "id": "grant-writing.portfolio.prospecting-rhythm",
+      "label": "Prospecting rhythm",
+      "tier": 2,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "one_line": "Run a weekly scan-and-log habit so new funders enter the pipeline continuously instead of in deadline-driven panics.",
+      "hours": 5,
+      "soft_prereqs": ["grant-writing.landscape.candid-search", "grant-writing.landscape.grants-gov-search"],
+      "know_what": [
+        "scan-and-log — the weekly ritual of checking saved searches and alerts, then logging anything new into the tracker in the same sitting",
+        "Grants.gov email alerts — saved-search notifications that fire when a new opportunity matches your keywords",
+        "Candid search templates — saved Foundation Directory searches re-run weekly to catch new or changed foundation records",
+        "state and local portals — state grant databases and regional funder sites with their own alert systems",
+        "lead time — the weeks a funder needs from first contact to LOI, which the rhythm must build in",
+        "deadline-driven panic — the failure mode where prospecting happens only when a deadline forces it"
+      ],
+      "know_how": [
+        "set up Grants.gov saved searches with email alerts for your top three program keywords",
+        "build and save 3-5 Candid search templates (subject, geography, population) and re-run them on a fixed weekday",
+        "block a weekly 30-60 minute prospecting slot on the same day every week",
+        "log every new opportunity into the tracker with status 'research' in the same session you find it",
+        "triage each find against the revenue target and funder mix before it becomes a pipeline candidate",
+        "refresh the saved searches quarterly as keywords and priorities drift"
+      ],
+      "habits": [
+        "prospecting on a schedule, not when a gap appears",
+        "logging a find the same day it is found — unlogged research is lost research",
+        "keeping the weekly slot even when the pipeline is full, because the pipeline always empties",
+        "noting why each find passed or failed triage so the search templates sharpen",
+        "checking alerts at a fixed time and clearing them to zero"
+      ],
+      "know_why": null,
+      "school_weights": { "foundation": "high" },
+      "checkpoint": "Complete a full weekly scan — Grants.gov alerts, Candid templates, and state portals — and log every new opportunity into the tracker with a status and a triage note, for four consecutive weeks.",
+      "common_failure": "Prospecting in bursts — a quarterly scramble before a deadline — so the pipeline is feast-or-famine and the funder mix is whatever was urgent, not what was planned.",
+      "sources": [
+        "Grants.gov — saved searches and email alerts",
+        "Candid Foundation Directory — saved search templates",
+        "Beverly Browning, Grant Writing For Dummies"
+      ]
+    },
+    {
+      "id": "grant-writing.portfolio.opportunity-calendar",
+      "label": "Funding calendar",
+      "tier": 3,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker", "grant-writing.landscape.funder-watch"],
+      "one_line": "Build a 12-month calendar of recurring deadlines and submission windows so you plan proposals in seasons, not sprints.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.compliance.deadline-discipline"],
+      "know_what": [
+        "recurring deadlines — the annual cycles many funders run, same month every year (e.g., many state agencies' March windows)",
+        "submission windows — the open periods (Grants.gov NOFOs typically open 60-90 days) inside which all work must fit",
+        "board-meeting cycles — foundations that decide at quarterly board meetings, so LOIs must land 2-4 months ahead",
+        "12-month rolling calendar — the forward view showing every known deadline and window for the year",
+        "internal milestone buffer — the lead time before submission your own review needs, commonly two weeks for federal",
+        "seasonal clustering — the tendency of deadlines to bunch (federal fall cycles, foundation spring cycles) that the calendar must expose"
+      ],
+      "know_how": [
+        "collect every known deadline from the tracker, funder websites, and prior award cycles into one calendar",
+        "record each deadline twice: the submission date and the internal milestone (draft done, review done) two weeks earlier",
+        "mark recurring cycles with their historical months drawn from prior years' NOFOs or the foundation's pattern",
+        "work backward from each deadline to the draft start date so the calendar shows when writing must begin",
+        "review the 12-month view monthly and update it as new NOFOs drop",
+        "color-code by pipeline (federal / foundation / corporate) so the year's mix is visible at a glance"
+      ],
+      "habits": [
+        "checking the calendar before committing to any new opportunity's timeline",
+        "adding a deadline to the calendar the same week it is discovered",
+        "looking at the next 90 days weekly, not just this month",
+        "watching for clusters and deliberately not starting a new sprint inside one",
+        "keeping the calendar in the same tool as the tracker so the two never disagree"
+      ],
+      "know_why": null,
+      "school_weights": { "federal": "high" },
+      "checkpoint": "Produce a 12-month calendar with every known recurring deadline and submission window, internal milestones marked two weeks before each submission date, and the next 90 days free of conflicting proposal sprints.",
+      "common_failure": "A calendar holding only the deadlines you remembered — the recurring cycles not yet announced are missing, so the year's plan collapses when a NOFO lands in the middle of another sprint.",
+      "sources": [
+        "Grants.gov — forecast and current opportunities",
+        "Candid — funding calendar features",
+        "Foundation websites' 'apply' pages and board-cycle announcements"
+      ]
+    },
+    {
+      "id": "grant-writing.portfolio.capacity-planning",
+      "label": "Capacity planning",
+      "tier": 2,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker", "grant-writing.portfolio.goal-setting"],
+      "one_line": "Match the pipeline to the hours you actually have, and say no to opportunities you can't staff to a competitive standard.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.landscape.opportunity-score"],
+      "know_what": [
+        "hours-per-proposal costing — the real time by proposal type: 30-40 hours for a full federal narrative, 8-10 for a foundation LOI-plus-proposal",
+        "go/no-go — the explicit pre-drafting decision of whether an opportunity gets your scarce hours",
+        "capacity ceiling — the team's total proposal hours per quarter after program work, meetings, and reporting",
+        "competitive standard — the floor of effort below which a proposal should not be submitted at all",
+        "opportunity cost — the proposal you did not write well because you wrote three adequately",
+        "submission-quality floor — the reality that a thin proposal can damage your standing with a funder more than declining"
+      ],
+      "know_how": [
+        "compute the team's quarterly capacity: staff proposal hours minus meetings, reporting, and other commitments",
+        "estimate each pipeline opportunity's hours from type (LOI vs full federal proposal) before committing to it",
+        "run a go/no-go on every opportunity: hours required, odds, fit, and what it displaces",
+        "decline early and explicitly when over capacity, and log the decline so the funder is not left hanging",
+        "sequence the pipeline so high-hour federal proposals do not cluster in one quarter",
+        "re-forecast capacity whenever the pipeline changes by more than a couple of rows"
+      ],
+      "habits": [
+        "counting hours before counting dollars",
+        "treating a full pipeline as a reason to prune, not to work more",
+        "saying no to the funder's face rather than silently underbidding",
+        "reviewing the capacity math quarterly against actual hours spent",
+        "keeping the costing numbers honest by tracking actual hours per proposal type"
+      ],
+      "know_why": null,
+      "school_weights": { "corporate": "low" },
+      "checkpoint": "Produce a quarterly capacity plan listing every pipeline opportunity with estimated hours, each marked go/no-go with a reason, and total hours within the team's ceiling.",
+      "common_failure": "Saying yes to everything because 'it's free money' — the team spreads across ten undercooked proposals, loses most of them, and damages the very relationships it had capacity to serve well.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "The Grantsmanship Center Magazine — go/no-go and capacity discussions",
+        "Beverly Browning, Grant Writing For Dummies"
+      ]
+    },
+    {
+      "id": "grant-writing.portfolio.diversification",
+      "label": "Revenue diversification",
+      "tier": 3,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.win-loss-review", "grant-writing.portfolio.goal-setting"],
+      "one_line": "Shape the portfolio so no single funder or funding type is load-bearing for your budget.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.landscape.funder-types"],
+      "know_what": [
+        "concentration risk — the share of budget carried by one funder; no single funder above 25-30% of budget is the common rule of thumb",
+        "funding-type mix — the balance across federal, foundation, corporate, and earned revenue, each with different cycles and rules",
+        "funder concentration — dependence on one relationship whose priorities, calendar, or giving cap become your binding constraint",
+        "co-termination risk — the danger of several large grants ending in the same year and leaving a revenue cliff",
+        "replacement cost — the lead time to replace a lost funder, commonly 6-18 months, which concentration ignores",
+        "portfolio shape — the intended distribution of revenue across funders and types that the tracker and goals are meant to enforce"
+      ],
+      "know_how": [
+        "compute the concentration ratio — largest funder's share of total budget — and flag anything above 25-30%",
+        "map the portfolio by funder type and by grant end-date to expose co-termination cliffs",
+        "set a diversification target inside the annual goals, e.g., no single type more than 50% of grant revenue",
+        "use the win/loss log and the prospecting rhythm to open new funder types deliberately, before a loss forces it",
+        "plan replacements 12-18 months out for any funder above the concentration threshold",
+        "rebalance the mix quarterly against actuals, adjusting prospecting and goal-setting"
+      ],
+      "habits": [
+        "asking 'what is our largest funder's share' quarterly, before it becomes a surprise",
+        "treating a single 40% funder as an emergency, not a win",
+        "recruiting new funder types when the mix tilts, not when a grant ends",
+        "checking grant end-dates together, not one at a time",
+        "keeping the concentration number on the dashboard next to the revenue target"
+      ],
+      "know_why": {
+        "claim": "Diversify grant revenue across funder types so no single funder or funding type is load-bearing for the budget.",
+        "because": "funder priorities, budgets, and cycles shift without notice; a funder above roughly 25-30% of budget makes its annual decision existential, and the 6-18 month replacement lead time means the loss lands before the pipeline can recover.",
+        "disputed_by": "cultivation-school practitioners who argue the returns are deepest when you double down on the few funder relationships that already work, and that spreading thin across types produces a portfolio of shallow, low-odds asks.",
+        "source": "Nonprofit Finance Fund — sustainability planning guidance; the concentration-vs-cultivation debate runs in The Grantsmanship Center Magazine"
+      },
+      "school_weights": { "federal": "high", "foundation": "low" },
+      "checkpoint": "Compute your largest funder's share of the annual budget, map every grant end-date, and produce a written plan that brings any funder above 25-30% below the threshold within 18 months.",
+      "common_failure": "Treating the biggest funder as the safest — concentration feels like success until that funder's priorities pivot, and the 6-18 month replacement lead time becomes a budget crisis that diversification would have spread across.",
+      "sources": [
+        "Nonprofit Finance Fund — sustainability and revenue-mix guidance",
+        "The Grantsmanship Center Magazine — portfolio diversification debates",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"
+      ]
+    }
+  ]
+}

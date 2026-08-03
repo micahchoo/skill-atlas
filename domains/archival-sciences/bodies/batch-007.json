@@ -1,0 +1,360 @@
+{
+  "domain": "archival-sciences",
+  "batch": 7,
+  "ids": [
+    "archival-sciences.access.copyright",
+    "archival-sciences.access.user-studies",
+    "archival-sciences.access.restrictions-and-privacy",
+    "archival-sciences.records-management.active-records",
+    "archival-sciences.records-management.records-inventories",
+    "archival-sciences.records-management.retention-schedule-authoring",
+    "archival-sciences.records-management.electronic-records-management"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.access.copyright",
+      "label": "Copyright determinations",
+      "tier": 3,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.access.reference-interview"],
+      "soft_prereqs": ["archival-sciences.appraisal.accessioning"],
+      "one_line": "Make a defensible copyright call for copying or publishing archival material — unpublished status, duration, fair use — and record the reasoning.",
+      "hours": 10,
+      "know_what": [
+        "Copyright — the exclusive bundle (17 U.S.C. §106: reproduce, distribute, display, perform, make derivatives) held by the author or rights holder, separate from physical ownership; the archive can hold the paper without holding the right",
+        "Unpublished status — U.S. works created before 1978 and never published were protected until the later of 70 years after the author's death or December 31, 2002 (and through 2047 if published by then); the biggest duration trap in archives holding letters and manuscripts",
+        "Publication — distribution of copies to the public (17 U.S.C. §101), which an archive triggers by putting images online; the act that switches duration and fair-use analysis",
+        "Duration — life of the author plus 70 years for post-1978 works; 95 years from publication or 120 from creation for works made for hire and anonymous or pseudonymous works",
+        "Fair use — 17 U.S.C. §107's four factors (purpose and character of use, nature of the work, amount and substantiality, effect on the market); the archive's main statutory route to serving unpublished material",
+        "Orphan works — works whose rights holder cannot be identified or located after a diligent search; the U.S. has no safe-harbor statute (unlike EU Directive 2012/28), so the archive documents the search instead of assuming clearance",
+        "First-sale doctrine — 17 U.S.C. §109 lets the archive lend and display the physical copies it owns, but authorizes neither copying nor digitization",
+        "Deed of gift — the acquisition document that can transfer or license copyright alongside physical custody; without an explicit grant, the right stays with the donor",
+        "Reasoned determination — the written analysis (status, duration, holder, fair-use factors) filed with the request; the artifact that makes a risky call defensible years later",
+        "Takedown policy — the notice-and-takedown procedure (17 U.S.C. §512 for online service providers) that bounds liability when the archive guesses wrong about a rights holder"
+      ],
+      "know_how": [
+        "Run the status-and-duration screen first: published or unpublished, pre-1978 or post-1978, named author with death date or anonymous — each answer changes the term",
+        "Determine publication status by the §101 test — was a copy distributed to the public — before applying any duration rule",
+        "Compute the term for a post-1978 authored work (life + 70) and for a work made for hire (95 from publication or 120 from creation) and state the end date in the determination",
+        "Apply the four fair-use factors to a copying or digitization request, writing one paragraph per factor with evidence — nature of the item, amount copied, market effect",
+        "Run the orphan-work diligence search — Copyright Office records, author registries, publisher and estate contacts — and log each step and date",
+        "Draft a deed-of-gift copyright clause that transfers or licenses the rights the archive needs for digitization and online access",
+        "File the reasoned determination with the request so a future staff member or a court can reconstruct the call"
+      ],
+      "habits": [
+        "Treat physical custody and copyright as two separate questions every time — 'we hold it' never answers 'may we publish it?'",
+        "Check publication status before duration; the classic error is assuming a letter is still protected because it is old, or public domain because it is unpublished",
+        "Write the determination before the scan, not after the takedown notice",
+        "When in doubt, document the doubt: name the unknown holder and the search steps rather than guessing",
+        "Keep the author's death date the way you keep the collection's box count — it drives every later call"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "preservation-first": "low" },
+      "checkpoint": "Given five real requests to copy or publish archival items (a 1920s donor letter, a 1985 departmental report, an anonymous photograph from 1960, a 2008 email from a named author, a published 1941 pamphlet), write a reasoned copyright determination for each — status, duration, rights holder, fair-use factors where relevant — and get no error that a copyright librarian flags.",
+      "common_failure": "Assuming old equals public domain, or 'the archive owns it so we can publish it': an unpublished 1923-1977 letter goes online without a determination and draws a takedown notice or a donor grievance. The mirror failure is over-restricting — refusing to serve or digitize everything because one item is risky, which quietly kills the access mission.",
+      "sources": [
+        "U.S. Copyright Office, Circular 1 and Circular 22 (Copyright Basics; How to Investigate the Copyright Status of a Work)",
+        "17 U.S.C. §§ 101, 106, 107, 108, 109, 302-305",
+        "Peter Hirtle, 'Copyright Term and the Public Domain in the United States' (Cornell Copyright Information Center)",
+        "Peter Hirtle, Emily Hudson, and Andrew Kenyon, Copyright and Cultural Institutions: Guidelines for Digitization for U.S. Libraries, Archives, and Museums (2009)"
+      ]
+    },
+    {
+      "id": "archival-sciences.access.user-studies",
+      "label": "User studies",
+      "tier": 3,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.access.outreach", "archival-sciences.access.reference-interview"],
+      "soft_prereqs": ["archival-sciences.access.reading-room"],
+      "one_line": "Run a small user study — log reference questions, track finding-aid success — and turn the findings into one description or access change.",
+      "hours": 8,
+      "know_what": [
+        "User study — a small-scale, systematic look at who uses the archive and how, built from logs, surveys, or observation; distinct from anecdotal impressions at the reference desk",
+        "Reference-question log — the running record of every reference transaction — date, query, channel, series requested, outcome — the raw material of demand analysis",
+        "Finding-aid success tracking — measuring whether researchers navigate finding aids unaided: task completion, click paths, failed searches, staff interventions",
+        "Transaction analysis — the classic archival method of counting and categorizing reference questions over a period, converting the log into demand data",
+        "User population — researchers, students, genealogists, community members, journalists; each group's needs differ and the study must name its population",
+        "Success criteria — the pre-defined outcome (e.g., 'researcher locates the payroll series without staff help in under 10 minutes') that turns observation into pass or fail",
+        "Usability test — having a researcher attempt a defined task on the finding aid or catalog while staff observe and time them",
+        "Survey instrument — a short structured questionnaire (typically 10-15 questions) for exit interviews or remote users",
+        "Reference statistics — the compiled numbers (questions by type, retrievals, remote contacts) that justify staffing and digitization budgets",
+        "Change loop — the discipline of turning one study finding into one concrete change (a description edit, a finding-aid link, a policy tweak) and re-measuring"
+      ],
+      "know_how": [
+        "Keep a reference-question log for a defined period (e.g., one month), categorizing every question by topic, user type, and whether the finding aid got the researcher there",
+        "Run a transaction analysis: count questions by category, compute the share that required staff interpretation beyond the finding aid, and write a one-page summary",
+        "Set up a finding-aid usability test: one task per participant (find series X, locate dates for creator Y), timed, with the stuck point recorded",
+        "Design a 10-15 question exit survey for reading-room users and administer it for a week",
+        "Turn one finding into one change: revise a finding aid's scope note or add a series-level link, then re-test the same task",
+        "Write a short study report — population, method, results, one recommended change — under two pages"
+      ],
+      "habits": [
+        "Log the reference question at the desk, not from memory at the end of the week",
+        "Ask 'how did you find us?' in every interview — it is the cheapest usability data in the building",
+        "When a researcher gets lost in the finding aid, note where they got lost and fix that exact spot",
+        "Treat every repeated question as a description failure until proven otherwise",
+        "Re-run the same task after a change instead of assuming the fix worked"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "community": "high", "preservation-first": "low" },
+      "checkpoint": "Run a four-week user study: log every reference transaction, categorize the questions, run one finding-aid usability task with five participants, and produce a two-page report with one recommended change that you then implement and re-test on the same task.",
+      "common_failure": "Collecting statistics without a question: counting transactions for a year and having nothing to decide, or observing one frustrated researcher and 'fixing' the finding aid for them alone. The loop — log, analyze, change, re-measure — is the whole skill, and skipping any leg makes the study decorative.",
+      "sources": [
+        "Paul Conway, 'Facts and Frameworks: An Approach to Studying the Users of Archives' (American Archivist, 1986)",
+        "Elizabeth Yakel, 'Thinking Inside and Outside the Box: Archival Reference Services at the Turn of the Century' (Archivaria, 2000)",
+        "Wendy Duff and Verne Harris, 'Stories and Names: Archival Description as Narrating Records and Constructing Meanings' (2002)",
+        "SAA, Reference and Access: Innovative Practices for Archives and Special Collections (2014)"
+      ]
+    },
+    {
+      "id": "archival-sciences.access.restrictions-and-privacy",
+      "label": "Restrictions & privacy",
+      "tier": 5,
+      "cluster": "access",
+      "prereqs": ["archival-sciences.description.dacs", "archival-sciences.access.reference-interview"],
+      "soft_prereqs": ["archival-sciences.foundations.archival-ethics"],
+      "one_line": "Apply access restrictions — donor-imposed, statutory, privacy-based — to a request and cite the authority for denying or redacting, documenting the review.",
+      "hours": 8,
+      "know_what": [
+        "Access restriction — a condition limiting who may see a record or what they may copy: donor-imposed, statutory, or privacy-based, each carrying a different authority and weight",
+        "Donor-imposed restriction — a term in the deed of gift ('closed until 2040', 'researcher must obtain family permission'); binding on the archive for the stated term",
+        "Statutory restriction — access limits set by law: FERPA for student records, HIPAA for health information, FOIA exemptions for government records, national security classifications",
+        "Privacy-based restriction — limits derived from the privacy interests of living persons named in records, applied by institutional policy where no statute covers the material",
+        "Redaction — copying a record with portions masked (names, medical details, third-party identities) so the rest can be served; distinct from denying the whole item",
+        "Authority citation — naming the specific legal or donor provision justifying a denial or redaction, so the decision can be audited",
+        "Review log — the documented record of each restriction decision: item, restriction applied, authority, staff member, date; the evidence that a denial was a procedure, not a whim",
+        "Deed of gift terms — the acquisition contract's access clauses; the archive's strongest defense when a donor's family challenges a decision later",
+        "Closure period — a fixed term (often 25, 50, or 75 years) after which a donor-imposed restriction lifts automatically",
+        "Privacy vs secrecy — the distinction between protecting identifiable living people and withholding material because it embarrasses an institution; the crux of the debate"
+      ],
+      "know_how": [
+        "Classify a restriction request into donor-imposed, statutory, or privacy-based and name the authority — deed clause, statute, or policy — for each",
+        "Cite the exact provision when denying or redacting ('closed under the deed of gift dated 1982, clause 4'; 'FERPA, 20 U.S.C. §1232g') rather than a personal judgment",
+        "Redact for third-party privacy: mask names and identifiers, keep the surrounding context, and note the redaction on the copy served",
+        "Calculate closure periods: from the deed or record date, state when the restriction lifts and make the finding aid say so",
+        "Document every review in the restriction log — item, restriction, authority, decision, date, reviewer — so a colleague can audit the call",
+        "Write the DACS access-restrictions note that tells researchers what is closed, why, and until when",
+        "Escalate a borderline call (privacy vs embarrassment) to the review procedure with the reasoning written down"
+      ],
+      "habits": [
+        "Ask 'whose authority?' for every restriction — no authority, no denial",
+        "Separate the person's privacy from the institution's embarrassment before applying any restriction",
+        "Redact rather than deny when a single name is the problem",
+        "Put the restriction in the finding aid so researchers know what they cannot see before they ask",
+        "Re-open files on schedule: closure periods end, and nobody re-checks them unless the calendar says so"
+      ],
+      "know_why": {
+        "claim": "Restrictions — donor-imposed, statutory, and privacy-based — protect real people and legal interests, and an archive that applies them faithfully can still serve the record.",
+        "because": "privacy-based and statutory restrictions prevent concrete harm to identifiable living people (health, student, personnel records), and the review log makes each denial auditable; the archive's legitimacy rests on the restriction being a cited procedure, never a staff judgment.",
+        "disputed_by": "the community archives school argues restrictions in practice hide material: donor clauses let the powerful bury embarrassing history, and institutions stretch privacy rules to dodge accountability — so open access should be the default and any closure must be justified, time-limited, and controlled by the community the records are about rather than by the donor; access-first archivists share the suspicion of donor control while accepting statutory limits.",
+        "source": "SAA, Reference and Access: Innovative Practices for Archives and Special Collections (2014); Menzi Behrnd-Klodt, Navigating Legal Issues in Archives (2008); Verne Harris, 'The Archival Sliver' (2002); the donor-restriction debate in American Archivist"
+      },
+      "school_weights": { "access-first": "high", "community": "high" },
+      "checkpoint": "Given six requested records (a personnel file, a 1980 donor letter with a closure clause, a medical record, an internal memo about a failed program, a student transcript, an unrestricted newsletter), decide serve, redact, or deny for each; cite the exact authority for every denial and redaction; and log each decision with date and reviewer in a review log a colleague can audit.",
+      "common_failure": "Restricting from anxiety: closing or redacting everything with a living person's name, which denies access without a stated authority and collapses under the first challenge. The opposite failure is honoring donor clauses you never re-read — a 1982 deed's 'closed until 2000' gets forgotten and stays closed for decades because nobody scheduled the review.",
+      "sources": [
+        "SAA, Reference and Access: Innovative Practices for Archives and Special Collections (2014)",
+        "Menzi Behrnd-Klodt, Navigating Legal Issues in Archives (SAA, 2008)",
+        "Heather MacNeil, Trusting Records: Legal, Historical and Diplomatic Perspectives (2000)",
+        "Verne Harris, 'The Archival Sliver: Power, Memory, and Archives in South Africa' (Archival Science, 2002)",
+        "FERPA (20 U.S.C. §1232g), HIPAA Privacy Rule (45 CFR §164), and FOIA exemptions"
+      ]
+    },
+    {
+      "id": "archival-sciences.records-management.active-records",
+      "label": "Active records systems",
+      "tier": 1,
+      "cluster": "records-management",
+      "prereqs": [],
+      "soft_prereqs": ["archival-sciences.foundations.record-lifecycle"],
+      "one_line": "Set up an office file plan — series folders, naming conventions, version control — so current records are findable without IT archaeology.",
+      "hours": 8,
+      "know_what": [
+        "Active records — records in current use by the creating office, kept where staff work; the first stage of the lifecycle before retention and disposition",
+        "File plan — the office's agreed folder taxonomy, named by function or series, that every staff member uses for filing and retrieval",
+        "Records series — a group of records filed together under one system or produced by one activity; the unit a file plan names",
+        "Naming convention — the standard for folder and file names (e.g., YYYY-{series}-{descriptor}) that makes sort order meaningful and retrieval predictable",
+        "Version control — one canonical current version per document, with drafts and superseded versions kept or discarded per the file plan, never overwritten silently",
+        "Filing vs piling — placing a record in its planned location at creation or receipt versus letting it accumulate on the desk and in the inbox",
+        "Official record copy — the designated authoritative copy (usually the one filed in the recordkeeping system) versus convenience copies on the desktop",
+        "Shared drive hygiene — the network drive or team-site folder structure that mirrors the file plan instead of growing organically",
+        "Recordkeeping system — the software or physical arrangement designed to capture, maintain, and dispose of records by schedule",
+        "Metadata capture — the points (date, author, series) recorded at filing that make a file findable without opening it"
+      ],
+      "know_how": [
+        "Draft an office file plan: 5-10 series folders named by function, agreed with the office, with a written rule for where each new document goes",
+        "Design a naming convention (e.g., YYYYMMDD_series_short-description_vN) and test it against ten real files for sort order and uniqueness",
+        "Set up version control: one canonical file per document, a version stamp in the filename or metadata, and a rule for superseded drafts",
+        "Move an office's shared drive from a topic mess to the file plan, holding the top level to 5-10 folders",
+        "Write the one-page file-plan document — folders, naming rule, version rule, exceptions — that survives staff turnover",
+        "Run a retrieval test: pick ten random current records and time how long a colleague takes to find each under the new plan"
+      ],
+      "habits": [
+        "File at creation or receipt, not at 'cleanup day'",
+        "Name the series before the document: 'which folder does this belong to?' is the first filing question",
+        "Keep one canonical version; treat anything else as a dated draft",
+        "When a new document fits no folder, add a folder — never a miscellaneous pile",
+        "Ask 'would a stranger find this in my absence?' before closing a file"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "high" },
+      "checkpoint": "For a real office of 3-10 staff, produce a written file plan (5-10 function-based series folders), a naming convention that sorts correctly, and a version rule; move the shared drive or physical files to it; and show that a colleague can retrieve any of ten named current records in under two minutes each.",
+      "common_failure": "Building the file plan on paper and stopping: the taxonomy is approved, nobody changes behavior, and the drive still grows a 'Misc' folder and twelve 'final_FINAL_v3' copies. A file plan not enforced at creation time is decoration — retrieval degrades back to search-and-hope within a quarter.",
+      "sources": [
+        "ARMA International, Guidelines for File Plans and Records Retention",
+        "NARA, Managing Electronic Records and file-plan guidance",
+        "Jay Atherton, 'From Life Cycle to Continuum: Some Thoughts on the Records Management-Archives Relationship' (Archivaria, 1985-86)",
+        "ISO 15489-1:2016, Information and documentation — Records management"
+      ]
+    },
+    {
+      "id": "archival-sciences.records-management.records-inventories",
+      "label": "Records inventories",
+      "tier": 2,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.active-records"],
+      "soft_prereqs": ["archival-sciences.appraisal.retention-schedules"],
+      "one_line": "Run a records inventory — walk the office, list every series with volume and format — producing the data a retention schedule is built from.",
+      "hours": 8,
+      "know_what": [
+        "Records inventory — the systematic survey of what an office holds: walking the space, listing every series with its volume, format, and location",
+        "Series-level capture — recording the inventory at the series level (not item level), naming each series and the function it serves",
+        "Volume measurement — counting in linear feet for paper (or boxes) and in gigabytes or file counts for electronic records, so the schedule can size the problem",
+        "Format identification — noting paper, photographs, microfilm, magnetic media, email, and databases, because each format carries different retention and preservation needs",
+        "Location register — the inventory's map of where each series lives: cabinet, shelf, drive path, database",
+        "Duplicate detection — flagging series that exist in multiple copies or multiple systems during the walk",
+        "Vital records — records essential to the office's continuity (charter, contracts, financials) that the inventory flags for protection",
+        "Inventory worksheet — the standard form (series name, function, volume, format, dates, location, owner) filled per series",
+        "Stakeholder interview — asking the office's staff where records live and what they mean before walking, because half the series sit in a cabinet nobody mentions",
+        "Completeness check — verifying the inventory against the office's functions and file plan so no series is missed"
+      ],
+      "know_how": [
+        "Prepare the walk: interview the office manager and two staff about where records live, then list the functions the records serve",
+        "Walk the office systematically — desks, cabinets, storage closets, shared drives, databases, email accounts — and fill one worksheet per series",
+        "Measure volume per series: linear feet for paper, gigabytes and file counts for electronic records",
+        "Record format and date ranges per series so the retention schedule can apply the right rules",
+        "Cross-check the inventory against the file plan and the office's function list, and chase every discrepancy",
+        "Flag duplicates, vital records, and records sitting in personal folders or home drives during the walk",
+        "Write the inventory summary: series count, total volume by format, and the five largest series by volume"
+      ],
+      "habits": [
+        "Interview before walking — staff know where the real records live",
+        "Count in the room, not from memory: open the cabinet, measure the shelf",
+        "List series by function, not by container ('legal correspondence', not 'cabinet 3')",
+        "Never trust the file plan alone — the walk exists to find the exceptions",
+        "Check the email and the shared drive even when the office says 'we have no electronic records'"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "For a real office, produce a complete records inventory: one worksheet per series with function, format, dates, and location; volume measured in linear feet or gigabytes; duplicates, vital records, and electronic records flagged; and a one-page summary listing the five largest series. A second person walking the same office must find no series the inventory missed.",
+      "common_failure": "Inventorying the file room and missing the real records: the project correspondence lives in a project manager's desk drawer, the email lives on a shared mailbox, and the spreadsheet 'doesn't count'. A retention schedule built on a partial inventory authorizes the destruction of records the schedule never saw.",
+      "sources": [
+        "NARA, Records Management Guidance and inventory worksheets",
+        "ARMA International, Records and Information Management Core Competencies",
+        "U.S. General Services Administration, Federal Records Management handbook",
+        "ISO 15489-1:2016, Information and documentation — Records management"
+      ]
+    },
+    {
+      "id": "archival-sciences.records-management.retention-schedule-authoring",
+      "label": "Retention schedule authoring",
+      "tier": 2,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.active-records"],
+      "soft_prereqs": ["archival-sciences.appraisal.retention-schedules", "archival-sciences.records-management.records-inventories"],
+      "one_line": "Write a retention schedule for an office — every series, retention period, legal hold — so destruction is authorized and auditable, not accidental.",
+      "hours": 12,
+      "know_what": [
+        "Retention schedule — the authoritative document assigning each series a retention period and disposition; the legal basis for destroying records",
+        "Series-to-period mapping — one line per series stating how long it is kept and what happens then: transfer, destroy, or retain permanently",
+        "Disposition — the authorized final action — transfer to archives, certified destruction, or permanent retention",
+        "Legal hold — a directive (litigation hold, investigation, FOIA request) that suspends destruction for named records until lifted; the schedule's most important override",
+        "Minimum retention — the floor set by statute or regulation (tax records 3-7 years, personnel records per state law) below which the office cannot schedule destruction",
+        "Schedule citation — the audit line (series, authority, retention, disposition) that makes each destruction defensible",
+        "Destruction certificate — the signed record of what was destroyed, when, and under which schedule line; the proof that destruction was authorized",
+        "Master vs office schedule — the institutional schedule covering all offices versus an office-specific one; offices inherit series from the master",
+        "Lifecycle trigger — the event that starts the clock (project close, employee departure, contract end) versus calendar-based retention from creation",
+        "Schedule approval — the sign-off chain (records manager, legal, agency head) that makes the schedule binding rather than a proposal"
+      ],
+      "know_how": [
+        "Turn the inventory into a schedule draft: one row per series with function, retention period, disposition, and the authority (statute, regulation, or business need) for the period",
+        "Distinguish calendar-based from event-based retention and state the trigger for each series",
+        "Research the statutory minimum for regulated series (tax, personnel, medical, contract) before proposing any period",
+        "Write the legal-hold clause: which records are suspended, by whose directive, and how the hold is lifted",
+        "Draft the destruction procedure the schedule points to: approval, certificate, and method (shredding, secure erase)",
+        "Circulate the draft for approval and record the approval dates so the schedule is legally binding",
+        "Set the review cycle (typically annual) for updating the schedule as functions change"
+      ],
+      "habits": [
+        "Schedule series, not documents — the unit of retention is the series",
+        "Ask 'what is the shortest defensible period?' instead of defaulting to 'keep forever'",
+        "Check the legal hold before every destruction, not as a footnote at the end",
+        "Cite the authority for every period — 'business need' alone does not survive an audit",
+        "Destroy on the calendar: a schedule that is never executed is a liability, because records kept past schedule stay discoverable"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "high", "community": "low" },
+      "checkpoint": "From a completed inventory, write a retention schedule for an office: one line per series with retention period, disposition, and cited authority; a legal-hold clause naming the suspended records and the directive; and a destruction procedure with certificate. A records manager must be able to execute any line without further research.",
+      "common_failure": "Writing 'retain permanently' for everything because it feels safe: the schedule then authorizes nothing, the office keeps accumulating, or staff destroy on a guessed period and the first audit or lawsuit finds missing records. The schedule only works when every period carries an authority and the review cycle is real.",
+      "sources": [
+        "NARA, General Records Schedules (GRS) and 'Records Management: Retention and Disposition'",
+        "ARMA International, Retention Management guidelines",
+        "Donald Skupsky, Recordkeeping Requirements (Information Requirements Clearinghouse)",
+        "ISO 15489-1:2016; ISO/TR 21946:2018, Information and documentation — Appraisal for managing records"
+      ]
+    },
+    {
+      "id": "archival-sciences.records-management.electronic-records-management",
+      "label": "Electronic records management",
+      "tier": 2,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.active-records"],
+      "soft_prereqs": ["archival-sciences.appraisal.retention-schedules"],
+      "one_line": "Tame a shared drive or ERM system — classification scheme, capture rules, disposal triggers — so digital records are managed in place instead of accumulating forever.",
+      "hours": 10,
+      "know_what": [
+        "ERM system — an electronic records management system that classifies, captures, and disposes of records by schedule (SharePoint records management, OpenText, Alfresco, and similar)",
+        "Classification scheme — the ERM's file plan: the folder or metadata taxonomy every captured record is placed into",
+        "Capture rules — the automated or manual criteria deciding which documents become records to be captured ('all contracts', 'final versions only') versus transient material",
+        "Disposal triggers — the scheduled events (retention expiry, hold lift) that move records to archive or destruction inside the ERM",
+        "Shared drive — the unmanaged network folder structure where most born-digital records actually live; the ERM's main competitor",
+        "Metadata capture — the fields (series, date, author, classification) recorded at capture that make the record findable and schedulable",
+        "Declared record — the moment a document is formally declared a record and frozen against further editing",
+        "Journaling — automated capture of email and documents into the records system at the point of sending or saving",
+        "Hold mechanism — the ERM's way of suspending disposal for litigation or investigation",
+        "Scale problem — the volume reality (millions of files, thousands of users) that makes manual classification infeasible and forces automation or abandonment"
+      ],
+      "know_how": [
+        "Design the classification scheme for a shared drive or ERM: 5-10 top-level series from the file plan, applied to both folders and metadata",
+        "Write capture rules stating what gets captured (final contracts, approved policy) and what does not (drafts, personal files, junk)",
+        "Configure disposal triggers per series: retention expiry to archive or destroy, with legal holds overriding",
+        "Set up automatic metadata capture (author, date, series derived from the folder) so classification survives without staff effort",
+        "Run the declare-record workflow: final version declared, editing frozen, version history retained",
+        "Migrate a shared drive into the scheme — map old folders to new series, report the orphans — without losing records in transit",
+        "Test the disposal trigger on a sample series and verify the destruction log"
+      ],
+      "habits": [
+        "Capture at the moment of creation or receipt — 'file it or declare it now' — because backlogs never get classified",
+        "Assume the shared drive holds the real records until proven otherwise",
+        "When classification fails at volume, automate the metadata (folder-derived) instead of adding manual steps",
+        "Check holds before every disposal run, not after",
+        "Measure the system: capture rate, disposal rate, and the orphan-folder count are the ERM's health stats"
+      ],
+      "know_why": {
+        "claim": "Capture-and-classify into an ERM or classified shared drive is the feasible way to manage born-digital records: automated metadata and capture rules let classification keep up with volume.",
+        "because": "records left unclassified in place accumulate without retention or disposal, which is both a discovery liability and an archival loss, while folder-derived metadata and capture rules move the classification burden from people to the system.",
+        "disputed_by": "the postcustodial school argues capture-and-classify fails at real volume — users will not classify, systems fall out of compliance, and the ERM becomes an empty shell while the shared drive holds the actual record — so stewardship should happen in place (distributed custody, description at creation, no forced capture), with the archive supervising rather than collecting; NARA's published reviews of failed ERM deployments are the evidence the school cites.",
+        "source": "Frank Upward, 'Structuring the Records Continuum' (Archives and Manuscripts, 1996-97); NARA, 'Guidance on Managing Electronic Records' and ERM assessment reports; Kate Cumming, 'A Matter of Formalities: The Obstacles to Implementing Electronic Records Management' (2010)"
+      },
+      "school_weights": { "custodial": "high", "postcustodial": "low" },
+      "checkpoint": "For a shared drive with at least 5,000 files, build the classification scheme, write the capture rules, configure disposal triggers for three series with a legal hold on one, migrate the drive to the scheme with an orphan report, and demonstrate a test disposal that the hold blocks — with the system's capture rate logged.",
+      "common_failure": "Buying the ERM and declaring victory: the system goes in, nobody declares records, the capture rate is near zero, and the shared drive keeps growing beside it — an empty shell costing licenses. The mirror failure is forcing manual classification on thousands of files, which staff abandon within a month and which leaves a drive classified by no one.",
+      "sources": [
+        "NARA, 'Guidance on Managing Electronic Records' and ERM assessment reports",
+        "ISO 15489-1:2016; MoReq2010, Modular Requirements for Records Systems",
+        "Frank Upward, 'Structuring the Records Continuum' (Archives and Manuscripts, 1996-97)",
+        "Kate Cumming, 'A Matter of Formalities: The Obstacles to Implementing Electronic Records Management' (2010)"
+      ]
+    }
+  ]
+}

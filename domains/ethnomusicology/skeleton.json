@@ -1,0 +1,468 @@
+{
+  "domain": "ethnomusicology",
+  "level": "serious amateur aiming at professional competence",
+  "schools": [
+    {
+      "id": "scientific",
+      "name": "Scientific school",
+      "optimises_for": "music as a measurable object — systematic transcription, controlled comparison, and hypothesis-testing (comparative musicology, Lomax's cantometrics)",
+      "gives_up": "the lived meaning of the music for the people who make it",
+      "quarrels_with": ["interpretive"]
+    },
+    {
+      "id": "interpretive",
+      "name": "Interpretive school",
+      "optimises_for": "music as culture — meaning, emic perspective, and thick description (Merriam's 'music in culture', Geertz)",
+      "gives_up": "cross-cultural comparability — each tradition is read on its own terms",
+      "quarrels_with": ["scientific", "documentary"]
+    },
+    {
+      "id": "applied",
+      "name": "Applied school",
+      "optimises_for": "reciprocity and impact — community collaboration, repatriation, and public scholarship that returns value to the community",
+      "gives_up": "detached neutrality — the researcher takes sides and shares control of the work",
+      "quarrels_with": ["scientific", "interpretive"]
+    },
+    {
+      "id": "documentary",
+      "name": "Documentary school",
+      "optimises_for": "capturing and preserving recordings as cultural heritage — durable, documented, and archived for future generations",
+      "gives_up": "analysis depth — the recording matters more than the interpretation",
+      "quarrels_with": ["interpretive"]
+    }
+  ],
+  "clusters": [
+    { "id": "foundations", "icon": "📖", "name": "Discipline & questions", "gist": "What ethnomusicology studies, its history, and its recurring debates — the questions that define the field before any recording is made." },
+    { "id": "fieldwork", "icon": "🎙️", "name": "Fieldwork & documentation", "gist": "Preparation, ethics of access, recording technique, interviews, participant observation, field notes — the evidence-gathering core of the discipline." },
+    { "id": "transcription", "icon": "🎼", "name": "Transcription & notation", "gist": "Notating recorded music — Western notation, LAB shorthand, graphical systems, rhythm and tuning — and knowing what notation cannot capture." },
+    { "id": "analysis", "icon": "🔬", "name": "Musical & cultural analysis", "gist": "Formal analysis of the music — form, scale, rhythm, timbre — plus cultural interpretation and comparison across traditions." },
+    { "id": "ethnography", "icon": "✍️", "name": "Ethnographic writing", "gist": "The written account — thick description, reflexivity, voice, structure, and the venues that publish it." },
+    { "id": "ethics", "icon": "🤝", "name": "Ethics & community", "gist": "Informed consent, IRB, intellectual property, repatriation, collaboration, ownership — the obligations that fieldwork carries." },
+    { "id": "archiving", "icon": "🗄️", "name": "Recording stewardship & archiving", "gist": "Metadata, file standards, preservation, deposit into archives, and return of recordings to the communities that made them." }
+  ],
+  "spine": [
+    "ethnomusicology.foundations.discipline-history",
+    "ethnomusicology.fieldwork.prep",
+    "ethnomusicology.fieldwork.recording",
+    "ethnomusicology.transcription.notation",
+    "ethnomusicology.analysis.formal-analysis",
+    "ethnomusicology.ethnography.thick-description",
+    "ethnomusicology.archiving.deposit"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.foundations.discipline-history",
+      "label": "Discipline history & scope",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Trace ethnomusicology from 1880s comparative musicology (Stumpf, Hornbostel) and Bartók and Kodály's folk-music collecting, through Merriam's The Anthropology of Music (1964) and Nettl's surveys, and place any current research question in that lineage.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.foundations.music-culture-concept",
+      "label": "Music as culture",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Explain a tradition's music with Merriam's tripartite model — conceptualization, behavior, sound — and show how a single performance instantiates all three layers.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.foundations.defining-music",
+      "label": "Defining music across cultures",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "one_line": "Argue where the category 'music' begins and ends for a given community using Blacking's 'humanly organized sound' and Nettl's cross-cultural definitions, instead of assuming your own boundary.",
+      "hours": 8
+    },
+    {
+      "id": "ethnomusicology.foundations.bimusicality",
+      "label": "Bi-musicality",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.music-culture-concept"],
+      "one_line": "Learn to perform a short piece in the tradition you study well enough to play it for a practitioner, following Mantle Hood's bi-musicality program.",
+      "hours": 40
+    },
+    {
+      "id": "ethnomusicology.foundations.rilm-search",
+      "label": "RILM literature search",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "one_line": "Search RILM Abstracts of Music Literature by topic, region, and instrument to find the peer-reviewed scholarship on any tradition in under an hour.",
+      "hours": 6
+    },
+    {
+      "id": "ethnomusicology.foundations.research-questions",
+      "label": "Research questions",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "one_line": "Turn a curiosity about a music culture into three answerable research questions — descriptive, comparative, or applied — each with the observable evidence it implies.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.foundations.disciplinary-debates",
+      "label": "Disciplinary debates",
+      "tier": 3,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.research-questions", "ethnomusicology.foundations.music-culture-concept"],
+      "one_line": "Articulate the emic/etic and scientific/interpretive debates and defend your own position with named practitioners on each side, instead of writing as if the field had one method.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.fieldwork.prep",
+      "label": "Fieldwork preparation",
+      "tier": 2,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "one_line": "Produce a fieldwork plan — site, duration, contacts, recording kit, budget, and IRB timeline — that a supervisor could execute, before you leave home.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.fieldwork.access",
+      "label": "Access & entry",
+      "tier": 2,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "one_line": "Identify the gatekeepers and introduction chains that grant access to a music community, and secure an explicit invitation before recording anything.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.fieldwork.recording",
+      "label": "Field recording",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.prep"],
+      "one_line": "Field-record a live performance with a portable recorder (e.g., Zoom H5) at usable levels and clean sound — no clipping, no wind rumble, no dead batteries — in one take.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.fieldwork.interviewing",
+      "label": "Ethnographic interviewing",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.access"],
+      "one_line": "Run a 30-minute open-ended ethnographic interview that elicits a musician's own account of their practice, using follow-up and silence instead of a fixed questionnaire.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.fieldwork.participant-observation",
+      "label": "Participant observation",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.access"],
+      "one_line": "Attend and participate in a music event without disrupting it, then describe what changed about your access and understanding because you participated.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.fieldwork.field-notes",
+      "label": "Field notes",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.prep"],
+      "one_line": "Convert jottings made in the field into daily expanded notes with time, place, and people indexed, within 24 hours, so they are usable evidence later.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.transcription.notation",
+      "label": "Transcription & notation fundamentals",
+      "tier": 4,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.fieldwork.recording"],
+      "one_line": "Transcribe a 30-second recorded passage into readable notation with correct pitches, rhythm, and meter, choosing Western staff notation, LAB shorthand, or a graphical system as the music demands.",
+      "hours": 45
+    },
+    {
+      "id": "ethnomusicology.transcription.lab-notation",
+      "label": "LAB shorthand notation",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Write and read Seeger's LAB shorthand — letter names, accidentals, bars — to capture a melodic line on the fly, faster than full staff notation.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.transcription.rhythm-meter",
+      "label": "Rhythm & meter notation",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Notate non-isochronous and additive rhythms — aksak meters like Bulgarian 7/8, West African bell timelines, clave — with tuplets, changing meters, and stroke notation, without forcing them into 4/4.",
+      "hours": 25
+    },
+    {
+      "id": "ethnomusicology.transcription.tuning-pitch",
+      "label": "Tuning & pitch measurement",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Measure and notate a non-equal-tempered tuning in cents and Hz (e.g., sléndro/pélog, maqam quarter tones) with a tuner or software, and show the deviations from the tempered scale.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.transcription.graphical-notation",
+      "label": "Graphical notation",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Produce a graphical transcription — waveform- or spectrogram-based, using Sonic Visualiser or Praat — for a passage that defeats staff notation, and annotate the features you mean.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.transcription.transcription-software",
+      "label": "Transcription software",
+      "tier": 5,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Use Audacity or Transcribe! to slow, loop, and EQ a recording, and produce a transcription whose tricky passages you can defend measure by measure.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.transcription.limits",
+      "label": "Limits of notation",
+      "tier": 6,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.transcription.notation", "ethnomusicology.transcription.tuning-pitch"],
+      "one_line": "State what your notation cannot show — timbre, microtiming, performance nuance — using Seeger's prescriptive/descriptive distinction, and choose a notation that fits your analytical claim.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.analysis.formal-analysis",
+      "label": "Formal musical analysis",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Analyze a transcribed piece for form, scale, rhythm, and timbre, and write up the analysis with labeled examples drawn from your own transcription.",
+      "hours": 30
+    },
+    {
+      "id": "ethnomusicology.analysis.scale-mode-analysis",
+      "label": "Scale & mode analysis",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Classify a piece's scale or mode system — raga, maqam, sléndro/pélog, pentatonic set — from measured intervals, and name the system the tradition itself uses.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.analysis.rhythm-analysis",
+      "label": "Rhythmic analysis",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "one_line": "Describe a piece's rhythmic structure — metrical framework, timeline, polyrhythm, improvisatory variation — in terms the musicians would recognize.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.analysis.cultural-interpretation",
+      "label": "Cultural interpretation",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.foundations.music-culture-concept", "ethnomusicology.transcription.notation"],
+      "one_line": "Interpret a musical feature — a mode, a drum pattern, a song text — as cultural meaning (function, identity, emotion) in the tradition's own terms, following Merriam's 'music in culture'.",
+      "hours": 25
+    },
+    {
+      "id": "ethnomusicology.analysis.comparison",
+      "label": "Cross-cultural comparison",
+      "tier": 6,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.analysis.formal-analysis", "ethnomusicology.analysis.cultural-interpretation"],
+      "one_line": "Compare two traditions on a single dimension — melody, rhythm, function — with a controlled method like Lomax's cantometrics or a parameter you define, while acknowledging what the comparison flattens.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.analysis.emic-etic",
+      "label": "Emic & etic analysis",
+      "tier": 6,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.analysis.cultural-interpretation"],
+      "one_line": "Separate insider categories (emic) from analyst categories (etic) in your analysis and label each claim, so a reader always knows whose concept is being used.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.analysis.performance-analysis",
+      "label": "Performance analysis",
+      "tier": 6,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.analysis.formal-analysis"],
+      "one_line": "Analyze variation across performances of the 'same' piece — ornamentation, microtiming, improvisation — and account for it as performance practice, not error.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.ethnography.thick-description",
+      "label": "Thick description",
+      "tier": 6,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.analysis.formal-analysis"],
+      "one_line": "Write a thick-description passage (Geertz) of a performance you observed — action, sound, context, meaning — from your field notes, dense enough to ground a claim.",
+      "hours": 25
+    },
+    {
+      "id": "ethnomusicology.ethnography.reflexivity",
+      "label": "Reflexivity",
+      "tier": 6,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.analysis.cultural-interpretation"],
+      "one_line": "Write a reflexive passage positioning yourself — access, biases, relationships, how you changed the room — into the account, instead of writing as an invisible narrator.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.ethnography.voice",
+      "label": "Voice & polyphony",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "one_line": "Compose a passage that represents a consultant's voice — quoted, translated, contextualized — alongside your own analysis, so the two are distinct yet both present.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.ethnography.structure",
+      "label": "Ethnographic structure",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "one_line": "Structure a full ethnographic argument — chapter or article — with an introduction that states the claim, evidence chapters, and a conclusion, so a reader can state your thesis after one read.",
+      "hours": 20
+    },
+    {
+      "id": "ethnomusicology.ethnography.venues",
+      "label": "Publication venues",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "one_line": "Match a finished piece of writing to a real venue — Ethnomusicology, Yearbook for Traditional Music, Ethnomusicology Forum, an edited volume — and reformat it to that venue's stated conventions.",
+      "hours": 8
+    },
+    {
+      "id": "ethnomusicology.ethnography.multi-sited",
+      "label": "Multi-sited ethnography",
+      "tier": 7,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "one_line": "Design a multi-sited study tracing one music across locations — a diaspora community, a festival circuit, streaming platforms — with a method specified for each site.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.ethics.consent",
+      "label": "Informed consent in the field",
+      "tier": 3,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.fieldwork.access"],
+      "one_line": "Get informed consent — oral or written, in the consultant's language — for recording, quoting, and archiving, and document refusal when it happens.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.ethics.irb",
+      "label": "IRB protocols",
+      "tier": 3,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.fieldwork.prep"],
+      "one_line": "Write and submit an IRB protocol for research with musicians — recruitment, consent forms, data security, risk — and address the board's revisions.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.ethics.ip",
+      "label": "Intellectual property & copyright",
+      "tier": 4,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Determine who owns a recording you made — the performer, the tradition, the archive, you — under copyright and cultural-ownership norms, and act accordingly.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.ethics.collaboration",
+      "label": "Community collaboration",
+      "tier": 4,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Co-design a research or documentation project with community members — shared questions, shared credit, community review of output — rather than extracting data.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.ethics.repatriation",
+      "label": "Repatriation",
+      "tier": 5,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.ip"],
+      "one_line": "Return recordings or copies to the community that made them — via archive agreements, community copies, or re-release — and document the return.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.ethics.ownership",
+      "label": "Cultural ownership",
+      "tier": 5,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.ip"],
+      "one_line": "Argue who legitimately decides what can be studied, published, or shown from a tradition — elders, performers, archives, scholars — with named positions in the debate.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.archiving.metadata",
+      "label": "Recording metadata",
+      "tier": 4,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.fieldwork.recording"],
+      "one_line": "Describe a field recording with enough metadata — who, what, when, where, instrument, genre, rights — to be findable and usable, using a standard like Dublin Core or LCMPI MARC fields.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.archiving.file-standards",
+      "label": "File standards & digitization",
+      "tier": 4,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.fieldwork.recording"],
+      "one_line": "Convert a field recording into archival file standards — WAV/BWF 96 kHz/24-bit masters, lossless or compressed access copies, checksums, named per a convention — so it survives.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.archiving.preservation",
+      "label": "Long-term preservation",
+      "tier": 5,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.archiving.file-standards"],
+      "one_line": "Store a digital collection so it survives a decade — redundant copies, verified checksums, format migration on a schedule, no single point of failure.",
+      "hours": 12
+    },
+    {
+      "id": "ethnomusicology.archiving.cataloging",
+      "label": "Collection cataloging",
+      "tier": 5,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.archiving.metadata"],
+      "one_line": "Catalog a small collection — accession numbers, item-level records, finding aid — so a stranger can locate a specific recording within a day.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.archiving.community-return",
+      "label": "Return to communities",
+      "tier": 6,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.ethics.repatriation"],
+      "one_line": "Deliver recordings back to the source community in usable form — copies, players, community archive, screening — and hand over control of their use.",
+      "hours": 10
+    },
+    {
+      "id": "ethnomusicology.archiving.legacy-collections",
+      "label": "Legacy collections",
+      "tier": 6,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.archiving.preservation"],
+      "one_line": "Triage an undocumented legacy collection — deteriorating reels or cassettes, unknown performers — and set digitization priorities you can defend.",
+      "hours": 15
+    },
+    {
+      "id": "ethnomusicology.archiving.deposit",
+      "label": "Archive deposit",
+      "tier": 7,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "one_line": "Assemble a complete deposit package — master recordings, metadata, consent and rights records, and the written documentation of the study — and submit it to an archive such as the Archive of World Music, accepted without follow-up questions.",
+      "hours": 20
+    }
+  ]
+}

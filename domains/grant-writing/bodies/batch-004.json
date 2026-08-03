@@ -1,0 +1,433 @@
+{
+  "domain": "grant-writing",
+  "batch": 4,
+  "ids": [
+    "grant-writing.proposal.executive-summary",
+    "grant-writing.proposal.abstract",
+    "grant-writing.proposal.attachment-pack",
+    "grant-writing.budget.personnel",
+    "grant-writing.budget.allowable-costs",
+    "grant-writing.budget.indirect-costs",
+    "grant-writing.budget.match-requirements",
+    "grant-writing.budget.multi-year-budget"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.proposal.executive-summary",
+      "label": "Executive summary",
+      "tier": 3,
+      "cluster": "proposal",
+      "prereqs": [
+        "grant-writing.proposal.proposal-outline"
+      ],
+      "soft_prereqs": [
+        "grant-writing.proposal.project-narrative",
+        "grant-writing.strategy.smart-objectives"
+      ],
+      "one_line": "Compress the whole proposal into the one-page summary reviewers actually read first, hitting every scoring criterion in miniature.",
+      "hours": 5,
+      "know_what": [
+        "Executive summary — the one-page distillation placed first in the proposal that program officers and panelists read before the narrative",
+        "First-read position — reviewers skim the summary first and carry its impression into the narrative, so it must carry the whole argument",
+        "Review-criteria mirroring — the convention of hitting every scoring criterion in miniature, in the criteria's own order",
+        "Stand-alone test — the summary must make sense to someone who reads nothing else in the packet",
+        "The ask in numbers — amount, duration, and what the money funds, stated explicitly instead of left for the budget",
+        "One-page rule — most foundations cap the summary at one page; federal project-summary fields have their own word counts that must be checked per NOFO",
+        "Forward references — phrases like 'as detailed in the approach section' that spend words without earning credibility"
+      ],
+      "know_how": [
+        "Write the summary after the narrative is complete, then place it first in the document",
+        "Open with the problem and the project in one sentence each, never with the organization's history",
+        "Mirror the review criteria in order, one sentence per criterion, using the funder's own vocabulary",
+        "State the ask — dollar amount, duration, and what it buys — in the first half of the page",
+        "Tighten to the funder's stated page or word limit, cutting adjectives before cutting claims",
+        "Run the stand-alone test: hand the summary alone to a reader and have them restate the project"
+      ],
+      "habits": [
+        "Drafting the summary last but checking it first on every revision pass",
+        "Re-reading the summary after every narrative change so the two cannot drift apart",
+        "Keeping a boilerplate one-liner for the organization's mission and track record to reuse across funders",
+        "Treating 'the reviewer will see it in the narrative' as a reason to cut, not to pad",
+        "Checking the funder's summary-field spec (word count, plain text, portal box) before writing"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "grantsmanship": "high"
+      },
+      "checkpoint": "Write a one-page executive summary, from a finished narrative, in which a cold reader can restate the problem, the approach, the outcomes, and the dollar ask, with every review criterion hit in miniature.",
+      "common_failure": "Writing the summary first and letting the narrative drift from it, so the document contradicts its own front page; or padding it past one page — reviewers who read the summary first carry its sloppiness into the rest of the score.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Carlson & O'Neal-McElrath, Winning Grants Step by Step",
+        "Grants.gov SF424 instructions"
+      ]
+    },
+    {
+      "id": "grant-writing.proposal.abstract",
+      "label": "Project abstract",
+      "tier": 4,
+      "cluster": "proposal",
+      "prereqs": [
+        "grant-writing.proposal.executive-summary"
+      ],
+      "soft_prereqs": [
+        "grant-writing.strategy.smart-objectives",
+        "grant-writing.proposal.review-criteria-mapping"
+      ],
+      "one_line": "Write the 250-word abstract that must stand alone in the funder's portal and win the skim.",
+      "hours": 5,
+      "know_what": [
+        "Abstract — the 200-250 word summary that lives in the funder's portal or application form, often the only part read by non-panel staff and the part databases index",
+        "250-word convention — most portals and NOFOs cap the abstract at 200-250 words; the cap is a hard field limit, not a suggestion",
+        "Plain-text constraint — portal abstract fields usually strip formatting, so bold, bullets, and tables are lost on paste",
+        "Stand-alone unit — the abstract is read and searched detached from the proposal it summarizes",
+        "Structured abstract — the background-objectives-methods-expected-results shape some federal programs mandate",
+        "Keyword indexing — agencies and databases surface proposals by abstract terms, so the words you choose are searchable metadata",
+        "Abstract vs executive summary — the abstract is a portal field; the executive summary is a document section; they are written separately even where they overlap"
+      ],
+      "know_how": [
+        "Read the NOFO or portal spec first: exact word count, plain-text requirement, and any mandated structure",
+        "Draft from the specific aims or SMART objectives, mirroring their order and language",
+        "Front-load the first 30 words with population, intervention, and expected outcome",
+        "Write the abstract last, once the narrative is final, so every claim in it exists in the full text",
+        "Count words against the field limit and cut to about 95% of the cap rather than trusting truncation",
+        "Paste the final text into the portal field and re-check for characters the form strips, such as quotes and ampersands",
+        "Run the stand-alone test: a reader who sees only the abstract can state what is being done, for whom, and with what expected result"
+      ],
+      "habits": [
+        "Writing the abstract after the narrative is frozen, never before",
+        "Keeping a sentence template — population, problem, approach, outcome, ask — so abstracts stay skimmable",
+        "Checking every abstract against the NOFO's stated word limit before pasting",
+        "Re-reading the abstract in the portal preview, not just in the word processor",
+        "Choosing the same field terms the funder uses, since the abstract is searchable metadata"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Write a 250-word abstract under the funder's stated limit that survives detachment — a reader who sees only the abstract can state the population, the approach, the expected outcome, and the ask.",
+      "common_failure": "Pasting the executive summary into the abstract field and blowing the word limit, or writing the abstract first and letting the narrative drift — either way the portal text and the proposal disagree at the point of first skim.",
+      "sources": [
+        "NIH — Write Your Application (abstract guidance)",
+        "Grants.gov SF424 instructions",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"
+      ]
+    },
+    {
+      "id": "grant-writing.proposal.attachment-pack",
+      "label": "Attachment pack",
+      "tier": 4,
+      "cluster": "proposal",
+      "prereqs": [
+        "grant-writing.proposal.project-narrative",
+        "grant-writing.budget.budget-narrative"
+      ],
+      "soft_prereqs": [
+        "grant-writing.budget.budget-basics"
+      ],
+      "one_line": "Assemble the supporting documents — org budget, bios, letters of support, financials — that reviewers check for capacity and credibility.",
+      "hours": 6,
+      "know_what": [
+        "Required attachments — the funder's checklist: biosketches or resumes, org budget, board list, IRS determination letter, audited financials, letters of support",
+        "Biosketch conventions — NIH-style biosketch or the funder's resume format, naming the person's role on this project and its effort percent, not a general CV",
+        "Letters of support — third-party letters that name the writer, the organization, and the specific commitment, not generic praise",
+        "Org budget vs project budget — the full organizational budget (all revenue and expenses) that reviewers read for capacity, distinct from the project budget",
+        "Audited or reviewed financials — the prior year's statements that prove the organization can actually handle the money",
+        "IRS determination letter — the 501(c)(3) letter proving charitable status; foundations routinely require a current copy",
+        "Portal constraints — per-file size limits (commonly 50MB on Grants.gov), allowed file formats, and file-naming rules"
+      ],
+      "know_how": [
+        "Copy the funder's attachment checklist into a tracking sheet and mark each item owned and done before submission week",
+        "Prepare biosketches that tie each person to this project's role and effort, not a generic CV dump",
+        "Solicit letters of support early with a template that names the writer, the relationship, and the specific commitment",
+        "Convert every document to the portal's required format (usually PDF) and rename per the funder's naming convention",
+        "Verify file sizes and formats against the portal limits before submission, not after the upload fails",
+        "Cross-check names, titles, and effort in the attachments against the narrative so the personnel story agrees everywhere",
+        "Keep a master folder of evergreen attachments (determination letter, org chart, board list) with current dates and versions"
+      ],
+      "habits": [
+        "Building the attachment pack in parallel with the narrative, never the night before submission",
+        "Requesting letters of support at least two weeks before the deadline",
+        "Re-reading every attachment for stale dates and facts before each new submission",
+        "Keeping a per-funder attachment checklist so nothing is assumed from a prior application",
+        "Verifying each PDF opens and renders correctly before uploading"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "foundation": "high"
+      },
+      "checkpoint": "Produce a complete attachment pack matching the funder's checklist — every required document present, correctly named, under every portal size limit, and consistent with the narrative's personnel and budget.",
+      "common_failure": "Treating attachments as afterthoughts: generic form letters of support that name no commitment, org budgets two years out of date, or an expired determination letter — reviewers read the pack as the capacity evidence, and a mismatch kills credibility.",
+      "sources": [
+        "NIH biosketch format guidance",
+        "Candid — proposal attachments guidance",
+        "Carlson & O'Neal-McElrath, Winning Grants Step by Step"
+      ]
+    },
+    {
+      "id": "grant-writing.budget.personnel",
+      "label": "Personnel & fringe",
+      "tier": 2,
+      "cluster": "budget",
+      "prereqs": [
+        "grant-writing.budget.budget-basics"
+      ],
+      "soft_prereqs": [
+        "grant-writing.strategy.logic-model"
+      ],
+      "one_line": "Price staff time with real salaries and fringe rates, allocating effort across funded and unfunded time so the budget survives scrutiny.",
+      "hours": 6,
+      "know_what": [
+        "Personnel line — salaries and wages for named or to-be-hired staff, usually the largest line in a project budget",
+        "Percent effort — the fraction of a person's time charged to the grant, shown as a percentage or FTE (e.g., 25% = 0.25 FTE) with the resulting dollar amount",
+        "Fringe rate — the employer-side costs added to salary: payroll taxes, health insurance, retirement; typically 25-40% of salary depending on the employer",
+        "Funded vs unfunded time — the split of a person's effort between grant-supported and other work, which reviewers check for realism",
+        "Salary cap — the ceiling on grant-charged salary, e.g., the NIH cap tied to Executive Level II (about $231,000 in 2025) that resets each January",
+        "Payroll-based pricing — pricing from the actual payroll amount or hiring range, not a round guess, so the budget matches what finance will actually pay",
+        "New-hire pricing — quoting a to-be-hired salary at the hiring step or grade HR will use, with the start date in the right budget year"
+      ],
+      "know_how": [
+        "Price each person from the actual payroll or the hiring range, then add the fringe rate on top",
+        "Show effort as a percentage or FTE per person with the resulting dollars, so the math is checkable",
+        "Allocate effort across funded and unfunded time — a person at 50% grant, 50% other — so the budget never implies more than 1.0 FTE",
+        "Apply the fringe rate as a percentage of salary in the same period the payroll uses",
+        "Check each salary against any funder cap (e.g., the NIH salary cap) and cap the charged amount at it",
+        "Reconcile personnel totals to the payroll report or an HR letter so the numbers survive an audit",
+        "Price future years with the cost-of-living increment the organization actually grants, not a uniform guess"
+      ],
+      "habits": [
+        "Pricing personnel from payroll, never from 'what we wish we could pay'",
+        "Questioning any line where effort and salary imply more than 1.0 FTE",
+        "Keeping the organization's current fringe rate documented and re-checking it each budget cycle",
+        "Checking salary caps and effort rules for every new federal program before pricing staff",
+        "Running the personnel page past the person whose time it charges"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high"
+      },
+      "checkpoint": "Produce a personnel section where each named or to-be-hired role shows salary, fringe rate and amount, and percent effort that sums to a realistic allocation, with every number traceable to payroll or HR.",
+      "common_failure": "Pricing staff at round-number salaries with no fringe, or charging one person at 100% effort across three grants — the math fails an auditor and the reviewer reads the staffing story as fantasy.",
+      "sources": [
+        "2 CFR 200.430 (compensation) and 200.431 (fringe benefits)",
+        "NIH annual salary cap notice",
+        "Grants.gov budget guidance"
+      ]
+    },
+    {
+      "id": "grant-writing.budget.allowable-costs",
+      "label": "Allowable costs",
+      "tier": 2,
+      "cluster": "budget",
+      "prereqs": [
+        "grant-writing.budget.budget-basics"
+      ],
+      "soft_prereqs": [
+        "grant-writing.compliance.rfp-deconstruction"
+      ],
+      "one_line": "Check every line against federal cost principles and the funder's restrictions so nothing unallowable or disqualifying is requested.",
+      "hours": 8,
+      "know_what": [
+        "Allowable cost — a cost that passes 2 CFR 200.403: necessary, reasonable, allocable, treated consistently, and within the funder's limitations",
+        "2 CFR 200 (Uniform Guidance) — the federal cost principles defining allowable, allocable, and reasonable for every federal award",
+        "Unallowable categories — 2 CFR 200.438 entertainment (tickets, social activities, alcohol), 200.450 lobbying, 200.442 fundraising, 200.445 goods or services for personal use",
+        "Allocability — a cost is allocable when it benefits the award in proportion to its share, the test that governs shared staff, rent, and utilities",
+        "Reasonable-person test — whether a prudent person would pay this price for this good or service in this market",
+        "Prior approval — 2 CFR 200.407 items that need the funder's written consent before they can be charged, such as certain equipment or participant support",
+        "Funder restrictions — foundation and corporate exclusions (no capital campaigns, no regranting, no religious activity) that sit on top of federal rules",
+        "Equipment threshold — the useful-life-plus-cost definition (commonly $5,000) that moves an item from supplies into tracked equipment"
+      ],
+      "know_how": [
+        "Run every proposed line through the 200.403 test — necessary, reasonable, allocable, consistent, within limitations — before it reaches the budget",
+        "Check each category against the unallowable list — entertainment, lobbying, fundraising, alcohol — early, not after review",
+        "Classify shared costs (rent, utilities, admin staff) as direct or indirect once, and treat them the same way every year",
+        "Flag anything needing prior approval under 200.407 and request the funder's written consent in the budget justification",
+        "Read the funder's own exclusion list and line-check the draft budget against it",
+        "Keep a written rationale for each borderline line — an auditor will ask why it was allowed",
+        "Recheck the organization's capitalization policy when an item crosses the equipment threshold"
+      ],
+      "habits": [
+        "Keeping the 2 CFR 200 unallowable list open while building any federal budget",
+        "Questioning every line with 'would this survive an auditor?' before it ships",
+        "Noting the funder's exclusions on the budget cover sheet so they are visible at review",
+        "Documenting borderline decisions in writing the same week, not after the audit letter arrives",
+        "Re-reading the NOFO's cost section for program-specific restrictions, such as no food or no construction"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high"
+      },
+      "checkpoint": "Produce a line-checked budget where every line passes the 200.403 test, nothing on the funder's exclusion list is requested, and the borderline calls are documented in writing.",
+      "common_failure": "Assuming a cost is allowable because the program needs it — an entertainment-heavy conference line or a lobbying-adjacent activity gets requested, and the award gets flagged or the proposal rejected for asking.",
+      "sources": [
+        "2 CFR 200 Subpart E (Cost Principles)",
+        "NIH Grants Policy Statement — cost considerations",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"
+      ]
+    },
+    {
+      "id": "grant-writing.budget.indirect-costs",
+      "label": "Indirect cost rates",
+      "tier": 3,
+      "cluster": "budget",
+      "prereqs": [
+        "grant-writing.budget.budget-basics",
+        "grant-writing.budget.personnel"
+      ],
+      "soft_prereqs": [
+        "grant-writing.budget.budget-narrative"
+      ],
+      "one_line": "Calculate indirect costs using your negotiated rate, the funder's cap, or the 10% de minimis rate, and present them so they don't get cut.",
+      "hours": 8,
+      "know_what": [
+        "Indirect costs (F&A) — the organization's shared overhead — facilities, administration, finance, HR, IT — recovered as a percentage of a cost base",
+        "Negotiated indirect cost rate agreement (NICRA) — the rate your cognizant agency (typically HHS for nonprofits) approved after a rate negotiation",
+        "10% de minimis rate — 2 CFR 200.414(f): entities that have never held a negotiated rate may claim a flat 10% of modified total direct costs with no negotiation and no documentation",
+        "Modified total direct cost (MTDC) base — direct costs minus equipment, capital expenditures, participant support, rental costs, and the portion of each subaward over $25,000",
+        "Funder caps — many foundations cap indirect at 10-15% of direct costs, and some federal programs cap F&A (e.g., NIH's 8% cap on foreign components)",
+        "Rate basis — whether the rate applies to the full direct base or the MTDC base changes the dollars materially, so the base must match the agreement",
+        "Cognizant agency — the federal agency that negotiates and issues your NICRA, which you approach for rate changes and renegotiation"
+      ],
+      "know_how": [
+        "Find your rate in order: check for a current NICRA first; only if none exists and none ever has, elect the 10% de minimis",
+        "Identify the base the funder wants — MTDC vs total direct costs — and compute the indirect line on that base",
+        "Exclude from the MTDC base: equipment, capital expenditures, participant support, rental costs, and each subaward's amount over $25,000",
+        "Apply a funder's cap (e.g., 10-15%) when it is lower than your NICRA, and show the capped calculation",
+        "Present the rate and its base explicitly: '10% de minimis on MTDC' rather than a bare indirect number",
+        "Attach the NICRA, or the de minimis election statement, to federal budget submissions",
+        "Re-negotiate the NICRA on its cycle and re-check it before each year's applications"
+      ],
+      "habits": [
+        "Checking for a NICRA before defaulting to de minimis — the de minimis is for never-negotiated entities only",
+        "Stating the rate and its base on every budget so the reviewer never has to guess",
+        "Treating a funder's 'indirects not allowed' line as a negotiation point, not a final word",
+        "Keeping the NICRA and the de minimis election in the attachment master folder, current",
+        "Recomputing the indirect line whenever the direct base changes, so the two never disagree"
+      ],
+      "know_why": {
+        "claim": "Claim the full negotiated indirect rate on every award that allows it — a lower rate is donated overhead.",
+        "because": "the negotiated rate is the federal government's own determination of your real infrastructure cost, and accepting a funder's cap or the de minimis permanently underfunds the finance, HR, and IT that the grant itself depends on.",
+        "disputed_by": "small-nonprofit grant writers who accept a funder's cap or the 10% de minimis to look lean, arguing that a lower indirect line improves competitiveness where reviewers read overhead as bloat and where the rate-negotiation burden is not worth the recovery.",
+        "source": "2 CFR 200.414(c)-(f); NIH foreign-component F&A cap (NOT-OD-11-042); practitioner debate in The Grantsmanship Center Magazine"
+      },
+      "school_weights": {
+        "federal": "high",
+        "foundation": "low"
+      },
+      "checkpoint": "Produce an indirect cost line that names the rate, its basis (NICRA, funder cap, or 10% de minimis), and the base it applies to, with the calculation shown and any cap applied.",
+      "common_failure": "Leaving indirect costs out entirely to look lean and losing real overhead recovery, or applying a NICRA rate to the wrong base (total direct costs instead of MTDC) and overstating the line — either way the budget misrepresents the organization's real costs.",
+      "sources": [
+        "2 CFR 200.414",
+        "NIH F&A rate cap guidance (NOT-OD-11-042)",
+        "HHS Cost Allocation Services — indirect cost rate negotiation"
+      ]
+    },
+    {
+      "id": "grant-writing.budget.match-requirements",
+      "label": "Match & cost share",
+      "tier": 3,
+      "cluster": "budget",
+      "prereqs": [
+        "grant-writing.budget.budget-basics",
+        "grant-writing.budget.allowable-costs"
+      ],
+      "soft_prereqs": [
+        "grant-writing.budget.budget-narrative"
+      ],
+      "one_line": "Identify a required match or cost share and document how it will be met — cash, in-kind, or third-party — before it becomes a compliance problem.",
+      "hours": 6,
+      "know_what": [
+        "Match (cost share) — the portion of project costs the applicant must fund from its own or third-party sources, expressed as a percentage or ratio",
+        "Cash match — actual dollars from the applicant or a third party, governed by the same cost principles as the requested funds",
+        "In-kind match — donated goods, services, or volunteer time valued at fair market value and documented",
+        "Third-party match — contributions from partners, funders, or donors that count toward the requirement with a written commitment",
+        "2 CFR 200.306 — the federal match rules: verifiable from the organization's records, not funded by another federal award, necessary, reasonable, and allowable",
+        "Match ratios in the wild — e.g., JAG's 25% (cash or in-kind), FEMA's 25% non-federal share on hazard mitigation, PCORI's 50% of total project cost",
+        "Match documentation — time-and-effort logs for donated staff time, donor letters for cash pledges, and valuation worksheets for donated goods"
+      ],
+      "know_how": [
+        "Read the NOFO or guidelines for the exact ratio, the base it applies to (total project cost vs requested funds), and whether cash, in-kind, or both qualify",
+        "Inventory real match capacity before deciding to pursue: volunteer hours, donated space, partner contributions, and existing cash",
+        "Choose cash or in-kind according to what the funder allows and what the organization can actually document",
+        "Secure third-party match with written commitments before submission, never after the award",
+        "Valuate in-kind contributions at fair market value and keep the valuation worksheet with the match records",
+        "Exclude anything paid by another federal award from the match — 200.306 forbids double-counting",
+        "Budget the match line explicitly on the same budget form so reviewers see the match is planned, not hoped for"
+      ],
+      "habits": [
+        "Checking the match ratio before the go/no-go fit decision, not after the draft is written",
+        "Keeping a running inventory of in-kind capacity (volunteer hours, donated space) so the match is real, not invented",
+        "Documenting match at the time it happens — time sheets and commitment letters, not reconstructed at audit",
+        "Flagging any match funded from another federal source as a compliance error, immediately",
+        "Treating 'we'll find the match later' as a reason to pass on the opportunity"
+      ],
+      "know_why": {
+        "claim": "Match-heavy awards are worth chasing — the required match multiplies scarce cash and signals commitment that scores.",
+        "because": "in programs like PCORI (50% of total project cost) and JAG (25%), the match is mandatory and often scored, and an organization with real in-kind capacity can convert volunteer hours and donated space into leverage it could never raise in cash.",
+        "disputed_by": "program-integrity-minded grant managers who argue the match distorts the program — the design gets shaped around what is matchable rather than what is needed, and misvalued or undocumented match becomes an audit finding and a repayment at closeout.",
+        "source": "2 CFR 200.306; PCORI funding announcements (50% match); DOJ JAG match guidance; practitioner debate in The Grantsmanship Center Magazine"
+      },
+      "school_weights": {
+        "federal": "high"
+      },
+      "checkpoint": "Given a NOFO with a match requirement, produce a match plan naming the ratio, the base, the cash and in-kind sources, the valuation method, and the documentation trail, all compliant with 200.306.",
+      "common_failure": "Committing to a match the organization cannot document — counting hoped-for volunteer hours or a partner's verbal pledge — then failing the award's match verification at closeout, which can turn the grant into a repayment.",
+      "sources": [
+        "2 CFR 200.306",
+        "DOJ JAG program match guidance",
+        "PCORI funding announcements"
+      ]
+    },
+    {
+      "id": "grant-writing.budget.multi-year-budget",
+      "label": "Multi-year budget",
+      "tier": 4,
+      "cluster": "budget",
+      "prereqs": [
+        "grant-writing.budget.budget-narrative",
+        "grant-writing.budget.indirect-costs"
+      ],
+      "soft_prereqs": [
+        "grant-writing.proposal.project-narrative"
+      ],
+      "one_line": "Lay out a multi-year budget with annual escalation and changing match requirements so the full award period is coherent.",
+      "hours": 8,
+      "know_what": [
+        "Multi-year budget — a budget with a column per budget period (usually a year) plus a total column, spanning the full project period",
+        "Annual escalation — the 3-5% per-year increase applied to salaries, supplies, and contracted costs for inflation and steps",
+        "SF424A — the federal multi-year budget summary form with object-class categories across budget-period columns",
+        "Budget period vs project period — the funded year(s) vs the full award term; the multi-year budget covers the project period",
+        "Step increases — the annual salary step or cost-of-living bump the organization actually grants, which escalation must mirror rather than replace",
+        "Changing match by year — requirements that ramp up or phase out across budget periods (e.g., 25% in year one, 50% in year two) shown explicitly",
+        "Ramp-down — the final year's reduction in activities and costs as the project winds toward sustainability or continuation funding",
+        "Carryover — unspent funds the funder may allow into the next budget period, which affects how conservatively each year is priced"
+      ],
+      "know_how": [
+        "Set the project period and list every budget period with its start and end dates before pricing anything",
+        "Apply annual escalation to salary and supply lines at the organization's real increment, typically 3-5%",
+        "Add a column per year plus a total column, with cross-year formulas so no year can drift silently",
+        "Lay out the match year by year if the requirement changes, and show the cumulative total against the requirement",
+        "Price new hires in the year they start and step existing staff annually, rather than flat-lining headcount",
+        "Recompute the indirect line per year, since the base grows with escalation",
+        "Ramp down the final year's activities to a sustainable level instead of ending at full speed",
+        "Reconcile the multi-year total to the funder's form (e.g., SF424A sections) before submission"
+      ],
+      "habits": [
+        "Escalating from real payroll increments, not a universal 5% guess",
+        "Checking the funder's multi-year template before building columns, so the form and the spreadsheet agree",
+        "Reviewing the multi-year budget against the narrative's year-by-year activity plan",
+        "Flagging any year where the match or the indirect rate changes, with the reason on the sheet",
+        "Freezing prior-year columns once submitted, so revisions never ripple backwards"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high"
+      },
+      "checkpoint": "Produce a multi-year budget with a column per budget period, annual escalation applied consistently, match and indirect recomputed per year, and a grand total that reconciles to the funder's form.",
+      "common_failure": "Copying year one's budget into later years unchanged — no escalation, no step increases, no ramp-down — so the out-years are fiction, or applying escalation to fixed costs like rent and equipment that do not inflate.",
+      "sources": [
+        "Grants.gov SF424A instructions",
+        "2 CFR 200.308 (revision of budget and program plans)",
+        "Carlson & O'Neal-McElrath, Winning Grants Step by Step"
+      ]
+    }
+  ]
+}

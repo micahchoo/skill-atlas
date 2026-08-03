@@ -1,0 +1,154 @@
+{
+  "domain": "archival-sciences",
+  "batch": 8,
+  "ids": [
+    "archival-sciences.records-management.email-archiving",
+    "archival-sciences.records-management.database-archiving",
+    "archival-sciences.records-management.born-digital-transfer"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.records-management.email-archiving",
+      "label": "Email archiving",
+      "tier": 3,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.electronic-records-management"],
+      "soft_prereqs": ["archival-sciences.records-management.retention-schedule-authoring"],
+      "one_line": "Set up email capture — journaling, retention categories, export to the archive — so institutional memory survives staff departures.",
+      "hours": 10,
+      "know_what": [
+        "Journaling — server-side capture of every inbound and outbound message into a dedicated journal mailbox or archive connector, independent of what users delete; the mechanism that makes email capture complete instead of volunteer-based",
+        "Retention categories for email — message classes (administrative, legal, project, personal) mapped onto the records schedule, so disposition is authorized per class rather than applied to 'all email' as one bucket",
+        "PST/NST files — Outlook Personal Folders, the format where email escapes managed storage; their presence in the wild is the symptom of a failed capture policy",
+        "MBOX, EML, MSG — the interchange formats an archive actually accepts; EML preserves each message's headers and attachments in one file, MBOX bundles a mailbox, MSG is single-message Exchange format",
+        "Email metadata — the headers (From, To, Date, Message-ID, Thread-Index) that carry the evidence of the transaction even when the body or attachments are stripped for later processing",
+        "Legal hold — freezing disposition for custodians involved in pending or reasonably anticipated litigation; in U.S. practice spoliation sanctions under Federal Rule of Civil Procedure 37(e) attach to email deleted after the duty to preserve arises",
+        "Journal vs. archive vs. backup — journaling is capture, the archive is retention with disposition, and a backup is a recovery copy with no retention logic that must never be pressed into service as an archive",
+        "Departure-driven loss — the institutional-memory failure mode where the only copy of institutional correspondence sits in a departed employee's mailbox or personal PST, revocable the moment the account is closed",
+        "Auto-delete policies — retention tags applied server-side that purge expired classes automatically, with legal hold overriding every purge job",
+        "Attachment as separate record — the attachment is often the record (a contract, a report) and the email its wrapper; the two can carry different retention periods and must be appraised separately"
+      ],
+      "know_how": [
+        "Configure journaling in the mail system — Exchange Online journaling rules or a journaling connector, Google Vault/GWS retention, Microsoft Purview — so all messages route to the journal destination, and verify a test message lands there",
+        "Map email classes onto the retention schedule — e.g., administrative correspondence 3 years, contracts 7 years, project records 10 years — and encode them as retention tags or rules",
+        "Export a mailbox to MBOX or EML with headers intact using a tool such as Thunderbird, IMAP export, or a vendor archive's export function, then verify the exported message count matches the source count exactly",
+        "Enforce a no-PST policy by converting legacy personal stores into the managed archive on a schedule and tracking conversions to completion",
+        "Run a legal-hold procedure: identify custodians, place their mailboxes on hold in the system, and confirm the hold appears in the hold report before any disposition job runs",
+        "Document what the journal captures — which servers, which connectors, which metadata fields — so a future archivist can render the exported messages as records with their provenance intact"
+      ],
+      "habits": [
+        "Ask 'who owns the only copy?' before declaring an email policy a success",
+        "Treat a mailbox as a records series with a schedule, not as the employee's private property",
+        "When a departure notice lands, check the leaver's mailbox against the schedule and export what the archive needs before access is revoked",
+        "Distrust the search box: verify capture completeness by counting journaled messages against sent-plus-received counts",
+        "Read the headers before the body when deciding what an email evidences"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "high", "custodial": "low" },
+      "checkpoint": "Configure journaling on a test mail system so every inbound and outbound message to a test account lands in the journal within 24 hours, export one month of that account to MBOX with headers intact, and confirm the exported message count equals the journal count exactly.",
+      "common_failure": "Relying on users to archive their own mail (or on the backup tape): messages vanish with staff departures or mailbox deletions, and 'we back up Exchange' turns out to mean a recovery copy with no retention logic. The archive then holds only what individuals happened to save, and institutional memory leaves with the leaver.",
+      "sources": [
+        "Christopher J. Prom, 'Email Preservation', Digital Preservation Coalition Technology Watch Report 17-01 (2017)",
+        "The National Archives (UK), 'Managing Email' guidance",
+        "National Archives of Australia, 'Email Management' guidance",
+        "Federal Rule of Civil Procedure 37(e) — spoliation of electronically stored information",
+        "Society of American Archivists, Dictionary of Archives Terminology — 'email', 'journaling'"
+      ]
+    },
+    {
+      "id": "archival-sciences.records-management.database-archiving",
+      "label": "Database archiving",
+      "tier": 3,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.records-management.electronic-records-management"],
+      "soft_prereqs": ["archival-sciences.preservation.digital-preservation"],
+      "one_line": "Plan the archive of a database — export to CSV or SIARD, document schema and context — so structured data outlives its system.",
+      "hours": 10,
+      "know_what": [
+        "SIARD — Software Independent Archival of Relational Databases, the Swiss Federal Archives' open format (versions 2.0/2.1/2.2): a ZIP container holding XML metadata for the schema plus the data as CSV tables, the principal interchange format for relational database archival",
+        "CSV export as the minimal path — a tabular dump that survives, but silently loses data types, constraints, and relationships if exported without the schema",
+        "Schema documentation — the DDL (CREATE TABLE statements), keys, constraints, views, triggers, and stored procedures that define what the data means; without it the rows are unreadable noise",
+        "Referential integrity — foreign keys linking tables across the database; a naive per-table dump breaks those links unless the schema travels with the data",
+        "Data types and encoding — dates (ISO 8601), decimals, NULL representation, and character encoding must be pinned down in the export or the data silently degrades over time",
+        "Context documentation — a database is a system, not just data: the business function, owning office, users, update frequency, and the application that read it must be described for future interpreters",
+        "Views vs. base tables — exporting the results of views instead of the underlying tables captures a display of the data rather than the records themselves",
+        "Blobs and binary fields — attachments and images stored in the database need separate extraction to files with pointers, not a CSV cell dump",
+        "Live vs. archive copy — the archive is a frozen snapshot with its own retention and fixity; it is neither the operational database nor one of its backups",
+        "Migration vs. archive — migrating to a new system replaces one live system with another; archiving preserves what the old system meant, which a migration discards"
+      ],
+      "know_how": [
+        "Extract the schema first — full DDL with keys, constraints, views, and triggers — and save it as the anchor document before any data dump begins",
+        "Export a relational database to SIARD 2.1 using a converter (siard-suite, DBPTK, or the Swiss Federal Archives' tools), then verify the package opens and per-table row counts match the source",
+        "Export to CSV per table with explicit conventions — UTF-8, a documented NULL representation, ISO 8601 dates, decimal precision — plus a sidecar schema file describing each column's type and meaning",
+        "Write the context document: system name, purpose, business owner, hardware and software stack, update frequency, and a data dictionary for the fields",
+        "Test the archive by reloading it into a fresh database engine and running a set of reference queries with expected row counts, confirming the reload reproduces the source data",
+        "Document the foreign-key map so a future researcher can rejoin the tables the way the application did"
+      ],
+      "habits": [
+        "Ask 'what will make this data mean something in twenty years?' before choosing the export format",
+        "Export the schema before the data, always — the DDL is the record's grammar",
+        "Treat the database as a series that includes the application that read it: document the system, not just the rows",
+        "When a vendor announces end-of-life or end-of-support, schedule the export before the license or the environment dies",
+        "Verify by reloading into a clean engine — never trust the export tool's success message alone"
+      ],
+      "know_why": null,
+      "school_weights": { "preservation-first": "high" },
+      "checkpoint": "Export a sample relational database (3+ tables with foreign keys) to SIARD 2.1 and to CSV with a sidecar schema file, reload both into a fresh database engine, and confirm three reference queries return the same row counts as the source; produce the context document naming the system, purpose, and update frequency.",
+      "common_failure": "Dumping tables to CSV and calling it done: without the schema and context document the data types, keys, and relationships are lost, and in a decade no one can say which rows were authoritative or what the columns meant. The data outlives its system but not its meaning, and the archive holds a pile of numbers that proves nothing.",
+      "sources": [
+        "Swiss Federal Archives, 'SIARD — Software Independent Archival of Relational Databases' specification (SIARD 2.2)",
+        "The National Archives (UK), 'Archiving Born-Digital Databases' guidance (SIARD)",
+        "Ross Harvey and Jaye Weatherburn (eds.), Preserving Digital Materials, 3rd ed. (ALA, 2018)",
+        "OCLC Research, 'Demystifying Born Digital' (Ricky Erway, 2012)"
+      ]
+    },
+    {
+      "id": "archival-sciences.records-management.born-digital-transfer",
+      "label": "Born-digital transfer",
+      "tier": 4,
+      "cluster": "records-management",
+      "prereqs": ["archival-sciences.appraisal.accessioning", "archival-sciences.records-management.electronic-records-management"],
+      "soft_prereqs": ["archival-sciences.preservation.digital-preservation"],
+      "one_line": "Transfer born-digital records into the archive — write-blocked copies, checksums, technical environment documented — so digital acquisitions arrive intact and provable.",
+      "hours": 12,
+      "know_what": [
+        "Write blocker — hardware (Tableau T8u/T35u, WiebeTech) or software that exposes a read-only interface to a source drive, so imaging can never alter the original media",
+        "Forensic imaging — a sector-level copy of a carrier (raw dd-style image or E01 Expert Witness Format via FTK Imager or Guymager) that captures deleted and unallocated space, not just the visible file tree",
+        "Logical vs. physical extraction — collecting only the visible files (logical) vs. imaging the whole medium (physical); the choice turns on whether deleted data matters to the provenance story",
+        "Checksum / fixity — an MD5, SHA-1, or SHA-256 digest computed at capture and re-computed at every handoff; the number that proves the copy matches the original",
+        "Chain of custody for digital media — the acquisition log (who, when, what carrier, what hash) that makes the transfer legally credible, mirroring the paper chain of custody",
+        "Technical environment documentation — the hardware, OS, and software that created the files (e.g., WordPerfect 5.1 on Windows 3.1), captured from the donor or inferred from the files with identification tools",
+        "Carrier media — floppy disks, Zip disks, CD/DVDs, external hard drives, and memory cards, each with its own fragility, obsolescence, and reading requirements",
+        "Born-digital accessioning workflow — quarantine, virus scan, inventory with file counts, fixity verification, transfer agreement: the digital analogue of paper accessioning",
+        "Preservation vs. access copies — the access copy may be normalized (e.g., to PDF/A), but the preservation copy stays exactly as captured, bit-for-bit",
+        "Digital original order — the directory structure and file system are the born-digital original order; imaging preserves it, and re-sorting files by subject destroys it just as it would in paper"
+      ],
+      "know_how": [
+        "Connect a donor drive through a hardware write blocker and verify its read-only status light or tool output before mounting the source",
+        "Create a forensic image with FTK Imager or Guymager, computing SHA-256 at the source and at the destination, and record both hashes in the acquisition log",
+        "Draft a digital transfer agreement naming the creator, the carriers, the software environment, and access conditions before the media leaves the donor",
+        "Produce a technical environment document using file-format identification (DROID against the PRONOM registry, or Siegfried) when the donor cannot describe what ran the files",
+        "Run the accessioning sequence in order: quarantine, antivirus scan, inventory with counts, checksum verification, then move the image into preservation storage",
+        "Verify the transfer by re-hashing the copy at the archive and comparing it against the donor's or capture log's checksum before releasing the original"
+      ],
+      "habits": [
+        "Never mount a donor drive without a write blocker — the reflex that protects the original",
+        "Hash at every handoff; a transfer without a checksum is an unproven transfer",
+        "Record the technical environment at intake, not later, when no one remembers what ran the files",
+        "Ask the donor 'what did you run this on?' before imaging, and write the answer down verbatim",
+        "Treat the capture log as part of the accession record, not scratch notes"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "postcustodial": "low" },
+      "checkpoint": "Image a USB drive through a hardware write blocker with FTK Imager or Guymager, compute SHA-256 before and after capture, and produce a transfer record naming the carrier, capture tool, both checksums, and the software environment — with the two hashes matching and the source drive's pre- and post-capture hashes identical.",
+      "common_failure": "Plugging a donor drive into a workstation and copying 'the files': no write blocker, no imaging, no checksum. The original is silently altered (mount artifacts, timestamp updates, metadata writes), deleted or hidden material is missed, and the archive can never prove the copy matches what the donor handed over — the acquisition is unusable as evidence.",
+      "sources": [
+        "BitCurator project and BitCurator Consortium (UNC), born-digital forensics in archives",
+        "Christopher A. Lee and Kam Woods, 'Automated Processing of Digital Collections' (BitCurator / archival forensics literature)",
+        "OCLC Research, 'Demystifying Born Digital' (Ricky Erway, 2012)",
+        "Tableau Forensic, write blocker documentation",
+        "The National Archives (UK), DROID and PRONOM file format identification documentation"
+      ]
+    }
+  ]
+}

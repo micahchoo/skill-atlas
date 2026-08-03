@@ -1,0 +1,307 @@
+{
+  "domain": "grant-writing",
+  "batch": 3,
+  "ids": [
+    "grant-writing.landscape.grants-gov-search",
+    "grant-writing.landscape.prior-awards",
+    "grant-writing.landscape.funder-watch",
+    "grant-writing.landscape.opportunity-score",
+    "grant-writing.strategy.need-stats",
+    "grant-writing.strategy.outcome-measures",
+    "grant-writing.strategy.evaluation-plan"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.landscape.grants-gov-search",
+      "label": "Grants.gov opportunity search",
+      "tier": 1,
+      "cluster": "landscape",
+      "prereqs": [],
+      "one_line": "Find every live federal funding opportunity relevant to your field on Grants.gov and read its synopsis before it closes.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.landscape.funder-types"],
+      "know_what": [
+        "Grants.gov — the federal portal where discretionary federal opportunities are posted and applications submitted",
+        "Synopsis vs NOFO — the short search-result summary vs the full Notice of Funding Opportunity holding every requirement",
+        "Assistance Listing number (formerly CFDA) — the federal identifier that names the agency and program, and tells you whether an award is a grant or a cooperative agreement",
+        "Opportunity status — posted / forecasted / closed; forecasted listings can appear up to 12 months early as planning signals",
+        "Eligibility codes — who may apply (nonprofits, states, tribes, institutions of higher education), shown on the synopsis page",
+        "Funding amount and expected awards — the award ceiling, floor, and number of awards the agency intends to make",
+        "Cost-sharing and match flags — whether the NOFO requires a match, visible in the funding and eligibility sections",
+        "Closing-date rules — deadlines are in Eastern Time on the due date, and 'submitted' is not 'received' until Grants.gov validates the package"
+      ],
+      "know_how": [
+        "Search Grants.gov by keyword, agency, Assistance Listing, and opportunity status to surface live federal opportunities in your field",
+        "Open the synopsis first and read the eligibility, award amount, and closing date before downloading the full NOFO",
+        "Read the full NOFO's sections — program description, eligibility, application contents, review criteria, submission info — before deciding to apply",
+        "Check the forecasted opportunities quarterly so agencies' upcoming competitions appear on your calendar 6-12 months early",
+        "Confirm your SAM.gov registration and Grants.gov roles well before a deadline, since registration can take weeks",
+        "Verify the closing time and time zone against your calendar and submit 24-48 hours early to dodge portal outages"
+      ],
+      "habits": [
+        "Checking Grants.gov for your saved keyword set weekly, not only when a colleague forwards a link",
+        "Reading the synopsis and the Assistance Listing before the full NOFO, so deep reading goes only to real fits",
+        "Logging every opportunity you consider into the pipeline tracker with its number and closing date the day you find it",
+        "Keeping SAM.gov and Grants.gov registrations renewed so a live opportunity never expires while you register",
+        "Noting the forecasted competitions in your field so the calendar shows upcoming cycles before they post"
+      ],
+      "know_why": null,
+      "school_weights": { "foundation": "low", "corporate": "rejected" },
+      "checkpoint": "Produce a one-page brief on a live Grants.gov opportunity — Assistance Listing number, agency, eligibility, award ceiling, closing date — from the synopsis alone, with no errors.",
+      "common_failure": "Treating the synopsis as the announcement: the requirements live in the full NOFO, and applicants who skip it miss an eligibility or attachment rule and are rejected for compliance before their proposal is ever reviewed.",
+      "sources": ["Grants.gov — Search Grants and forecasted opportunities", "2 CFR 200 (Uniform Guidance)", "USASpending.gov — federal award data"]
+    },
+    {
+      "id": "grant-writing.landscape.prior-awards",
+      "label": "Prior-awards research",
+      "tier": 2,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.candid-search"],
+      "one_line": "Pull a foundation's IRS 990s and recent grants to see who they actually fund, at what size, and for what duration — not just what they claim to fund.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.landscape.funder-types"],
+      "know_what": [
+        "990 vs 990-PF vs 990-EZ — the filings for public charities, private foundations, and small organizations, each with different grant-disclosure schedules",
+        "Schedule I — the part of a public charity's 990 that lists grants paid, to whom, and in what amounts",
+        "ProPublica Nonprofit Explorer — free, searchable digitized 990s and extracted grant records for U.S. nonprofits",
+        "Candid grant records — the foundation's grants as reported, searchable by recipient, subject, and geography",
+        "Grant size distribution — the median and range of a foundation's awards, which tells you whether your ask is realistic",
+        "Recurring grantees — organizations funded year after year, the signature of a relationship-driven giving pattern",
+        "Total giving and assets — the scale of the foundation from the 990's summary, which calibrates what share of its giving your ask would be"
+      ],
+      "know_how": [
+        "Pull the last two years of a foundation's 990s from ProPublica Nonprofit Explorer and read Schedule I for who was actually paid",
+        "Sort the grant list by size and by repeat recipient to find the foundation's real giving pattern, not its stated priorities",
+        "Check whether organizations like yours — type, geography, budget size — appear on the list, and at what dollar range",
+        "Compare the median grant against your planned ask; an ask several times the median is a signal to rescope or pass",
+        "Note multi-year vs one-year patterns and whether renewals happen, which shapes your relationship plan",
+        "Cross-check 990 data against Candid's grants view and the foundation's own annual report for the current year"
+      ],
+      "habits": [
+        "Reading the 990 before the website — the filing shows what they did, the site shows what they say",
+        "Checking Schedule I for actual recipients whenever a new foundation enters your pipeline",
+        "Tracking median grant size per foundation so every ask is calibrated before drafting",
+        "Flagging foundations whose 990 giving contradicts their stated focus, and trusting the 990",
+        "Recording grant-pattern notes on the funder record so the research compounds across proposals"
+      ],
+      "know_why": null,
+      "school_weights": { "federal": "low" },
+      "checkpoint": "From a foundation's last two 990s, state its total giving, median grant size, top three recipient types, and whether it funds organizations like yours — naming the Schedule I entries that support each claim.",
+      "common_failure": "Researching the foundation's marketing materials instead of its 990s — the ask is sized to a stated mission that the actual grant list contradicts, and the proposal fails the program officer's 'does this look like us' test.",
+      "sources": ["ProPublica Nonprofit Explorer", "IRS Form 990 and Schedule I instructions", "Candid — Foundation Directory grant records"]
+    },
+    {
+      "id": "grant-writing.landscape.funder-watch",
+      "label": "Opportunity watch",
+      "tier": 2,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.grants-gov-search", "grant-writing.landscape.candid-search"],
+      "one_line": "Run saved searches and alerts on Grants.gov, Candid, and state portals so new and recurring opportunities reach you instead of being missed.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "know_what": [
+        "Saved searches — stored Grants.gov query criteria that rerun automatically and email new matches",
+        "Grants.gov email notifications — daily or weekly digests of new postings matching your saved criteria",
+        "Candid funding alerts — saved subject and geography searches that email new foundation giving matches",
+        "State grant portals — state clearinghouses (e.g., the California Grants Portal) listing state agency opportunities separately from federal ones",
+        "Forecasted opportunities — federal competitions listed before the NOFO posts, the earliest warning of a cycle",
+        "Recurring cycles — foundations and agencies that open the same RFP on an annual or quarterly rhythm, predictable from last year's postings",
+        "Philanthropy News Digest — Candid's daily digest of new funding opportunities and announcements"
+      ],
+      "know_how": [
+        "Build a Grants.gov saved search from your working keyword set and turn on email notifications so new postings arrive without daily manual checks",
+        "Set a Candid alert for your subject and geography so foundation openings surface in your inbox",
+        "Subscribe to the newsletters and RFP pages of the 10-20 funders you already target, not just the directories",
+        "Maintain a 12-month calendar of known recurring cycles reconstructed from last year's postings and grantee reports",
+        "Triage alerts daily but act weekly: sort new matches into apply / watch / pass within seven days of posting",
+        "Re-run and refresh saved searches quarterly so stale keywords do not bury new opportunities"
+      ],
+      "habits": [
+        "Treating alerts as a triage queue, not an inbox — every match gets a fit call within the week",
+        "Keeping the saved-search keyword list in sync with the program's actual focus as it evolves",
+        "Recording the recurrence pattern of every funder you track: annual RFP, rolling, or quarterly board",
+        "Reviewing the alert setup monthly to kill dead searches and add new ones",
+        "Fixing the search when an alert misses a known posting, instead of just noting the miss"
+      ],
+      "know_why": null,
+      "school_weights": { "grantsmanship": "low" },
+      "checkpoint": "Set up working alerts on Grants.gov and Candid plus two funder newsletters, and for one week triage every alert into apply / watch / pass with a reason — with zero relevant opportunities missed that week.",
+      "common_failure": "Subscribing to alerts and then ignoring them until the deadline passes — saved searches are only useful as a triage queue, and the unfiltered flood trains you to stop reading them.",
+      "sources": ["Grants.gov — saved searches and email notifications", "Candid — funding alerts", "Philanthropy News Digest (Candid)"]
+    },
+    {
+      "id": "grant-writing.landscape.opportunity-score",
+      "label": "Opportunity scoring",
+      "tier": 3,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.funder-fit", "grant-writing.landscape.prior-awards"],
+      "one_line": "Score a live opportunity on fit, odds, and cost-to-apply, then make a defensible go/no-go call for your portfolio.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "know_what": [
+        "Fit score — your scored match on mission, geography, ask size, and eligibility against the funder's actual giving, not its website",
+        "Odds — the competition reality: applicants per award, e.g., NIH R01 success rates around 20-25% and many foundation grants 1 in 10-20 applicants",
+        "Cost-to-apply — the honest hours estimate (often 40-100 hours for a federal narrative, 8-20 for a foundation proposal) times your loaded staff rate",
+        "Capacity check — the number of proposals already in flight this quarter and whether the team can add one without degrading quality",
+        "Go/no-go threshold — the minimum combined score below which the opportunity is declined on purpose, set before scoring",
+        "Award value vs effort — dollars at stake divided by hours, the crude return that catches prestige chases",
+        "Review panel composition — federal panels of peer reviewers vs foundation staff, which changes how the proposal must read"
+      ],
+      "know_how": [
+        "Score each live opportunity on three axes — fit, odds, cost-to-apply — on 1-5 scales with definitions written down before scoring",
+        "Estimate odds from evidence: prior applicants vs awards in the NOFO or from the program officer, using published success rates (e.g., NIH R01 ~20-25%) where they exist",
+        "Estimate cost-to-apply from the outline: page count, boilerplate availability, data needs, and the revision loops a reviewer-grade draft requires",
+        "Run a weighted scorecard with fit dominant, and hold the go threshold fixed once the quarter's decisions are set",
+        "Compare against the portfolio: decline a 3.5-score opportunity if two stronger ones are already in flight",
+        "Record the score and the decision on the opportunity record so the reasoning survives the outcome"
+      ],
+      "habits": [
+        "Scoring every opportunity before writing a word, including the ones you are excited about",
+        "Deciding the go/no-go threshold once a quarter, not per opportunity, so it cannot be moved to fit a wish",
+        "Treating 'but it is prestigious' as a cost, not a benefit, in the scorecard",
+        "Re-scoring after reading the full NOFO, because synopses flatter fit",
+        "Reviewing past scores against actual outcomes to calibrate the odds estimate"
+      ],
+      "know_why": {
+        "claim": "A weighted scorecard with a pre-set threshold beats gut feel for go/no-go decisions.",
+        "because": "scoring forces fit, odds, and cost-to-apply to be priced separately and makes the decision reviewable after the outcome is known, whereas gut feel reliably overweights mission excitement and underweights odds and hours.",
+        "disputed_by": "veteran grant developers who argue that experienced judgment reads the same evidence faster, and that scorecards manufacture false precision from odds estimates that are guesses either way.",
+        "source": "Instrumentl and GrantStation go/no-go guidance; debate in Grant Professionals Association forums"
+      },
+      "school_weights": { "grantsmanship": "low" },
+      "checkpoint": "Score a live opportunity on a weighted fit/odds/cost scorecard, make a go/no-go call against a threshold set before scoring, and write a two-sentence rationale that survives review after the outcome is known.",
+      "common_failure": "Scoring after the decision: the scorecard is built to justify a yes the applicant already wanted, with the odds guess inflated — and the same 60 hours then go into a 1-in-30 shot.",
+      "sources": ["Instrumentl — opportunity scoring guidance", "GrantStation — go/no-go decision resources", "NIH — R01 success rate data (NIH Data Book)"]
+    },
+    {
+      "id": "grant-writing.strategy.need-stats",
+      "label": "Needs evidence",
+      "tier": 2,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.problem-statement"],
+      "one_line": "Find and cite the statistics, studies, and local data that quantify the problem you opened your statement with.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Authoritative sources — Census ACS, CDC BRFSS, Bureau of Labor Statistics, HUD's AHAR, USDA ERS food-security data — each with its own population and geography coverage",
+        "County Health Rankings & Roadmaps — the University of Wisconsin–Population Health Institute's county-level health data reviewers use to check local claims",
+        "Rates vs counts — a rate with a denominator (per 100,000) vs a raw count, and why reviewers distrust denominator-free numbers",
+        "Recency — the convention that need statistics sit within 3-5 years of submission, newer for fast-moving problems",
+        "Geographic match — national, state, county, or ZIP-level data, with the requirement that the figure matches your service area",
+        "Triangulation — two independent sources agreeing on a magnitude, which survives a reviewer's fact-check",
+        "Small-sample caveats — county-level rates with wide confidence intervals, which must be flagged rather than oversold",
+        "Meta-analyses and systematic reviews — the strongest evidence for prevalence and effect size, found via PubMed or the Cochrane Library"
+      ],
+      "know_how": [
+        "Find the federal or state source covering your population and geography, and pull the statistic with its year and table name",
+        "Step from national data down to state and county so the local gap is quantified, not asserted",
+        "Write every statistic with source and year in the draft ('per the 2022 ACS 5-year estimates…'), never bare",
+        "Check the denominator and population definition before citing — 'food insecure' means different things in USDA ERS vs Feeding America data",
+        "Verify the source year against the submission date and replace anything older than 5 years unless no newer data exists",
+        "Where local data is missing, cite the nearest proxy and say so, or plan primary data collection in the evaluation section"
+      ],
+      "habits": [
+        "Keeping a running evidence file of statistics with sources and years, captured as you read rather than at draft time",
+        "Fact-checking every statistic in the problem statement against its original table before submission",
+        "Preferring the primary source over the secondary article that quoted it",
+        "Asking 'does this number describe my population, or one that looks like it?' before citing",
+        "Re-verifying statistics when a proposal is reused a year later, because sources age out"
+      ],
+      "know_why": null,
+      "school_weights": { "evaluation": "high" },
+      "checkpoint": "Produce a need-evidence table for your problem statement with 5-10 statistics, each with primary source, year, geography, and population definition, and defend any local figure against a reviewer's fact-check.",
+      "common_failure": "Citing a national statistic for a local claim, or a five-year-old figure with no year attached — one reviewer fact-check kills the credibility of the entire needs section.",
+      "sources": ["U.S. Census Bureau American Community Survey", "County Health Rankings & Roadmaps (University of Wisconsin–Population Health Institute)", "Feeding America Map the Meal Gap", "HUD Annual Homeless Assessment Report (AHAR)"]
+    },
+    {
+      "id": "grant-writing.strategy.outcome-measures",
+      "label": "Outcome measures",
+      "tier": 3,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.logic-model", "grant-writing.strategy.smart-objectives"],
+      "one_line": "Choose indicators and data sources for each outcome so your proposal can claim measurable results, not intentions.",
+      "hours": 12,
+      "soft_prereqs": [],
+      "know_what": [
+        "Indicator — the observable, countable proxy for an outcome, e.g., 'employment 6 months post-program' for 'sustained employment'",
+        "Baseline and target — the pre-program value and the numeric destination ('from 40% to 60%'), the minimum a measurable claim needs",
+        "Validated instruments — PHQ-9 for depression, GAD-7 for anxiety, the USDA 6-item Household Food Security Survey Module — measures with published reliability",
+        "Administrative data — records you already keep (attendance, enrollment, service logs) as low-burden indicators",
+        "Leading vs lagging indicators — early signals (session attendance) vs true outcomes (employment at 6 months)",
+        "Measurement burden — respondent and staff time per indicator, the hidden cost that sinks evaluation plans",
+        "Proxy indicators — the measurable stand-in when the real outcome cannot be measured directly (e.g., GPA for learning gains)",
+        "WIOA common measures — the federal employment-program indicators (employment rate, earnings, credential attainment) reviewers recognize"
+      ],
+      "know_how": [
+        "Write one indicator per outcome in the logic model, each with a data source and a collection method named",
+        "Set baseline and target from real data or a pilot, never from hope, and label the basis of each number",
+        "Choose a validated instrument where one exists for the outcome, and name the instrument in the proposal",
+        "Prefer administrative data over surveys where it answers the question — it costs less and cannot be gamed by self-report",
+        "Add one leading indicator per outcome so early results are visible before closeout",
+        "Cut any indicator whose measurement cost exceeds its value to the decision, and say why it was cut"
+      ],
+      "habits": [
+        "Asking 'how will we know?' for every outcome, and refusing 'we'll survey participants' as an answer without naming the instrument",
+        "Keeping baseline numbers attached to the objective they serve, so targets are never orphaned",
+        "Checking each indicator against the logic model: no indicator without an outcome, no outcome without an indicator",
+        "Piloting the measurement before the grant starts, because instruments fail in the field, not on the page",
+        "Treating a home-grown survey question as a last resort, never a default"
+      ],
+      "know_why": {
+        "claim": "Outcome measures should be quantitative indicators with baselines and targets, even when the program's change is hard to count.",
+        "because": "reviewers and closeout reports can only verify countable change, and a baseline-target pair is the difference between a claim and a number that can be checked.",
+        "disputed_by": "evaluators in participatory and qualitative traditions (Most Significant Change, utilization-focused evaluation) who argue that numeric indicators flatten the outcomes that matter, and that well-collected qualitative evidence is more honest for complex programs.",
+        "source": "W.K. Kellogg Foundation Evaluation Handbook; Michael Quinn Patton, Utilization-Focused Evaluation; Rick Davies & Jess Dart, The 'Most Significant Change' Technique"
+      },
+      "school_weights": { "evaluation": "high", "grantsmanship": "low" },
+      "checkpoint": "For a program with 3-5 objectives, produce a measure table naming the indicator, baseline, target, data source, collection method, and collection schedule for each — with every indicator traceable to a logic-model outcome.",
+      "common_failure": "Indicators that measure activity ('we will track attendance') instead of outcome ('attendance rose 30%'), or targets with no baseline — the evaluation section then reports process, and the grantee cannot claim the change it promised.",
+      "sources": ["W.K. Kellogg Foundation Evaluation Handbook", "PHQ-9 and GAD-7 validation literature (Kroenke et al.)", "USDA Economic Research Service — Household Food Security Survey Module"]
+    },
+    {
+      "id": "grant-writing.strategy.evaluation-plan",
+      "label": "Evaluation plan",
+      "tier": 4,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.outcome-measures"],
+      "one_line": "Write the who-measures-what-when plan, with instruments and analysis, that turns outcome measures into a fundable evaluation section.",
+      "hours": 12,
+      "soft_prereqs": ["grant-writing.budget.budget-basics"],
+      "know_what": [
+        "Formative vs summative evaluation — improvement feedback during the program vs a verdict on outcomes at the end",
+        "Process vs outcome evaluation — did implementation happen as designed vs did participants change",
+        "External evaluator — an independent contractor or university partner whose findings carry credibility internal staff lack",
+        "Evaluator credentials — relevant degrees, prior evaluation of similar programs, and experience with your population and methods",
+        "Logic model alignment — an evaluation plan that tests each outcome column of the model, the first thing reviewers check",
+        "Pre/post and comparison designs — measuring change within the group vs against a matched comparison group, with the tradeoff in confidence",
+        "W.K. Kellogg Foundation Evaluation Handbook — the standard reference funders recognize for writing evaluation sections",
+        "Evaluation budget — commonly 5-10% of a federal project budget, a line reviewers notice when it is missing"
+      ],
+      "know_how": [
+        "Write the evaluation section as who measures what, with which instrument, on what schedule, feeding which decision",
+        "Align the plan row by row to the logic model: every outcome column gets a measure, a method, and a use",
+        "Specify the design honestly — pre/post with its limitations stated, or a comparison group where the budget allows",
+        "Name the evaluator's role and credentials, or commit to hiring an external evaluator with stated qualifications",
+        "Budget evaluation explicitly at 5-10% of the project, with evaluator time and instrument costs itemized",
+        "Describe how findings will be used and shared — funders want evaluation that informs program decisions, not shelf reports"
+      ],
+      "habits": [
+        "Writing the evaluation plan from the logic model, not from a template, so measures and outcomes cannot drift apart",
+        "Discussing the evaluation with the would-be evaluator before the proposal is submitted, not after funding",
+        "Checking that every measure named in the plan is one the organization can actually collect with its staff and budget",
+        "Re-reading the plan asking 'what decision does this finding inform?' — a measure with no decision is dead weight",
+        "Treating evaluation as a budget line from the start, not an afterthought discovered at closeout"
+      ],
+      "know_why": {
+        "claim": "An external evaluator is worth the budget for any outcome-level claim.",
+        "because": "independent evaluators carry credibility with reviewers and funders, apply methodological distance internal staff cannot, and their findings survive scrutiny at closeout.",
+        "disputed_by": "practitioners who argue that on small grants an external evaluator consumes 5-10% of the budget for reports nobody reads, and that internal evaluation with honest methods serves small programs better.",
+        "source": "W.K. Kellogg Foundation Evaluation Handbook; debate in Grant Professionals Association and American Evaluation Association forums"
+      },
+      "school_weights": { "evaluation": "high", "grantsmanship": "low" },
+      "checkpoint": "Write an evaluation plan for a real proposal: design named, every logic-model outcome mapped to a measure and schedule, evaluator role and credentials stated, and a budget line of 5-10% that a reviewer could execute as written.",
+      "common_failure": "A plan that names instruments but no schedule or owner — 'we will survey participants' with no baseline, no mid-point, and no named evaluator — which reviewers read as a promise the organization cannot keep.",
+      "sources": ["W.K. Kellogg Foundation Evaluation Handbook", "CDC Framework for Program Evaluation in Public Health", "American Evaluation Association — Guiding Principles for Evaluators"]
+    }
+  ]
+}

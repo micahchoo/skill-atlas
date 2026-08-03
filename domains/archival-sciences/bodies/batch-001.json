@@ -1,0 +1,371 @@
+{
+  "domain": "archival-sciences",
+  "batch": 1,
+  "ids": [
+    "archival-sciences.foundations.what-is-record",
+    "archival-sciences.foundations.provenance",
+    "archival-sciences.appraisal.appraisal-criteria",
+    "archival-sciences.arrangement.arrangement-plan",
+    "archival-sciences.description.finding-aid",
+    "archival-sciences.preservation.digitization-for-access",
+    "archival-sciences.access.reference-services"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.foundations.what-is-record",
+      "label": "What is a record",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Distinguish a record from a document or stray information artifact by its provenance and purpose, so you can scope what an archive keeps and defend that scope.",
+      "hours": 6,
+      "know_what": [
+        "Record — information fixed in form (paper, digital file, photograph) that serves as evidence of a function or activity, distinct from a document that merely carries content",
+        "Evidence vs information — a record is kept because it proves what happened; the archival test is evidentiary capacity, not informational richness",
+        "Provenance as the defining property — a record is defined by its creator and the activity that produced it, not by its subject matter",
+        "Original vs copy — authenticity attaches to the version created in the transaction; later reproductions are surrogates unless their provenance says otherwise",
+        "Organic accumulation — records arise naturally from activity (correspondence files, ledgers, email threads) rather than being collected like books",
+        "Records in law — the U.S. Federal Records Act (44 U.S.C. ch. 31) defines records by creation or receipt in transaction of business; FOIA and discovery convert that definition into enforceable rights",
+        "Archives vs library materials — archives hold unique, organic, unrepeatable records; libraries hold published, reproducible works; the boundary shapes collecting policy",
+        "Personal papers — the same tests applied to one person's papers: fixed form, created in the course of a life, evidence of that life's activity",
+        "Digital records — fixity is a property of bits plus metadata (PREMIS events) rather than paper; the same provenance tests apply to an email or spreadsheet",
+        "Record vs memory artifact — archives keep records as evidence first; memory institutions may keep artifacts for symbolic value, a distinction that steers appraisal"
+      ],
+      "know_how": [
+        "Apply the three tests to any item: created or received in the course of activity? fixed in form? evidence of that activity? — pass all three to call it a record",
+        "State the provenance of an item in one sentence — creator, function, date range — before classifying it",
+        "Distinguish record from reference copy: when shown a photocopy, ask which version was created in the transaction",
+        "Test uniqueness and reproducibility to place an item in archive vs library collecting scope",
+        "Write the scope note for a small personal-papers accession naming what counts as a record and what the archive will not keep",
+        "Defend a boundary decision out loud against a 'just keep it anyway' objection, citing the record's evidentiary purpose"
+      ],
+      "habits": [
+        "Ask 'what activity produced this?' before asking 'what is it about?'",
+        "When a stray item arrives, name creator and function before subject",
+        "Question reproductions by default: 'which copy is the record?'",
+        "In collecting conversations, sort items into record / non-record / reference copy before discussing retention",
+        "Re-run the three tests when a borderline item resurfaces instead of trusting the earlier label"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "community": "low" },
+      "checkpoint": "Given ten mixed items (letters, a published book, a photocopied contract, a spreadsheet, a receipt, a brochure, an email thread, a photograph, a postcard, a backup drive), classify each as record or non-record with a one-sentence provenance-and-purpose justification, with no more than one error.",
+      "common_failure": "Treating 'interesting content' as the test: keeping a rich brochure while discarding a dull payroll ledger because the ledger seems boring. The record test is evidentiary, not informational, and this error quietly strips the archive of its proof function.",
+      "sources": [
+        "Hilary Jenkinson, A Manual of Archive Administration (1922)",
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956)",
+        "Society of American Archivists, Dictionary of Archives Terminology",
+        "U.S. Federal Records Act, 44 U.S.C. ch. 31"
+      ]
+    },
+    {
+      "id": "archival-sciences.foundations.provenance",
+      "label": "Provenance",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": [
+        "archival-sciences.foundations.what-is-record"
+      ],
+      "soft_prereqs": ["archival-sciences.foundations.archival-function"],
+      "one_line": "Trace any body of records to the office or person that created it and use that creator link to explain why the records belong together as one group.",
+      "hours": 8,
+      "know_what": [
+        "Provenance — the office, person, or organization that created and accumulated the records; the fundamental organizing principle of archives",
+        "Original order — the arrangement the creator gave the records; with provenance it forms the basis for respecting a fonds or record group",
+        "Record group / fonds — the highest level of control, named for the creating body; U.S. practice says record group, Canadian and European practice says fonds",
+        "Chain of custody — the documented succession of custody that makes authenticity provable; a break weakens the record's evidentiary weight",
+        "Fonds vs collection — a fonds grows organically from one creator; a collection is assembled by the archive, and the two are kept separate in arrangement",
+        "Creator authority — the creator link is what explains why heterogeneous material (letters, ledgers, photographs) belongs together as one body",
+        "Respect des fonds — the principle that records of one creator are never mixed with another's, codified by the 1841 French ministerial rules",
+        "Provenance in the digital age — metadata capturing creator and context (PREMIS, OAIS packages) replaces physical custody as the carrier of provenance",
+        "Provenance vs pertinence — the rejected alternative of arranging by subject, which destroys the evidence of the creating function",
+        "Provenance and authenticity — for legal and scholarly use, provenance is what lets a reader trust that the record is what it purports to be"
+      ],
+      "know_how": [
+        "Identify the creator of a body of records from internal evidence (letterheads, signatures, filing codes) when no documentation survives",
+        "Construct the record-group hierarchy — creator → subgroup/office → series — for an accession in one pass",
+        "Trace the chain of custody from creation to the archive, documenting each transfer with dates and parties",
+        "Separate a fonds from an artificial collection on sight and assign distinct collection IDs",
+        "Map two intermingled creators (e.g., a married couple's joint papers) into separate provenance units without splitting physical files",
+        "Reconstruct original order from folder titles, file codes, or a registry system when the physical order has been disturbed"
+      ],
+      "habits": [
+        "Always ask 'whose records are these?' before arranging or describing anything",
+        "When material looks mixed, assume two creators until proven one — then hunt for the boundary",
+        "Cite the creating office in every description, not just the archive's own collection name",
+        "Before reboxing, photograph or note the existing order so original order survives the rehousing",
+        "When provenance is unknown, say so in the description rather than inventing a creator"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "postcustodial": "high" },
+      "checkpoint": "Given a box of mixed personal papers from one household (two careers, joint finances, shared correspondence), identify the creators, state the provenance and original order of each body in a written note, and assign record-group-level IDs before any arrangement begins.",
+      "common_failure": "Reordering records by subject ('neater') or merging two families' papers because they arrived in one box. The moment you arrange by pertinence you destroy the creator link that makes the records evidence — the damage is invisible but permanent.",
+      "sources": [
+        "Hilary Jenkinson, A Manual of Archive Administration (1922)",
+        "Michel Duchein, 'Theoretical Principles and Practical Problems of Respect des Fonds in Archival Science' (1983)",
+        "Society of American Archivists, Dictionary of Archives Terminology — provenance, original order, fonds",
+        "Terry Cook, 'The Concept of the Archival Fonds in the Post-Custodial Era' (1993)"
+      ]
+    },
+    {
+      "id": "archival-sciences.appraisal.appraisal-criteria",
+      "label": "Appraisal criteria",
+      "tier": 3,
+      "cluster": "appraisal",
+      "prereqs": [
+        "archival-sciences.foundations.provenance"
+      ],
+      "soft_prereqs": ["archival-sciences.foundations.record-lifecycle", "archival-sciences.appraisal.retention-schedules"],
+      "one_line": "Judge a body of records' enduring value with Schellenberg's evidential and informational tests, and state the keep-or-discard call in one paragraph.",
+      "hours": 12,
+      "know_what": [
+        "Appraisal — the archival function of deciding which records have enduring value and deserve acquisition and preservation; the archive's most consequential act",
+        "Evidential value — Schellenberg's test of value inhering in records that document the origins, structure, and functioning of the creating body",
+        "Informational value — Schellenberg's test of value inhering in records as sources of information about persons, places, things, and problems, independent of the creator",
+        "Primary vs secondary value — value to the creator in daily operation vs value to society for research; appraisal judges secondary value",
+        "Macro-appraisal — Terry Cook's reorientation: appraise the function and the citizen-state interaction, deciding the societal context worth documenting before judging any series",
+        "Retention schedule — the records-management instrument fixing retention periods by record series; the operational front end that appraisal refines",
+        "Disposition — the authorized final act — transfer to archives, destruction, or continued retention — requiring legal authorization",
+        "Sampling — keeping a statistically representative slice of a large series (e.g., 1-in-N case files) rather than all or nothing",
+        "Duplication test — the practical screen: does another institution already hold this content, or does the series survive elsewhere?",
+        "Appraisal report — the written record of the value judgment, the criteria applied, and the disposition recommendation — the decision's audit trail"
+      ],
+      "know_how": [
+        "Run Schellenberg's two tests on a series and write a one-paragraph keep-or-discard call naming the evidential and informational grounds",
+        "Separate primary from secondary value in a series description before weighing archival worth",
+        "Apply Cook's macro-appraisal at the function level: name the documented functions and citizen interactions, then target the series that evidence them",
+        "Read a retention schedule and confirm which series are archival candidates before any disposition",
+        "Design a sampling scheme for a large case-file series and document the interval and rationale",
+        "Draft an appraisal report — criteria, evidence examined, disposition recommendation — in under a page"
+      ],
+      "habits": [
+        "State the appraisal rationale out loud before acting on it — 'this evidences X, so keep'",
+        "Check for duplication — 'who else holds this?' — before accepting any accession",
+        "When a series is marginal, name the doubt and the counterfactual ('if discarded, what evidence is lost?') instead of defaulting to keep",
+        "Attach the disposition decision to the schedule or report so it can be audited later",
+        "Revisit appraisal decisions on a cycle; reappraisal is legitimate, not a betrayal of the original call"
+      ],
+      "know_why": {
+        "claim": "Schellenberg's evidential and informational tests are objective professional criteria: applied properly, they yield a defensible keep-or-discard judgment.",
+        "because": "the tests anchor appraisal in properties of the records — what they evidence, what information they carry — rather than in the archivist's taste or the creator's prominence, so decisions can be justified and audited.",
+        "disputed_by": "Terry Cook and the macro-appraisal school argue the tests are content-focused and creator-bound, and that appraisal is really a socially constructed act of remembering and forgetting — the archivist decides what future society will know, a power no criteria can make neutral; the community archives school adds that expert appraisal of community records reproduces archival authority over the community's own memory.",
+        "source": "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956); Terry Cook, 'Macroappraisal in Theory and Practice' (2004-05); appraisal debates in American Archivist and Archivaria"
+      },
+      "school_weights": { "custodial": "high", "postcustodial": "low", "community": "low" },
+      "checkpoint": "Given three series from one creator (a payroll ledger, a complaints correspondence file, a marketing brochure run), write an appraisal report for each: keep or discard, evidential and informational grounds, and the series-level disposition for the kept ones. Each call must survive a colleague's challenge.",
+      "common_failure": "Appraising by gut or by scarcity ('it's old so it's valuable') instead of by criteria, then discovering the kept records document nothing anyone will study while the discarded ones did. The one-paragraph justification exposes the error; skipping it hides the error until the records are gone.",
+      "sources": [
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956)",
+        "Terry Cook, 'Macroappraisal in Theory and Practice: Origins, Characteristics, and Implementation' (2004-05)",
+        "Barbara L. Craig, Archival Appraisal: Theory and Practice (2004)",
+        "Society of American Archivists, Appraisal and Acquisition resources"
+      ]
+    },
+    {
+      "id": "archival-sciences.arrangement.arrangement-plan",
+      "label": "Arrangement plan",
+      "tier": 4,
+      "cluster": "arrangement",
+      "prereqs": [
+        "archival-sciences.appraisal.appraisal-criteria",
+        "archival-sciences.foundations.original-order"
+      ],
+      "soft_prereqs": ["archival-sciences.arrangement.series-identification"],
+      "one_line": "Plan an accession's arrangement — record groups, series, subseries mirroring creator functions — on paper before touching a single folder.",
+      "hours": 10,
+      "know_what": [
+        "Arrangement — the function of organizing records into the hierarchy that mirrors the creating body's structure: record group → series → subseries → file",
+        "Record group — the top of the U.S. hierarchy, named for the creating agency; the equivalent of the fonds in Canadian practice",
+        "Series — a body of records filed together under one system (alphabetical, chronological, numerical) or produced by one activity; the level where arrangement and description most often meet",
+        "Subseries — a logical subdivision of a series where the filing system or activity changed within it",
+        "Original order — the creator's own filing order; the default arrangement unless it is unusable or unknowable",
+        "Series identification — recognizing series boundaries from filing systems, forms, and functions before writing the plan",
+        "Arrangement plan — a written scheme of the accession's hierarchy produced before folders are touched, with container numbers assigned after",
+        "MPLP — Greene and Meissner's More Product, Less Process default: series-level arrangement, no item-level work, applied to clear backlogs",
+        "Physical vs intellectual arrangement — the order of boxes on the shelf vs the hierarchy in the finding aid; they need not match",
+        "Level of control — deciding how deep to arrange (series vs file vs item) from use and resources, stated in the plan"
+      ],
+      "know_how": [
+        "Produce a written arrangement plan for an accession — record group, series, subseries, planned container sequence — before reboxing anything",
+        "Identify series within a body of records from filing clues (alphabetical correspondence, numbered case files, chronological reports)",
+        "Split or merge series candidates with the test: does each candidate share one filing system and one function?",
+        "Assign container numbers that keep physical and intellectual order consistent, or document the deliberate mismatch",
+        "Write the series-level container list that the finding aid will later mirror",
+        "Apply the MPLP default consciously: state the level of arrangement you will stop at and why"
+      ],
+      "habits": [
+        "Plan on paper first; rebox only after the plan is written",
+        "When two filing systems appear in one box, assume two series until proven one",
+        "Record the creator's original order before disturbing it — note folder titles and file codes first",
+        "When unsure how deep to arrange, ask what the researcher needs, not what the material deserves",
+        "Leave the arrangement plan with the accession file so future processors inherit the reasoning"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "postcustodial": "low" },
+      "checkpoint": "Given a real accession of 20-40 boxes with mixed filing systems, produce a written arrangement plan — record group, series, subseries, container sequence, and chosen level of control — without moving a single folder, and defend each series boundary to a colleague.",
+      "common_failure": "Arranging as you go: opening boxes and reordering folders by topic or 'neatness', which destroys original order, or skipping the plan and ending with a hierarchy that contradicts the finding aid. The result is an arrangement that has to be redone at full reprocessing cost.",
+      "sources": [
+        "Mark A. Greene and Dennis Meissner, 'More Product, Less Process: Revamping Traditional Archival Processing' (2005)",
+        "Fredric M. Miller, Arranging and Describing Archives and Manuscripts (1990)",
+        "Society of American Archivists, Arrangement and Description manual",
+        "T.R. Schellenberg, Modern Archives: Principles and Techniques (1956)"
+      ]
+    },
+    {
+      "id": "archival-sciences.description.finding-aid",
+      "label": "Finding aid",
+      "tier": 5,
+      "cluster": "description",
+      "prereqs": [
+        "archival-sciences.description.dacs",
+        "archival-sciences.arrangement.arrangement-plan"
+      ],
+      "soft_prereqs": ["archival-sciences.description.authority-control"],
+      "one_line": "Write a DACS-compliant finding aid — collection-level and series-level descriptions, biographical note, scope and content — a researcher can use without staff help.",
+      "hours": 15,
+      "know_what": [
+        "Finding aid — the document that lets a researcher navigate a collection without staff help: a hierarchy of descriptions from collection level down to series and file level",
+        "DACS — Describing Archives: A Content Standard, the U.S. content standard whose 25 elements define what a compliant finding aid must say",
+        "DACS elements — title, date, creator, scope and content, biographical or historical note, arrangement note, access and use restrictions, preferred citation, among the 25",
+        "EAD3 — Encoded Archival Description, the XML schema (ead3.dtd and XSD) that encodes finding aids for interchange; the <c> component hierarchy mirrors the arrangement",
+        "Levels of description — DACS's rule: describe at the level that gives the researcher enough to find and understand the material, not every level at once",
+        "Scope and content note — the element that tells the researcher what the records contain and how they evidence the creator's activity",
+        "Biographical / historical note — the creator's story, written to explain why the records took the shape they did",
+        "Access restrictions and conditions governing use — the elements that tell the researcher what they cannot see and why",
+        "Authority-controlled names — creator names matched to VIAF or LCNAF identifiers so the same person links across finding aids and catalogs",
+        "Container list — the series- or file-level box-and-folder listing that connects the description to physical retrieval"
+      ],
+      "know_how": [
+        "Write a DACS-compliant collection-level description — title, date, extent, creator, scope and content, biographical note, restrictions — in the required order and wording",
+        "Draft series-level descriptions that mirror the arrangement plan, one paragraph each with dates and extent",
+        "Encode a finding aid in EAD3 with the <archdesc> → <dsc> → <c> hierarchy and validate it against the ead3 schema",
+        "Match creator names to LCNAF or VIAF records and record the identifiers in the authority fields",
+        "Link the finding aid's container list to the physical box numbers so retrieval is one lookup",
+        "Run a DACS checklist against a draft and fix every missing element before publication"
+      ],
+      "habits": [
+        "Describe at the level the researcher needs, not the level the material deserves",
+        "Write scope and content by naming what the series evidences, not just listing folder titles",
+        "Keep creator names consistent — check LCNAF before writing a name from memory",
+        "Update the finding aid whenever arrangement changes; never let the two diverge",
+        "Read your own finding aid as a stranger: can a researcher find the payroll series in under a minute?"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "community": "low" },
+      "checkpoint": "Write a DACS-compliant finding aid for an accession you have arranged: collection-level description plus series-level entries, an EAD3 encoding that validates against the schema, and creator names resolved in LCNAF or VIAF. A colleague using only the finding aid must be able to locate any named series.",
+      "common_failure": "Copying folder titles into the finding aid and stopping: the result describes containers, not records, and researchers cannot tell what the collection evidences. Equally common is writing one giant narrative instead of the DACS hierarchy, which the EAD3 encoding then cannot represent.",
+      "sources": [
+        "Society of American Archivists, Describing Archives: A Content Standard (DACS)",
+        "Library of Congress, EAD3 schema and Tag Library (loc.gov/ead)",
+        "VIAF and LC Name Authority File documentation",
+        "Michael J. Fox and Peter L. Wilkerson, Introduction to Archival Organization and Description (SAA, 1998)"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.digitization-for-access",
+      "label": "Digitization for access",
+      "tier": 6,
+      "cluster": "preservation",
+      "prereqs": [
+        "archival-sciences.description.finding-aid"
+      ],
+      "soft_prereqs": ["archival-sciences.preservation.handling-and-storage"],
+      "one_line": "Run a digitization project end to end — scan at 300-600 dpi TIFF with a target, name files per scheme, link surrogates to descriptions — so users get images, not the originals.",
+      "hours": 25,
+      "know_what": [
+        "Digitization for access — reformatting originals into surrogates so users get images, not the originals; distinct from digitization for preservation",
+        "Master vs derivative — an uncompressed or lossless master (300-600 dpi TIFF, usually 8-bit grayscale or 24-bit color) kept as the archive of record, plus a compressed derivative (JPEG or PDF) for delivery",
+        "Resolution choice — 300 dpi minimum for text and photographic prints, 600 dpi for small originals and halftones, scanned at the size of the original, never upscaled",
+        "Scanning target — a color or grayscale target (IT8 or the AIIM/ISO 12641 family) captured in the first frame to calibrate and prove color accuracy",
+        "File naming — a systematic scheme (collection ID + box + folder + item + extension) that is human-readable and sortable, never a camera-generated number",
+        "Checksums and fixity — MD5 or SHA-256 digests recorded at ingest and re-verified on a schedule to prove files have not changed",
+        "PREMIS — the preservation metadata standard that records the events (capture, checksum verification, migration) affecting each object",
+        "OAIS — ISO 14721, the reference model whose SIP/AIP/DIP packages (submission, archival, dissemination information packages) structure digital objects",
+        "Linked surrogates — the derivative's identifier tied to the finding aid and catalog record so the image is discoverable from the description",
+        "Digitization project management — selection, workflow, quality control, staffing, and cost per image as the project's operating frame"
+      ],
+      "know_how": [
+        "Set up a capture workflow: document handling, target frame first, scan at the chosen dpi into TIFF, verify each image against a quality checklist",
+        "Choose dpi and bit depth by original type (300 dpi 8-bit for text, 600 dpi 24-bit for photographs) and justify the choice in the project plan",
+        "Generate a file-naming scheme and rename every output so a stranger can reconstruct the hierarchy from filenames alone",
+        "Compute checksums on ingest, store them in a fixity manifest, and schedule periodic verification",
+        "Write the PREMIS event record for each digitization run: object, event type (capture), agent, outcome",
+        "Structure the output as OAIS packages: the TIFF master in the AIP, the JPEG or PDF derivative in the DIP, metadata alongside both",
+        "Link each surrogate to its finding-aid series and catalog record so retrieval lands on the image"
+      ],
+      "habits": [
+        "Scan the target frame first on every run — no target, no trusted image",
+        "Verify every master's checksum before deleting or returning the original to storage",
+        "Never treat the derivative as the record: the master TIFF is the archive, derivatives are disposable",
+        "When the workflow drifts (new scanner, new operator), re-verify quality before batching",
+        "Record capture metadata at capture time; backfilling it later is a data-recovery project"
+      ],
+      "know_why": {
+        "claim": "Digitization for access is the right default because surrogates free the originals: users see images, the physical record stays protected, and access scales beyond the reading room.",
+        "because": "each request served on the surrogate instead of the original removes handling damage and unlocks remote, simultaneous use, which is the point of an access mission.",
+        "disputed_by": "the preservation-first school warns that access digitization drives use and reproduction costs that outrun preservation capacity — staff time goes to scanning and derivatives while environmental control, conservation, and digital preservation are underfunded; the community archives school adds that digitization reproduces the archive's power by deciding which records are worth making visible.",
+        "source": "FADGI Technical Guidelines for Digitizing Cultural Heritage Materials; SAA and ALA digitization guidance; access-vs-preservation debate in American Archivist and Preservation, Digital Technology & Culture"
+      },
+      "school_weights": { "access-first": "high", "preservation-first": "low" },
+      "checkpoint": "Digitize a 20-item sample end to end: 300-600 dpi TIFF masters with a target frame, a validated file-naming scheme, checksums recorded in a fixity manifest, derivative files linked to finding-aid descriptions, and a PREMIS event for the capture. A colleague must be able to locate and verify any item from its filename alone.",
+      "common_failure": "Treating digitization as scanning: saving everything as JPEG at screen resolution with camera-generated filenames and no checksums — surrogates that cannot serve as archival masters and must be redone at full cost. The mirror-image failure is scanning originals to 'preserve' them while damaging or degrading the originals in the process.",
+      "sources": [
+        "FADGI, Technical Guidelines for Digitizing Cultural Heritage Materials (loc.gov/preservation/digital)",
+        "SAA, Digitization Guidelines and Standards resources",
+        "PREMIS Data Dictionary for Preservation Metadata",
+        "OAIS Reference Model, ISO 14721:2012"
+      ]
+    },
+    {
+      "id": "archival-sciences.access.reference-services",
+      "label": "Reference services",
+      "tier": 7,
+      "cluster": "access",
+      "prereqs": [
+        "archival-sciences.description.finding-aid",
+        "archival-sciences.preservation.digitization-for-access"
+      ],
+      "soft_prereqs": ["archival-sciences.access.reading-room", "archival-sciences.access.reference-interview", "archival-sciences.access.restrictions-and-privacy"],
+      "one_line": "Run a reference service — interview, retrieval via finding aids, service to in-person and remote users — with policies and statistics, not just ad hoc answers.",
+      "hours": 12,
+      "know_what": [
+        "Reference service — the archive's function of serving records to users: interviews, retrieval, duplication, instruction, and the statistics that run it",
+        "Reference interview — the structured conversation (at the registration desk or by email) that turns a vague request into a retrievable query",
+        "Reading-room rules — registration, ID checks, no pens, gloves for photographs, one box at a time, coat lockers — the custody controls that let access and preservation coexist",
+        "Retrieval workflow — request → finding-aid lookup → pull from storage → delivery to the reading room → reshelving, measured by turnaround time",
+        "Remote reference — email, chat, and virtual service for off-site users, with reproduction and fee policies",
+        "Restrictions — access restrictions (privacy, donor-imposed, national security, attorney-client) that staff apply before any record is served",
+        "Copyright and use — the archive can serve records it holds without owning copyright; duplication policies must respect the rights holder",
+        "Reference statistics — counting requests, questions, retrievals, and remote contacts; the numbers that justify staffing and digitization budgets",
+        "Reference policy — the written terms of what the archive will and will not do, with fee and turnaround provisions",
+        "Orientation and instruction — teaching users the finding aids and reading-room rules so they can navigate independently"
+      ],
+      "know_how": [
+        "Run a reference interview that converts 'I want to know about the factory' into a retrievable query: records, date range, creator, and purpose of research",
+        "Apply the retrieval workflow end to end and record turnaround — request to delivery — on the reference log",
+        "Enforce reading-room rules without friction: register the reader, secure coats and bags, serve one box per trip",
+        "Resolve a restricted record: check the restriction field in the finding aid, consult the restriction policy, and explain the denial to the user",
+        "Answer a remote request using the finding aid and digitized surrogates, and log the transaction",
+        "Compile the monthly reference statistics from the reference log and summarize the trends in one paragraph",
+        "Draft the reference policy stating what the archive will and will not do, with fee and turnaround terms"
+      ],
+      "habits": [
+        "Interview before retrieving: never pull boxes for an unclarified request",
+        "Log every reference transaction at the time of service, not at the end of the day",
+        "When a user asks about a subject, think series first — which series evidences this?",
+        "Quote the restriction or policy line when denying access, never a personal judgment",
+        "Turn repeated questions into finding-aid or FAQ improvements"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "high", "community": "high" },
+      "checkpoint": "Run a live reference shift: register a reader, take three requests (one vague, one restricted, one remote), retrieve and deliver the records, deny the restricted one with the policy cited, and log all transactions with turnaround times. The log must let a colleague reconstruct the shift.",
+      "common_failure": "Answering from memory instead of the finding aid, so the user gets the wrong series and the retrieval statistics never match the boxes actually pulled. The other classic: skipping the interview as a nuisance, which converts a fifteen-minute request into an afternoon of wrong retrievals.",
+      "sources": [
+        "Society of American Archivists, Reference and Access: Innovative Practices for Archives and Special Collections (2014)",
+        "SAA, Guidelines for Evaluating Archival Reference Services",
+        "Richard H. Lytle, 'Intellectual Access to Archives: I. Provenance and Content Indexing Methods of Subject Retrieval' (1980)",
+        "In-house reference and reading-room policies of the archive you serve"
+      ]
+    }
+  ]
+}

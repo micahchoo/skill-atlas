@@ -1,0 +1,338 @@
+{
+  "domain": "grant-writing",
+  "batch": 6,
+  "ids": [
+    "grant-writing.stewardship.acknowledgments",
+    "grant-writing.stewardship.reporting-calendar",
+    "grant-writing.stewardship.narrative-reporting",
+    "grant-writing.stewardship.funder-relationship",
+    "grant-writing.stewardship.funder-visits",
+    "grant-writing.stewardship.renewal-ask",
+    "grant-writing.stewardship.impact-stories"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.stewardship.acknowledgments",
+      "label": "Funder acknowledgments",
+      "tier": 1,
+      "cluster": "stewardship",
+      "prereqs": [],
+      "one_line": "Credit your funders in the places their grant agreements require — websites, materials, events — visibly and promptly.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "the acknowledgment clause in the grant agreement — the exact sentence some funders require on materials, often verbatim with a set placement",
+        "funder logo requirements — file formats, color vs mono versions, clear-space minimums, and the prohibition on re-coloring or altering the lockup",
+        "the named-credit convention — \"generously supported by [Funder]\" taglines and how to order multiple funders on a page",
+        "digital acknowledgment places: website footer and donor page, email signatures, social posts, and annual report masthead",
+        "federal public-acknowledgment language — awards made under federal dollars require specific statements (e.g., \"This project was supported by...\") and disclaimers of endorsement",
+        "the distinction between required acknowledgment (agreement clause) and optional thank-you (which never substitutes for the clause)"
+      ],
+      "know_how": [
+        "read the grant agreement's acknowledgment clause before celebrating the award, and list every place it names",
+        "pull the funder's current logo pack from their brand or grantee portal instead of reusing an old file",
+        "place the acknowledgment within the window the agreement sets (often 30-60 days of award) and log the placement",
+        "match the funder's stated tagline and language verbatim — do not paraphrase a required credit",
+        "when multiple funders support one program, order credits by size or agreement requirement, never by recency",
+        "notify the funder before a major announcement or event where they are credited, so they can coordinate"
+      ],
+      "habits": [
+        "checking every new grant agreement for an acknowledgment clause before doing anything else with the award",
+        "keeping a running acknowledgment log: funder, required language, places, date placed, proof screenshot",
+        "reviewing the website footer and annual report masthead quarterly for stale or missing credits",
+        "flagging new public materials (brochures, reports, event signage) to funders who require advance notice",
+        "re-verifying logo files against the funder's brand guide every time a new material is produced"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "corporate": "high"
+      },
+      "checkpoint": "Place each funder's required acknowledgment (logo and tagline exactly per the agreement) in every named location — website footer, annual report, event signage — within the agreement's stated window, with the placement logged.",
+      "common_failure": "Treating acknowledgment as optional cosmetics — funders audit their grantees' visibility and some make a silent credit the first sign of a weak relationship; using an outdated or re-colored logo; paraphrasing required language; crediting on the website but missing the annual report the agreement also names.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Candid — grantee acknowledgment guidance (Candid.org)",
+        "Foundation grant agreement templates (e.g., Ford Foundation, Robert Wood Johnson Foundation award letters)"
+      ]
+    },
+    {
+      "id": "grant-writing.stewardship.reporting-calendar",
+      "label": "Reporting calendar",
+      "tier": 2,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.acknowledgments"],
+      "one_line": "Track every interim and final report deadline across active grants so no reporting window is ever missed.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "know_what": [
+        "interim vs final reports — many agreements require a mid-grant narrative or financial report, not just a closing one",
+        "the two report windows — due-on-period-end vs due-30-60-days-after-period-end — and which each funder uses",
+        "report components per funder: narrative, financial statement, SF-425 (Federal Financial Report) for federal awards, and supporting data",
+        "the reporting section of the award letter — the authoritative deadline source, not the funder's marketing page",
+        "federal monitoring duties under 2 CFR 200.328-200.329, including subrecipient monitoring and the annual closeout timeline",
+        "no-cost extension and carryover mechanics, whose approval windows often bind to reporting deadlines"
+      ],
+      "know_how": [
+        "build the calendar the day each award lands: due date, portal or email, components, and the person who drafts and the person who approves",
+        "work backward two weeks from every deadline for the drafting window, and flag conflicts between reports due the same week",
+        "distinguish narrative from financial deadlines — they sometimes land on different dates in the same agreement",
+        "record the submission portal and login for each funder (Grants.gov, foundation portals, email) so submission is not a scavenger hunt",
+        "set reminders at 60, 30, and 7 days out, and treat the 7-day mark as the freeze for drafting",
+        "reconcile the calendar monthly with finance so drawdowns and cash requests are not blocked by a missing report"
+      ],
+      "habits": [
+        "entering reporting obligations into the tracker on award day, never 'later'",
+        "trusting the award letter over any third-party listing of deadlines",
+        "reviewing the full calendar monthly with the person who signs reports",
+        "treating a funder's silence as no signal at all — absence of a reminder is not an extension",
+        "logging the submission confirmation so there is proof on file for every report"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "federal": "high"
+      },
+      "checkpoint": "Produce a reporting calendar covering every active grant — each report's due date, portal, components (narrative/financial), and owner — with a two-week drafting buffer before every deadline, and update it within a week of any new award.",
+      "common_failure": "Relying on funder reminders — many are never sent and some funders penalize lateness or freeze further draws; treating the calendar as a one-time list instead of a living tracker; missing that interim and final reports have different dates; losing portal credentials at deadline time.",
+      "sources": [
+        "2 CFR 200.328-200.329 (monitoring and reporting)",
+        "SF-425 Federal Financial Report instructions (grants.gov)",
+        "Candid — grant reporting best practices"
+      ]
+    },
+    {
+      "id": "grant-writing.stewardship.narrative-reporting",
+      "label": "Narrative & financial reporting",
+      "tier": 3,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.reporting-calendar"],
+      "one_line": "Write progress reports that document outcomes against the proposal's promises and flag problems before funders find them.",
+      "hours": 10,
+      "soft_prereqs": ["grant-writing.strategy.smart-objectives", "grant-writing.budget.budget-narrative"],
+      "know_what": [
+        "the no-surprise rule — a funder should learn bad news from you, in writing, before they learn it any other way",
+        "promised objectives as the report's skeleton — the proposal's SMART objectives are the checklist the report must answer",
+        "activity vs outcome reporting — what you did (activities) vs what changed (outcomes), and why funders pay for the second",
+        "financial report formats — actuals vs budget, the SF-425 for federal awards, and the variance line a reviewer reads first",
+        "the variance explanation convention — every material over- or under-spend line gets a one-line reason, not just a number",
+        "evidence attachments — data tables, participant counts, photos with consent, and third-party evaluations that back the narrative claims"
+      ],
+      "know_how": [
+        "pull the proposal's objectives and outcome measures before drafting, and structure the report objective by objective",
+        "quantify every claim with the measure from the evaluation plan — named count, percentage, or instrument score, not 'many'",
+        "flag any shortfall or delay on the first page, with the cause and a corrective plan, before the praise",
+        "keep narrative and financial figures consistent — the people count in the story must match the headcount in the budget line",
+        "write the final report so it doubles as renewal evidence: results, lessons learned, and what the next phase would buy",
+        "submit through the agreed channel with confirmation saved, well before the deadline so funder questions have time to breathe"
+      ],
+      "habits": [
+        "keeping a running evidence file through the grant year, so the report is assembled, not recreated, at deadline",
+        "writing the report against the proposal document, never from memory",
+        "reporting a problem the week it is known, not the week the report is due",
+        "re-reading the previous report before writing the next, so the story is continuous",
+        "reusing reported data in the next proposal — what the funder already approved is the strongest evidence you have"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "evaluation": "high"
+      },
+      "checkpoint": "Write a progress report that maps every promised objective to a reported actual with a number, flags any shortfall on the first page with a corrective plan, and matches its financial figures to the budget — submitted before the deadline with confirmation saved.",
+      "common_failure": "Writing reports as marketing, so a funder cannot tell what actually changed; hiding problems until the final report, which converts a fixable setback into a trust break; reporting activities instead of outcomes; letting narrative and financial numbers contradict each other; drafting at the deadline so there is no time for the funder's follow-up questions.",
+      "sources": [
+        "2 CFR 200.328-200.329 (monitoring and reporting)",
+        "SF-425 Federal Financial Report instructions (grants.gov)",
+        "The Grantsmanship Center — grant reporting articles"
+      ]
+    },
+    {
+      "id": "grant-writing.stewardship.funder-relationship",
+      "label": "Funder relationship",
+      "tier": 3,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.acknowledgments", "grant-writing.landscape.funder-fit"],
+      "one_line": "Run a funder relationship deliberately — updates, transparency, responsiveness — so the funder knows you between applications, not just at ask time.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "the program officer role — the funder staffer who champions your grant internally; the grants manager who administers it, and why they are different audiences",
+        "the check-in cadence convention — a quarterly touchpoint between reports is standard for active grants; silence is not a relationship",
+        "responsiveness norms — returning funder email within one business day, and flagging when an answer will take longer",
+        "what a program officer can use from you: early results, participant stories with consent, photos, and data they can quote in their own reporting",
+        "the transparency norm — sharing a problem early is read as competence; hiding it is read as risk",
+        "the single-voice rule — the funder should hear one consistent story from your organization, not conflicting updates from different staff"
+      ],
+      "know_how": [
+        "schedule a standing check-in with each active program officer (quarterly call or short email) and log what was discussed",
+        "respond to funder inquiries within one business day, even if the full answer takes longer",
+        "send early wins and early warnings before the report deadline, so the report confirms what the funder already knows",
+        "give the program officer quotable material — a stat, a story, a photo — they can reuse in their internal reporting",
+        "invite the program officer to relevant events and offer a tailored tour when they visit",
+        "keep a relationship log: contacts, preferences (email vs call), staff changes, and what was promised, so the relationship survives turnover"
+      ],
+      "habits": [
+        "updating the program officer before the report, never using the report as the first contact since the award",
+        "tracking each PO's stated preferences and reviewing them before every touchpoint",
+        "noting program-officer changes immediately and re-onboarding the new person with a written context memo",
+        "never surprising the funder with bad news in a report they could have heard months earlier",
+        "reviewing the relationship log before every renewal cycle so the ask lands on a documented history"
+      ],
+      "know_why": {
+        "claim": "Cultivate the funder between grants — regular touchpoints that are not asks — so the renewal is decided on a known, trusted relationship rather than a cold application.",
+        "because": "foundation boards fund organizations their program officers can defend, and a PO who has heard your results and your problems firsthand can carry that defense; a documented relationship also survives PO turnover, which otherwise resets you to stranger status.",
+        "disputed_by": "the leave-them-alone camp holds that unsolicited contact between grants reads as needy, consumes a PO's limited hours, and that renewal decisions are actually made on the reported results — so cultivation effort is noise at best and a nuisance at worst.",
+        "source": "practitioner debate in The Grantsmanship Center Magazine and program-officer commentary at grantee conferences"
+      },
+      "school_weights": {
+        "foundation": "high",
+        "federal": "low",
+        "corporate": "low"
+      },
+      "checkpoint": "Run one mid-grant check-in: send a program officer a short update covering results and one early problem before the scheduled report, respond to their reply within one business day, and log the exchange with their stated preferences.",
+      "common_failure": "Treating the funder as a check-writer until the next ask — no contact for a year, then a renewal request that lands cold; or the opposite failure of contacting only to ask, so every touchpoint is a transaction; one staff member hoarding the relationship so it dies with their departure.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "The Grantsmanship Center — grantee-funder relationship guidance",
+        "Foundation program-officer panels at GrantSpace webinars (Candid)"
+      ]
+    },
+    {
+      "id": "grant-writing.stewardship.funder-visits",
+      "label": "Site visits & check-ins",
+      "tier": 4,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.funder-relationship"],
+      "one_line": "Prepare for a funder site visit or check-in so it confirms the story your proposal told instead of undercutting it.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.strategy.outcome-measures"],
+      "know_what": [
+        "the site visit as verification, not PR — funders attend to confirm the program exists, operates as proposed, and has the capacity to spend the money well",
+        "what funders watch for: fidelity to the proposal, real implementation capacity, staff who can answer specifics, and red flags (empty facilities, staged props, evasive answers)",
+        "who to bring — the people who run the work (program staff, frontline workers, finance if asked), not a lineup of executives",
+        "the virtual visit norm — since 2020 many check-ins are video calls; the same preparation applies plus tested technology",
+        "the unannounced-visit reality — anything you stage must survive a visit you did not schedule, so the staged and the real must match",
+        "the 48-hour follow-up convention — thank-you plus every promised document within two business days"
+      ],
+      "know_how": [
+        "ask the funder what they want to see before building the agenda, and build it to mirror the proposal's claims",
+        "prepare evidence for each agenda item: outcome data, participant stories with consent, and the program space itself",
+        "brief every staffer who will speak on the proposal's promises and the two or three numbers they must know cold",
+        "walk the actual program space before the visit and fix what a visitor would see, without staging anything new",
+        "rehearse the Q&A, including the questions you dread, and agree on what not to say (internal politics, unapproved plans)",
+        "for virtual visits, test the link, camera, and screen-share a day ahead, and have a phone fallback",
+        "send the thank-you and promised materials within 48 hours, and log what was discussed"
+      ],
+      "habits": [
+        "asking what the funder wants to see before writing a single agenda line",
+        "walking the program space as a visitor would before they arrive",
+        "briefing every speaker, including the person who only shows one data slide",
+        "never staging anything that could not survive an unannounced visit",
+        "sending follow-up materials while the visit is still fresh in the funder's memory"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "foundation": "high"
+      },
+      "checkpoint": "Run a site visit or check-in end to end: an agenda mirroring the proposal's claims, staff who can answer implementation questions in the room, rehearsed evidence for each agenda item, and a follow-up with promised materials sent within 48 hours.",
+      "common_failure": "Over-staging — funders see rehearsed performances and can visit unannounced, so the staged version and the real version must match; putting only the executive director in the room, so implementation questions go unanswered; treating the visit as a PR opportunity when the funder is there to verify; leaving a funder question unanswered until it dies.",
+      "sources": [
+        "Candid — preparing for a site visit (GrantSpace)",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "The Grantsmanship Center — site visit checklists"
+      ]
+    },
+    {
+      "id": "grant-writing.stewardship.renewal-ask",
+      "label": "Renewal & follow-on asks",
+      "tier": 4,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.narrative-reporting", "grant-writing.stewardship.funder-relationship"],
+      "one_line": "Convert a completed grant into a renewal or expansion ask using reported results as the evidence.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "know_what": [
+        "renewal vs expansion ask — same scope again vs more money or broader scope, and how the evidence burden differs",
+        "the reported-results-as-evidence convention — the final report's documented outcomes are the opening argument of the renewal ask",
+        "funder renewal mechanics — some foundations renew automatically after a clean final report; others require a fresh competitive application; know which you face",
+        "the board-cycle timing constraint — foundation budgets are set in cycles, so a renewal asked after the cycle closes waits a year",
+        "the multi-year commitment option — proposing 2-3 years of support at a stepped amount is a legitimate ask, not a given",
+        "bridge-funding fallbacks — a reduced-scope or short-bridge request keeps the door open when full renewal is not available"
+      ],
+      "know_how": [
+        "draft the renewal ask from the final report, quoting its documented outcomes as the evidence base",
+        "quantify the delta the grant produced — the before/after the money bought — rather than re-describing the program",
+        "propose the next phase with fresh SMART objectives and a specific multi-year structure and amount",
+        "time the ask to the funder's board cycle, working back from their decision meetings, typically 3-6 months before the grant ends",
+        "run the draft past the program officer before the formal submission, so the first official ask is not a surprise",
+        "prepare the fallback in advance: if full renewal is refused, ask what evidence or timing would change the answer"
+      ],
+      "habits": [
+        "starting the renewal conversation 3-6 months before the grant ends, never after it closes",
+        "building the ask from reported data, not from a blank page",
+        "tracking which funders renew automatically vs re-compete, and noting it in the pipeline tracker",
+        "treating a 'no' as information — ask what would change it and record the answer",
+        "never assuming renewal, even after three clean reports"
+      ],
+      "know_why": {
+        "claim": "Ask for renewal only after the final results are reported, so the ask is anchored in documented outcomes rather than promises.",
+        "because": "a renewal decision rests on what the money bought, and a program officer cannot defend a renewal to their board without results in hand; asking before results exist forces the funder to decide on faith, which is a weaker ask for everyone.",
+        "disputed_by": "the momentum camp argues the opposite: ask early, while the grant is visibly working and the relationship is warm, because foundation boards budget cycles ahead — a late ask can arrive after renewal money was already allocated to someone else, making results moot.",
+        "source": "practitioner debate in The Grantsmanship Center Magazine and program-officer commentary at grantee conferences"
+      },
+      "school_weights": {
+        "foundation": "high",
+        "corporate": "low"
+      },
+      "checkpoint": "Send a renewal request built on the final report's documented outcomes, with a specific multi-year amount and structure, timed to the funder's board cycle and previewed with the program officer before submission.",
+      "common_failure": "Assuming renewal and asking for more money with no new evidence; asking after the grant has closed so the funder's budget cycle has passed and the money is already allocated; sending a renewal ask that reads like a first-time proposal, ignoring the documented history; taking a 'no' as final instead of learning what would change the answer.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Candid — renewing foundation grants (GrantSpace)",
+        "The Grantsmanship Center — follow-on funding guidance"
+      ]
+    },
+    {
+      "id": "grant-writing.stewardship.impact-stories",
+      "label": "Impact storytelling",
+      "tier": 4,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.narrative-reporting"],
+      "one_line": "Turn reported outcomes into a specific story with a named beneficiary that humanizes the grant for funders and boards.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.strategy.outcome-measures"],
+      "know_what": [
+        "the one-named-beneficiary convention — a single specific person's arc humanizes data that a thousand names would blur",
+        "informed consent for stories — written permission covering name, photo, and quotes, and the exact materials and audiences each consent covers",
+        "photo and video release forms — the model-release standard, including minors' forms requiring a guardian's signature",
+        "the story-data pairing — every story is anchored to the reported outcome it illustrates, so the anecdote cannot float free of the evidence",
+        "sensitivity situations — survivors of violence, undocumented people, children, and health-service users, where even a consented story can expose someone; anonymity and composite options exist",
+        "the consent-lifecycle rule — a consent given for one funder's report does not cover a new funder, a public website, or a national conference"
+      ],
+      "know_how": [
+        "identify a story that illustrates a reported outcome — a named beneficiary whose arc maps to a data point in the report",
+        "obtain written consent before collecting photos or quotes, covering name, likeness, and exact uses, with the beneficiary allowed to read the final text first",
+        "store signed consent forms with the story file so every future use can be checked against the permission given",
+        "pair the story with its data point in reports and proposals — one paragraph of person, one line of number",
+        "re-confirm consent when a use changes: a new funder, a public report, or a press mention each need fresh permission",
+        "let the beneficiary approve the final wording, including the photo crop and the quote in context"
+      ],
+      "habits": [
+        "collecting consent at intake, not after the fact, so the story is ready when a funder asks",
+        "checking the consent log before every major use of a story or photo",
+        "never embellishing or merging two people's stories into one composite without saying so",
+        "keeping stories current — refreshing the archive so a three-year-old story is not doing duty for new funding",
+        "checking with the beneficiary before each new high-visibility use, even when consent is on file"
+      ],
+      "know_why": null,
+      "school_weights": {
+        "grantsmanship": "high",
+        "evaluation": "low"
+      },
+      "checkpoint": "Publish one impact story with a named beneficiary: written consent on file covering name, photo, and quotes for the specific funder use, beneficiary-approved final text, and the story linked to its reported outcome data point.",
+      "common_failure": "Using a photo or quote without consent and getting burned — one harm story (an exposed survivor, a misquoted beneficiary) ends the trust that took years to build; embellishing or merging stories until the anecdote no longer matches the data; reusing one story forever until it goes stale; treating the beneficiary as raw material instead of a person with rights over their own story.",
+      "sources": [
+        "Candid — ethical storytelling guidance (GrantSpace)",
+        "Andy Goodman, Storytelling As Best Practice",
+        "Foundation Center — consent and photo release templates"
+      ]
+    }
+  ]
+}

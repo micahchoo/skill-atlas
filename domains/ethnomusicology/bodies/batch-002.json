@@ -1,0 +1,332 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 2,
+  "ids": [
+    "ethnomusicology.foundations.music-culture-concept",
+    "ethnomusicology.foundations.defining-music",
+    "ethnomusicology.foundations.bimusicality",
+    "ethnomusicology.foundations.rilm-search",
+    "ethnomusicology.foundations.research-questions",
+    "ethnomusicology.foundations.disciplinary-debates",
+    "ethnomusicology.fieldwork.access"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.foundations.music-culture-concept",
+      "label": "Music as culture",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Explain a tradition's music with Merriam's tripartite model — conceptualization, behavior, sound — and show how a single performance instantiates all three layers.",
+      "hours": 10,
+      "know_what": [
+        "Merriam's tripartite model — conceptualization, behavior, sound, the three layers of The Anthropology of Music (1964) that moved the field from studying sound to studying music as human behavior",
+        "conceptualization — what the culture believes music is and does: the ideas, values, and categories held before any sound is made",
+        "behavior — the actions that produce and surround sound: who may perform, when, where, for whom, and what they do while playing",
+        "sound — the audible product, the only layer pre-Merriam music study habitually examined",
+        "'music in culture' vs 'music as culture' — Merriam's formula (music embedded in culture) against the later claim (e.g., Feld's) that music is not merely carried by culture but constitutes it",
+        "the performance as the unit — one event instantiating all three layers at once, the field's preferred analytic starting point",
+        "Blacking's Venda material — How Musical Is Man (1973), where children's songs show that music's meaning lives in the social relations that produce it, not in the notes",
+        "Nettl's formulation — The Study of Ethnomusicology (1983, 2005) reading music as a system of behavior and belief first, sound second"
+      ],
+      "know_how": [
+        "Split any performance you witness into the three layers: what people think about the music, what they do around it, what sounds result",
+        "Explain one performance with all three layers, showing a causal chain — a belief at the conceptualization layer shaping a behavior that shapes the sound",
+        "Diagnose an account that is sound-only and add the missing behavior and conceptualization layers to it",
+        "Ask the cultural questions at each layer: who is excluded from performing, when is this music appropriate, what counts as playing well",
+        "Check your three-layer account against practitioners' own categories before finalizing, so the layers are theirs, not imported",
+        "Use the model comparatively: run the same three questions against two performances and note which layer differs most"
+      ],
+      "habits": [
+        "Never describe a sound without asking what behavior produced it and what belief shapes that behavior",
+        "Ask of every performance who is excluded, and treat the answer as data",
+        "Run the tripartite split as a checklist on every field observation, not as a theory to recite",
+        "When reading an old comparative study, notice which of the three layers it silently dropped",
+        "Ask what the music does in the culture before asking what it is"
+      ],
+      "know_why": null,
+      "school_weights": { "interpretive": "high", "scientific": "low" },
+      "checkpoint": "Take a single performance you have witnessed or recorded and produce a one-page account organized as Merriam's three layers — conceptualization, behavior, sound — with at least two specific observations per layer and a sentence showing how a belief at one layer shaped what happened at another.",
+      "common_failure": "Reducing the model to a slogan — 'music is culture!' — and then describing only the sound layer anyway: the tripartite claim appears in the introduction, but the analysis stays note-level, with no account of who may perform, when, and why.",
+      "sources": [
+        "Alan P. Merriam, The Anthropology of Music (1964)",
+        "John Blacking, How Musical Is Man (1973)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.foundations.defining-music",
+      "label": "Defining music across cultures",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Argue where the category 'music' begins and ends for a given community using Blacking's 'humanly organized sound' and Nettl's cross-cultural definitions, instead of assuming your own boundary.",
+      "hours": 8,
+      "know_what": [
+        "'humanly organized sound' — Blacking's working definition in How Musical Is Man (1973): sound organized by people, whatever its local function",
+        "the cross-cultural survey of definitions — Nettl's finding that many cultures have no word equivalent to 'music', classifying sound by function, ritual, or emotion instead",
+        "the functional boundary — where a community draws the line between music and noise, music and ritual sound, music and speech",
+        "song vs speech — cultures that separate the two differently than the West does (chant, recitation, drummed speech sitting on the boundary)",
+        "the category problem — applying 'music' to traditions whose sound practices are organized as prayer, healing, or communication",
+        "emic vs etic definitions — insider categories vs analyst-imposed ones, the test for whether a boundary is the community's or yours",
+        "musical universals — the search for features common to all musics, and the critics who say the search itself imports the category"
+      ],
+      "know_how": [
+        "Ask the community's own boundary questions before defining anything: what do you call this sound, who makes it, when is it appropriate, what is it for",
+        "Test Blacking's definition against a case: does the community's practice count as 'humanly organized sound', and what does that framing add or hide",
+        "Locate where a tradition's classification of sound diverges from the Western 'music' category and state the divergence precisely",
+        "Run the emic/etic test on your own working definition and say whose category it is",
+        "State your operational definition before comparing two traditions, so the boundary is explicit and checkable",
+        "When a translation ('song', 'dance', 'ritual') carries a Western category into another language, flag it rather than absorbing it"
+      ],
+      "habits": [
+        "Ask what the practitioners call this before asking what this is",
+        "Check whether the language even has a word for 'music' and what territory it covers",
+        "Treat your own definition of music as a choice to be defended, not a given",
+        "Notice when a word you habitually use ('piece', 'concert', 'genre') smuggles in a Western boundary",
+        "Before any comparative claim, re-state the definition you are comparing under"
+      ],
+      "know_why": {
+        "claim": "'Music' names a universal human category: Blacking's 'humanly organized sound' and Nettl's cross-cultural survey show that every society organizes sound meaningfully, so the analyst may study any tradition with the same conceptual toolbox.",
+        "because": "If the category were not universal, comparison would be impossible — a shared, maximally inclusive definition is what lets ethnomusicology treat a Venda children's song and a Javanese gamelan piece as the same kind of object at all.",
+        "disputed_by": "the constructivist camp — ethnographers and critical musicologists such as Steven Feld (the Kaluli organize sound as bird song, weeping, and water, not 'music') and Gary Tomlinson, who hold that the label 'music' is a Western construct that misdescribes traditions whose sound practices are organized as ritual, healing, or speech.",
+        "source": "John Blacking, How Musical Is Man (1973); Bruno Nettl, The Study of Ethnomusicology (2005), ch. 1-2; Steven Feld, Sound and Sentiment (1982); Gary Tomlinson, A Million Years of Music (2015)"
+      },
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Take one tradition you have studied and write a half-page argument for where its 'music' category begins and ends — using Blacking's definition, Nettl's cross-cultural findings, and the community's own terms — and state explicitly what your boundary includes and excludes.",
+      "common_failure": "Assuming the Western boundary: treating 'music' as self-evident and classifying a tradition's sound practices by your own genres, so a healing song or ritual drumming gets filed under 'music' in a sense the practitioners do not share — the exact imposition the constructivist critique attacks.",
+      "sources": [
+        "John Blacking, How Musical Is Man (1973)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005)",
+        "Steven Feld, Sound and Sentiment (1982)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.foundations.bimusicality",
+      "label": "Bi-musicality",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.music-culture-concept"],
+      "soft_prereqs": [],
+      "one_line": "Learn to perform a short piece in the tradition you study well enough to play it for a practitioner, following Mantle Hood's bi-musicality program.",
+      "hours": 40,
+      "know_what": [
+        "bi-musicality — Mantle Hood's term ('The Challenge of Bi-Musicality', 1960): learning to perform the tradition you study as a condition of understanding it",
+        "the UCLA program — Hood's Institute of Ethnomusicology, where 1960s students learned Indonesian gamelan and other ensembles as coursework, performing alongside analysis",
+        "Hood's claim — insight into a music comes through performance, not only through listening, transcription, and theory",
+        "the performance threshold — a short piece played well enough for a practitioner to recognize it, Hood's own formulation of the goal",
+        "performance knowledge — the bodily, tacit competence (feel, timing, social choreography) that notation and analysis cannot carry",
+        "the apprenticeship contrast — traditions whose own pedagogy is lifelong and embodied (Indian guru-śiṣya paramparā, Javanese court musicianship), which the semester model compresses",
+        "the insider/outsider debate — whether the researcher's performance is genuine musicianship or a gesture, the standing charge against the program",
+        "Rice's model — Timothy Rice's May It Fill Your Soul (1994), built on his own performance study of Bulgarian music, the program's most cited vindication"
+      ],
+      "know_how": [
+        "Find a teacher or a high-quality video of a practitioner and learn one short piece phrase by phrase, imitating exactly before varying anything",
+        "Learn by ear and imitation first, notation later — most traditions teach orally, and the ear route preserves what notation drops",
+        "Practice against the recording at performance tempo, matching timing and ornamentation, not just the pitches",
+        "Perform the piece from memory for a practitioner and get their judgment: recognizable, correct, acceptable — the three-part test",
+        "Log practice sessions with the specific technique each one targeted, so the 40 hours are accountable",
+        "Use the performance as an analytical instrument: after each session, note in the field journal what the body now knows that listening never revealed"
+      ],
+      "habits": [
+        "Imitate first, understand later — play the phrase exactly before asking what it means",
+        "Ask your teacher what you are doing wrong, and fix that before adding anything new",
+        "Never simplify the ornamentation to make the piece easier; the ornamentation is the tradition",
+        "Record your own practice and compare it against the model phrase by phrase",
+        "Treat every performance session as data collection, with field notes the same evening"
+      ],
+      "know_why": {
+        "claim": "Learning to perform the tradition is a necessary route to understanding it: Hood's bi-musicality program holds that insight comes through doing, and the researcher must acquire the musicianship, not only analyze recordings.",
+        "because": "A tradition's essential knowledge — feel, timing, the social choreography of performance — lives in the body and is invisible to transcription and listening, so the analyst who has never performed will miss precisely what practitioners know.",
+        "disputed_by": "critics who call the program tokenism — postcolonial and insider critics such as Kofi Agawu, who argue that no outsider genuinely acquires the tradition's musicianship in a short program, and that the bi-musical gesture lets the researcher claim an authority the performance does not confer.",
+        "source": "Mantle Hood, 'The Challenge of Bi-Musicality' (1960); Timothy Rice, May It Fill Your Soul (1994); Kofi Agawu, Representing African Music (2003)"
+      },
+      "school_weights": { "interpretive": "high", "scientific": "low" },
+      "checkpoint": "Learn one short piece in the tradition you study and perform it from memory at performance tempo, with the tradition's ornamentation, for a practitioner who confirms it is recognizable and acceptable.",
+      "common_failure": "Learning a simplified approximation — the notes without the feel — and calling it bi-musicality: the piece is recognizable to you but not to the tradition's musicians, so the exercise produces neither musicianship nor insight, only the gesture the critics warn about.",
+      "sources": [
+        "Mantle Hood, 'The Challenge of Bi-Musicality' (1960)",
+        "Timothy Rice, May It Fill Your Soul (1994)",
+        "Kofi Agawu, Representing African Music (2003)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.foundations.rilm-search",
+      "label": "RILM literature search",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "soft_prereqs": [],
+      "one_line": "Search RILM Abstracts of Music Literature by topic, region, and instrument to find the peer-reviewed scholarship on any tradition in under an hour.",
+      "hours": 6,
+      "know_what": [
+        "RILM Abstracts of Music Literature — the annotated international bibliography of music scholarship since 1967, covering articles, books, and dissertations",
+        "the RILM abstract — each entry carries an author-written English abstract, letting you screen relevance without the full text",
+        "RILM's controlled vocabulary — the indexing terms for instruments, regions, genres, and peoples that make a topic searchable beyond free-text keywords",
+        "the geographic and chronological indexes — RILM's routes for bounding a tradition's literature by place and period",
+        "the scholarly filter — RILM indexes peer-reviewed and vetted literature, not blogs or program notes",
+        "related databases — JSTOR's music titles, Ethnomusicology: Global Field Recordings, the MLA International Bibliography, and how their coverage differs from RILM's",
+        "forward citation — following who has cited a foundational study (via RILM's cited-reference links or Google Scholar) to track a debate after its origin"
+      ],
+      "know_how": [
+        "Run a topic search with region and instrument as facets — e.g., 'gamelan' + 'Java' + 'tuning' — and screen the hits by abstract, inside an hour",
+        "Search the controlled vocabulary, not free text alone: try RILM's thesaurus terms for the instrument and the people before resorting to keywords",
+        "Use the geographic and chronological indexes to bound the literature on a tradition, then scan the bounded set for the core studies",
+        "Harvest the foundational citations from a recent ethnography's bibliography and check each in RILM for abstracts and forward citations",
+        "Record the search — database, date, query, and result count — so the search is reproducible and citable",
+        "When a tradition is under-covered in RILM, name the gap and turn to area bibliographies: the journal Ethnomusicology's book notes, regional journals, and archive catalogs"
+      ],
+      "habits": [
+        "Search the literature before designing the study, so your questions are not already answered",
+        "Re-run the search six months later — the literature moves",
+        "Keep the search log with the project files, not in memory",
+        "When a search returns nothing, doubt the query before the field",
+        "Record the search date on every bibliography, because a search is a snapshot"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a tradition, instrument, or region, run a RILM search and produce an annotated list of the 5-10 peer-reviewed sources most relevant to your question — abstracts screened, citations recorded, search logged with database, date, and query — in under an hour.",
+      "common_failure": "Treating the search as a Google query: free-text keywords that miss RILM's controlled vocabulary and geographic indexes, so the results skip the core ethnomusicological literature and the project later re-invents a question the field already answered.",
+      "sources": [
+        "RILM Abstracts of Music Literature, database help and thesaurus (rilm.org)",
+        "Jennifer C. Post, Ethnomusicology: A Research and Information Guide (2nd ed., 2011)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.foundations.research-questions",
+      "label": "Research questions",
+      "tier": 2,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "soft_prereqs": ["ethnomusicology.foundations.rilm-search"],
+      "one_line": "Turn a curiosity about a music culture into three answerable research questions — descriptive, comparative, or applied — each with the observable evidence it implies.",
+      "hours": 10,
+      "know_what": [
+        "the research question — the single answerable question a study is organized around; every design decision follows from it",
+        "descriptive questions — what the music is, who does it, when and where: the documentary and ethnographic baseline",
+        "comparative questions — how this tradition compares to another, or to another period, on a defined dimension",
+        "applied questions — what research can do for the community: revitalization, documentation, repatriation support",
+        "the answerability test — a question is researchable when you can name the observable evidence that would answer it",
+        "the one-line purpose — the distilled question that the fieldwork plan, interview guide, and analysis all answer to",
+        "the literature gap — the space the question occupies that existing scholarship has not filled, found via the RILM search",
+        "hypothesis vs question — the scientific school's preference for testable hypotheses against the interpretive school's open questions, a choice the researcher must make, not inherit"
+      ],
+      "know_how": [
+        "Turn one curiosity into three questions, one of each type — descriptive, comparative, applied — and pick the one that fits your access and skills",
+        "Apply the answerability test to each: name the evidence that would answer it, and cut any question whose evidence you cannot reach",
+        "Write the question as one sentence with a verb and an object — 'How do X musicians negotiate Y in Z?' — never 'What is X music like?'",
+        "Ground the question in the literature gap, citing the sources from your RILM search that leave it open",
+        "Scope the question to the access you actually have: a question needing year-round ritual access is not researchable in a two-week visit",
+        "Draft the one-line purpose that the fieldwork plan, interview guide, and analysis will each answer to"
+      ],
+      "habits": [
+        "Ask 'what would answer this?' before 'is this interesting?'",
+        "Rewrite the question until a stranger can state the evidence it implies",
+        "When a question grows, split it; when it shrinks, drop it",
+        "Keep the gap visible: the question exists because the literature has not answered it",
+        "Test the question against the field site before leaving home"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce three research questions — one descriptive, one comparative, one applied — each in a single sentence naming its evidence and the literature gap it fills, cited from your RILM search, so a supervisor can pick any of the three and plan fieldwork for it.",
+      "common_failure": "Falling in love with a topic instead of a question: 'I want to study gamelan' never becomes answerable, so the study collects everything and argues nothing — the design has no spine and the analysis no claims.",
+      "sources": [
+        "Bruno Nettl, The Study of Ethnomusicology (2005), 'The Nature of Research' chapters",
+        "Barz & Cooley, Shadows in the Field (2nd ed., 2008), ch. on fieldwork questions",
+        "John W. Creswell, Research Design (qualitative question design chapters)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.foundations.disciplinary-debates",
+      "label": "Disciplinary debates",
+      "tier": 3,
+      "cluster": "foundations",
+      "prereqs": ["ethnomusicology.foundations.research-questions", "ethnomusicology.foundations.music-culture-concept"],
+      "soft_prereqs": [],
+      "one_line": "Articulate the emic/etic and scientific/interpretive debates and defend your own position with named practitioners on each side, instead of writing as if the field had one method.",
+      "hours": 12,
+      "know_what": [
+        "the emic/etic distinction — Pike's terms borrowed from linguistics: emic = insider categories, etic = analyst categories; the field's longest-running methodological debate",
+        "the scientific program — the heir of 1880s comparative musicology (Stumpf, Hornbostel): measurement, systematic transcription, cantometrics-style coding, hypothesis testing",
+        "the interpretive program — the heir of Merriam (1964) and Geertz: music in culture, emic meaning, thick description",
+        "'music in culture' vs 'music as culture' — Merriam's embedding formula against the claim that music constitutes culture rather than sitting inside it",
+        "the insider/outsider debate — who may represent a tradition, sharpened by the postcolonial critique of Western scholars speaking for others",
+        "the applied turn — the 1990s-2000s demand that research return value to communities through collaboration and repatriation",
+        "named camps — each position has canonical practitioners: scientific (Stumpf, Hornbostel, Lomax), interpretive (Merriam, Feld, Rice), critical (Agawu), applied (the repatriation and collaboration literature)",
+        "the schools' trade-offs — each school optimises for something and gives something up, and a position paper must own both sides of that ledger"
+      ],
+      "know_how": [
+        "State the emic/etic distinction with an example from your own research: one claim in insider terms and one in analyst terms, labeled",
+        "Reconstruct any disciplinary debate as two positions, each with named practitioners and the evidence each side would accept — never an averaged middle",
+        "Defend your own position: name which school's questions your project answers and what choosing it gives up",
+        "Label every category you use as the tradition's (emic) or yours (etic), so the reader always knows whose concept is in play",
+        "Trace a current article's method back to the school that produced it, citing what that school optimizes for",
+        "Write the cost of your school's choice into the paper — per the schools' 'gives up' columns — instead of writing as if the field had one method"
+      ],
+      "habits": [
+        "When reading a study, ask which school's assumptions produced it before judging its findings",
+        "Before writing, state your own position and its cost in one sentence",
+        "When two camps disagree, report both positions before arguing yours",
+        "Never write 'ethnomusicologists believe X' — name the camp",
+        "Treat a consensus as the thing to interrogate: whose questions did it answer, and whose did it drop"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "high", "interpretive": "high", "documentary": "low" },
+      "checkpoint": "Write a two-page position paper on one disciplinary debate (emic/etic or scientific/interpretive) that names at least two practitioners on each side, states the evidence each side accepts, and defends your own position with its acknowledged cost — readable by a colleague who takes the other side.",
+      "common_failure": "Writing as if the field had settled on one method: presenting the interpretive consensus as 'the' way to study music, or averaging the camps into 'both matter' — which satisfies nobody and commits the paper to no position at all.",
+      "sources": [
+        "Alan P. Merriam, The Anthropology of Music (1964)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005), 'The Nature of the Field' chapters",
+        "Kofi Agawu, Representing African Music (2003)",
+        "Mark Slobin, 'Micromusics of the West' (1993), for the applied turn's questions"
+      ]
+    },
+    {
+      "id": "ethnomusicology.fieldwork.access",
+      "label": "Access & entry",
+      "tier": 2,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "soft_prereqs": [],
+      "one_line": "Identify the gatekeepers and introduction chains that grant access to a music community, and secure an explicit invitation before recording anything.",
+      "hours": 12,
+      "know_what": [
+        "gatekeepers — the elders, ritual leaders, festival organizers, and officials whose permission unlocks access to a music community",
+        "the introduction chain — the social route to a gatekeeper: who introduces you, and whose word vouches for you",
+        "the explicit invitation — permission to record given orally or in writing before any recording begins; without it there is no session",
+        "the chain rule — each contact names the next, and a cold approach at the gate fails where a chain succeeds",
+        "the reciprocity expectation — access is granted on the understanding that something returns to the community: copies, payment, help, recognition",
+        "the outsider's standing — who you are, who sent you, and why you are here are the questions every gatekeeper asks first",
+        "the refusal — the documented no, a legitimate outcome and part of the research record",
+        "local protocol — the greeting customs, gift norms, and consultation rules that precede any request, as the community defines them"
+      ],
+      "know_how": [
+        "Map the gatekeepers before arrival: name the people whose permission the community's own musicians need in order to perform, and rank them",
+        "Build the introduction chain: get a trusted community member or prior researcher to introduce you, and let each contact open the next door",
+        "Ask for permission in person, in the community's language, before recording anything — an explicit invitation, never an implied one",
+        "Answer the standing questions — who you are, who sent you, why you are here — plainly, before asking anything of your own",
+        "Negotiate the terms of access — what you record, who may hear it, what the community gets back — and document what was agreed",
+        "Handle refusal as a result: thank the gatekeeper, document the no, and adjust the study to the access that remains",
+        "Follow local protocol for greetings, gifts, and consultation as the community defines it, not as you assume it"
+      ],
+      "habits": [
+        "Ask 'who must say yes for this to happen?' before every planned recording",
+        "Treat the moment the recorder appears as the moment permission must be explicit",
+        "Let the chain do the work: every contact names the next, and you follow the names",
+        "Record what access you got and how, so the study's evidence base is honest about its limits",
+        "Return something before asking for more — reciprocity precedes the next request"
+      ],
+      "know_why": null,
+      "school_weights": { "applied": "high" },
+      "checkpoint": "For a real community you intend to study, produce an access plan naming the gatekeepers and the introduction chain to reach them, then secure an explicit invitation — oral or written — to record, and document the terms of access and how a refusal would be handled.",
+      "common_failure": "Treating access as logistics: showing up with the recorder and asking anyone 'may I record the music?' — no gatekeeper mapped, no chain, no explicit invitation — so the first session is granted by the wrong person and later denied by the right one, or the recording rests on an assumption that collapses.",
+      "sources": [
+        "Barz & Cooley, Shadows in the Field (2nd ed., 2008), ch. on entry and access",
+        "Jeff Todd Titon, 'Knowing Fieldwork' in Shadows in the Field (1997)",
+        "SEM position statement on fieldwork ethics"
+      ]
+    }
+  ]
+}

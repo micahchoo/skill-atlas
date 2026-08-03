@@ -1,0 +1,341 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 1,
+  "ids": [
+    "ethnomusicology.foundations.discipline-history",
+    "ethnomusicology.fieldwork.prep",
+    "ethnomusicology.fieldwork.recording",
+    "ethnomusicology.transcription.notation",
+    "ethnomusicology.analysis.formal-analysis",
+    "ethnomusicology.ethnography.thick-description",
+    "ethnomusicology.archiving.deposit"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.foundations.discipline-history",
+      "label": "Discipline history & scope",
+      "tier": 1,
+      "cluster": "foundations",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Trace ethnomusicology from 1880s comparative musicology (Stumpf, Hornbostel) and Bartók and Kodály's folk-music collecting, through Merriam's The Anthropology of Music (1964) and Nettl's surveys, and place any current research question in that lineage.",
+      "hours": 12,
+      "know_what": [
+        "comparative musicology — the 1880s Berlin tradition of Stumpf and Hornbostel, which treated non-Western music as a measurable object and collected it on wax cylinders for the Phonogramm-Archiv",
+        "folk-music collecting — Bartók and Kodály's turn-of-the-century Hungarian fieldwork, transcribing peasant song from phonograph recordings and insisting the collector know the repertory firsthand",
+        "The Anthropology of Music (1964) — Merriam's turn from sound to culture: music studied as human behavior, with the tripartite model of conceptualization, behavior, and sound",
+        "bi-musicality — Mantle Hood's 1960s UCLA program requiring students to learn to perform the tradition they study, not merely describe it",
+        "cantometrics — Lomax's coding system rating song performance on 37 scales to compare singing styles worldwide (Folk Song Style and Culture, 1968)",
+        "the emic/etic distinction — Pike's terms borrowed from linguistics (insider categories vs analyst categories), the frame of the field's longest-running debate",
+        "How Musical Is Man (1973) — Blacking's argument that music is 'humanly organized sound,' broadening the object of study beyond art music",
+        "Nettl's surveys — The Study of Ethnomusicology (1983, 2005) and the earlier surveys that stabilized the discipline's self-definition and history",
+        "the Society for Ethnomusicology (SEM) — founded 1955, publisher of Ethnomusicology, the field's professional home and its standard-bearer",
+        "RILM Abstracts of Music Literature — the annotated bibliography of music scholarship since 1967, the entry point for finding who has already worked a tradition"
+      ],
+      "know_how": [
+        "Place any current research question in the lineage: name which school's questions it answers and which canonical works it builds on or breaks with",
+        "Date the major turns — 1880s comparative musicology, SEM 1955, Merriam 1964, Hood's bi-musicality program 1960s, Lomax's cantometrics 1960s-70s — and attach a work to each date",
+        "Trace a practice (recording, transcription, collaboration) from its wax-cylinder origin to its current digital form in two or three sentences",
+        "Distinguish the schools by what each preserves and what it gives up, using the four-school map: scientific, interpretive, applied, documentary",
+        "Find the canonical statement of any sub-debate — emic/etic, prescriptive/descriptive, music in culture vs music as culture — and cite who wrote it and when",
+        "Read an old recording study or transcription and identify which school's assumptions produced it, naming the tell"
+      ],
+      "habits": [
+        "When a claim about a tradition appears, ask which school's frame produced it before accepting it",
+        "Date every major work you cite, because a 1964 claim and an 1880s claim do different work",
+        "Before fieldwork, rehearse your own project's lineage: what it borrows and what it rejects",
+        "Locate each new ethnography in the history before judging its method",
+        "Treat 'the field has always done X' as a claim to check against the history, not a reason"
+      ],
+      "know_why": null,
+      "school_weights": { "applied": "low" },
+      "checkpoint": "Given a current ethnomusicology article, write a paragraph placing it in the lineage — which school's questions it answers, which canonical works it cites (Merriam, Nettl, Hood, Lomax, Blacking, or their heirs), and what it adds or rejects — that a colleague can verify against the sources.",
+      "common_failure": "Learning the history as a parade of names and dates — Stumpf, Merriam, 1964 — without the arguments, so you can recite the canon but cannot say why the field abandoned comparative musicology's assumptions, or which school's frame your own project sits in.",
+      "sources": [
+        "Merriam, The Anthropology of Music (1964)",
+        "Nettl, The Study of Ethnomusicology (2005)",
+        "Mantle Hood, 'The Challenge of Bi-Musicality' (1960)",
+        "Lomax, Folk Song Style and Culture (1968)",
+        "Blacking, How Musical Is Man (1973)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.fieldwork.prep",
+      "label": "Fieldwork preparation",
+      "tier": 2,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.foundations.discipline-history"],
+      "soft_prereqs": ["ethnomusicology.ethics.irb", "ethnomusicology.fieldwork.access"],
+      "one_line": "Produce a fieldwork plan — site, duration, contacts, recording kit, budget, and IRB timeline — that a supervisor could execute, before you leave home.",
+      "hours": 15,
+      "know_what": [
+        "the fieldwork plan — site, duration, contacts, recording kit, budget, and IRB timeline, written as a document someone else could execute",
+        "the IRB timeline — 4-12 weeks of institutional review at most universities, so the protocol is drafted and submitted before departure, not after arrival",
+        "gatekeepers — the elders, ritual leaders, and festival organizers whose permission unlocks access to a music community",
+        "the recording kit — a portable recorder (e.g., Zoom H5), spares, windscreen, headphones, and backup storage, runnable from memory",
+        "budget categories — travel, accommodation, per diem, interpreter days, and the convention of paying consultants for their time and knowledge",
+        "the study's one-sentence purpose — the research questions every plan decision (site, duration, kit) must serve"
+      ],
+      "know_how": [
+        "Write the plan as a document a supervisor could execute: site, dates, named contacts, kit, budget table, IRB timeline, and a day-by-day field schedule",
+        "Draft the IRB protocol and consent forms in the consultants' language before departure, leaving room for the board's revisions",
+        "Research the site's music calendar — festival cycles, ritual seasons, practice schedules — and schedule arrival around real performance dates, not convenience",
+        "Run a full field-day rehearsal at home: pack, record, transfer, back up, so no component is tested for the first time abroad",
+        "Cost the study honestly — per diem, transport, spares, interpreter days, consultant honoraria — with a 15-20% contingency",
+        "Budget the exit plan — how recordings and findings return to the community — so reciprocity is planned, not improvised"
+      ],
+      "habits": [
+        "Test every piece of gear before it goes in the bag, and pack spares for anything that fails silently",
+        "Keep the IRB clock on the calendar in weeks, not months — 4-12 weeks of review is real lead time",
+        "Write down every open question a plan element raises (a contact, a date) and chase it before departure",
+        "Rehearse the consent conversation in the consultants' language until it is natural, not recited",
+        "Re-read the study's purpose before every plan revision and cut anything that does not serve it"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce a one-page fieldwork plan — site, dates, named contacts, kit list with spares, budget with a 15-20% contingency, and an IRB timeline with submission and approval dates — that a supervisor signs off as executable.",
+      "common_failure": "Planning the trip but not the ethics: booking travel and packing the recorder while the 4-12 week IRB clock is still running, so fieldwork starts without approved protocols and every recording is unusable as evidence.",
+      "sources": [
+        "Barz & Cooley, Shadows in the Field (2nd ed., 2008)",
+        "SEM position statement on fieldwork ethics",
+        "45 CFR 46 (Common Rule) and your institution's IRB guidance"
+      ]
+    },
+    {
+      "id": "ethnomusicology.fieldwork.recording",
+      "label": "Field recording",
+      "tier": 3,
+      "cluster": "fieldwork",
+      "prereqs": ["ethnomusicology.fieldwork.prep"],
+      "soft_prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Field-record a live performance with a portable recorder (e.g., Zoom H5) at usable levels and clean sound — no clipping, no wind rumble, no dead batteries — in one take.",
+      "hours": 20,
+      "know_what": [
+        "the Zoom H5 or equivalent portable recorder — the field standard, with two XLR inputs, interchangeable capsules, and SD-card capture",
+        "record level — input gain set so peaks sit around -12 to -6 dBFS: hot enough to use, with headroom against a sudden fortissimo",
+        "clipping — the distortion when a peak crosses 0 dBFS, unrecoverable in post; the one failure no EQ can fix",
+        "wind rumble — subsonic pressure noise cut by a foam or furry windscreen before the diaphragm, not fixable afterward",
+        "96 kHz/24-bit WAV — the capture format that preserves dynamic headroom and detail for archival use; 44.1 kHz/16-bit is a downgrade you cannot undo",
+        "BWF — Broadcast Wave Format, the WAV wrapper carrying a timestamp and metadata chunk that archives use to identify a take",
+        "stereo technique — for most field recording, a fixed XY or AB pair that captures the room along with the music, not spot mics",
+        "backup discipline — transfer cards daily and keep two copies, because a single card is one failure from losing the fieldwork"
+      ],
+      "know_how": [
+        "Set gain at a soundcheck with the musicians playing at performance level so peaks sit around -12 to -6 dBFS, then leave the gain alone",
+        "Run fresh batteries, a charged spare, and a tested card before each session, checking remaining time between takes",
+        "Fit the windscreen before any outdoor take and place the recorder 1-3 meters from the sound source, aimed at the ensemble, not the audience",
+        "Record a spoken slate — date, place, performers, piece — before each take so the file identifies itself if metadata is lost",
+        "Monitor through headphones during the take and re-record immediately on hearing clipping or rumble, rather than hoping to fix it later",
+        "Transfer each day's files to two storage devices and verify by checksum before erasing the card"
+      ],
+      "habits": [
+        "Treat the soundcheck as part of the performance: never start a take without confirming the meters sit in the safe band",
+        "Carry spare batteries and cards in the pocket, not the bag, so a mid-ritual swap takes seconds",
+        "When in doubt about level, err to the quiet side — -12 dBFS is recoverable in post, clipping is not",
+        "Speak the slate even when you think you will remember — you will not, six weeks later",
+        "Back up before celebrating: the day is not done until the files exist in two places"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high" },
+      "checkpoint": "Field-record a live performance in one take with a portable recorder (e.g., Zoom H5): peaks between -12 and -6 dBFS, no clipping or wind rumble, a spoken slate on the file, and the take transferred to two storage devices with a checksum verified.",
+      "common_failure": "Trying to fix at the desk what should be fixed at capture: leaving the meter pinned into clipping or the recorder in the wrong position, then discovering the distortion is permanent — no EQ, denoiser, or resampler restores a clipped peak.",
+      "sources": [
+        "Zoom H5 user manual",
+        "Bernard Lortat-Jacob, 'Recording' in Ethnomusicology: An Introduction (Myers ed., 1992)",
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects"
+      ]
+    },
+    {
+      "id": "ethnomusicology.transcription.notation",
+      "label": "Transcription & notation fundamentals",
+      "tier": 4,
+      "cluster": "transcription",
+      "prereqs": ["ethnomusicology.fieldwork.recording"],
+      "soft_prereqs": [],
+      "one_line": "Transcribe a 30-second recorded passage into readable notation with correct pitches, rhythm, and meter, choosing Western staff notation, LAB shorthand, or a graphical system as the music demands.",
+      "hours": 45,
+      "know_what": [
+        "Western staff notation — the five-line default the field still publishes in, built for European art music and prone to distorting other traditions",
+        "LAB shorthand — Seeger's letter-name system (A-G, accidentals, barlines) for capturing a melodic line faster than full staff notation",
+        "the prescriptive/descriptive distinction — Seeger (1958): prescriptive notation tells a performer what to do, descriptive records what was heard, and no single notation does both",
+        "aksak meters — additive, non-isochronous rhythms such as Bulgarian 7/8 (2+2+3) that resist Western barlines and must not be forced into 4/4",
+        "sléndro/pélog — Javanese tuning systems off the equal-tempered grid, so pitch accuracy is reported in cents rather than assumed staff positions",
+        "the cent — the logarithmic pitch unit (100 cents = one equal-tempered semitone) used to report deviations the staff cannot show",
+        "the 30-second passage — the standard transcription unit, worked in 3-5 second loops because the ear cannot hold a longer stretch accurately",
+        "ornamentation and microtiming — the inflections Western notation approximates at best, often the features that carry a tradition's identity"
+      ],
+      "know_how": [
+        "Choose the system from the music, not from habit: staff for pitch-driven art music, LAB for a quick melodic line, graphical (Sonic Visualiser or Praat spectrogram) when the passage defeats both",
+        "Transcribe in passes — meter and phrase skeleton first, then pitches, then ornamentation — never note-by-note from the first listen",
+        "Loop 3-5 seconds of audio at a time and write what you hear before moving on, checking each completed bar against the recording",
+        "Set the meter from the accents you hear — tap along and find where the strong beats fall — before drawing any barlines, keeping aksak groupings intact",
+        "Measure uncertain pitches with a tuner and write the deviation in cents rather than rounding to the nearest staff degree",
+        "Write a caption naming the notation system, the conventions used, and what is deliberately omitted, so the reader knows what the score claims",
+        "Re-listen at half speed when two hearings conflict, and decide which reading the audio actually supports"
+      ],
+      "habits": [
+        "Ask what the notation is for before choosing it — a score for analysis is not a score for performance",
+        "Loop small chunks instead of replaying the whole passage, keeping attention on one decision at a time",
+        "Write the meter from the accents you hear, never from the barline you expect",
+        "When a pitch sits between staff degrees, write the cents deviation instead of rounding",
+        "Keep a commentary column or layer for everything the notation cannot carry, so no information is silently dropped",
+        "Re-listen to your own transcription a day later and mark every spot you would now write differently"
+      ],
+      "know_why": {
+        "claim": "Transcription can be a neutral inscription of the recording — a transparent 'text' of the performance that other analysts can read and compare without the transcriber's interpretation getting in the way.",
+        "because": "A shared written record is what lets analysts compare traditions and lets readers check claims against the same passage; if every score is a personal reading, comparison loses its common ground.",
+        "disputed_by": "the interpretive camp, following Seeger's prescriptive/descriptive distinction and Ellingson's critique, holds that every notation selects, shapes, and analyzes — transcription is interpretation, so the honest move is to make the analysis visible and argue for it, not hide behind a claim of neutrality.",
+        "source": "Charles Seeger, 'Prescriptive and Descriptive Music-Writing' (1958); Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction, ed. Helen Myers (1992)"
+      },
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Transcribe a 30-second passage you have never heard before into readable notation — pitches, rhythm, and meter verified against the recording, system chosen with a caption stating conventions and omissions — and defend each bar on re-listening.",
+      "common_failure": "Reaching for staff notation by default and forcing the music onto its grid: aksak meters squeezed into 4/4, sléndro pitches rounded to tempered semitones, ornamentation dropped as error — a score that looks clean and misrepresents the music.",
+      "sources": [
+        "Charles Seeger, 'Prescriptive and Descriptive Music-Writing' (1958)",
+        "Ter Ellingson, 'Transcription' in Ethnomusicology: An Introduction (Myers ed., 1992)",
+        "Bartók, Serbo-Croatian Folk Songs (1951)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.analysis.formal-analysis",
+      "label": "Formal musical analysis",
+      "tier": 5,
+      "cluster": "analysis",
+      "prereqs": ["ethnomusicology.transcription.notation"],
+      "soft_prereqs": ["ethnomusicology.analysis.cultural-interpretation"],
+      "one_line": "Analyze a transcribed piece for form, scale, rhythm, and timbre, and write up the analysis with labeled examples drawn from your own transcription.",
+      "hours": 30,
+      "know_what": [
+        "form — the piece's large-scale layout: strophic, through-composed, A B A, call-and-response, marked by section boundaries a listener can hear",
+        "the labeled example — the convention that every analytical claim cites a specific bar or phrase from your own transcription, numbered and quotable",
+        "scale — the pitch collection identified from measured intervals and matched against the tradition's own names before importing analyst categories",
+        "rhythmic structure — the metrical framework and the repeating timeline (e.g., a West African bell pattern) that the parts relate to",
+        "timbre — the sound qualities notation drops (a kora's attack, a throat-singer's overtones) that analysis must recover by listening",
+        "motivic repetition — the short cells a piece builds on; locating them is the first move in most formal analysis",
+        "call-and-response — the antiphonal structure common across African and African-diaspora music, with its own formal conventions",
+        "description vs interpretation — the two registers analysis must keep distinct and label separately in the write-up"
+      ],
+      "know_how": [
+        "Mark the form first: listen for section boundaries, label them (A, B, refrain), and check the labels against the transcription's phrase structure",
+        "Extract the pitch collection from the transcription and compare it with the tradition's own scale names before applying imported categories",
+        "Analyze the rhythm from the timeline outward — find the repeating pattern, then how each part relates to it — before describing any part alone",
+        "Attach every claim to a labeled example with a bar or timestamp reference a reader can check against the recording",
+        "Keep description and interpretation in separate labeled columns in the draft, weaving them only when both are solid",
+        "Compare sections or phrases formally — same or different material, how transformed — before claiming anything larger about the piece",
+        "Write the analysis with the transcription as an appendix, examples timestamped into the recording"
+      ],
+      "habits": [
+        "Name the form before anything else — the piece's layout frames every other observation",
+        "When a scale or meter looks familiar, check it against the tradition's own categories before importing yours",
+        "Quote the music: every analysis paragraph earns a labeled example, or it is not analysis",
+        "Label every claim description or interpretation in the notes, keeping the two columns separate",
+        "Re-listen to the passage behind each labeled example before finalizing, so the example says what the audio does"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "high", "interpretive": "low" },
+      "checkpoint": "Analyze a transcribed piece for form, scale, rhythm, and timbre and write up the analysis with at least four labeled examples from your own transcription, each with a bar or timestamp reference a reader can verify against the recording.",
+      "common_failure": "Analyzing the score instead of the music: reading form and scale off the transcription alone and asserting interpretations with no labeled examples — claims the reader cannot check, because no passage is ever cited.",
+      "sources": [
+        "Jan LaRue, Guidelines for Style Analysis (2nd ed., 1992)",
+        "Bruno Nettl, The Study of Ethnomusicology (2005), analytical chapters",
+        "Steven Feld, 'Sound Structure as Social Structure' (1984)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethnography.thick-description",
+      "label": "Thick description",
+      "tier": 6,
+      "cluster": "ethnography",
+      "prereqs": ["ethnomusicology.analysis.formal-analysis"],
+      "soft_prereqs": ["ethnomusicology.fieldwork.participant-observation"],
+      "one_line": "Write a thick-description passage (Geertz) of a performance you observed — action, sound, context, meaning — from your field notes, dense enough to ground a claim.",
+      "hours": 25,
+      "know_what": [
+        "thick description — Geertz's term (The Interpretation of Cultures, 1973): action, context, and meaning layered so the reader knows whether it was a wink or a twitch",
+        "thin vs thick — a thin account reports what happened; a thick account reports what the happening meant to those doing it",
+        "the performance passage — the unit of writing here: one event (a ritual, a rehearsal, a festival set) rendered densely from field notes",
+        "the evidential standard — every interpretive sentence traceable to a field-note observation, a recording, or a quote",
+        "emic meaning — the participants' own sense of what the music does, which thick description exists to carry",
+        "the native's point of view — Malinowski's injunction, the ancestor of Geertz's project and the standing justification for ethnography over surveys",
+        "field notes as raw material — no observation recorded, no thickness possible",
+        "the single-case warrant — one well-understood performance grounds claims a survey cannot"
+      ],
+      "know_how": [
+        "Write the passage with the event pinned: time, place, who was there, what you could see and hear",
+        "Layer the account — observable action and sound, then the context that makes it legible, then the meanings participants gave it — each layer labeled",
+        "Quote consultants by name or role, translated and contextualized, as evidence for every meaning claim",
+        "Show, don't summarize: render the kora's attack, the dancer's timing, the elder's remark as particulars a reader can picture",
+        "Ground each interpretive sentence in an observation you recorded, and cut any sentence that has no field-note source",
+        "Mark what you saw, what you were told, and what you infer, explicitly, within the passage",
+        "Write 500-800 words on one event and check that a reader who was not there can reconstruct what happened and what it meant"
+      ],
+      "habits": [
+        "Turn to the expanded field notes before writing each passage, never writing from memory of the event",
+        "Keep the observation layer and the interpretation layer separate in the first draft, weaving them only when both are solid",
+        "When a meaning claim has no evidence, flag it as a question for the next visit rather than deleting it silently",
+        "Re-read Geertz's Balinese cockfight essay before writing, as the model of the genre",
+        "Check every passage against one question: could a participant recognize themselves in this?"
+      ],
+      "know_why": {
+        "claim": "The core product of ethnomusicology is thick description — a dense, interpretive account of music in culture that lets a reader who was not there understand what a performance meant.",
+        "because": "Meaning is carried in particulars — a gesture, a tuning, a remark — and only a passage dense enough to carry those particulars can ground a claim about a tradition; analysis without it floats.",
+        "disputed_by": "the scientific school, which demands replicable, thin, data-attached accounts — measurable transcripts, coded features, statistics in the style of Lomax's cantometrics — and treats interpretive prose as unverifiable wherever its claims cannot be checked line by line against the data.",
+        "source": "Clifford Geertz, 'Thick Description: Toward an Interpretive Theory of Culture' (1973); Alan Lomax, Folk Song Style and Culture (1968); the scientific/interpretive debate running through Ethnomusicology since the 1960s"
+      },
+      "school_weights": { "interpretive": "high", "scientific": "low" },
+      "checkpoint": "Write a 500-800-word thick-description passage of a performance you observed — action, sound, context, and meaning layered from your field notes, every interpretive sentence traceable to a recorded observation — that a reader who was not there can reconstruct.",
+      "common_failure": "Writing 'thick' as ornate: stacking vivid adjectives onto a thin factual base, so the passage is atmospheric but its interpretive claims float with no field-note evidence — the exact failure the scientific school cites against the genre.",
+      "sources": [
+        "Clifford Geertz, 'Thick Description: Toward an Interpretive Theory of Culture' (1973)",
+        "Steven Feld, Sound and Sentiment (1982)",
+        "Bronislaw Malinowski, Argonauts of the Western Pacific (1922)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.archiving.deposit",
+      "label": "Archive deposit",
+      "tier": 7,
+      "cluster": "archiving",
+      "prereqs": ["ethnomusicology.ethnography.thick-description"],
+      "soft_prereqs": ["ethnomusicology.archiving.metadata", "ethnomusicology.archiving.file-standards"],
+      "one_line": "Assemble a complete deposit package — master recordings, metadata, consent and rights records, and the written documentation of the study — and submit it to an archive such as the Archive of World Music, accepted without follow-up questions.",
+      "hours": 20,
+      "know_what": [
+        "the deposit package — master recordings, metadata, consent and rights records, and the study's written documentation, handed over as one unit",
+        "the Archive of World Music (Harvard) — a major ethnomusicology archive whose deposit guidelines model what a complete package must contain",
+        "BWF masters at 96 kHz/24-bit — the preservation format archives accept as masters, per the field's file-standard conventions",
+        "access vs preservation copies — the master stays in the archive; users get a lower-resolution access copy",
+        "the rights record — signed consent and release forms stating who may hear, quote, and copy each recording",
+        "the metadata record — who, what, when, where, instrument, genre, rights, in a standard like Dublin Core; without it a recording is noise",
+        "the accession agreement — the contract between depositor and archive defining access restrictions, closure periods, and community rights",
+        "the collection record — the finding aid or catalog entry that lets a stranger locate a specific recording"
+      ],
+      "know_how": [
+        "Assemble the package against the archive's own deposit guidelines, item by item, checking each against its checklist before submission",
+        "Prepare the masters in the archive's convention — BWF at 96 kHz/24-bit, checksums computed, files named with accession-ready identifiers",
+        "Pair every recording with its metadata record and rights record, so no file enters the archive unaccompanied",
+        "State access restrictions explicitly — open, restricted, community-only, closed — in the agreement, honoring what consultants consented to",
+        "Write the deposit documentation — study summary, collection overview, recording log — in the archive's expected format",
+        "Submit the package, confirm acceptance in writing, and keep the agreement and accession number on file",
+        "Arrange the community copy as part of deposit, so return to the community happens at the same moment as preservation"
+      ],
+      "habits": [
+        "Treat the deposit as the last act of fieldwork, not an admin chore after it",
+        "Check the archive's deposit guidelines before assembling, never after",
+        "Keep the rights record with the recordings from day one, so consent is never reconstructed from memory",
+        "Name files so a stranger can sort them before opening them",
+        "Confirm acceptance in writing and file the agreement where the next researcher can find it",
+        "Ask the archive how the community can access copies, and build that into the agreement"
+      ],
+      "know_why": null,
+      "school_weights": { "documentary": "high", "interpretive": "low" },
+      "checkpoint": "Submit a complete deposit package to a real archive (e.g., the Archive of World Music) — BWF masters at 96 kHz/24-bit, metadata and rights records for every item, and written documentation — and receive acceptance without follow-up questions.",
+      "common_failure": "Depositing the recordings and nothing else: files arrive with no metadata, no rights records, and no documentation, so the archive returns them with questions — or shelves them as inaccessible noise no future researcher can cite.",
+      "sources": [
+        "Archive of World Music (Harvard) deposit guidelines",
+        "IASA TC 04, Guidelines on the Production and Preservation of Digital Audio Objects",
+        "SEM statement on ethics and archival deposit"
+      ]
+    }
+  ]
+}

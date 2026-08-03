@@ -1,0 +1,355 @@
+{
+  "domain": "archival-sciences",
+  "batch": 5,
+  "ids": [
+    "archival-sciences.description.ead",
+    "archival-sciences.description.marc",
+    "archival-sciences.description.subject-indexing",
+    "archival-sciences.description.metadata-standards",
+    "archival-sciences.preservation.environment-control",
+    "archival-sciences.preservation.handling-and-storage",
+    "archival-sciences.preservation.disaster-response"
+  ],
+  "nodes": [
+    {
+      "id": "archival-sciences.description.ead",
+      "label": "EAD encoding",
+      "tier": 6,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.finding-aid"],
+      "soft_prereqs": ["archival-sciences.description.authority-control"],
+      "one_line": "Encode a finding aid in EAD XML that validates against the EAD3 schema and renders in a discovery portal.",
+      "hours": 12,
+      "know_what": [
+        "EAD (Encoded Archival Description) — the XML standard for encoding finding aids, maintained by SAA's Technical Subcommittee on Encoded Archival Standards (TS-EAS)",
+        "EAD3 — the 2015 revision of the standard: a simplified schema, a separate <control> element for metadata about the finding aid itself, and looser content-model rules than EAD 2002",
+        "Document structure — every EAD3 document has two children of the root <ead>: <control> (schema version, maintenance, language) and <archdesc> (the archival description proper)",
+        "<archdesc> and levels — the description carries a level attribute (fonds, series, file, item) that must mirror the hierarchy in the finding aid and in DACS",
+        "Core elements — <did> (descriptive identification with <unitid>, <unittitle>, <unitdate>, <physdesc>), <scopecontent>, <bioghist>, <controlaccess>",
+        "Schema validation — an EAD file must validate against the EAD3 XSD (plus the accompanying Schematron rules for business rules) before ingest; unvalidated XML is not a finding aid",
+        "Discovery portal rendering — portals such as ArchivesSpace, Calisphere, and the Iowa Finding Aids portal transform EAD to HTML via XSLT; the encoding must be complete enough that the render is navigable",
+        "EAD vs DACS — EAD encodes structure; DACS supplies the content rules for what goes inside each element; the two are a pair, not rivals",
+        "Crosswalks — EAD maps to MARC-21 and Dublin Core (the 856/856u and dc:relation links), so one encoded description feeds catalogs and portals alike",
+        "Namespaces and well-formedness — an EAD3 document declares the etdlns namespace; well-formedness (parses) and validity (conforms to the XSD) are separate checks that both must pass"
+      ],
+      "know_how": [
+        "Build an EAD3 file from an empty template: write <control> first (schema version, language, maintenance history), then <archdesc> with <did>, then the narrative and access elements",
+        "Validate against the EAD3 XSD with xmllint --schema or oXygen and fix every error — attribute typos, wrong level values, out-of-order elements — until zero errors remain",
+        "Encode a DACS-compliant finding aid element by element: DACS scope and content → <scopecontent>, biographical note → <bioghist>, access points → <controlaccess> with source attributes (lcsh, lcgft, viaf)",
+        "Round-trip a finding aid through ArchivesSpace's EAD import/export and diff the result to see what the system normalizes",
+        "Put authority-controlled headings into <controlaccess> (<persname>, <corpname>, <subject>) with the source attribute, never typing names freehand",
+        "Render the encoded file to HTML in a portal and verify every series and file level displays with working links and dates",
+        "Write a minimal valid EAD3 document by hand with no generator, then prove it validates — the test that separates encoders from form fillers"
+      ],
+      "habits": [
+        "Validate before publishing: no EAD file leaves the workstation unvalidated",
+        "Keep <control> honest — schema version and maintenance dates belong there, and they go stale fast",
+        "Encode at the level the portal displays, not the level the XML makes convenient",
+        "Reuse authority headings in <controlaccess> instead of retyping names and subjects",
+        "When a portal renders badly, suspect the encoding first, the portal second"
+      ],
+      "know_why": {
+        "claim": "EAD XML is the archival discovery standard because a schema-validated structured encoding lets finding aids interoperate across systems, aggregators, and migrations.",
+        "because": "a schema-backed format keeps descriptions machine-actionable — portals render them, aggregators harvest them, crosswalks convert them, and the description survives system migrations that kill hand-rolled HTML.",
+        "disputed_by": "the web-native camp of archival web developers and user-centered finding-aid researchers (e.g., Cory Nimer and Jody Perkins, 'Trust Us: A Case Study in Finding Aids, Browsing, and the User', Journal of Western Archives 2013), who argue that plain HTML or markdown pages serve users better, that EAD is a library-world artifact of the SGML era, and that its XML overhead buys interoperation for systems rather than discovery for people.",
+        "source": "EAD3: Encoded Archival Description Version 3.0 Technical Specification (SAA TS-EAS, 2015); ArchivesSpace EAD import/export documentation; Nimer & Perkins, 'Trust Us' (2013); xmllint and oXygen validation tooling"
+      },
+      "school_weights": { "access-first": "low", "community": "low" },
+      "checkpoint": "Encode a two-series finding aid from scratch in EAD3 — <control> plus <archdesc> with <did>, <scopecontent>, and <controlaccess> using authority headings — validate it against the EAD3 XSD with zero errors, and render it in a discovery portal where both series display with working links.",
+      "common_failure": "Typing XML without validating, so the file fails the schema at ingest and every portal render breaks; or encoding levels that contradict the DACS hierarchy (a file-level title under a fonds-level <c>), which the schema accepts but users experience as a broken tree.",
+      "sources": [
+        "EAD3 Technical Specification, SAA Technical Subcommittee on Encoded Archival Standards (2015)",
+        "ArchivesSpace documentation — EAD import and export",
+        "Library of Congress, EAD3 schema and documentation (loc.gov/ead)",
+        "Cory Nimer and Jody Perkins, 'Trust Us: A Case Study in Finding Aids, Browsing, and the User', Journal of Western Archives (2013)"
+      ]
+    },
+    {
+      "id": "archival-sciences.description.marc",
+      "label": "MARC-21 catalog records",
+      "tier": 6,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.dacs", "archival-sciences.description.finding-aid"],
+      "soft_prereqs": ["archival-sciences.description.authority-control"],
+      "one_line": "Convert a collection description into MARC-21 records that load into OCLC, so archives holdings surface in library catalogs.",
+      "hours": 8,
+      "know_what": [
+        "MARC-21 — the Machine-Readable Cataloging format maintained by the Library of Congress; the record format library catalogs and OCLC exchange collections in",
+        "Leader and directory — the fixed header every MARC record opens with; the directory maps each variable field's tag to its position, and a broken Leader corrupts the whole record",
+        "Variable fields — three-digit tags with indicators and subfields: 245 title, 520 summary/scope note, 545 biographical note, 655 genre headings, 852 holdings location",
+        "Collection-level record — one MARC record describing the whole fonds or collection (with 6xx subjects and 655 genres), not item-level entries; item detail lives in the EAD finding aid",
+        "OCLC — the cooperative WorldCat catalog where member libraries contribute and reuse records; archives create and export records through OCLC Connexion",
+        "856 field — the electronic location field that links the catalog record to the online finding aid, making the brief record the front door to the full description",
+        "Encoding level — Leader/17 tells catalogers how complete the record is (blank = full, '4' = core); incomplete fixed fields fail load or downgrade the record",
+        "Fixed fields and 008 — the coded positions for date, language, country, and format; errors here are invisible in the display but break sorting and limiting",
+        "Authority-controlled access points — 1xx/6xx/7xx headings should match LCNAF or LCSH so the record retrieves with everything else on the same creator or subject"
+      ],
+      "know_how": [
+        "Convert a DACS-compliant collection description into a collection-level MARC record: 245 title, 520 scope note, 545 biographical note, 6xx subjects, 655 genres",
+        "Encode the Leader and 008 fixed fields — type, date, language, country — so the record is complete enough for OCLC load",
+        "Create the record in OCLC Connexion, run the format validation, and export it as MARC21 binary or MARCXML",
+        "Crosswalk from EAD: <unittitle> → 245, <scopecontent> → 520, <bioghist> → 545, <controlaccess> headings → 6xx/7xx, finding-aid URL → 856",
+        "Add the 856 field pointing to the finding aid and verify the URL resolves after the record loads",
+        "Match access points against the authority file before saving, so the record merges cleanly with existing headings",
+        "Export a batch of records and load them into a test catalog (Koha or an OCLC test record) to prove they load without errors"
+      ],
+      "habits": [
+        "Start from the DACS description, never from a blank record — the finding aid is the source of truth",
+        "Check the Leader and 008 before export; fixed fields are where loads fail",
+        "Keep every access point authority-controlled; inventing a heading spelling fragments retrieval",
+        "Verify the 856 URL resolves after loading, not months later",
+        "Read your record the way a patron does: from the catalog search results page"
+      ],
+      "know_why": null,
+      "school_weights": { "postcustodial": "low", "community": "low" },
+      "checkpoint": "Produce a collection-level MARC-21 record from a DACS description — Leader and 008 encoded, 245/520/545/6xx/655 populated, 856 linking the finding aid — load it into OCLC Connexion with zero validation errors, export it as MARC21, and retrieve it by creator in a test catalog.",
+      "common_failure": "Treating MARC as a form to fill: copying the title into 245 and skipping the Leader, 008, and authority checking, so the record loads but never surfaces in catalog searches — the archive's holdings stay invisible in the very catalogs the record was meant to reach.",
+      "sources": [
+        "Library of Congress, MARC 21 Format for Bibliographic Data",
+        "OCLC, Bibliographic Formats and Standards",
+        "SAA, Describing Archives: A Content Standard (DACS)",
+        "LC, EAD to MARC crosswalk documentation (loc.gov/ead)"
+      ]
+    },
+    {
+      "id": "archival-sciences.description.subject-indexing",
+      "label": "Subject & genre indexing",
+      "tier": 6,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.authority-control"],
+      "soft_prereqs": [],
+      "one_line": "Index a collection with LCSH and form/genre terms, describing what the records are rather than what they mean.",
+      "hours": 8,
+      "know_what": [
+        "LCSH (Library of Congress Subject Headings) — the controlled subject vocabulary archivists assign from the official authority file; headings are chosen, never invented",
+        "Form/genre terms — LCGFT (Library of Congress Genre/Form Terms) and the Art & Architecture Thesaurus (AAT) describe what a record IS — correspondence, diaries, ledgers, minutes — as a facet separate from subject",
+        "Aboutness vs form — 'what the records are about' (labor unions, a city's history) vs 'what they are' (letters, photographs); archival indexing records both facets",
+        "Subdivision order — LCSH's topic—place—time pattern ('Labor unions—United States—History—20th century') that makes a heading precise enough to retrieve",
+        "Controlled-vocabulary discipline — one heading per concept, verified against the authority; retrieval depends on consistency, not cleverness",
+        "Indexing level — DACS applies subjects and genres at collection and series level, not item by item; item-level subject indexing is a backlog factory",
+        "Faceted retrieval — separating the subject facet from the genre facet lets a user filter by either ('Civil War' aboutness and 'letters' form)",
+        "Authority lookup — id.loc.gov is the working authority file; every assigned heading must be confirmed there before it lands in a finding aid",
+        "Local headings — when LCSH has no fit (community records, local subjects), archives add flagged local headings and reconcile them later",
+        "Bias in LCSH — the vocabulary carries the Library of Congress's worldview, including outdated or offensive headings for marginalized groups; Sanford Berman's 'Prejudices and Antipathies' (1971) is the classic critique"
+      ],
+      "know_how": [
+        "Scan a series container list and produce two separate lists: subjects (aboutness) and genres (form), before opening the first folder",
+        "Convert a topic phrase into an LCSH heading with correct subdivision order — topic, then geographic, then chronological",
+        "Decide subject vs genre by the test: 'is this what the record is about, or what it is?' — a diary about the war gets both facets",
+        "Look up every heading in id.loc.gov before assigning; never type a heading from memory",
+        "Apply DACS level rules: assign headings at collection/series level, enough to retrieve the series, not exhaustive enough to catalog every item",
+        "Add a local heading with a flag when LCSH fails, and record it in the local authority file for later reconciliation",
+        "Reconcile local headings against LCSH on a schedule, merging them once an official heading appears"
+      ],
+      "habits": [
+        "Ask 'what IS this?' (genre) before 'what is it ABOUT?' (subject)",
+        "When stuck for a heading, search the authority file instead of inventing a phrase",
+        "Keep the researcher's path in mind: would they search 'letters' or 'Civil War'? — index both",
+        "Flag biased or missing LCSH headings rather than silently forcing material into a bad one",
+        "Index at the series level and stop — the discipline that keeps backlogs from growing"
+      ],
+      "know_why": null,
+      "school_weights": { "community": "low", "access-first": "low" },
+      "checkpoint": "Index a five-series collection: assign LCSH subject headings and LCGFT genre/form terms to each series, every heading verified against id.loc.gov with correct subdivision order and the aboutness/form distinction stated per series — a researcher must retrieve each series by both a subject search and a genre search.",
+      "common_failure": "Indexing meaning instead of form — assigning 'Vietnam War' as the heading for a box of letters whose honest access points are 'Soldiers—Correspondence' plus a subject for the war — so retrieval depends on the archivist's interpretation of content rather than what the records are. The mirror failure is inventing headings no authority file recognizes, fragmenting retrieval across the catalog.",
+      "sources": [
+        "Library of Congress, Subject Headings Manual (H 1900s series) and id.loc.gov authority files",
+        "Library of Congress Genre/Form Terms (LCGFT)",
+        "SAA, Describing Archives: A Content Standard (DACS), access-points chapter",
+        "Sanford Berman, Prejudices and Antipathies: A Tract on the LC Subject Heads Concerning People (1971)"
+      ]
+    },
+    {
+      "id": "archival-sciences.description.metadata-standards",
+      "label": "Metadata standards selection",
+      "tier": 7,
+      "cluster": "description",
+      "prereqs": ["archival-sciences.description.ead"],
+      "soft_prereqs": ["archival-sciences.preservation.digital-preservation"],
+      "one_line": "Choose a metadata standard per object type — Dublin Core for digital objects, PREMIS for preservation, EAD for finding aids — and justify the choice.",
+      "hours": 8,
+      "know_what": [
+        "Dublin Core — the 15-element vocabulary (DCMES, ISO 15836) for describing digital objects; the lightweight default for digitized surrogates and web resources",
+        "PREMIS — the Preservation Metadata: Implementation Strategies data dictionary; its entities (object, event, agent, rights) record what proves a digital object survives",
+        "EAD as metadata — the finding aid is itself metadata: hierarchical description of the collection the digital objects belong to",
+        "Layer separation — Dublin Core describes the single digital object, EAD describes the collection, PREMIS describes preservation events; conflating layers is the classic selection error",
+        "Simple vs qualified Dublin Core — 15 unqualified elements vs dcterms refinements (dcterms:created, dcterms:spatial); qualified DC buys precision at interop cost",
+        "Metadata crosswalks — mapping EAD↔MARC or DC↔PREMIS loses detail; choosing a standard is choosing what detail to keep, and every crosswalk should be documented as lossy",
+        "Standards vs content standards vs schemas — a vocabulary (DC), a data dictionary (PREMIS), and an XML schema (EAD XSD) answer different questions; 'metadata standard' conflates all three",
+        "METS — the structural wrapper (XML) that packages DC and PREMIS around a digital object in one envelope",
+        "Fixity and events as metadata — checksums and preservation actions are metadata (PREMIS events), not afterthoughts logged outside the description",
+        "Interoperability vs richness — Dublin Core trades precision for interop; PREMIS trades simplicity for provability; the trade is the selection"
+      ],
+      "know_how": [
+        "Choose a standard per object type in one pass: digital object → Dublin Core; preservation tracking → PREMIS; collection discovery → EAD; structural packaging → METS",
+        "Write a qualified DC record for a digitized photograph — title, creator, date, format, identifier (a persistent URL or ARK), rights — with at least 8 of the 15 elements populated",
+        "Record a PREMIS event (checksum verification or format migration) with its five required properties: object, event, agent, date/time, outcome",
+        "Justify a standard choice in writing against the alternatives — why DC and not MARC for a digital object, why PREMIS and not DC for preservation",
+        "Link the object-level DC record to the collection-level EAD description via the identifier element",
+        "Package DC plus PREMIS in a METS wrapper for one digital object and verify the XML parses",
+        "Read a data dictionary (PREMIS) and locate the semantic unit for a given fact — the skill that makes any new standard self-teachable"
+      ],
+      "habits": [
+        "Ask 'what am I describing — object, collection, or preservation event?' before choosing a standard",
+        "Prefer the standard the community already uses for that object type over the one you know best",
+        "Keep identifiers persistent and stated — metadata without stable identifiers is unlinked",
+        "Record preservation events in PREMIS terms at the time they happen, not after",
+        "When a crosswalk loses a field, note the loss instead of pretending the mapping is lossless"
+      ],
+      "know_why": null,
+      "school_weights": { "access-first": "low", "community": "low", "preservation-first": "high" },
+      "checkpoint": "For a digitized collection, produce a qualified Dublin Core record for one object, a complete PREMIS event for its checksum verification, and a written justification citing why DC (not MARC), PREMIS (not DC), and EAD are the right standards for their layers — the DC record must link to the EAD description via identifier.",
+      "common_failure": "Grabbing one standard and applying it everywhere — describing everything in Dublin Core (losing preservation events) or in EAD (overkill for a single object) — because the standard you know beats the standard the material needs. The error surfaces years later as unprovable digital objects and undiscoverable surrogates.",
+      "sources": [
+        "DCMI, Dublin Core Metadata Initiative (dublincore.org)",
+        "PREMIS Data Dictionary for Preservation Metadata (Library of Congress)",
+        "METS schema and documentation (Library of Congress)",
+        "OAIS Reference Model, ISO 14721:2012"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.environment-control",
+      "label": "Environmental control",
+      "tier": 1,
+      "cluster": "preservation",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Specify the archival storage environment — 65°F ±2, 35-45% relative humidity, under 500 lux with no UV — and verify it with a datalogger.",
+      "hours": 8,
+      "know_what": [
+        "Temperature spec — 65°F ±2 (18°C ±1) for mixed paper collections per ISO 11799; cooler (50-55°F) for photographic and film material",
+        "Relative humidity — 35-45% RH target; RH drives chemical decay and mold far more than temperature, with the danger zones above 65% RH (mold) and below 30% (embrittlement)",
+        "Lux — the unit of illuminance; collection areas stay under 500 lux at shelf surfaces, per the ISO 11799 light spec",
+        "UV radiation — ultraviolet in daylight and fluorescent tubes accelerates fading and yellowing; UV is filtered at the source (sleeves, window film) and measured with a UV meter",
+        "Datalogger — a recording thermo-hygrometer (Onset HOBO, TandD, or similar) that samples temperature and RH continuously; verification means logged evidence, not a spot reading",
+        "Fluctuation vs steady state — sudden RH swings do more damage than slow drift; stability beats perfection, and condensation/desiccation cycles are what crack emulsions and cockle paper",
+        "HVAC delivery — the archive's climate is delivered by the building's HVAC, not a room unit; portable humidifiers fight the building and mask the real problem",
+        "Cold storage — 35-45°F or frozen facilities for nitrate film and color photographs, with their own specs and separate alarms",
+        "Microenvironments — boxes and enclosures buffer the room climate; a good box buys days of protection during HVAC failure",
+        "ISO 11799 — the standard that specifies document storage requirements: the numbers above, plus building and shelving requirements"
+      ],
+      "know_how": [
+        "Place dataloggers at shelf height in each room, away from doors, vents, and windows, and log temperature and RH continuously",
+        "Set the HVAC target at 65°F ±2 and 35-45% RH, and confirm the building can hold it across a season before writing it into a policy",
+        "Download a datalogger (HOBOware or the vendor's software), identify out-of-range periods, and cross-check them against the HVAC log",
+        "Filter UV at the source — UV sleeves on fluorescent tubes, film on windows — and confirm with a UV meter reading",
+        "Measure light with a lux meter at shelf surfaces and keep collection areas under 500 lux",
+        "Respond to an out-of-range reading: find the cause (season, HVAC cycle, water), correct it, and document the event in the climate log",
+        "Write a one-page climate report from a year of datalogger data showing seasonal swings and their causes"
+      ],
+      "habits": [
+        "Trust the datalogger, never the thermostat — the building set point is not the room climate",
+        "Review logged data on a schedule (monthly check, seasonal deep dive) instead of after a complaint",
+        "When a reading goes out of range, hunt the cause before touching the set point",
+        "Keep datalogger records as evidence — they are the proof for the board, the insurer, and the grant",
+        "Recalibrate or replace dataloggers per the vendor schedule, typically annually"
+      ],
+      "know_why": null,
+      "school_weights": { "custodial": "high", "preservation-first": "high" },
+      "checkpoint": "Deploy two dataloggers in a storage area, log 30 days of temperature and RH, produce a chart showing the area holds 65°F ±2 and 35-45% RH, and write a one-page report identifying any out-of-range period with its cause — the report must cite the datalogger data, not the thermostat.",
+      "common_failure": "Relying on the building's thermostat plus an occasional spot hygrometer reading: 'the room feels fine' substitutes for logged evidence, so seasonal swings and HVAC failures go unnoticed until mold or embrittlement appears — damage that is invisible and permanent. The mirror failure is chasing perfect numbers while ignoring fluctuation, which matters more.",
+      "sources": [
+        "ISO 11799, Information and documentation — Document storage requirements",
+        "NEDCC Preservation Leaflets — 'Environmental Control' and 'Temperature, Relative Humidity, Light, and Air Quality'",
+        "Image Permanence Institute (IPI), Climate Notebook and environmental guidance",
+        "Northeast Document Conservation Center, preservation storage recommendations"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.handling-and-storage",
+      "label": "Handling & storage",
+      "tier": 2,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.environment-control"],
+      "soft_prereqs": [],
+      "one_line": "Handle and store records safely — nitrile gloves for photographs, supports for bound volumes, upright or flat boxing — so use and storage don't damage them.",
+      "hours": 6,
+      "know_what": [
+        "Nitrile gloves — worn for photographs, film, and metal objects; skin oils and salts leave fingerprints that permanently damage emulsions",
+        "Glove policy nuance — cotton gloves are out (they snag, shed, and reduce dexterity); clean dry hands are fine for most paper, nitrile for photographs",
+        "Book cradles and foam wedges — supports that hold a bound volume open at a safe angle during reading, photocopying, or digitization, protecting the spine and sewing",
+        "Upright vs flat storage — bound volumes stand upright, shelved snug so they don't lean; oversized flat items and photographs lie flat in boxes",
+        "Flat storage — photographs, maps, and large documents stored flat in archival boxes, interleaved with unbuffered tissue or sleeved so surfaces never touch",
+        "Archival enclosures — acid-free folders and boxes (buffered for most paper, unbuffered for photographs) that act as each record's microclimate",
+        "Rehousing — moving records into archival folders and boxes in original order, documenting the change; the physical sibling of arrangement",
+        "Buffered vs unbuffered — buffered paper has an alkaline reserve (good for acidic paper); unbuffered is required for photographs, where alkalinity attacks emulsions",
+        "Handling rules — no pens near records, one item at a time, both covers supported, no elbows on documents, no pulling volumes by the spine top",
+        "Box packing — boxes filled snug but never overpacked; oversize and fragile items get flat boxes rather than folders that droop"
+      ],
+      "know_how": [
+        "Glove up with nitrile for photographs and film, and take the gloves off for paper when they cost dexterity",
+        "Open a bound volume on a cradle or foam wedge at a safe angle — never forced flat — for reading, copying, or scanning",
+        "Shelve bound volumes upright and snug; lay oversize volumes flat with the spine horizontal, never leaning",
+        "House a collection: acid-free folders in acid-free boxes, upright for letter/legal size, flat for oversize, unbuffered enclosures for photographs",
+        "Choose buffered vs unbuffered by material: unbuffered for color and black-and-white photographs, buffered acceptable for most paper records",
+        "Rehouse in original order, recording what moved where in the processing notes, and never reorder while rehousing",
+        "Interleave or sleeve photographs so emulsions do not touch adjacent surfaces"
+      ],
+      "habits": [
+        "Glove up when the material demands it and glove down when it hurts the work",
+        "Never force a volume flat — reach for the cradle",
+        "Store by size and format, not by subject: oversize goes flat, bound goes upright",
+        "Rehouse in original order and note the change; rehousing is not an excuse to rearrange",
+        "When unsure about an enclosure, choose acid-free and unbuffered"
+      ],
+      "know_why": null,
+      "school_weights": { "preservation-first": "high" },
+      "checkpoint": "Rehouse a mixed box of letters, photographs, and one bound ledger: nitrile gloves for the photographs, unbuffered sleeves, an acid-free folder per series in original order, the ledger upright and snug on a shelf, and a written rehousing note — a colleague must find any item and confirm no order change.",
+      "common_failure": "Handling photographs bare-handed 'just this once' and shelving volumes leaning — each shortcut is individually survivable but compounds into faded edges, broken spines, and fingerprints that no later conservation removes. The other classic: using rehousing as an excuse to reorder, silently destroying original order.",
+      "sources": [
+        "NEDCC Preservation Leaflets — 'Handling Varied Materials' and 'Storage Enclosures for Books and Artifacts'",
+        "Library of Congress, Preservation Directorate handling guidance",
+        "ALA, An Ounce of Prevention: Integrated Disaster Planning for Archives, Libraries, and Archives (1986)",
+        "SAA Dictionary of Archives Terminology — rehousing, buffered paper"
+      ]
+    },
+    {
+      "id": "archival-sciences.preservation.disaster-response",
+      "label": "Disaster response",
+      "tier": 2,
+      "cluster": "preservation",
+      "prereqs": ["archival-sciences.preservation.environment-control"],
+      "soft_prereqs": [],
+      "one_line": "Run the first 48 hours of a disaster — salvage priorities, freezing wet records, freeze-drying referral — so the collection's loss stays partial.",
+      "hours": 10,
+      "know_what": [
+        "The first 48 hours — the window that decides the outcome: stabilize the site, stop the water, prioritize salvage, and freeze what cannot be treated immediately",
+        "Mold clock — mold begins on wet paper within 48 hours; the race is to dry or freeze before spores colonize the collection",
+        "Salvage priorities — the pre-written list (vital records, irreplaceable originals, high-use series) that tells responders what to save first when everything is wet",
+        "Freezing wet records — freezing arrests mold and further damage; wet paper can be frozen and held for months until freeze-drying capacity is available",
+        "Freeze-drying — the professional vacuum treatment that removes water without the swelling and distortion of air drying; referred to commercial vendors such as Document Reprocessors or Belfor",
+        "Air-dry vs freeze decision — small volumes of plain paper can air-dry with fans and interleaving; coated paper, photographs, film, and large volumes go to freezing",
+        "Stabilization — the first tasks: secure the site, stop the water source, stabilize temperature and RH to slow mold, and document damage for insurance",
+        "Damage documentation — photographing and logging what is wet, destroyed, or salvageable; recovery funding from insurers and granting agencies depends on it",
+        "The disaster plan — the pre-written document (contacts, priorities, vendor contracts, procedures); response is executing the plan, not improvising",
+        "Format-specific salvage — wet photographs must stay wet (never dry in contact, emulsions fuse); film and magnetic media have their own first actions"
+      ],
+      "know_how": [
+        "Run the first 48 hours in order: secure the site, stop the water, stabilize the climate, assemble the response team, and begin salvage by the priority list",
+        "Freeze wet records: pack them in plastic crates or bags separated by freezer paper and load them into a commercial blast freezer — or arrange vendor pickup — inside the mold window",
+        "Decide air-dry vs freeze per item: small volumes of plain paper → air-dry with fans and interleaving; coated paper, photographs, or large volumes → freeze for freeze-drying",
+        "Refer to a commercial freeze-drying vendor with documented volume and formats, and start the container and pickup logistics in the first hours, not days",
+        "Document damage before moving anything: photograph each affected area and log every item as wet, destroyed, or salvageable",
+        "Stabilize the environment after a flood with fans, dehumidifiers, and lowered temperature to buy time against mold",
+        "Test the plan's contact list and vendor numbers once a year — a disaster plan fails at the first expired phone number"
+      ],
+      "habits": [
+        "Think in hours, not days — mold and cockling are the clock",
+        "When in doubt, freeze: freezing rarely hurts paper and always buys time",
+        "Salvage by the priority list, never by what is nearest the door",
+        "Photograph everything before moving anything — the insurer and the grant both need it",
+        "Rehearse the plan annually; a plan never opened is a folder of wishes"
+      ],
+      "know_why": null,
+      "school_weights": { "preservation-first": "high", "custodial": "high" },
+      "checkpoint": "Given a simulated flood affecting 30 boxes (mixed paper, one box of photographs, one set of bound volumes), execute the first-48-hours response on paper: stabilization steps, salvage order from the priority list, a freeze-vs-air-dry decision per format with reasons, the freeze-drying vendor referral, and a damage log with photographs — a reviewer must follow the response start to finish without asking questions.",
+      "common_failure": "Starting salvage by grabbing the nearest wet boxes: the wrong material gets air-dried while vital records sit wet, and the response team burns the mold window improvising. The mirror failure is skipping damage documentation, so insurance and recovery funding collapse and the loss is counted twice.",
+      "sources": [
+        "NEDCC Preservation Leaflets — 'Emergency Management' and 'Salvage of Water-Damaged Materials'",
+        "Council of State Archivists (CoSA), COSTEP disaster response framework",
+        "Getty Conservation Institute, Emergency Response and Salvage guidance",
+        "Document Reprocessors and Belfor, commercial freeze-drying and recovery services"
+      ]
+    }
+  ]
+}

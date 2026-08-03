@@ -1,0 +1,302 @@
+{
+  "domain": "ethnomusicology",
+  "batch": 6,
+  "ids": [
+    "ethnomusicology.ethics.consent",
+    "ethnomusicology.ethics.irb",
+    "ethnomusicology.ethics.ip",
+    "ethnomusicology.ethics.collaboration",
+    "ethnomusicology.ethics.repatriation",
+    "ethnomusicology.ethics.ownership"
+  ],
+  "nodes": [
+    {
+      "id": "ethnomusicology.ethics.consent",
+      "label": "Informed consent in the field",
+      "tier": 3,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.fieldwork.access"],
+      "soft_prereqs": ["ethnomusicology.ethics.irb"],
+      "one_line": "Get informed consent — oral or written, in the consultant's language — for recording, quoting, and archiving, and document refusal when it happens.",
+      "hours": 10,
+      "know_what": [
+        "informed consent — the consultant's explicit, voluntary, revocable permission, given after understanding what the recording, quotation, and archive deposit will be used for",
+        "use-by-use consent — separate permission for recording, for quoting in writing, and for archiving/deposit, because agreeing to one is not agreeing to the others",
+        "oral consent — the community-recognized form where permission is spoken in the consultant's language and witnessed, documented in field notes or on tape, with no signature required",
+        "written consent forms — the IRB default, a signed document listing purpose, uses, risks, and withdrawal rights, drafted in the consultant's language and back-translated to check accuracy",
+        "the consent conversation — conducted in the consultant's language, slowly, with the recorder off and an interpreter if needed, so understanding, not signing, is the point",
+        "refusal — a documented 'no' to all or part of the request, recorded verbatim in field notes with date and context, and honored in every later use",
+        "withdrawal — the consultant's right to revoke consent at any time, including after deposit, which is why forms must name who to contact and how to pull material",
+        "gatekeeper consent — the permission of elders, ritual leaders, or festival organizers, which complements but never replaces each individual performer's consent",
+        "the SEM position statement on fieldwork ethics (1998) — the field's own code, requiring reciprocity, respect for consultants, and avoidance of harm, beyond what any review board demands"
+      ],
+      "know_how": [
+        "Rehearse the consent conversation in the consultant's language before entering the field, until you can explain recording, quoting, and archiving without notes",
+        "Offer consent in the form the community uses: a signed form where literacy and signatures are normal, oral with a witness where they are not",
+        "State the concrete uses before recording — who will hear it, where it will be deposited, what you might publish — and record the consultant's assent on tape as a witness to the oral agreement",
+        "Have an interpreter back-translate any written form you draft, and keep the translation with the signed original",
+        "Document every refusal in a consent log: date, request, exact words of the 'no', and what was done with any already-recorded material",
+        "Re-confirm consent at material moments — before a sensitive recording, before publication, before deposit — rather than treating the first yes as permanent",
+        "Record the consent exchange itself as a metadata artifact, so a future archivist can verify who agreed to what, when"
+      ],
+      "habits": [
+        "Turn the recorder off when you ask for permission, so the ask is not itself a recording",
+        "When a consultant hesitates, stop and ask what the concern is — hesitation is a refusal in progress",
+        "Keep a running consent log, not a memory, and update it the same day as each exchange",
+        "Assume consent is per-use until re-confirmed: a yes to a lecture is not a yes to an album",
+        "Re-read the SEM ethics statement before each field trip and check your practice against it"
+      ],
+      "know_why": {
+        "claim": "Oral consent in the consultant's language and community norms protects consultants; a written form in a language they do not read protects the institution, not the person.",
+        "because": "A signed form is only as meaningful as the understanding behind it — a form drafted in English and translated by rote, or signed out of deference to the researcher, creates a paper record of consent that never actually happened, while oral consent with a witness and an on-tape assent documents a real agreement a community recognizes as binding.",
+        "disputed_by": "IRB practitioners and the documentary school, who hold that a written, signed record is the only auditable evidence of consent, that oral consent leaves institutions and archives exposed to later claims, and that waiving documentation is a risk no archive should absorb.",
+        "source": "SEM Position Statement on Ethical and Professional Responsibilities (1998); 45 CFR 46 (Common Rule) §46.117 on documentation of consent; Barz & Cooley, Shadows in the Field (2008)"
+      },
+      "school_weights": { "applied": "high" },
+      "checkpoint": "Produce a consent package for one field session — a form or oral-consent script in the consultant's language, a back-translation, and a consent log entry dated the same day — and record one real refusal with its exact wording and the disposition of the material.",
+      "common_failure": "Treating consent as a signature to collect: handing over the English IRB form, getting the signature, and never checking that the consultant understood what the recording is for — so the consent is legally complete and ethically empty, and the first public use of the recording reveals the gap.",
+      "sources": [
+        "SEM Position Statement on Ethical and Professional Responsibilities (1998)",
+        "45 CFR 46 (Common Rule) and your institution's IRB guidance",
+        "Barz & Cooley, Shadows in the Field (2nd ed., 2008)",
+        "Bruno Nettl, 'Ethical Problems in Fieldwork' in Heartland Excursions (1995)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethics.irb",
+      "label": "IRB protocols",
+      "tier": 3,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.fieldwork.prep"],
+      "soft_prereqs": ["ethnomusicology.ethics.consent"],
+      "one_line": "Write and submit an IRB protocol for research with musicians — recruitment, consent forms, data security, risk — and address the board's revisions.",
+      "hours": 12,
+      "know_what": [
+        "the IRB (Institutional Review Board) — the university committee that must approve research with human subjects before fieldwork begins, under 45 CFR 46 (the Common Rule)",
+        "exempt, expedited, and full-board review — the three tracks; interviews and recording with adults usually clear expedited review, but the classification must be argued, not assumed",
+        "the protocol document — the application stating purpose, recruitment, procedures, consent process, risk, and data security that the board actually reads",
+        "recruitment materials — the flyer, email, or word-of-mouth script you will use to find musicians, which the board reviews for coercion and clarity",
+        "the consent form — the IRB-approved document (or waiver of documentation) covering purpose, procedures, risks, confidentiality, and withdrawal, in the consultant's language",
+        "data security plan — how recordings and notes are stored, encrypted, and destroyed, named in the protocol with concrete measures (e.g., encrypted drive, no cloud sync)",
+        "revisions — the board's numbered requests, typically returned 4-12 weeks after submission, each of which must be answered before approval",
+        "minimal risk — the Common Rule standard that the research poses no more risk than everyday life, the bar most ethnomusicology fieldwork must be argued against",
+        "community-specific review — for research with Indigenous communities, an additional tribal IRB or research-review body (e.g., Navajo Nation HRRB, Māori ethics committees) may sit above the university board"
+      ],
+      "know_how": [
+        "Submit the protocol at least 12 weeks before departure, because the 4-12 week review clock plus revisions rarely runs faster",
+        "Draft recruitment materials and consent forms in the consultants' language in the same pass, so the board sees the actual instruments, not placeholders",
+        "Name the data security measures concretely — encrypted drive, password manager, no cloud backup of raw recordings — so the board can verify the plan",
+        "Answer each board revision in a numbered response document that quotes the request and states the change, resubmitting within the board's window",
+        "Argue the review category in the application itself, citing 45 CFR 46.104 for exempt or 46.110 for expedited, so the board does not have to guess",
+        "Plan for the refusal case: state in the protocol how you will document refusals and honor them, since boards want to see withdrawal and refusal handled",
+        "Keep the approved protocol, stamped consent forms, and revision correspondence in one folder that travels with you to the field"
+      ],
+      "habits": [
+        "Start the IRB clock the day fieldwork is proposed, not the day tickets are booked",
+        "Write the consent forms in the consultants' language first and let the English version follow, so translation is not an afterthought",
+        "When a revision request seems off, ask the board's office for clarification in writing rather than silently editing the study",
+        "Re-read the approved protocol before every field session and notice when practice drifts from what was approved",
+        "Check for a community-level review board (tribal, national) before assuming the university IRB is the only gate"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Submit a complete IRB package for a study with musicians — protocol, recruitment flyer, consent form in the consultants' language, and data security plan — and return the board's revision responses in writing, within the board's stated window.",
+      "common_failure": "Treating the IRB as paperwork to survive: pasting a generic social-science template over your real study, so the board's questions expose that the consent form and recruitment plan were never matched to the actual musicians, and approval arrives — or is denied — with the field dates already locked in.",
+      "sources": [
+        "45 CFR 46 (Common Rule), esp. §§46.102, 46.104, 46.109, 46.117",
+        "your institution's IRB office guidance and templates",
+        "SEM Position Statement on Ethical and Professional Responsibilities (1998)",
+        "Barz & Cooley, Shadows in the Field (2nd ed., 2008)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethics.ip",
+      "label": "Intellectual property & copyright",
+      "tier": 4,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.consent"],
+      "soft_prereqs": ["ethnomusicology.archiving.metadata"],
+      "one_line": "Determine who owns a recording you made — the performer, the tradition, the archive, you — under copyright and cultural-ownership norms, and act accordingly.",
+      "hours": 15,
+      "know_what": [
+        "the sound recording — the physical/electronic capture you made, which you own as the maker unless the consent or contract assigns it",
+        "the musical work — the underlying composition and lyrics, owned by the composer (or in the public domain for most traditional repertory), separate from the recording of it",
+        "performer rights — the performer's claim to their own rendition, recognized in many jurisdictions as a neighboring right to the sound-recording copyright",
+        "fixation — the copyright trigger: an improvised performance that was never recorded has no copyright at all, while the moment it is fixed in a recording, layers of rights attach",
+        "traditional knowledge (TK) — customary ownership of songs, styles, and meanings that copyright does not recognize, so a recording can be legally free to use and culturally off-limits",
+        "traditional knowledge labels (TK Labels) — the Local Contexts labeling system (Jane Anderson, Kim Christen) that lets communities mark cultural material with their own access terms",
+        "the archive's role — the repository that holds the copy and its rights metadata, controlling access even when it does not own the underlying claims",
+        "the 1976 Copyright Act's music provisions and the WIPO Performances and Phonograms Treaty (1996) — the legal scaffolding a field recording sits inside",
+        "Seeger's argument — Anthony Seeger's insistence that the researcher must know who claims what before recording, because ownership is negotiated, not discovered"
+      ],
+      "know_how": [
+        "Map the ownership layers of each recording — sound recording, musical work, performer rendition, community TK — and name who holds each claim",
+        "Ask the performer directly who may use the music and for what, and write the answer into the consent record, since cultural norms often diverge from copyright",
+        "Check the public-domain status of traditional repertory before publishing or releasing it, and still seek community permission where TK norms attach",
+        "State rights in the deposit agreement with the archive — who may access, copy, and republish — rather than leaving the archive to guess",
+        "Apply TK Labels to digital collections where the community wants them, and respect a community's label even when the law would allow more",
+        "Negotiate splits before a release — performer, composer, recorder, archive — and put the agreement in writing before mastering, not after",
+        "Record the ownership claims at the moment of recording, when witnesses are present, not years later when the performer is gone"
+      ],
+      "habits": [
+        "Ask 'who owns this?' as a field question, alongside 'what is this?', for every recording",
+        "Treat the absence of a copyright as the beginning of the analysis, not the end — the TK question remains",
+        "When you deposit, read the archive's deposit agreement for the rights clause and negotiate what it gives away",
+        "Attribute performers by name in every publication and release, as a moral-rights default even where the law does not require it",
+        "Keep the consent record and the rights map together with the audio, so a future user can verify the claims"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "low", "documentary": "high" },
+      "checkpoint": "Produce a rights map for one field recording: the maker, composer, performer, and community claims each stated, with the consent record and deposit agreement attached, and a written decision on what uses you will permit.",
+      "common_failure": "Assuming the recording is yours because you made it: publishing or depositing without mapping the performer's and community's claims, so a traditional song you 'legally' released violates the cultural ownership the law never recognized — and the community, not the copyright office, delivers the judgment.",
+      "sources": [
+        "Anthony Seeger, 'Ethnomusicologists, Archives, Professional Organizations, and the Shifting Ethics of Intellectual Property' (Yearbook for Traditional Music, 1996)",
+        "Steven Feld, 'A Sweet Lullaby for World Music' (Public Culture, 2000)",
+        "Local Contexts — Traditional Knowledge Labels (Jane Anderson, Kim Christen)",
+        "WIPO Performances and Phonograms Treaty (1996); U.S. Copyright Act of 1976"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethics.collaboration",
+      "label": "Community collaboration",
+      "tier": 4,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.consent"],
+      "soft_prereqs": ["ethnomusicology.ethnography.reflexivity", "ethnomusicology.analysis.cultural-interpretation"],
+      "one_line": "Co-design a research or documentation project with community members — shared questions, shared credit, community review of output — rather than extracting data.",
+      "hours": 15,
+      "know_what": [
+        "co-design — research whose questions, methods, and outputs are set with community members from the start, not presented to them after the design is fixed",
+        "the consultant-to-co-author spectrum — from paid informant, through advisor, to named co-researcher and co-author, with credit and control shifting along it",
+        "community review — the practice of letting community members read, hear, or watch material before publication and revise or veto specific content",
+        "shared credit — co-authorship, named acknowledgment, or negotiated attribution, agreed before publication, not after a draft exists",
+        "listening sessions — structured playbacks where consultants hear their own recordings and correct the researcher's interpretation of them",
+        "the advisory board — a small group of community members who steer the project's access and publication decisions between field trips",
+        "reciprocity agreements — explicit commitments (honoraria, copies, skills training, co-publication) negotiated up front so return is planned, not improvised",
+        "community-based ethnomusicology — the applied school's frame (Beverley Diamond, Klisala Harrison) making collaboration the method, not a courtesy appended to extraction"
+      ],
+      "know_how": [
+        "Begin the first meeting by asking community members what questions they want answered, and let those reframe or replace your own research questions",
+        "Draft a collaboration agreement with the group: roles, decision rights, credit, review process, and what happens to the material if the project ends early",
+        "Run a listening session before analysis, and incorporate the consultants' corrections into the interpretation before you write",
+        "Name co-authors on the manuscript and negotiate the byline before submission, using the agreement you signed",
+        "Route any publication that names the community through their review, with a stated deadline and a veto that counts",
+        "Pay consultants for their time and knowledge at a rate named in the agreement, and treat honoraria as part of the budget, not a gesture",
+        "Design the return at the same time as the research: copies, a community archive, a screening, or training, so the deliverable exists when the fieldwork ends"
+      ],
+      "habits": [
+        "Ask 'who should decide this?' at every project fork, and let the answer reshape the plan",
+        "When a community member proposes a change of direction, treat it as data about the project, not a disruption of it",
+        "Keep the collaboration agreement in the field bag and re-read it before each negotiation",
+        "Notice when the project is extracting without returning and say so out loud before the fieldwork ends",
+        "Write the community's corrections into the field notes the day you hear them, with names and dates"
+      ],
+      "know_why": null,
+      "school_weights": { "scientific": "low", "applied": "high" },
+      "checkpoint": "Produce a signed collaboration agreement for one project — shared research questions, named co-researchers, credit terms, and a community review step — and hold one listening session whose corrections you can show were incorporated into the analysis.",
+      "common_failure": "Confusing consultation with collaboration: presenting a finished research design, asking for comments, and calling the comments 'co-design' — so the community's role is ratified, not shared, and the first publication still reads as the researcher's project with the community as data.",
+      "sources": [
+        "Beverley Diamond, 'The Music of Modern Indigeneity' and her community-based work (Memorial University)",
+        "Klisala Harrison, Applied Ethnomusicology in the Global North (2012, co-ed.)",
+        "Anthony Seeger's Suyá fieldwork and returns (Why Suyá Sing, 1987; later returns to Kisêdjê communities)",
+        "SEM Position Statement on Ethical and Professional Responsibilities (1998)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethics.repatriation",
+      "label": "Repatriation",
+      "tier": 5,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.ip"],
+      "soft_prereqs": ["ethnomusicology.ethics.collaboration", "ethnomusicology.archiving.community-return"],
+      "one_line": "Return recordings or copies to the community that made them — via archive agreements, community copies, or re-release — and document the return.",
+      "hours": 12,
+      "know_what": [
+        "repatriation — returning recordings, or usable copies of them, to the community whose members made them, decades after collection if necessary",
+        "digital repatriation — returning copies rather than originals, now the norm because masters stay preserved while communities get access copies (WAV/BWF or MP3 by community preference)",
+        "archive agreements — the deposit-side instrument that reserves community access and return terms when the recordings enter an archive in the first place",
+        "community copies — delivered in the community's language and media, with players if needed, plus the metadata to know who is on each track",
+        "re-release — commercial or community editions that put the music back in circulation, e.g., the Association for Cultural Equity's reissues of Alan Lomax's field recordings with source-community royalties",
+        "return of legacy collections — the 1930s-60s recordings (Lomax, the Library of Congress, colonial archives) that today's researchers and archivists are tracing back to descendant communities",
+        "NAGPRA (1990) — the U.S. law requiring federally funded institutions to return Native American cultural items, the legal model many recording-return projects follow informally",
+        "the return document — the record of what was returned, to whom, in what format, and under what use terms, signed by the receiving community"
+      ],
+      "know_how": [
+        "Identify the community of origin for a recording from its metadata and consultants before attempting any return, and work through recognized community representatives",
+        "Deposit with a return clause: negotiate community access, copies, and use terms into the archive agreement before the masters leave your hands",
+        "Deliver copies in the format and media the community can actually use — and provide a player or training where playback infrastructure is missing",
+        "Ask what the community wants returned and in what form, rather than assuming a pile of files is a return",
+        "Document the return with a signed record — items, formats, recipient, use terms, date — and keep it with the collection's metadata",
+        "For legacy collections with unknown performers, publish what you can identify and state plainly what remains unidentified, rather than blocking the whole return",
+        "Route re-release royalties to the performers or their descendants, as the Association for Cultural Equity does for Lomax recordings"
+      ],
+      "habits": [
+        "Assume recordings want to go home, and ask the community to confirm rather than waiting to be asked",
+        "When a return stalls on unclear ownership, consult the community and the archive together instead of shelving the project",
+        "Note the return in the collection's metadata, so the archive and the community both hold the record",
+        "Plan for the long tail: a return is a relationship, not a handover, and follow-up access questions will come",
+        "Ask 'who benefits?' before each return format decision, and let the community's answer set the format"
+      ],
+      "know_why": {
+        "claim": "Returning recordings to source communities serves the people who made the music; keeping them in professional archives serves the institution and the research community that has historically profited from them.",
+        "because": "Field recordings are the audible record of a community's own cultural production — its members are the performers, the copyright holders, and the cultural owners — so custody in a distant archive, however well preserved, reproduces the extraction the recording originally captured; return puts the material and the decision about its use back in community hands.",
+        "disputed_by": "the documentary school and archive practitioners, who argue that professional archives guarantee preservation, metadata, and global access that no community infrastructure can match, and that naive return can strand recordings where they degrade unplayed, losing them for everyone.",
+        "source": "Anthony Seeger, 'Who Should Control the Use of Field Recordings?' (in Shadows in the Field, 2008); Association for Cultural Equity reissue practice; NAGPRA (1990); Aaron Fox, 'Repatriation as Reanimation' (Current Musicology, 2009)"
+      },
+      "school_weights": { "applied": "high" },
+      "checkpoint": "Return one set of recordings to its community of origin — copies delivered in the community's chosen format, a signed return document with use terms, and the return recorded in the collection's metadata — verifiable against the deposit records.",
+      "common_failure": "Treating repatriation as a file transfer: burning copies and mailing them off without asking what the community wants or can use, so the return is a gesture that leaves the community with unplayable media and no rights over the master — or, at the other pole, keeping the masters 'safe' in the archive while the community that made the music still cannot hear it.",
+      "sources": [
+        "Anthony Seeger, 'Who Should Control the Use of Field Recordings?' (in Barz & Cooley, Shadows in the Field, 2nd ed., 2008)",
+        "Aaron Fox, 'Repatriation as Reanimation' (Current Musicology, 2009)",
+        "Association for Cultural Equity — Lomax recordings reissue and return practice",
+        "NAGPRA (Native American Graves Protection and Repatriation Act, 1990)"
+      ]
+    },
+    {
+      "id": "ethnomusicology.ethics.ownership",
+      "label": "Cultural ownership",
+      "tier": 5,
+      "cluster": "ethics",
+      "prereqs": ["ethnomusicology.ethics.ip"],
+      "soft_prereqs": ["ethnomusicology.ethics.repatriation"],
+      "one_line": "Argue who legitimately decides what can be studied, published, or shown from a tradition — elders, performers, archives, scholars — with named positions in the debate.",
+      "hours": 10,
+      "know_what": [
+        "cultural ownership — the claim of a community, family, or tradition to control its own music, independent of and often opposed to copyright's individual ownership",
+        "the elders' authority — the position that senior tradition-bearers, as custodians of restricted knowledge, must authorize what is studied and shown",
+        "the performers' claim — the performers' demand to control their own renditions and recordings, the living parties a researcher actually contracts with",
+        "the archival-custody position — archives and documentary scholars arguing that preservation and access obligations override community restrictions, or that custody is stewardship, not ownership",
+        "the scholarly-access position — the claim that music is the common heritage of humanity and researchers must be able to study it freely, associated with the older comparative tradition",
+        "the Taos case — the 1990s dispute over scholarly publications of Taos Pueblo music against the pueblo's wishes, the field's canonical fight over who decides what gets published",
+        "data sovereignty — the CARE Principles for Indigenous Data Governance (Collective benefit, Authority to control, Responsibility, Ethics, 2018) extending Indigenous control to digital data",
+        "kaitiakitanga — the Māori guardianship model in which communities hold cultural material in trust, an alternative to Western ownership that archives increasingly negotiate with"
+      ],
+      "know_how": [
+        "State your position on a contested case (Taos, a sacred repertory, a restricted ceremony) and name the camp you are arguing with, in writing",
+        "Trace a publication decision to its authority: who licensed it, who reviewed it, and whose claim would have stopped it",
+        "Weigh the elders' restriction against the performers' consent and the archive's access mandate, and show your ranking rather than averaging the three",
+        "Apply the CARE principles to a project's data plan and say which of the four principles each design decision serves",
+        "Negotiate restricted-access terms in the deposit agreement — who may hear what, with whose permission — instead of leaving access binary",
+        "In a disagreement between community authority and scholarly interest, document the positions and the decision, with reasons, so the choice is on record"
+      ],
+      "habits": [
+        "Ask 'who decides?' before every study, publication, and showing — and write the answer down with the name of the person who gave it",
+        "When two authorities conflict (an elder forbids, a performer permits), surface the conflict instead of resolving it silently",
+        "Treat 'the tradition owns this' as a real claim to weigh, not a metaphor for the public domain",
+        "Read the ownership debate through the named cases — Taos, Māori kaitiakitanga, Australian Aboriginal restrictions — rather than abstract principle",
+        "Notice when your own interest (publication, access) is doing the arguing and say so in the analysis"
+      ],
+      "know_why": null,
+      "school_weights": { "applied": "high", "scientific": "low" },
+      "checkpoint": "Write a position paper on one contested case — who may decide what is studied or published, naming at least two camps with their cited positions and your own ranking of the authorities — that a colleague can argue against without strawmanning either side.",
+      "common_failure": "Resolving the debate by averaging: concluding that elders, performers, archives, and scholars should each have 'a say' without ever deciding where authority rests — so the first real conflict (an elder's no against a performer's yes) is fumbled in the field instead of reasoned through in advance.",
+      "sources": [
+        "the Taos Pueblo case as discussed in the ethnomusicology literature of the 1990s (see Nettl's account in The Study of Ethnomusicology)",
+        "CARE Principles for Indigenous Data Governance (GIDA, 2018)",
+        "Māori kaitiakitanga and Waitangi-Tribunal-informed archival practice in Aotearoa New Zealand",
+        "Anthony Seeger, 'Ethnomusicologists, Archives, Professional Organizations, and the Shifting Ethics of Intellectual Property' (1996)"
+      ]
+    }
+  ]
+}
