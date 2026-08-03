@@ -1,0 +1,518 @@
+{
+  "domain": "grant-writing",
+  "level": "serious amateur aiming at professional competence",
+  "schools": [
+    {
+      "id": "federal",
+      "name": "Federal pipeline school",
+      "optimises_for": "competitive compliance — winning large, scored federal awards (Grants.gov, SAM.gov, 2 CFR 200) through rigorous process",
+      "gives_up": "long-term funder relationships and program flexibility once money is awarded",
+      "quarrels_with": ["foundation"]
+    },
+    {
+      "id": "foundation",
+      "name": "Foundation cultivation school",
+      "optimises_for": "mission alignment and multi-year funder relationships (Candid, 990s, LOIs, site visits)",
+      "gives_up": "predictable process and fast decisions — foundations move on their own calendar",
+      "quarrels_with": ["federal", "grantsmanship"]
+    },
+    {
+      "id": "corporate",
+      "name": "Corporate sponsorship school",
+      "optimises_for": "brand alignment, speed, and low-friction awards from company giving programs",
+      "gives_up": "sustained general operating support — corporate grants are often one-off and project-tied",
+      "quarrels_with": ["foundation"]
+    },
+    {
+      "id": "grantsmanship",
+      "name": "Grantsmanship school",
+      "optimises_for": "the proposal as persuasion — reviewer psychology, narrative craft, and the scored document itself",
+      "gives_up": "portfolio-level pipeline discipline in favour of perfecting each individual ask",
+      "quarrels_with": ["evaluation"]
+    },
+    {
+      "id": "evaluation",
+      "name": "Evidence-and-evaluation school",
+      "optimises_for": "demonstrable outcomes — logic models, outcome measures, and data-backed claims that survive scoring",
+      "gives_up": "narrative warmth and speed — evidence discipline slows every draft",
+      "quarrels_with": ["grantsmanship"]
+    }
+  ],
+  "clusters": [
+    { "id": "landscape", "name": "Funder landscape", "gist": "Where the money actually lives — federal, foundation, corporate, and regranting pipelines — and how to match your work to a funder before writing a word." },
+    { "id": "strategy", "name": "Program strategy", "gist": "Shaping the work so it is fundable and measurable: problem, theory of change, logic model, objectives, and the evaluation plan that proves them." },
+    { "id": "proposal", "name": "Proposal craft", "gist": "The documents that get read and scored — LOI, outline, narrative, abstract — and the revision loop that makes them submittable." },
+    { "id": "budget", "name": "Budgeting", "gist": "Turning the program into numbers that survive review: line items, personnel, indirect costs, match, and the narrative that justifies them." },
+    { "id": "compliance", "name": "Compliance & submission", "gist": "The mechanics that disqualify otherwise good proposals: registrations, eligibility, portals, deadlines, award terms, and audit readiness." },
+    { "id": "stewardship", "name": "Stewardship & renewal", "gist": "Keeping the money once it lands — reporting, relationships, site visits, and converting results into the next ask." },
+    { "id": "portfolio", "name": "Portfolio management", "gist": "Running grant-seeking as a system — pipeline tracking, calendars, win/loss learning, and capacity — instead of one proposal at a time." }
+  ],
+  "spine": [
+    "grant-writing.proposal.loi",
+    "grant-writing.proposal.proposal-outline",
+    "grant-writing.proposal.project-narrative",
+    "grant-writing.proposal.review-criteria-mapping",
+    "grant-writing.proposal.revision-loop"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.landscape.funder-types",
+      "label": "Funder landscape",
+      "tier": 1,
+      "cluster": "landscape",
+      "prereqs": [],
+      "one_line": "Sort any potential funder into the federal, foundation, corporate, or regranting pipeline and know which documents, timelines, and constraints each one implies.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.landscape.candid-search",
+      "label": "Candid foundation search",
+      "tier": 1,
+      "cluster": "landscape",
+      "prereqs": [],
+      "one_line": "Search the Candid Foundation Directory by geography, focus area, and giving history to build a real list of foundations that could fund your work.",
+      "hours": 12
+    },
+    {
+      "id": "grant-writing.landscape.grants-gov-search",
+      "label": "Grants.gov opportunity search",
+      "tier": 1,
+      "cluster": "landscape",
+      "prereqs": [],
+      "one_line": "Find every live federal funding opportunity relevant to your field on Grants.gov and read its synopsis before it closes.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.landscape.funder-fit",
+      "label": "Funder-fit triage",
+      "tier": 2,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.funder-types"],
+      "one_line": "Read a funder's stated priorities, past awards, and restrictions to judge whether a project is a genuine fit before spending hours writing.",
+      "hours": 10
+    },
+    {
+      "id": "grant-writing.landscape.prior-awards",
+      "label": "Prior-awards research",
+      "tier": 2,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.candid-search"],
+      "one_line": "Pull a foundation's IRS 990s and recent grants to see who they actually fund, at what size, and for what duration — not just what they claim to fund.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.landscape.funder-watch",
+      "label": "Opportunity watch",
+      "tier": 2,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.grants-gov-search", "grant-writing.landscape.candid-search"],
+      "one_line": "Run saved searches and alerts on Grants.gov, Candid, and state portals so new and recurring opportunities reach you instead of being missed.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.landscape.opportunity-score",
+      "label": "Opportunity scoring",
+      "tier": 3,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.funder-fit", "grant-writing.landscape.prior-awards"],
+      "one_line": "Score a live opportunity on fit, odds, and cost-to-apply, then make a defensible go/no-go call for your portfolio.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.strategy.problem-statement",
+      "label": "Problem statement",
+      "tier": 1,
+      "cluster": "strategy",
+      "prereqs": [],
+      "one_line": "State the problem your project exists to solve in one paragraph with named evidence, so a stranger reviewer understands why the work matters.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.strategy.theory-of-change",
+      "label": "Theory of change",
+      "tier": 1,
+      "cluster": "strategy",
+      "prereqs": [],
+      "one_line": "Write the if-then chain from your activities to the long-term change you claim, exposing the assumptions a reviewer will test.",
+      "hours": 10
+    },
+    {
+      "id": "grant-writing.strategy.logic-model",
+      "label": "Logic model",
+      "tier": 2,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.theory-of-change"],
+      "one_line": "Turn your theory into the inputs-activities-outputs-outcomes table funders expect, with every column traceable to the next.",
+      "hours": 10
+    },
+    {
+      "id": "grant-writing.strategy.smart-objectives",
+      "label": "SMART objectives",
+      "tier": 2,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.problem-statement"],
+      "one_line": "Write objectives that are specific, measurable, achievable, relevant, and time-bound so your outcomes can be evaluated at closeout.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.strategy.need-stats",
+      "label": "Needs evidence",
+      "tier": 2,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.problem-statement"],
+      "one_line": "Find and cite the statistics, studies, and local data that quantify the problem you opened your statement with.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.strategy.outcome-measures",
+      "label": "Outcome measures",
+      "tier": 3,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.logic-model", "grant-writing.strategy.smart-objectives"],
+      "one_line": "Choose indicators and data sources for each outcome so your proposal can claim measurable results, not intentions.",
+      "hours": 12
+    },
+    {
+      "id": "grant-writing.strategy.evaluation-plan",
+      "label": "Evaluation plan",
+      "tier": 4,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.outcome-measures"],
+      "one_line": "Write the who-measures-what-when plan, with instruments and analysis, that turns outcome measures into a fundable evaluation section.",
+      "hours": 12
+    },
+    {
+      "id": "grant-writing.proposal.loi",
+      "label": "Letter of inquiry",
+      "tier": 1,
+      "cluster": "proposal",
+      "prereqs": [],
+      "one_line": "Write a one-to-three-page LOI that gets a foundation to invite your full proposal instead of passing.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.proposal.proposal-outline",
+      "label": "Proposal outline",
+      "tier": 2,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.loi"],
+      "one_line": "Map your full proposal against the funder's stated sections and page limits before writing a word, so nothing gets written that can't be used.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.proposal.executive-summary",
+      "label": "Executive summary",
+      "tier": 3,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.proposal-outline"],
+      "one_line": "Compress the whole proposal into the one-page summary reviewers actually read first, hitting every scoring criterion in miniature.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.proposal.project-narrative",
+      "label": "Project narrative",
+      "tier": 3,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.proposal-outline", "grant-writing.strategy.smart-objectives"],
+      "one_line": "Write the narrative body — need, approach, personnel, evaluation — that answers the funder's review criteria in order.",
+      "hours": 20
+    },
+    {
+      "id": "grant-writing.proposal.review-criteria-mapping",
+      "label": "Review-criteria mapping",
+      "tier": 4,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.project-narrative"],
+      "one_line": "Walk your finished draft against the funder's published scoring criteria and confirm each one is answered with evidence, not implication.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.proposal.abstract",
+      "label": "Project abstract",
+      "tier": 4,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.executive-summary"],
+      "one_line": "Write the 250-word abstract that must stand alone in the funder's portal and win the skim.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.proposal.attachment-pack",
+      "label": "Attachment pack",
+      "tier": 4,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.project-narrative", "grant-writing.budget.budget-narrative"],
+      "one_line": "Assemble the supporting documents — org budget, bios, letters of support, financials — that reviewers check for capacity and credibility.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.proposal.revision-loop",
+      "label": "Revision loop",
+      "tier": 5,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.review-criteria-mapping"],
+      "one_line": "Run a structured read-through with a critical reader and revise against criteria and page limits until the draft is submittable.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.budget.budget-basics",
+      "label": "Budget construction",
+      "tier": 1,
+      "cluster": "budget",
+      "prereqs": [],
+      "one_line": "Build a line-item project budget with personnel, fringe, travel, equipment, and other categories that sums correctly and tells the project's story.",
+      "hours": 10
+    },
+    {
+      "id": "grant-writing.budget.personnel",
+      "label": "Personnel & fringe",
+      "tier": 2,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-basics"],
+      "one_line": "Price staff time with real salaries and fringe rates, allocating effort across funded and unfunded time so the budget survives scrutiny.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.budget.budget-narrative",
+      "label": "Budget narrative",
+      "tier": 2,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-basics"],
+      "one_line": "Write the justification that explains each line item to a reviewer who wasn't in the room when you planned it.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.budget.allowable-costs",
+      "label": "Allowable costs",
+      "tier": 2,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-basics"],
+      "one_line": "Check every line against federal cost principles and the funder's restrictions so nothing unallowable or disqualifying is requested.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.budget.indirect-costs",
+      "label": "Indirect cost rates",
+      "tier": 3,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-basics", "grant-writing.budget.personnel"],
+      "one_line": "Calculate indirect costs using your negotiated rate, the funder's cap, or the 10% de minimis rate, and present them so they don't get cut.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.budget.match-requirements",
+      "label": "Match & cost share",
+      "tier": 3,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-basics", "grant-writing.budget.allowable-costs"],
+      "one_line": "Identify a required match or cost share and document how it will be met — cash, in-kind, or third-party — before it becomes a compliance problem.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.budget.multi-year-budget",
+      "label": "Multi-year budget",
+      "tier": 4,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-narrative", "grant-writing.budget.indirect-costs"],
+      "one_line": "Lay out a multi-year budget with annual escalation and changing match requirements so the full award period is coherent.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.compliance.sam-registration",
+      "label": "SAM.gov registration",
+      "tier": 1,
+      "cluster": "compliance",
+      "prereqs": [],
+      "one_line": "Register your entity in SAM.gov with a Unique Entity ID so you can legally apply for and receive federal awards.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.compliance.rfp-deconstruction",
+      "label": "NOFO deconstruction",
+      "tier": 1,
+      "cluster": "compliance",
+      "prereqs": [],
+      "one_line": "Extract deadlines, eligibility, page limits, and review criteria from a Notice of Funding Opportunity so you plan the response before writing.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.compliance.deadline-discipline",
+      "label": "Deadline discipline",
+      "tier": 1,
+      "cluster": "compliance",
+      "prereqs": [],
+      "one_line": "Work backward from a hard submission time to a writing and review schedule, and submit with margin instead of in the last hour.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.compliance.grants-gov-submission",
+      "label": "Grants.gov submission",
+      "tier": 2,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.sam-registration"],
+      "one_line": "Assemble and submit an application through Grants.gov — forms, attachments, validation — without tripping the portal's rejections.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.compliance.eligibility",
+      "label": "Eligibility check",
+      "tier": 2,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.rfp-deconstruction"],
+      "one_line": "Confirm your entity type, geography, and track record satisfy every threshold before committing hours to an application.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.compliance.terms-acceptance",
+      "label": "Award terms review",
+      "tier": 3,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.grants-gov-submission", "grant-writing.compliance.eligibility"],
+      "one_line": "Review the notice of award's terms and conditions and flag anything you cannot commit to before you accept the money.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.compliance.regranting",
+      "label": "Regranting & subawards",
+      "tier": 3,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.eligibility", "grant-writing.compliance.grants-gov-submission"],
+      "one_line": "Pass federal or foundation funds through to subrecipients with written subawards and their own compliance duties.",
+      "hours": 10
+    },
+    {
+      "id": "grant-writing.compliance.single-audit",
+      "label": "Single audit readiness",
+      "tier": 4,
+      "cluster": "compliance",
+      "prereqs": ["grant-writing.compliance.regranting"],
+      "one_line": "Track federal expenditures to the $750,000 threshold and prepare the documentation a single audit will demand.",
+      "hours": 12
+    },
+    {
+      "id": "grant-writing.stewardship.acknowledgments",
+      "label": "Funder acknowledgments",
+      "tier": 1,
+      "cluster": "stewardship",
+      "prereqs": [],
+      "one_line": "Credit your funders in the places their grant agreements require — websites, materials, events — visibly and promptly.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.stewardship.reporting-calendar",
+      "label": "Reporting calendar",
+      "tier": 2,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.acknowledgments"],
+      "one_line": "Track every interim and final report deadline across active grants so no reporting window is ever missed.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.stewardship.narrative-reporting",
+      "label": "Narrative & financial reporting",
+      "tier": 3,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.reporting-calendar"],
+      "one_line": "Write progress reports that document outcomes against the proposal's promises and flag problems before funders find them.",
+      "hours": 10
+    },
+    {
+      "id": "grant-writing.stewardship.funder-relationship",
+      "label": "Funder relationship",
+      "tier": 3,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.acknowledgments", "grant-writing.landscape.funder-fit"],
+      "one_line": "Run a funder relationship deliberately — updates, transparency, responsiveness — so the funder knows you between applications, not just at ask time.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.stewardship.funder-visits",
+      "label": "Site visits & check-ins",
+      "tier": 4,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.funder-relationship"],
+      "one_line": "Prepare for a funder site visit or check-in so it confirms the story your proposal told instead of undercutting it.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.stewardship.renewal-ask",
+      "label": "Renewal & follow-on asks",
+      "tier": 4,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.narrative-reporting", "grant-writing.stewardship.funder-relationship"],
+      "one_line": "Convert a completed grant into a renewal or expansion ask using reported results as the evidence.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.stewardship.impact-stories",
+      "label": "Impact storytelling",
+      "tier": 4,
+      "cluster": "stewardship",
+      "prereqs": ["grant-writing.stewardship.narrative-reporting"],
+      "one_line": "Turn reported outcomes into a specific story with a named beneficiary that humanizes the grant for funders and boards.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.portfolio.pipeline-tracker",
+      "label": "Pipeline tracker",
+      "tier": 1,
+      "cluster": "portfolio",
+      "prereqs": [],
+      "one_line": "Keep a live list of every opportunity with status, deadline, and owner so you always know what's in flight and what's due.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.portfolio.goal-setting",
+      "label": "Portfolio goals",
+      "tier": 1,
+      "cluster": "portfolio",
+      "prereqs": [],
+      "one_line": "Set a revenue target and funder mix for the year so individual proposals serve a portfolio, not a whim.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.portfolio.win-loss-review",
+      "label": "Win/loss debrief",
+      "tier": 2,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "one_line": "Debrief every decision — win, loss, no-decision — and extract the pattern that improves your next ask.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.portfolio.prospecting-rhythm",
+      "label": "Prospecting rhythm",
+      "tier": 2,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker"],
+      "one_line": "Run a weekly scan-and-log habit so new funders enter the pipeline continuously instead of in deadline-driven panics.",
+      "hours": 5
+    },
+    {
+      "id": "grant-writing.portfolio.opportunity-calendar",
+      "label": "Funding calendar",
+      "tier": 3,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker", "grant-writing.landscape.funder-watch"],
+      "one_line": "Build a 12-month calendar of recurring deadlines and submission windows so you plan proposals in seasons, not sprints.",
+      "hours": 6
+    },
+    {
+      "id": "grant-writing.portfolio.capacity-planning",
+      "label": "Capacity planning",
+      "tier": 2,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.pipeline-tracker", "grant-writing.portfolio.goal-setting"],
+      "one_line": "Match the pipeline to the hours you actually have, and say no to opportunities you can't staff to a competitive standard.",
+      "hours": 8
+    },
+    {
+      "id": "grant-writing.portfolio.diversification",
+      "label": "Revenue diversification",
+      "tier": 3,
+      "cluster": "portfolio",
+      "prereqs": ["grant-writing.portfolio.win-loss-review", "grant-writing.portfolio.goal-setting"],
+      "one_line": "Shape the portfolio so no single funder or funding type is load-bearing for your budget.",
+      "hours": 8
+    }
+  ]
+}

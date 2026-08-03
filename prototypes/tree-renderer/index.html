@@ -1,0 +1,167 @@
+<!-- Throwaway prototype (ticket 005): three layouts to settle tree-renderer decisions. The keep is NOTES.md, not this code. -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>grant-writing tree · renderer prototype</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; display: flex; flex-direction: column; }
+  .toolbar {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 8px 14px; background: #0f172a; color: #e2e8f0; font-size: 13px; z-index: 20;
+  }
+  .toolbar b { font-size: 13px; letter-spacing: .2px; }
+  .toolbar .facts { color: #94a3b8; font-size: 11.5px; }
+  .toolbar label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; user-select: none; }
+  .toolbar input[type=checkbox] { accent-color: #f59e0b; }
+  .toolbar .zoom { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+  .toolbar button {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 5px;
+    padding: 2px 9px; font-size: 12px; cursor: pointer;
+  }
+  .toolbar button:hover { background: #334155; }
+  .toolbar input[type=range] { width: 120px; accent-color: #f59e0b; }
+  main { flex: 1; position: relative; min-height: 0; }
+  .viewer { width: 100%; height: 100%; display: block; cursor: grab; background:
+    radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 22px 22px; }
+  .viewer.panning { cursor: grabbing; }
+  .viewer text { user-select: none; }
+  .node rect { fill: #ffffff; stroke: #94a3b8; stroke-width: 1; }
+  .node text { fill: #1e293b; font-size: 10px; }
+  .node:hover rect { stroke: #2563eb; stroke-width: 2; filter: drop-shadow(0 1px 3px rgba(0,0,0,.25)); }
+  .node.spine rect { fill: #ffe08a; stroke: #d9a400; stroke-width: 1.4; }
+  .node.spine text { font-weight: 600; fill: #7a5a00; }
+  .edge { stroke-width: 1.2; }
+  .edge.hard { stroke: #8a93a6; }
+  .edge.soft { stroke: #a6adbb; stroke-dasharray: 4 4; stroke-width: 1; opacity: .5; }
+  .edge.cross { stroke: #7c3aed; stroke-width: 1.6; opacity: .85; }
+  .spine-layer polyline { stroke: #d9a400; stroke-width: 2.6; stroke-dasharray: 7 5; opacity: .95; }
+  .tooltip {
+    position: fixed; z-index: 40; max-width: 360px; background: #0f172a; color: #e2e8f0;
+    border: 1px solid #334155; border-radius: 8px; padding: 9px 11px; font-size: 12px; line-height: 1.45;
+    box-shadow: 0 6px 18px rgba(15,23,42,.35); pointer-events: none;
+  }
+  .tooltip b { font-size: 13px; }
+  .tooltip .tip-spine { color: #fbbf24; font-weight: 600; }
+  .tooltip .tip-line { margin-top: 5px; color: #cbd5e1; }
+  .switcher {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 30;
+    display: flex; align-items: center; gap: 10px; background: #0f172a; color: #e2e8f0;
+    border: 1px solid #334155; border-radius: 999px; padding: 6px 14px; font-size: 13px;
+    box-shadow: 0 8px 24px rgba(15,23,42,.4); user-select: none;
+  }
+  .switcher .arrow {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 50%;
+    width: 26px; height: 26px; font-size: 14px; cursor: pointer; display: grid; place-items: center; padding: 0;
+  }
+  .switcher .arrow:hover { background: #334155; }
+  .switcher .label { min-width: 250px; text-align: center; font-weight: 500; }
+  .error { margin: 40px auto; max-width: 520px; padding: 16px 20px; background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: 8px; color: #991b1b; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <b>grant-writing · tree renderer prototype</b>
+    <span class="facts" id="facts"></span>
+    <label><input type="checkbox" id="spineToggle" checked> Spine highlight</label>
+    <label><input type="checkbox" id="softToggle" checked> Soft edges (<span id="softCount">0</span>)</label>
+    <span class="zoom">
+      <button id="zoomOut" title="zoom out">−</button>
+      <input type="range" id="zoomSlider" min="8" max="300" value="100">
+      <button id="zoomIn" title="zoom in">+</button>
+      <button id="fitBtn">Fit</button>
+    </span>
+  </div>
+  <main id="stage"></main>
+  <div class="switcher">
+    <button class="arrow" id="prevV" title="previous variant (←)">‹</button>
+    <span class="label" id="variantLabel"></span>
+    <button class="arrow" id="nextV" title="next variant (→)">›</button>
+  </div>
+  <div id="errorBox" class="error" hidden></div>
+
+<script type="module">
+import { buildGraph } from './graph.js';
+import { setupViewer, bindTooltip } from './render.js';
+import { VARIANTS, getVariant, makeDraw } from './variants.js';
+
+const $ = (id) => document.getElementById(id);
+const stage = $('stage');
+const state = { showSpine: true, showSoft: true };
+
+const params = new URLSearchParams(location.search);
+let current = getVariant(params.get('variant'));
+
+const viewer = setupViewer(stage);
+let graph = null;
+
+async function boot() {
+  try {
+    const [sk, bd] = await Promise.all([
+      fetch('../../domains/grant-writing/skeleton.json').then((r) => r.json()),
+      fetch('../../domains/grant-writing/bodies/batch-001.json').then((r) => r.json()),
+    ]);
+    graph = buildGraph(sk, bd);
+  } catch (err) {
+    $('errorBox').hidden = false;
+    $('errorBox').textContent =
+      `Could not load tree data (${err.message}). Run the prototype from the repo root:\n` +
+      `  cd skill-tree && python3 -m http.server 8000\n` +
+      `then open http://localhost:8000/prototypes/tree-renderer/?variant=${current.key}`;
+    throw err;
+  }
+  $('facts').textContent =
+    `${graph.nodes.length} nodes · ${graph.hardEdges.length} hard · ${graph.softEdges.length} soft · ` +
+    `${graph.spine.length} spine (${graph.spine.filter((id) => graph.byId.get(id).hasBody).length} with bodies)`;
+  $('softCount').textContent = graph.softEdges.length;
+  $('softToggle').disabled = graph.softEdges.length === 0;
+  bindTooltip(viewer, graph);
+
+  viewer.onZoom((k) => { $('zoomSlider').value = Math.round(k * 100); });
+  $('zoomSlider').addEventListener('input', () => {
+    const v = viewer.getView();
+    viewer.setView($('zoomSlider').value / 100, v.tx, v.ty);
+  });
+  $('zoomIn').onclick = () => viewer.zoomBy(1.3, stage.clientWidth / 2, stage.clientHeight / 2);
+  $('zoomOut').onclick = () => viewer.zoomBy(1 / 1.3, stage.clientWidth / 2, stage.clientHeight / 2);
+  $('fitBtn').onclick = render;
+  $('spineToggle').onchange = (e) => { state.showSpine = e.target.checked; render(); };
+  $('softToggle').onchange = (e) => { state.showSoft = e.target.checked; render(); };
+  $('prevV').onclick = () => switchVariant(-1);
+  $('nextV').onclick = () => switchVariant(1);
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, textarea, select, [contenteditable]')) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); switchVariant(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); switchVariant(1); }
+  });
+
+  render();
+}
+
+let lastBox = null;
+function render() {
+  if (!graph) return;
+  viewer.clear();
+  const draw = makeDraw();
+  const box = current.render(graph, viewer.world, draw, state);
+  lastBox = box;
+  viewer.fit(box);
+  $('variantLabel').textContent = current.name;
+}
+
+function switchVariant(dir) {
+  const i = VARIANTS.indexOf(current);
+  current = VARIANTS[(i + dir + VARIANTS.length) % VARIANTS.length];
+  history.replaceState(null, '', `?variant=${current.key}`);
+  render();
+}
+
+boot().catch(() => {});
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{
+  "domain": "grant-writing",
+  "batch": 2,
+  "ids": [
+    "grant-writing.proposal.loi",
+    "grant-writing.proposal.review-criteria-mapping",
+    "grant-writing.proposal.revision-loop"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.proposal.loi",
+      "label": "Letter of inquiry",
+      "tier": 1,
+      "cluster": "proposal",
+      "prereqs": [],
+      "one_line": "Write a one-to-three-page LOI that gets a foundation to invite your full proposal instead of passing.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.landscape.candid-search", "grant-writing.landscape.funder-fit"],
+      "know_what": [
+        "the one-to-three-page LOI format most foundations expect before a full proposal",
+        "the difference between a letter LOI and a form-based inquiry in foundation portals",
+        "what a program officer screens for: fit, feasibility, and a competent ask",
+        "the five standard sections: hook, problem, approach, outcomes, and the ask itself",
+        "the convention that attachments and appendices are not invited unless stated"
+      ],
+      "know_how": [
+        "read the foundation's LOI guidelines and mirror its section order and page limit exactly",
+        "open with the problem in one paragraph with named evidence, not your organization's history",
+        "state the approach in concrete terms a reviewer can picture, naming methods and partners",
+        "put the ask in numbers and years early enough that it cannot be missed",
+        "close with a specific next step: invite the full proposal, or a call",
+        "check the portal deadline and submission mechanics before writing a word"
+      ],
+      "habits": [
+        "researching the funder before drafting, never after",
+        "keeping a reusable LOI boilerplate bank of problem, approach, and outcomes paragraphs",
+        "treating the LOI as the first screening, not a warm-up for the real proposal",
+        "recording every foundation's LOI deadline and format in the pipeline tracker",
+        "re-reading the funder's stated priorities immediately before the final pass to catch drift"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Draft an LOI in a foundation's stated format, under its page limit, that a colleague reading it cold can restate the ask, the problem, and the approach — and send it to a foundation whose priorities you can name.",
+      "common_failure": "Writing the LOI before researching the funder, so it reads as boilerplate; treating it as a miniature full proposal until it is too dense to screen; burying the dollar ask; missing a portal deadline because the format was assumed, not checked.",
+      "sources": [
+        "Candid — letter of inquiry guidance (Candid.org)",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Jane Geever, The Foundation Center's Guide to Proposal Writing"
+      ]
+    },
+    {
+      "id": "grant-writing.proposal.review-criteria-mapping",
+      "label": "Review-criteria mapping",
+      "tier": 4,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.project-narrative"],
+      "one_line": "Walk your finished draft against the funder's published scoring criteria and confirm each one is answered with evidence, not implication.",
+      "hours": 6,
+      "soft_prereqs": ["grant-writing.strategy.outcome-measures"],
+      "know_what": [
+        "published review criteria: the scoring rubric reviewers actually fill in",
+        "the difference between answering a criterion with evidence and with implication",
+        "how scoring weights change where effort should go in the draft",
+        "federal scoring conventions such as the NIH 9-point scale versus foundation pass/fail rubrics",
+        "the fact that page limits and criteria both come from the same NOFO or guidelines document"
+      ],
+      "know_how": [
+        "extract every criterion and its weight from the NOFO or foundation guidelines before revising",
+        "build a criteria-to-section map: each criterion named, the section that answers it, the evidence cited",
+        "walk the finished draft section by section, tagging each criterion answered, partial, or unanswered",
+        "rewrite every partial and unanswered tag with named evidence, not stronger adjectives",
+        "recheck the map after each revision pass so a rewrite cannot orphan an earlier answer",
+        "give the map to a second reader whose only job is to find an unanswered criterion"
+      ],
+      "habits": [
+        "reading the criteria before drafting, never after the deadline",
+        "keeping the criteria map open beside the draft while writing",
+        "checking every factual claim in the draft carries a named source",
+        "treating 'it answers that criterion by implication' as a warning sign",
+        "re-extracting the criteria if the funder issues a revised NOFO or guidelines mid-draft"
+      ],
+      "know_why": {
+        "claim": "Mapping the draft to the funder's published criteria is the surest way to make reviewers see every answer they are paid to score.",
+        "because": "reviewers score against a rubric under time pressure and skim for evidence; an answer they cannot find scores as absent.",
+        "disputed_by": "some program officers warn that criteria-mirroring reads as gaming the review and that authentic fit outscores checklist alignment.",
+        "source": "practitioner debate in The Grantsmanship Center Magazine and program-officer commentary at grantee conferences"
+      },
+      "school_weights": {},
+      "checkpoint": "Produce a criteria map for a real draft with every published criterion tagged answered, partial, or unanswered, and close every partial and unanswered tag before submission.",
+      "common_failure": "Mapping after the deadline; mistaking implication for evidence; reconstructing criteria from memory instead of reading the actual NOFO; ignoring scoring weights and spending the pages on an unweighted section.",
+      "sources": [
+        "NIH — Review Criteria & Scoring guidance (grants.nih.gov)",
+        "Grants.gov application guides",
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"
+      ]
+    },
+    {
+      "id": "grant-writing.proposal.revision-loop",
+      "label": "Revision loop",
+      "tier": 5,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.review-criteria-mapping"],
+      "one_line": "Run a structured read-through with a critical reader and revise against criteria and page limits until the draft is submittable.",
+      "hours": 8,
+      "soft_prereqs": ["grant-writing.budget.budget-narrative"],
+      "know_what": [
+        "the difference between editing sentences and revising the argument",
+        "structured read-through: reading the draft as the reviewer, not the author",
+        "what a critical reader can catch that the author cannot: assumptions, gaps, buried asks",
+        "page-limit trimming techniques: cut boilerplate, merge sections, move content to attachments",
+        "version control for drafts so no revision is lost or reverted by accident"
+      ],
+      "know_how": [
+        "run a structured read-through: read once for argument, once for criteria, once for limits",
+        "recruit a critical reader with specific questions, never a blank 'does this look good?'",
+        "revise against the criteria map, closing every unanswered tag before touching prose",
+        "trim to page limits by cutting whole sections of boilerplate before cutting evidence",
+        "re-run the criteria map after each pass and freeze the version when it passes",
+        "submit the frozen version, not the latest edit"
+      ],
+      "habits": [
+        "never submitting a first draft, ever",
+        "reading the draft aloud or printed to break the author's glaze",
+        "tracking each revision against a named criterion or limit",
+        "treating 'it's fine' as incomplete feedback and asking for one specific problem",
+        "keeping a revision log with the frozen submittable version clearly marked"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Submit a proposal that has passed at least one structured read-through by a critical reader, with every review-criteria item confirmed answered and the draft within every page limit.",
+      "common_failure": "Polishing instead of revising — fixing sentences while the argument is wrong; revision by committee until the voice dies; ignoring page limits until the final hour; one editing pass with no criteria check, then submitting a draft that scores zero on an unanswered criterion.",
+      "sources": [
+        "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need",
+        "Carlson & O'Neal-McElrath, Winning Grants Step by Step",
+        "Beverly Browning, Grant Writing For Dummies"
+      ]
+    }
+  ]
+}

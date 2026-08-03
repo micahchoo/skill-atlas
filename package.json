@@ -1,0 +1,9 @@
+{
+  "name": "skill-atlas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "validate:stability": "node scripts/validate.mjs --stability"
+  }
+}

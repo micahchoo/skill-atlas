@@ -1,0 +1,464 @@
+{
+  "domain": "grant-writing",
+  "batch": "batch-001",
+  "ids": [
+    "grant-writing.landscape.funder-types",
+    "grant-writing.landscape.candid-search",
+    "grant-writing.landscape.funder-fit",
+    "grant-writing.strategy.problem-statement",
+    "grant-writing.strategy.theory-of-change",
+    "grant-writing.strategy.logic-model",
+    "grant-writing.strategy.smart-objectives",
+    "grant-writing.proposal.proposal-outline",
+    "grant-writing.proposal.project-narrative",
+    "grant-writing.budget.budget-basics",
+    "grant-writing.budget.budget-narrative"
+  ],
+  "nodes": [
+    {
+      "id": "grant-writing.landscape.funder-types",
+      "label": "Funder landscape",
+      "tier": 1,
+      "cluster": "landscape",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Sort any potential funder into the federal, foundation, corporate, or regranting pipeline and know which documents, timelines, and constraints each one implies.",
+      "hours": 8,
+      "know_what": [
+        "Federal grants — discretionary awards through Grants.gov and SAM.gov, governed by 2 CFR 200, with page limits, scored review, and fixed submission windows",
+        "Foundations — private, family, community, and corporate foundations tracked in Candid's Foundation Directory, applying via LOI and full proposal on their own cycle",
+        "Regranting intermediaries — organizations that pass larger awards down (e.g., state arts agencies, United Ways), often with simpler applications but narrower scope",
+        "Corporate giving programs — company-run grants and sponsorships tied to brand, employee engagement, and geographic footprint",
+        "Formula vs discretionary funding — formula funds arrive by statute and eligibility; discretionary funds are competed and won",
+        "General operating vs project support — unrestricted operating money vs restricted project money, and which funder types typically offer which",
+        "Cycle length — federal cycles of 6-18 months from NOFO to award vs foundation cycles that can turn in 2-4 months",
+        "Review burden — federal reviewers score against published criteria; foundation staff and boards decide on mission fit"
+      ],
+      "know_how": [
+        "Classify any funder by pipeline (federal / foundation / corporate / regranting) in one sentence, naming the documents it expects",
+        "Check a federal opportunity's Assistance Listing number and agency to confirm who is really the funder",
+        "Read a foundation's 990-PF or 990 to classify it as private, family, or community and note its giving pattern",
+        "Determine the entry point — LOI, full proposal, or simple form — from the funder type before drafting anything",
+        "Estimate the timeline implied by the funder type and put it on the calendar before drafting",
+        "Match funder type to need: general operating support usually comes from foundations, big project dollars from federal agencies"
+      ],
+      "habits": [
+        "Before any outreach, name the funder type out loud and state the entry document it expects",
+        "Keep a one-line taxonomy note on every funder record in your pipeline tracker",
+        "When a new funder appears, classify it before evaluating fit",
+        "Recheck classifications annually — foundations change focus, corporate programs pivot",
+        "When a funder's behavior contradicts your classification, note it and adjust rather than forcing the fit",
+        "File every funding notification under its pipeline so past research is reusable"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given descriptions of five real funders (a federal agency, a private foundation, a community foundation, a corporate giving program, a regranting intermediary), classify each and name its entry document and typical timeline with no errors.",
+      "common_failure": "Treating all funders as one pipeline: drafting a federal-style narrative for a foundation that wanted a one-page LOI, or vice versa. The taxonomy collapses and the wrong document gets written.",
+      "sources": ["Candid Foundation Directory", "Grants.gov", "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"]
+    },
+    {
+      "id": "grant-writing.landscape.candid-search",
+      "label": "Candid foundation search",
+      "tier": 1,
+      "cluster": "landscape",
+      "prereqs": [],
+      "soft_prereqs": ["grant-writing.landscape.funder-types"],
+      "one_line": "Search the Candid Foundation Directory by geography, focus area, and giving history to build a real list of foundations that could fund your work.",
+      "hours": 12,
+      "know_what": [
+        "Candid Foundation Directory (formerly Foundation Directory Online) — the searchable database of U.S. foundations with grants, 990s, and contact data",
+        "990-PF and 990 — the IRS filings that reveal a foundation's actual grantmaking: recipients, amounts, trustees",
+        "ProPublica Nonprofit Explorer — free digitized 990s when you don't have a Candid subscription",
+        "Grants to organizations vs individuals — most directories distinguish them; you usually want organizational grantmakers",
+        "Giving interests — the coded subjects, geographies, and populations a foundation funds",
+        "Typical grant size — the low/high/average award that tells you whether an ask is realistic",
+        "Submission type — the foundation's stated entry point: LOI, full proposal, or no unsolicited requests",
+        "Deadlines and cycles — board meeting dates and whether the foundation accepts rolling applications"
+      ],
+      "know_how": [
+        "Build a search from your program's subject, geography, and population filters in the Foundation Directory",
+        "Verify each shortlist foundation's recent giving in 990s before spending time on fit",
+        "Export a shortlist with contact info, focus areas, and giving range into your pipeline tracker",
+        "Check the recent-grants view (or 990 Schedule I) to see if the foundation already funds your type of organization",
+        "Note the submission type and cycle on each record so you never cold-submit where LOIs are required",
+        "Cross-check Candid data against the foundation's own website for the current year's priorities"
+      ],
+      "habits": [
+        "Search in batches, then verify with 990s, rather than trusting the marketing description",
+        "Log every foundation you research into the tracker in the same session you research it",
+        "Refresh your search quarterly — new foundations appear and giving interests shift",
+        "Save every successful search as a template so re-running it takes minutes, not hours",
+        "Verify a foundation's current priorities against its website before the first contact"
+      ],
+      "know_why": null,
+      "school_weights": { "federal": "low" },
+      "checkpoint": "Produce a verified shortlist of 10 foundations likely to fund your program, each with giving range, submission type, and evidence from a 990 or the foundation's own materials.",
+      "common_failure": "Building a list from a foundation's aspirational website copy instead of its actual 990s — the list looks plausible and funds nothing.",
+      "sources": ["Candid Foundation Directory", "ProPublica Nonprofit Explorer", "Foundation Center (now Candid) training materials"]
+    },
+    {
+      "id": "grant-writing.landscape.funder-fit",
+      "label": "Funder-fit triage",
+      "tier": 2,
+      "cluster": "landscape",
+      "prereqs": ["grant-writing.landscape.funder-types"],
+      "soft_prereqs": ["grant-writing.landscape.prior-awards"],
+      "one_line": "Read a funder's stated priorities, past awards, and restrictions to judge whether a project is a genuine fit before spending hours writing.",
+      "hours": 10,
+      "know_what": [
+        "Fit vs wish — the difference between a funder whose priorities genuinely match and one you merely want money from",
+        "Priorities and focus areas — the foundation's stated current interests, usually on its website and annual report",
+        "Giving history — what the foundation actually funded last year, visible in 990s and Candid grant records",
+        "Restrictions — geographic limits, entity-type limits, no-unsolicited policies, no capital campaigns, no regranting",
+        "Funding strategy — many small grants, few large ones, or running its own initiatives",
+        "Relationship stage — whether the foundation requires an introduction, an LOI, or accepts direct proposals",
+        "Alignment evidence — the concrete overlaps (populations, geography, methods) you can cite in an approach"
+      ],
+      "know_how": [
+        "Score fit on three axes — mission, geography, and ask size — before writing anything",
+        "Check the foundation's own list of things it does not fund against your project line by line",
+        "Read the last two years of grants (990 schedules or Candid) and look for your field, geography, or org type",
+        "Look for a pattern of repeat grantees — some foundations effectively fund a closed circle, which changes your odds",
+        "Identify the decision maker — staff program officer, board committee, or giving committee — and how they take input",
+        "Write a one-paragraph fit statement for a go candidate, or a one-line no-go reason and move on"
+      ],
+      "habits": [
+        "Never draft before fit: the fit check comes first, always",
+        "Keep the no-go list as deliberate as the go list — it protects your hours",
+        "Recheck fit when a new RFP or LOI window opens; priorities change quarterly",
+        "Write the no-go reason on the funder record so you never re-litigate it",
+        "When a maybe goes to go, capture what changed so the pattern is visible"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given five foundation profiles, classify each as go / maybe / no-go with a written reason, and the go list survives a program officer's 'why us' interrogation.",
+      "common_failure": "Convincing yourself a funder fits because the money is attractive — the hours go into a proposal that a program officer rejects as off-mission in one read.",
+      "sources": ["Candid Foundation Directory", "Jane Geever, The Foundation Center's Guide to Proposal Writing", "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"]
+    },
+    {
+      "id": "grant-writing.strategy.problem-statement",
+      "label": "Problem statement",
+      "tier": 1,
+      "cluster": "strategy",
+      "prereqs": [],
+      "soft_prereqs": ["grant-writing.strategy.need-stats"],
+      "one_line": "State the problem your project exists to solve in one paragraph with named evidence, so a stranger reviewer understands why the work matters.",
+      "hours": 8,
+      "know_what": [
+        "Problem statement — the opening paragraph(s) that establish the need your project addresses, with evidence",
+        "Population of focus — who exactly is harmed or underserved, named specifically rather than 'the community'",
+        "Magnitude — the scale of the problem in numbers: counts, rates, percentages, with citations",
+        "Consequence — what happens if the problem persists, in terms a reviewer can picture",
+        "Root cause vs symptom — the underlying driver vs its surface effects",
+        "Local evidence — data specific to your geography or population that national statistics miss",
+        "Gap in services — the specific absence your project fills, which is what justifies funding you rather than someone else"
+      ],
+      "know_how": [
+        "Open with the population and the scale of the problem in the first sentence, not with your organization's history",
+        "Cite at least one authoritative statistic per claim, with source and year",
+        "Narrow from national to local: the national trend, then your city or county's numbers",
+        "State the consequence of inaction so the reviewer feels the cost of not funding",
+        "Close the paragraph by pointing at the gap your project fills",
+        "Cut adjectives and let the numbers and the named population carry the weight"
+      ],
+      "habits": [
+        "Draft the problem statement before the project description, and revise it last",
+        "Every statistic in the statement must have a source you could produce on request",
+        "Re-read the statement asking whether a stranger in another field would find it urgent",
+        "Keep a running file of strong need statistics so drafting starts from evidence, not memory",
+        "When the program changes, re-check that the statement still describes the real problem"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Write a problem statement that a reviewer outside your field can summarize back to you accurately after one read, with every statistic cited.",
+      "common_failure": "Starting with your organization's history or the project's features instead of the problem, so the need — the thing being funded — never gets established.",
+      "sources": ["Community Tool Box — Defining the Problem", "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need", "Beverly Browning, Grant Writing For Dummies"]
+    },
+    {
+      "id": "grant-writing.strategy.theory-of-change",
+      "label": "Theory of change",
+      "tier": 1,
+      "cluster": "strategy",
+      "prereqs": [],
+      "soft_prereqs": ["grant-writing.strategy.problem-statement"],
+      "one_line": "Write the if-then chain from your activities to the long-term change you claim, exposing the assumptions a reviewer will test.",
+      "hours": 10,
+      "know_what": [
+        "Theory of change — the explicit if-then chain from your activities to the long-term change you claim",
+        "Outcomes pathway — the sequence: activities → immediate outcomes → intermediate outcomes → long-term change",
+        "Assumptions — the beliefs about how change happens that your chain depends on",
+        "Preconditions — the conditions that must already hold for your intervention to work",
+        "Backwards mapping — starting from the long-term goal and working backwards to what must be true before it",
+        "Indicators at each step — the observable evidence that a link in the chain actually fired",
+        "Causal vs correlational claims — 'this produced that' vs 'these happened together'"
+      ],
+      "know_how": [
+        "Start from the long-term change and ask 'what must be true before this?' repeatedly until you reach your activities",
+        "Write each link as an if-then sentence and mark the assumption each one rests on",
+        "Test the chain for jumps — a link that skips from 'training' to 'higher employment' without intermediate outcomes",
+        "List the preconditions your project assumes: staffing, partner cooperation, participant attendance",
+        "Keep the theory to one page; the full narrative detail belongs in the logic model",
+        "Ask a skeptical reader to attack the weakest link and revise it"
+      ],
+      "habits": [
+        "Ask 'why will this work?' before 'how will we do it?' on every new project",
+        "Write assumptions down — unwritten assumptions get discovered by reviewers, painfully",
+        "Re-examine the theory when results don't match it, instead of moving the goalposts",
+        "Show the one-page theory to a practitioner who does the work and ask what link is weakest",
+        "Keep a library of theories of change from strong proposals in your field"
+      ],
+      "know_why": {
+        "claim": "Every serious proposal needs an explicit theory of change, even for small grants.",
+        "because": "it exposes the assumptions and the activity-outcome chain that reviewers actually score, and it keeps the proposal internally consistent.",
+        "disputed_by": "pragmatic grant writers who argue that for small foundation grants a one-page logic model or a well-evidenced problem statement is enough, and that formal theory-of-change work consumes hours with little review payoff.",
+        "source": "Aspen Institute Roundtable on Community Change & ActKnowledge, Theory of Change resources"
+      },
+      "school_weights": { "grantsmanship": "low" },
+      "checkpoint": "Produce a one-page theory of change for your project with a complete if-then chain, every assumption named, and no jump from activity to long-term outcome.",
+      "common_failure": "Writing a chain that's really a list of activities ending in a wish — no intermediate outcomes, no assumptions — so the theory can't be tested or scored.",
+      "sources": ["ActKnowledge / Aspen Institute Roundtable on Community Change — Theory of Change materials", "Ann Emery — theory of change and evaluation writing", "W.K. Kellogg Foundation Logic Model Development Guide"]
+    },
+    {
+      "id": "grant-writing.strategy.logic-model",
+      "label": "Logic model",
+      "tier": 2,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.theory-of-change"],
+      "soft_prereqs": ["grant-writing.strategy.smart-objectives"],
+      "one_line": "Turn your theory into the inputs-activities-outputs-outcomes table funders expect, with every column traceable to the next.",
+      "hours": 10,
+      "know_what": [
+        "Logic model — the inputs → activities → outputs → outcomes → impact table derived from the theory of change",
+        "Inputs — the resources you commit: staff, funding, facilities, partners",
+        "Activities — what the project does: workshops, services, campaigns, coaching",
+        "Outputs — the countable units produced: sessions held, people served, materials distributed",
+        "Outcomes — the changes in participants that result, short- and long-term",
+        "Impact — the longer-term population-level change the project contributes to",
+        "Column traceability — the discipline that every output connects to an activity and every outcome to an output"
+      ],
+      "know_how": [
+        "Derive the model from the theory of change rather than filling a template with whatever fits",
+        "Write one row per activity cluster: activity → its outputs → its outcomes, keeping columns aligned",
+        "Distinguish outputs (we served 120 people) from outcomes (attendance improved by X)",
+        "Put measurable language in the outcome column so indicators can hang off it later",
+        "Keep the model to one page; reviewers read it as a map, not an essay",
+        "Cross-check that every outcome in the model appears in the proposal's objectives and evaluation plan"
+      ],
+      "habits": [
+        "Build the logic model before the budget, so the budget funds the activities in the model",
+        "Update the model when the program changes, not at report time",
+        "Use the model as the table of contents for the evaluation section",
+        "Run a monthly trace: pick any outcome column and confirm the activities feeding it still exist",
+        "When a funder supplies its own model format, translate yours into it rather than inventing a parallel one"
+      ],
+      "know_why": {
+        "claim": "A logic model must be built from the theory of change, not from a template.",
+        "because": "template-first models produce columns of plausible-looking outputs with no outcome chain behind them, and reviewers cut them as boilerplate.",
+        "disputed_by": "funder scorecards that request 'a logic model' as a compliance artifact and accept any reasonable table, which trains applicants to fill templates.",
+        "source": "W.K. Kellogg Foundation Logic Model Development Guide"
+      },
+      "school_weights": { "grantsmanship": "low" },
+      "checkpoint": "Build a one-page logic model where a stranger can trace any output back to an activity and any outcome forward to impact, with no dead-end columns.",
+      "common_failure": "Filling in a template so the model is complete but disconnected — outputs that match no activity, outcomes that match no output — which reviewers read as a sign of sloppy program design.",
+      "sources": ["W.K. Kellogg Foundation Logic Model Development Guide", "University of Wisconsin–Extension Logic Model resources (Ellen Taylor-Powell)", "Innovation Network, Logic Model Workbook"]
+    },
+    {
+      "id": "grant-writing.strategy.smart-objectives",
+      "label": "SMART objectives",
+      "tier": 2,
+      "cluster": "strategy",
+      "prereqs": ["grant-writing.strategy.problem-statement"],
+      "soft_prereqs": ["grant-writing.strategy.logic-model"],
+      "one_line": "Write objectives that are specific, measurable, achievable, relevant, and time-bound so your outcomes can be evaluated at closeout.",
+      "hours": 6,
+      "know_what": [
+        "SMART — specific, measurable, achievable, relevant, time-bound; the standard shape for a grant objective",
+        "Objective vs activity — an objective states the change to be achieved; an activity states what you will do",
+        "Baseline — the starting value you measure against, without which 'increase' is meaningless",
+        "Target — the numeric destination: 'from 40% to 60%' rather than 'improve attendance'",
+        "Time-bound — the date or period by which the objective is met, usually the grant period",
+        "Outcome-level objectives — objectives that describe participant change, not staff activity"
+      ],
+      "know_how": [
+        "Write each objective as one sentence: by [date], [population] will [measurable change] from [baseline] to [target]",
+        "Run each objective through the five SMART letters and rewrite anything that fails one",
+        "Check achievability against your staffing and timeline before committing to a number",
+        "Make objectives outcome-level: 'participants will complete the course' is an output, not an objective",
+        "Align every objective to a row in the logic model so the proposal hangs together",
+        "Limit to 3-5 objectives; more than that reads as overreach and becomes unverifiable"
+      ],
+      "habits": [
+        "Before drafting, list the baseline numbers you already have — or plan to collect them",
+        "Every objective gets a 'who measures it and when' note before it goes in the proposal",
+        "Review objectives against results at midpoint, not just at closeout",
+        "Keep the baseline numbers attached to each objective so the target is never orphaned",
+        "When asked to cut objectives to fit a page, cut the least measurable one first"
+      ],
+      "know_why": {
+        "claim": "SMART phrasing is the unit reviewers actually score, so objectives must be written that way even when the work is qualitative.",
+        "because": "a measurable, time-bound objective is the only part of a narrative that can be checked at closeout, and reviewers reward claims they can verify.",
+        "disputed_by": "evaluators who argue objectives-first planning locks in the wrong outcomes, and that programs should start from the change sought and choose metrics to fit rather than force the change into a SMART template.",
+        "source": "George T. Doran, 'There's a S.M.A.R.T. Way to Write Management's Goals and Objectives' (1981)"
+      },
+      "school_weights": { "evaluation": "high", "grantsmanship": "low" },
+      "checkpoint": "Rewrite a vague project description into 3-5 SMART objectives, each with baseline, target, date, and a named measure, that survive a reviewer's 'how will you know?' challenge.",
+      "common_failure": "Objectives that restate activities ('we will run 12 workshops') as if that were a result — nothing is measurable, so the evaluation section has nothing to hang on.",
+      "sources": ["George T. Doran (1981), 'There's a S.M.A.R.T. Way to Write Management's Goals and Objectives'", "Community Tool Box — Writing SMART objectives", "Beverly Browning, Grant Writing For Dummies"]
+    },
+    {
+      "id": "grant-writing.proposal.proposal-outline",
+      "label": "Proposal outline",
+      "tier": 2,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.loi"],
+      "soft_prereqs": ["grant-writing.strategy.logic-model"],
+      "one_line": "Map your full proposal against the funder's stated sections and page limits before writing a word, so nothing gets written that can't be used.",
+      "hours": 6,
+      "know_what": [
+        "Funder outline — the section-by-section structure the funder specifies: narrative, budget, attachments",
+        "Page limits — hard caps per section (e.g., NIH's 12-page research strategy, many foundations' 10-page total) that the outline must respect",
+        "Review criteria order — the scoring criteria (significance, approach, personnel, evaluation) that should drive section order",
+        "Content budget — the allocation of pages to sections by the weight of the criteria",
+        "Boilerplate inventory — reusable sections (org overview, personnel, prior success) you can drop in",
+        "Gap list — the sections that need new writing vs ones that can be assembled from existing material"
+      ],
+      "know_how": [
+        "Copy the funder's required sections verbatim into an outline document before writing anything",
+        "Assign each criterion to the section that will answer it, and note where in the section",
+        "Allocate pages proportionally to criteria weight, not to your interest",
+        "Mark each section as draft-ready, needs-writing, or needs-data so you know the real work",
+        "List the required attachments and who owns each one",
+        "Set the outline as the roadmap: no prose until every section has a bullet list of what it must contain"
+      ],
+      "habits": [
+        "Outline first, always — a proposal written without an outline gets rewritten",
+        "Keep a boilerplate folder current so the outline can pull from it",
+        "Re-outline when a funder changes its requirements mid-cycle",
+        "Keep a reusable master outline per funder so the next proposal starts from a known shape",
+        "Time-box the outline: if it takes more than a couple of hours, the funder's requirements are still unclear"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a real NOFO or foundation guidelines, produce a section-by-section outline with a page allocation per section that sums to the page limit, and a named owner for each attachment.",
+      "common_failure": "Writing the narrative first and fitting it to the outline afterwards — page limits get blown and criteria get answered implicitly instead of in their own sections.",
+      "sources": ["NIH — Write Your Application guidance", "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need", "Grants.gov application guides"]
+    },
+    {
+      "id": "grant-writing.proposal.project-narrative",
+      "label": "Project narrative",
+      "tier": 3,
+      "cluster": "proposal",
+      "prereqs": ["grant-writing.proposal.proposal-outline", "grant-writing.strategy.smart-objectives"],
+      "soft_prereqs": ["grant-writing.strategy.logic-model", "grant-writing.budget.budget-basics"],
+      "one_line": "Write the narrative body — need, approach, personnel, evaluation — that answers the funder's review criteria in order.",
+      "hours": 20,
+      "know_what": [
+        "Project narrative — the main body: need, approach, personnel, evaluation, sustainability, written to the funder's criteria",
+        "Approach — the methods and activities, sequenced, with who does what",
+        "Need section — the problem statement plus local evidence, tailored to this funder",
+        "Personnel — who will do the work and why they are qualified, often with brief bios",
+        "Evaluation section — how success will be measured, tied to the objectives",
+        "Sustainability — how the work continues after the grant, increasingly required",
+        "Voice — the funder's reading level and culture: federal reviewers want precision, foundation staff want the mission"
+      ],
+      "know_how": [
+        "Answer the review criteria in order, using the criteria's own headings as section headers",
+        "Open each section with the claim, then the evidence, then the connection to the project",
+        "Quote the funder's language back where appropriate — mirror their terms for the work",
+        "Show, don't tell: name the population, the numbers, the method, the timeline",
+        "Weave the logic model's outcomes into the narrative so the document and the table agree",
+        "Write to the page limit: if the cap is 10 pages, deliver 9.5, not 10 pages of padding"
+      ],
+      "habits": [
+        "Draft section by section against the outline, then read the whole as one document",
+        "Check every claim in the narrative against the budget — the numbers must match",
+        "Read the narrative aloud; if a sentence survives only because you wrote it, cut it",
+        "Track which sections you cut under pressure so the next outline weights them correctly",
+        "Keep one example of a past winning narrative in your field as a yardstick for density"
+      ],
+      "know_why": null,
+      "school_weights": { "grantsmanship": "high", "evaluation": "low" },
+      "checkpoint": "Produce a complete project narrative under the funder's page limit where a reviewer can find each published criterion answered in its own section with evidence.",
+      "common_failure": "Writing the narrative as an essay about the organization instead of an argument to the criteria — reviewers can't find the answers they're paid to score.",
+      "sources": ["NIH — Write Your Application", "Carlson & O'Neal-McElrath, Winning Grants Step by Step", "Karsh & Fox, The Only Grant-Writing Book You'll Ever Need"]
+    },
+    {
+      "id": "grant-writing.budget.budget-basics",
+      "label": "Budget construction",
+      "tier": 1,
+      "cluster": "budget",
+      "prereqs": [],
+      "soft_prereqs": ["grant-writing.strategy.logic-model"],
+      "one_line": "Build a line-item project budget with personnel, fringe, travel, equipment, and other categories that sums correctly and tells the project's story.",
+      "hours": 10,
+      "know_what": [
+        "Line-item budget — the standard format: personnel, fringe, travel, equipment, supplies, contractual, other, indirect",
+        "Cost categories — the 2 CFR 200 categories federal reviewers expect to see",
+        "Direct vs indirect costs — costs attributable to the project vs the organization's shared overhead",
+        "Personnel — salaries and wages, priced as percent effort or hours times rate",
+        "Fringe — the employer-side costs (payroll taxes, benefits) added to salary",
+        "Matching funds — required or pledged contributions, cash or in-kind, shown in the budget",
+        "Reconciling totals — column sums and grand total that are exact and cross-checkable"
+      ],
+      "know_how": [
+        "Build the budget in a spreadsheet with a formula for every total, never a hand-typed number",
+        "Start from the logic model's activities so every line funds something in the model",
+        "Use realistic rates: actual salaries, actual vendor quotes, not round numbers",
+        "Show percent effort for each person so reviewers see the staffing story",
+        "Add a notes column explaining each line as you build it — that becomes the budget narrative",
+        "Reconcile the budget to the narrative numbers before submission"
+      ],
+      "habits": [
+        "Budget from quotes and payroll, not from 'we probably need' guesses",
+        "Update the budget whenever the program design changes",
+        "Keep last year's budget as a template with formulas intact",
+        "When a line exceeds your mental benchmark, question the program design before inflating the number",
+        "Run the budget past the person who will actually spend it before it ships"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Build a line-item project budget with all standard categories, exact totals, percent effort per person, and no line that a reviewer can't trace to the program.",
+      "common_failure": "A budget that doesn't sum, or sums only because numbers were fudged — reviewers check the math, and round-number guesses signal an unserious budget.",
+      "sources": ["2 CFR 200 (Uniform Guidance) cost principles", "Grants.gov budget guidance", "Foundation Center — Budgeting for Grants materials"]
+    },
+    {
+      "id": "grant-writing.budget.budget-narrative",
+      "label": "Budget narrative",
+      "tier": 2,
+      "cluster": "budget",
+      "prereqs": ["grant-writing.budget.budget-basics"],
+      "soft_prereqs": ["grant-writing.budget.personnel", "grant-writing.budget.indirect-costs"],
+      "one_line": "Write the justification that explains each line item to a reviewer who wasn't in the room when you planned it.",
+      "hours": 8,
+      "know_what": [
+        "Budget narrative — the written justification that explains each line item to a reviewer",
+        "Justification — for each line: what it is, why it's needed, how the amount was derived",
+        "Personnel justification — role, effort percentage, and the calculation behind the salary",
+        "Travel — destination, number of trips, cost basis (per-diem rates, airfare quotes)",
+        "Equipment vs supplies — the threshold and the distinction reviewers enforce",
+        "Indirect cost explanation — the rate used and its basis: negotiated agreement, funder cap, or 10% de minimis",
+        "Match documentation — how the match will be met and evidenced"
+      ],
+      "know_how": [
+        "Write one paragraph per line item in the same order as the budget",
+        "Show the math: '2 trips x $800 airfare + $160 per-diem x 3 days'",
+        "Justify need, not just amount: a line is defensible when the reviewer sees why the project can't run without it",
+        "State the indirect basis explicitly — negotiated rate agreement, 10% de minimis, or funder cap",
+        "Cross-reference the narrative: 'as described in the project narrative, page 4'",
+        "Keep to the funder's length expectation — usually 1-2 pages; some federal programs want more"
+      ],
+      "habits": [
+        "Write the narrative from the budget notes column you kept while building the budget",
+        "Every number in the narrative must match the budget exactly",
+        "Re-read the narrative pretending you're a skeptical grants officer",
+        "Update the narrative the moment a budget line changes, so the two never drift apart",
+        "Keep a copy of the funder's cost principles open while writing the justification"
+      ],
+      "know_why": null,
+      "school_weights": { "federal": "high", "corporate": "low" },
+      "checkpoint": "Produce a budget narrative where every line item has a calculation and a need-based justification, and an auditor can recompute every total from the text.",
+      "common_failure": "Repeating the budget as prose ('we request $5,000 for supplies') without the calculation or the why — the justification that makes the line credible is missing.",
+      "sources": ["2 CFR 200 cost principles", "NIH SF424 budget instructions", "Carlson & O'Neal-McElrath, Winning Grants Step by Step"]
+    }
+  ]
+}
