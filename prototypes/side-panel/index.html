@@ -1,0 +1,217 @@
+<!-- Throwaway prototype (ticket 006): tree + side panel for node bodies — settles section order, checkpoint billing, know_why-as-disagreement, skeleton-only state, prereq-chain tie-in, soft prereqs. The keep is NOTES.md, not this code. -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>grant-writing tree · side-panel prototype</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; display: flex; flex-direction: column; }
+
+  /* ---------- toolbar ---------- */
+  .toolbar {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 8px 14px; background: #0f172a; color: #e2e8f0; font-size: 13px; z-index: 20;
+  }
+  .toolbar b { font-size: 13px; letter-spacing: .2px; }
+  .toolbar .facts { color: #94a3b8; font-size: 11.5px; }
+  .toolbar .legend { color: #94a3b8; font-size: 11.5px; margin-left: auto; }
+  .toolbar .legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 4px 0 10px; vertical-align: -1px; }
+  .toolbar button {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 5px;
+    padding: 2px 9px; font-size: 12px; cursor: pointer;
+  }
+  .toolbar button:hover { background: #334155; }
+  .body-count { color: #fbbf24; font-weight: 600; }
+
+  /* ---------- layout: tree | panel ---------- */
+  main { flex: 1; display: flex; min-height: 0; }
+  #stage { flex: 1; position: relative; min-width: 0; }
+  .viewer { width: 100%; height: 100%; display: block; cursor: grab; background:
+    radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 22px 22px; }
+  .viewer.panning { cursor: grabbing; }
+  .viewer text { user-select: none; }
+
+  /* ---------- tree SVG (mirrors tree-renderer visual language) ---------- */
+  .node rect { fill: #ffffff; stroke: #94a3b8; stroke-width: 1; }
+  .node text { fill: #1e293b; font-size: 10px; }
+  .node:hover rect { stroke: #2563eb; stroke-width: 2; filter: drop-shadow(0 1px 3px rgba(0,0,0,.25)); }
+  .node.spine rect { fill: #ffe08a; stroke: #d9a400; stroke-width: 1.4; }
+  .node.spine text { font-weight: 600; fill: #7a5a00; }
+  /* skeleton-only nodes: dashed outline = mapped in the tree, body pending */
+  .node.pending rect { stroke: #cbd5e1; stroke-dasharray: 4 3; }
+  .node.pending text { fill: #64748b; }
+  .node.pending.spine rect { stroke: #d9a400; }
+  /* prereq chain highlight (question 5) */
+  .node.chain-anc rect { stroke: #d97706; stroke-width: 2; fill: #fef3c7; }
+  .node.chain-anc.spine rect { stroke: #b45309; }
+  .node.chain-desc rect { stroke: #0d9488; stroke-width: 2; fill: #ccfbf1; }
+  .node.chain-desc.spine rect { stroke: #0f766e; }
+  .node.chain-selected rect { stroke: #92400e; stroke-width: 3; fill: #fbbf24; }
+  .node.chain-selected text { font-weight: 700; }
+  .edge { stroke-width: 1.2; }
+  .edge.hard { stroke: #8a93a6; }
+  .edge.soft { stroke: #a6adbb; stroke-dasharray: 4 4; stroke-width: 1; opacity: .5; }
+  .edge.chain-edge { stroke: #d97706; stroke-width: 2.4; }
+  .spine-layer polyline { stroke: #d9a400; stroke-width: 2.6; stroke-dasharray: 7 5; opacity: .95; }
+  .tooltip {
+    position: fixed; z-index: 40; max-width: 360px; background: #0f172a; color: #e2e8f0;
+    border: 1px solid #334155; border-radius: 8px; padding: 9px 11px; font-size: 12px; line-height: 1.45;
+    box-shadow: 0 6px 18px rgba(15,23,42,.35); pointer-events: none;
+  }
+  .tooltip b { font-size: 13px; }
+  .tooltip .tip-spine { color: #fbbf24; font-weight: 600; }
+  .tooltip .tip-line { margin-top: 5px; color: #cbd5e1; }
+
+  /* ---------- side panel (questions 1-4, 6) ---------- */
+  #panel {
+    width: 430px; flex: none; border-left: 1px solid #e2e8f0; background: #ffffff;
+    overflow-y: auto; padding: 16px 18px 40px; font-size: 13px; line-height: 1.5;
+  }
+  #panel .placeholder { color: #94a3b8; font-size: 13px; margin-top: 24px; text-align: center; }
+  .p-label { font-size: 17px; font-weight: 700; line-height: 1.25; }
+  .p-meta { color: #64748b; font-size: 12px; margin-top: 2px; }
+  .p-line { color: #334155; font-size: 12.5px; font-style: italic; margin-top: 8px; padding-left: 10px; border-left: 3px solid #e2e8f0; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+    border-radius: 4px; padding: 1px 6px; vertical-align: 2px; margin-left: 6px;
+  }
+  .badge.spine { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  .badge.body { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+  .badge.pending { background: #fef9c3; color: #854d0e; border: 1px dashed #facc15; }
+
+  .prereqs { margin-top: 12px; padding: 10px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; }
+  .prereqs .row { display: flex; gap: 8px; align-items: baseline; margin: 4px 0; }
+  .prereqs .lbl { flex: none; width: 96px; color: #64748b; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; }
+  .prereqs .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip {
+    font-size: 11.5px; border-radius: 999px; padding: 1px 9px; cursor: pointer; border: 1px solid;
+    white-space: nowrap;
+  }
+  .chip:hover { filter: brightness(.95); }
+  .chip.hard { background: #eef2ff; color: #3730a3; border-color: #c7d2fe; }
+  .chip.soft { background: #f8fafc; color: #475569; border-color: #94a3b8; border-style: dashed; }
+  .prereqs .none { color: #94a3b8; font-size: 11.5px; }
+
+  /* checkpoint = THE thing (question 2) */
+  .checkpoint {
+    margin-top: 14px; background: #0f172a; color: #f8fafc; border-radius: 10px;
+    padding: 12px 14px; border-left: 5px solid #f59e0b;
+  }
+  .checkpoint .cp-kicker { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; color: #fbbf24; text-transform: uppercase; }
+  .checkpoint .cp-text { margin-top: 5px; font-size: 13.5px; line-height: 1.5; font-weight: 500; }
+
+  .sec { margin-top: 16px; }
+  .sec h3 {
+    font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
+    color: #475569; margin: 0 0 6px; display: flex; align-items: center; gap: 7px;
+  }
+  .sec h3 .count { color: #94a3b8; font-weight: 600; }
+  .sec h3::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+  .sec ul { margin: 0; padding-left: 17px; }
+  .sec li { margin: 3px 0; }
+  .sec.warn { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 9px 12px; }
+  .sec.warn h3 { color: #991b1b; }
+  .sec.warn ul { padding-left: 16px; }
+  .sec.warn li { color: #7f1d1d; }
+
+  /* know_why as a disagreement, not a paragraph (question 3) */
+  .kw-grid { display: grid; grid-template-columns: 1fr 34px 1fr; gap: 0; align-items: stretch; margin-top: 6px; }
+  .kw-side {
+    font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 5px 5px 0 0;
+  }
+  .kw-claim { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; overflow: hidden; }
+  .kw-claim .kw-side { background: #dbeafe; color: #1e40af; }
+  .kw-claim .kw-body { padding: 8px 10px; }
+  .kw-claim .kw-body p { margin: 0 0 6px; color: #1e3a8a; font-weight: 600; font-size: 12.5px; }
+  .kw-claim .kw-because { font-size: 11.5px; color: #334155; }
+  .kw-claim .kw-because b { color: #1e40af; }
+  .kw-dispute { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; overflow: hidden; }
+  .kw-dispute .kw-side { background: #fee2e2; color: #991b1b; }
+  .kw-dispute .kw-body { padding: 8px 10px; }
+  .kw-dispute .kw-body p { margin: 0; color: #7f1d1d; font-size: 12.5px; }
+  .kw-vs {
+    display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #94a3b8;
+  }
+  .kw-source { margin-top: 6px; font-size: 11px; color: #64748b; font-style: italic; }
+
+  /* school weights (lens overlay) */
+  .sw-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .sw-chip { font-size: 11.5px; border-radius: 6px; padding: 2px 9px; border: 1px solid; }
+  .sw-chip.v-high { background: #dcfce7; color: #166534; border-color: #86efac; }
+  .sw-chip.v-low { background: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+  .sw-chip.v-rejected { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+  .sw-chip.v-normal { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+  .sw-neutral { color: #64748b; font-size: 12px; margin-top: 4px; }
+
+  /* skeleton-only state: tree done, content pending (question 4) */
+  .pending-card {
+    margin-top: 14px; border: 1.5px dashed #facc15; background: #fefce8; border-radius: 10px; padding: 12px 14px;
+  }
+  .pending-card .pend-title { font-size: 11px; font-weight: 800; letter-spacing: 1px; color: #854d0e; text-transform: uppercase; }
+  .pending-card p { margin: 6px 0 0; color: #713f12; font-size: 12.5px; }
+  .pending-card .pend-sub { color: #a16207; font-size: 11.5px; }
+  .pending-card .pend-sections { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .pend-sec { font-size: 10px; color: #854d0e; background: #fef9c3; border: 1px solid #fde047; border-radius: 4px; padding: 0 6px; }
+
+  details.sec { border-top: 1px solid #e2e8f0; padding-top: 10px; }
+  details.sec summary { cursor: pointer; font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: #475569; list-style: none; }
+  details.sec summary::before { content: '▸ '; color: #94a3b8; }
+  details.sec[open] summary::before { content: '▾ '; }
+  details.sec ol { margin: 8px 0 0; padding-left: 18px; }
+  details.sec ol li { margin: 3px 0; }
+
+  /* ---------- status bar (surface state after every interaction) ---------- */
+  .statusbar {
+    background: #e2e8f0; color: #334155; font-size: 11.5px; padding: 5px 14px;
+    display: flex; gap: 18px; align-items: center; min-height: 26px; border-top: 1px solid #cbd5e1;
+  }
+  .statusbar .k { color: #64748b; font-weight: 600; }
+  .error { margin: 40px auto; max-width: 520px; padding: 16px 20px; background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: 8px; color: #991b1b; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <b>grant-writing tree · side panel</b>
+    <span class="facts" id="facts"></span>
+    <span class="body-count" id="bodyCount"></span>
+    <label><input type="checkbox" id="softToggle" checked> soft edges</label>
+    <label><input type="checkbox" id="spineToggle" checked> spine</label>
+    <button id="zoomIn">+</button>
+    <button id="zoomOut">−</button>
+    <button id="fitBtn">Fit</button>
+    <span class="legend">
+      <span class="sw" style="background:#fef3c7;border:1px solid #d97706"></span>ancestors
+      <span class="sw" style="background:#ccfbf1;border:1px solid #0d9488"></span>descendants
+      <span class="sw" style="background:#fbbf24;border:1px solid #92400e"></span>selected
+      <span class="sw" style="background:#fff;border:1px dashed #94a3b8"></span>body pending
+    </span>
+  </div>
+
+  <main>
+    <div id="stage"></div>
+    <aside id="panel">
+      <div class="placeholder" id="panelPlaceholder">
+        Click a node in the tree to open its panel.<br>
+        Solid outline = body present · dashed outline = body pending.
+      </div>
+    </aside>
+  </main>
+
+  <div class="statusbar" id="statusbar">
+    <span><span class="k">selected:</span> <span id="stSelected">—</span></span>
+    <span><span class="k">body:</span> <span id="stBody">—</span></span>
+    <span><span class="k">chain:</span> <span id="stChain">—</span></span>
+    <span><span class="k">soft prereqs:</span> <span id="stSoft">—</span></span>
+    <span><span class="k">bodies merged:</span> <span id="stMerged">—</span></span>
+  </div>
+
+  <div id="errorBox" class="error" hidden></div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

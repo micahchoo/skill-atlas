@@ -1,0 +1,394 @@
+<!-- Throwaway prototype (ticket 007): school lens — pick a school, the tree re-tints by that school's real school_weights. The keep is the NOTES.md decisions, not this code. Reuses tree-renderer's graph.js (merge/topology) and variant-A lane layout via read-only relative imports. -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>grant-writing tree · school lens prototype</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font-family: system-ui, sans-serif; background: #f8fafc; color: #0f172a; display: flex; flex-direction: column; }
+
+  /* ---- toolbar ---- */
+  .toolbar {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 7px 14px; background: #0f172a; color: #e2e8f0; font-size: 13px; z-index: 20;
+  }
+  .toolbar b { font-size: 13px; letter-spacing: .2px; }
+  .toolbar .facts { color: #94a3b8; font-size: 11.5px; }
+  .toolbar .state { color: #fbbf24; font-size: 11.5px; font-variant-numeric: tabular-nums; }
+  .toolbar .zoom { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; }
+  .toolbar button {
+    background: #1e293b; color: #e2e8f0; border: 1px solid #334155; border-radius: 5px;
+    padding: 2px 9px; font-size: 12px; cursor: pointer;
+  }
+  .toolbar button:hover { background: #334155; }
+
+  /* ---- selector + legend ---- */
+  .lensbar {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 8px 14px; background: #eef2f7; border-bottom: 1px solid #dbe2ea; z-index: 19;
+  }
+  .chips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .chips .cap { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; color: #334155; border: 1px solid #cbd5e1; border-radius: 999px;
+    padding: 4px 12px; font-size: 12.5px; cursor: pointer; user-select: none; line-height: 1.2;
+  }
+  .chip:hover { border-color: #2563eb; color: #1d4ed8; }
+  .chip .cnt { font-size: 10px; color: #94a3b8; }
+  .chip.active { background: #0f172a; color: #fbbf24; border-color: #0f172a; font-weight: 600; }
+  .chip.active .cnt { color: #fbbf24; }
+  .chip.enemy { border: 1px dashed #dc2626; color: #b91c1c; background: #fef2f2; }
+  .chip.enemy .cnt { color: #dc2626; }
+  .chip.none { border-style: dashed; }
+  .chip.none.active { border-style: solid; }
+
+  .legend { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 11px; color: #475569; margin-left: auto; }
+  .legend .lg { display: inline-flex; align-items: center; gap: 4px; }
+  .legend .sw { width: 11px; height: 11px; border-radius: 3px; border: 1px solid #94a3b8; display: inline-block; }
+  .lg-high .sw { background: #fef3c7; border-color: #d97706; box-shadow: 0 0 4px rgba(217,119,6,.6); }
+  .lg-norm .sw { background: #fff; }
+  .lg-low .sw { background: #f1f5f9; border-color: #cbd5e1; opacity: .8; }
+  .lg-rej .sw { background: #fef2f2; border-color: #dc2626; text-decoration: line-through; }
+  .legend .note { color: #94a3b8; font-style: italic; }
+
+  /* ---- lens strip (visible school text while lens is active) ---- */
+  .strip {
+    min-height: 46px; padding: 8px 14px; font-size: 12.5px; line-height: 1.5;
+    background: #1e293b; color: #cbd5e1; border-bottom: 1px solid #0f172a; z-index: 18;
+  }
+  .strip .sname { color: #fbbf24; font-weight: 700; font-size: 13px; margin-right: 10px; }
+  .strip .k { color: #64748b; font-weight: 600; margin-right: 4px; }
+  .strip .frag { display: inline; margin-right: 14px; }
+  .strip .qw { color: #fca5a5; }
+  .strip .warn { color: #fbbf24; margin-left: 6px; }
+  .strip.off { background: #eef2f7; color: #475569; border-bottom: 1px dashed #94a3b8; }
+  .strip.off b { color: #334155; }
+  .strip.off .deepchip { margin-left: 12px; color: #1d4ed8; font-weight: 600; }
+
+  /* ---- stage + viewer ---- */
+  main { flex: 1; position: relative; min-height: 0; }
+  .viewer { width: 100%; height: 100%; display: block; cursor: grab; background:
+    radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 22px 22px; }
+  .viewer.panning { cursor: grabbing; }
+  .viewer text { user-select: none; }
+
+  /* node defaults — spine gold first, then lens classes (lens wins on tie via order) */
+  .node rect { fill: #ffffff; stroke: #94a3b8; stroke-width: 1; }
+  .node text { fill: #1e293b; font-size: 10px; }
+  .node:hover rect { stroke: #2563eb; stroke-width: 2; filter: drop-shadow(0 1px 3px rgba(0,0,0,.25)); }
+  .node.spine rect { fill: #ffe08a; stroke: #d9a400; stroke-width: 1.4; }
+  .node.spine text { font-weight: 600; fill: #7a5a00; }
+
+  /* lens grammar: glow / neutral / dim / struck */
+  .node.lens-high rect { fill: #fef3c7; stroke: #d97706; stroke-width: 1.7;
+    filter: drop-shadow(0 0 5px rgba(217,119,6,.55)); }
+  .node.lens-high text { fill: #92400e; }
+  .node.lens-low { opacity: .72; }
+  .node.lens-low rect { fill: #f1f5f9; stroke: #cbd5e1; }
+  .node.lens-low text { fill: #94a3b8; }
+  .node.lens-rejected rect { fill: #fef2f2; stroke: #dc2626; stroke-width: 1.4; stroke-dasharray: 3 2; }
+  .node.lens-rejected text { fill: #b91c1c; text-decoration: line-through; }
+  .node.lens-rejected { opacity: .85; }
+  .node .badge { font-size: 8px; font-weight: 700; }
+  .node .badge.hi { fill: #b45309; } .node .badge.lo { fill: #64748b; } .node .badge.rj { fill: #b91c1c; }
+  .node .star { font-size: 8px; fill: #b45309; }
+  .node.deep rect { stroke: #2563eb; stroke-width: 2.5; filter: drop-shadow(0 0 8px rgba(37,99,235,.55)); }
+
+  .edge { stroke-width: 1.2; }
+  .edge.hard { stroke: #8a93a6; }
+  .edge.soft { stroke: #a6adbb; stroke-dasharray: 4 4; stroke-width: 1; opacity: .5; }
+  .edge.cross { stroke: #7c3aed; stroke-width: 1.6; opacity: .85; }
+  .spine-layer polyline { stroke: #d9a400; stroke-width: 2.6; stroke-dasharray: 7 5; opacity: .95; }
+
+  .tooltip {
+    position: fixed; z-index: 40; max-width: 360px; background: #0f172a; color: #e2e8f0;
+    border: 1px solid #334155; border-radius: 8px; padding: 9px 11px; font-size: 12px; line-height: 1.45;
+    box-shadow: 0 6px 18px rgba(15,23,42,.35); pointer-events: none;
+  }
+  .tooltip b { font-size: 13px; }
+  .tooltip .tip-spine { color: #fbbf24; font-weight: 600; }
+  .tooltip .tip-line { margin-top: 5px; color: #cbd5e1; }
+  .tooltip .tip-w { margin-top: 5px; font-weight: 600; }
+  .tooltip .tip-w.hi { color: #fbbf24; }
+  .tooltip .tip-w.lo { color: #94a3b8; }
+  .tooltip .tip-w.rj { color: #fca5a5; }
+
+  .error { margin: 40px auto; max-width: 520px; padding: 16px 20px; background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: 8px; color: #991b1b; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body data-lens="">
+  <div class="toolbar">
+    <b>grant-writing · school lens prototype</b>
+    <span class="facts" id="facts"></span>
+    <span class="state" id="state"></span>
+    <span class="zoom">
+      <button id="zoomIn" title="zoom in">+</button>
+      <button id="zoomOut" title="zoom out">−</button>
+      <button id="fitBtn">Fit</button>
+    </span>
+  </div>
+
+  <div class="lensbar">
+    <div class="chips" id="chips"></div>
+    <div class="legend" id="legend">
+      <span class="lg lg-high"><span class="sw"></span>high</span>
+      <span class="lg lg-norm"><span class="sw"></span>normal</span>
+      <span class="lg lg-low"><span class="sw"></span>low</span>
+      <span class="lg lg-rej"><span class="sw"></span>rejected</span>
+      <span class="note" id="rejNote"></span>
+    </div>
+  </div>
+
+  <div class="strip off" id="strip"></div>
+
+  <main id="stage"></main>
+  <div id="errorBox" class="error" hidden></div>
+
+<script type="module">
+import { buildGraph } from '../tree-renderer/graph.js';
+import { setupViewer } from '../tree-renderer/render.js';
+import { getVariant, makeDraw } from '../tree-renderer/variants.js';
+
+const $ = (id) => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const viewer = setupViewer($('stage'));
+
+let graph = null;
+let lens = null;                 // active school id, or null
+const deepId = params.get('node'); // ?node= deep link (ticket 004 scheme) — kept when school changes
+let fitted = false;
+
+const badgeChar = { high: 'H', low: 'L', rejected: 'R' };
+
+async function boot() {
+  try {
+    // MERGE ALL body batches (batch-001 + batch-002 = 14 bodies). Bodies only
+    // add soft_prereqs + school_weights; the skeleton owns the graph.
+    const [sk, b1, b2] = await Promise.all([
+      fetch('../../domains/grant-writing/skeleton.json').then((r) => r.json()),
+      fetch('../../domains/grant-writing/bodies/batch-001.json').then((r) => r.json()),
+      fetch('../../domains/grant-writing/bodies/batch-002.json').then((r) => r.json()),
+    ]);
+    graph = buildGraph(sk, { nodes: [...(b1.nodes || []), ...(b2.nodes || [])] });
+  } catch (err) {
+    $('errorBox').hidden = false;
+    $('errorBox').textContent =
+      `Could not load tree data (${err.message}). Run the prototype from the repo root:\n` +
+      `  cd skill-tree && python3 -m http.server 8000\n` +
+      `then open http://localhost:8000/prototypes/school-lens/`;
+    throw err;
+  }
+
+  const weighted = graph.nodes.filter((n) => n.school_weights && Object.keys(n.school_weights).length);
+  $('facts').textContent =
+    `${graph.nodes.length} nodes · ${graph.clusters.length} clusters · ${graph.tiers.length} tiers · ` +
+    `spine ${graph.spine.length} · ${graph.nodes.filter((n) => n.hasBody).length} bodies · ` +
+    `${weighted.length} of them with school weights`;
+  $('rejNote').textContent = 'rejected: absent from current data — grammar still defined';
+
+  buildChips();
+
+  // ?school= on load (lenient: unknown id -> no lens, drop the param)
+  const want = params.get('school');
+  if (want && graph.schools.some((s) => s.id === want)) lens = want;
+  else if (want) { params.delete('school'); history.replaceState(null, '', '?' + params.toString()); }
+
+  bindTooltip();
+  applyLens();
+
+  viewer.onZoom(() => {}); // state surface is the strip/chips, not zoom
+  $('zoomIn').onclick = () => viewer.zoomBy(1.3, $('stage').clientWidth / 2, $('stage').clientHeight / 2);
+  $('zoomOut').onclick = () => viewer.zoomBy(1 / 1.3, $('stage').clientWidth / 2, $('stage').clientHeight / 2);
+  $('fitBtn').onclick = () => { viewer.fit(lastBox()); };
+  window.addEventListener('resize', () => { viewer.fit(lastBox()); });
+}
+
+/* ---------------- selector ---------------- */
+function buildChips() {
+  const row = $('chips');
+  const cap = document.createElement('span');
+  cap.className = 'cap';
+  cap.textContent = 'School lens';
+  row.appendChild(cap);
+
+  const none = document.createElement('button');
+  none.className = 'chip none';
+  none.dataset.school = '';
+  none.textContent = 'No lens · overview';
+  none.title = 'Default view — the tree as authored, no school tinting.';
+  none.onclick = () => { lens = null; commitLens(); };
+  row.appendChild(none);
+
+  for (const s of graph.schools) {
+    const n = graph.nodes.filter((x) => x.school_weights && x.school_weights[s.id]).length;
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.dataset.school = s.id;
+    const label = document.createElement('span');
+    label.textContent = s.id;
+    const cnt = document.createElement('span');
+    cnt.className = 'cnt';
+    cnt.textContent = `(${n})`;
+    chip.append(label, cnt);
+    const qw = (s.quarrels_with || []).map((id) => graph.schools.find((x) => x.id === id)?.name ?? id).join(', ');
+    chip.title = `${s.name} — weights ${n} node${n === 1 ? '' : 's'}${qw ? `\nquarrels with: ${qw}` : ''}`;
+    chip.onclick = () => { lens = s.id; commitLens(); };
+    row.appendChild(chip);
+  }
+}
+
+function commitLens() {
+  if (lens) params.set('school', lens); else params.delete('school');
+  history.replaceState(null, '', '?' + params.toString()); // composes with ?node= (params object is shared)
+  applyLens();
+}
+
+/* ---------------- rendering ---------------- */
+let box = null;
+function lastBox() { return box; }
+
+function applyLens() {
+  viewer.clear();
+  const draw = makeDraw();
+  box = getVariant('A').render(graph, viewer.world, draw, { showSpine: true, showSoft: true });
+
+  // lens tint: strictly additive — nodes without a school_weights entry for the
+  // active school get NO lens class, so they render exactly as in no-lens mode.
+  for (const g of viewer.world.querySelectorAll('g.node[data-id]')) {
+    g.classList.remove('lens-high', 'lens-low', 'lens-rejected');
+    const n = graph.byId.get(g.dataset.id);
+    const w = lens && n.school_weights ? n.school_weights[lens] : null;
+    if (w) {
+      g.classList.add('lens-' + w);
+      const r = g.querySelector('rect');
+      const x = +r.getAttribute('x'), y = +r.getAttribute('y');
+      const b = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      b.setAttribute('x', x + 5); b.setAttribute('y', y + 7);
+      b.setAttribute('text-anchor', 'start'); b.setAttribute('dominant-baseline', 'central');
+      b.setAttribute('class', `badge ${w === 'high' ? 'hi' : w === 'low' ? 'lo' : 'rj'}`);
+      b.textContent = badgeChar[w] || '?';
+      g.appendChild(b);
+    }
+    if (lens && n.spine) { // keep spine-ness scannable when the lens overrides the gold fill
+      const r = g.querySelector('rect');
+      const x = +r.getAttribute('x'), w = +r.getAttribute('width'), y = +r.getAttribute('y');
+      const st = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      st.setAttribute('x', x + w - 5); st.setAttribute('y', y + 7);
+      st.setAttribute('text-anchor', 'end'); st.setAttribute('dominant-baseline', 'central');
+      st.setAttribute('class', 'star');
+      st.textContent = '★';
+      g.appendChild(st);
+    }
+    if (deepId && g.dataset.id === deepId) g.classList.add('deep');
+  }
+
+  if (!fitted) { viewer.fit(box); fitted = true; } // lens switches keep the user's zoom
+
+  updateStrip();
+  updateChips();
+  updateState();
+}
+
+/* ---------------- lens strip (Q2) ---------------- */
+function updateStrip() {
+  const strip = $('strip');
+  if (!lens) {
+    const s = graph.schools.find((x) => x.id === 'foundation');
+    strip.className = 'strip off';
+    const deep = deepId && graph.byId.get(deepId) ? `<span class="deepchip">deep link: ${graph.byId.get(deepId).label}</span>` : '';
+    strip.innerHTML =
+      `<b>No school lens — overview.</b> The tree as authored. Pick a school above to re-tint it by that school's weights. ` +
+      `37 of 51 nodes have no body yet; the 8 neutral bodies are weighted {} — both stay neutral under every lens.` +
+      deep;
+    return;
+  }
+  const s = graph.schools.find((x) => x.id === lens);
+  const qw = (s.quarrels_with || []).map((id) => graph.schools.find((x) => x.id === id)?.name ?? id).join(', ');
+  const weightedCount = graph.nodes.filter((n) => n.school_weights && n.school_weights[lens]).length;
+  const warn = weightedCount === 0
+    ? `<span class="warn">— no weight annotations for this school yet (0 nodes), so the tree stays neutral under this lens.</span>`
+    : `<span class="warn">— ${weightedCount} node${weightedCount === 1 ? '' : 's'} weighted by this school.</span>`;
+  strip.className = 'strip';
+  strip.innerHTML =
+    `<span class="sname">${s.name}</span>` +
+    `<span class="frag"><span class="k">optimises_for</span>${s.optimises_for}</span>` +
+    `<span class="frag"><span class="k">gives_up</span>${s.gives_up}</span>` +
+    (qw ? `<span class="frag qw"><span class="k">quarrels_with</span>⚔ ${qw}</span>` : '') +
+    warn;
+}
+
+/* ---------------- selector state (Q3) ---------------- */
+function updateChips() {
+  for (const chip of document.querySelectorAll('.chip')) {
+    chip.classList.remove('active', 'enemy');
+    if (chip.dataset.school === (lens || '')) { chip.classList.add('active'); continue; }
+    if (lens) {
+      const s = graph.schools.find((x) => x.id === lens);
+      if ((s.quarrels_with || []).includes(chip.dataset.school)) {
+        chip.classList.add('enemy');
+        chip.title = `⚔ ${s.name} quarrels with this school (active lens)`;
+      }
+    }
+  }
+  document.body.dataset.lens = lens || '';
+}
+
+function updateState() {
+  $('state').textContent = lens
+    ? `lens: ${lens} · ${graph.nodes.filter((n) => n.school_weights && n.school_weights[lens]).length} nodes weighted · url: ?${params.toString()}`
+    : `no lens · url: ${params.toString() || '(bare)'}`;
+}
+
+/* ---------------- tooltip (lens-aware, extends tree-renderer's) ---------------- */
+function bindTooltip() {
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  viewer.svg.addEventListener('pointerover', (e) => {
+    const g = e.target.closest('[data-id]');
+    if (!g) return;
+    const n = graph.byId.get(g.dataset.id);
+    if (!n) return;
+    const parts = [
+      `<b>${esc(n.label)}</b>${n.spine ? ' <span class="tip-spine">★ spine</span>' : ''}`,
+      `Tier ${n.tier} · ${graph.clusterMeta.get(n.cluster)?.name ?? n.cluster} · ${n.hours} h${n.hasBody ? '' : ' · no body yet'}`,
+      n.one_line ? `<div class="tip-line">${esc(n.one_line)}</div>` : '',
+    ];
+    if (lens) {
+      const w = n.school_weights ? n.school_weights[lens] : null;
+      const school = graph.schools.find((s) => s.id === lens);
+      if (w) parts.push(`<div class="tip-w ${w === 'high' ? 'hi' : w === 'low' ? 'lo' : 'rj'}">${school.name}: ${w}</div>`);
+      else parts.push(`<div class="tip-line">${school.name}: neutral (no weight entry)</div>`);
+    } else if (n.school_weights && Object.keys(n.school_weights).length) {
+      const sw = Object.entries(n.school_weights)
+        .map(([k, v]) => `${graph.schools.find((s) => s.id === k)?.name ?? k}: ${v}`)
+        .join(' · ');
+      parts.push(`<div class="tip-line">school weights: ${esc(sw)}</div>`);
+    }
+    viewer.tooltip.innerHTML = parts.filter(Boolean).join('<br>');
+    viewer.tooltip.hidden = false;
+  });
+  viewer.svg.addEventListener('pointermove', (e) => {
+    if (viewer.tooltip.hidden) return;
+    const r = viewer.tooltip.getBoundingClientRect();
+    let x = e.clientX + 14, y = e.clientY + 14;
+    if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+    if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+    viewer.tooltip.style.left = x + 'px';
+    viewer.tooltip.style.top = y + 'px';
+  });
+  viewer.svg.addEventListener('pointerout', (e) => {
+    if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('#world')) {
+      viewer.tooltip.hidden = true;
+    }
+  });
+}
+
+boot().catch(() => {});
+</script>
+</body>
+</html>

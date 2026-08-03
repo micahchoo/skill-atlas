@@ -3,7 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "validate": "node scripts/validate.mjs",
-    "validate:stability": "node scripts/validate.mjs --stability"
+    "validate": "node scripts/validate-all.mjs",
+    "validate:stability": "node scripts/validate.mjs --stability",
+    "build": "npm run validate && astro build",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "astro": "^5.18.2",
+    "typescript": "^5.9.3"
   }
 }

@@ -1,0 +1,41 @@
+---
+// / — atlas index: a plain list of domains (ticket 004 URL scheme, fog: no
+// discovery design yet). Each entry links to /<domain>.
+import { loadAllDomains } from '../lib/data';
+import { buildGraph } from '../lib/graph';
+import '../styles/global.css';
+
+const domains = loadAllDomains().map((d) => ({
+  slug: d.domain,
+  level: d.level,
+  graph: buildGraph(d),
+  bodies: Object.keys(d.bodies).length,
+}));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Skill Atlas</title>
+  </head>
+  <body>
+    <main class="atlas">
+      <h1>Skill Atlas</h1>
+      <p class="sub">Read-only skill trees, one page per domain. Click a domain to explore its tree.</p>
+      <div class="list">
+        {domains.map((d) => (
+          <a class="entry" href={`/${d.slug}`}>
+            <span class="name">{d.slug}</span>
+            <span class="meta">{d.level}</span>
+            <span class="right">
+              <b>{d.graph.nodes.length}</b> nodes · <b>{d.bodies}</b> of {d.graph.nodes.length} with bodies
+            </span>
+          </a>
+        ))}
+      </div>
+    </main>
+  </body>
+</html>

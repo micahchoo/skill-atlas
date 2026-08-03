@@ -62,9 +62,10 @@ bottom of the ticket file under `## Resolution`.
   page, `?node=<full id>` deep link opening the side panel — the shape
   cross-domain links reuse later.
 - [Pilot domain — generate the grant-writing tree](003-grant-writing-tree.md) —
-  real dataset landed: 51-node grant-writing skeleton + 11 spine bodies,
-  verified clean by the driver; cadence = spine-first lazy (deferral is
-  optionality); findings + validator suggestions in pilot-notes.md.
+  real dataset landed: 51-node grant-writing skeleton + 14 bodies (11 spine
+  batch + 3 follow-up, spine reworked to an honest 5-node chain); verified
+  clean; cadence = spine-first lazy (deferral is optionality); findings +
+  validator suggestions in pilot-notes.md.
 - [Contribution workflow for community trees](009-contribution-workflow.md) —
   both paths (PR as path of record, issue fallback for domain experts);
   review promise = validator-pass is enough, no human content step;
@@ -82,12 +83,31 @@ bottom of the ticket file under `## Resolution`.
   tiered columns + cluster lanes, left-to-right beziers, soft edges dashed
   default-on, spine as its own gold path layer, label-on-node + tooltip,
   DOM-free graph.js seam for route planning. Exposed the gapped spine (fixed).
+- [School lens semantics](007-school-lens.md) — throwaway at
+  prototypes/school-lens/ (verified in browser); additive tint grammar
+  (glow/neutral/dim/struck + H/L/R badges), header strip for school text,
+  enemy rings in the selector, explicit no-lens mode, `?school=` composes
+  with `?node=`; neutral invariant: no entry ⇒ untouched node.
+- [Side panel — node body presentation](006-side-panel.md) — throwaway at
+  prototypes/side-panel/ (verified in browser); section order with checkpoint
+  as the only colored card, know_why as a two-camp grid, explicit pending
+  state for skeleton-only nodes, transitive chain highlight mirrored in
+  panel chips, hard vs soft prereq rows.
+- [Astro scaffold](008-astro-scaffold.md) — the real site: Astro 5, one page
+  per domain, TS data/graph/layout/render libs, validator as build gate,
+  zero-framework panel + lens client; verified in browser (deep links, lens
+  badges, pending state, 404). Prototypes superseded.
+- [Deploy to GitHub Pages with validator CI](010-deploy-github-pages.md) —
+  git initialized (commit 887b100); validate.yml gates PRs, deploy.yml
+  publishes dist/ to Pages; push-to-GitHub checklist recorded for the human.
 
 ## Fog
 
 - **Route planning** — pick a target node, highlight the prereq path, sum
-  hours. Hangs on how the renderer prototype separates graph utilities from
-  drawing. Revisit once the renderer exists.
+  hours. The renderer now exists and the graph/drawing seam is decided:
+  src graph utilities are DOM-free (topo, ancestors/descendants, edges) and
+  reusable wholesale. Building the feature itself is deliberate future scope
+  — the map leaves room for it, nothing blocks it.
 - **Cross-domain links** — nodes referencing nodes in other domains
   (ethnomusicography → audio engineering). The URL half is settled (absolute
   `/<domain>?node=…` links work). What remains: the KTG frame has no syntax
@@ -100,8 +120,5 @@ bottom of the ticket file under `## Resolution`.
   so a new domain is a known recipe, not open design. Generating them is
   deliberate future scope — no open questions block it. The BODIES cadence
   decision is made (spine-first lazy).
-- **Deployment** — presumably GitHub Pages; decide once the Astro scaffold
-  exists. Includes whether the repo becomes a git repo / GitHub project
-  (it currently is not one).
 - **Game-feel polish** — sound, animation on hover, theming per domain.
   Deliberately vague until the renderer prototype sets the base aesthetic.

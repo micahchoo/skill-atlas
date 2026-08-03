@@ -1,0 +1,125 @@
+---
+// /<domain> — one static page per domain: the tiered tree (ticket 008).
+// Unknown slugs are not in getStaticPaths, so they 404 by construction.
+import { loadDomain, loadAllDomains } from '../lib/data';
+import { buildGraph } from '../lib/graph';
+import { clusterColor } from '../lib/palette';
+import '../styles/global.css';
+
+export function getStaticPaths() {
+  return loadAllDomains().map((d) => ({ params: { domain: d.domain } }));
+}
+
+const { domain } = Astro.params;
+const data = loadDomain(domain);
+if (!data) return Astro.NotFound;
+
+const graph = buildGraph(data);
+const bodyCount = Object.keys(data.bodies).length;
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+const weightedCount = (schoolId: string) =>
+  graph.nodes.filter((n) => n.school_weights[schoolId]).length;
+const chipTitle = (sid: string) => {
+  const s = data.schools.find((x) => x.id === sid)!;
+  return `${s.name} — optimises_for: ${s.optimises_for} · gives_up: ${s.gives_up} · quarrels_with: ${s.quarrels_with.join(', ') || 'none'}`;
+};
+const clusterCoverage = data.clusters.map((c) => {
+  const ns = graph.nodes.filter((n) => n.cluster === c.id);
+  const bodies = ns.filter((n) => n.hasBody).length;
+  return { ...c, total: ns.length, bodies, order: graph.clusterOrder.get(c.id) ?? 0 };
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>{data.domain} — Skill Atlas</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="atlas-link" href="/">← Skill Atlas</a>
+      <div>
+        <h1>{data.domain}</h1>
+        <p class="level">{data.level}</p>
+      </div>
+      <div class="facts">
+        {graph.nodes.length} nodes · {graph.tiers.length} tiers · {graph.clusters.length} clusters ·
+        {graph.hardEdges.length} hard edges · {graph.softEdges.length} soft edges · spine {graph.spine.length}
+      </div>
+      <div class="body-count">
+        Bodies merged: {bodyCount} ({data.batches.map((b) => `${b.id} ${b.count}`).join(' + ')}) — ALL batches
+      </div>
+    </header>
+
+    <div class="lensbar">
+      <div class="selector">
+        <span class="cap">School lens</span>
+        <button class="chip lens-chip none active" data-school="">No lens · overview</button>
+        {data.schools.map((s) => (
+          <button class="chip lens-chip" data-school={s.id} title={chipTitle(s.id)}>
+            {s.name} <span class="cnt">({weightedCount(s.id)})</span>
+          </button>
+        ))}
+      </div>
+      <div class="strip off" id="lensStrip">
+        <b>No school lens — overview.</b> The tree as authored. Pick a school above to re-tint it by that school's weights.
+      </div>
+    </div>
+
+    <main class="layout">
+      <section class="stage">
+        <div class="toolbar">
+          <label><input type="checkbox" id="softToggle" checked /> Soft edges ({graph.softEdges.length})</label>
+          <label><input type="checkbox" id="spineToggle" checked /> Spine path</label>
+          <span class="spacer"></span>
+          <button id="zoomIn" title="Zoom in">＋</button>
+          <button id="zoomOut" title="Zoom out">−</button>
+          <button id="fitBtn">Fit</button>
+        </div>
+        <div id="stage"></div>
+      </section>
+      <aside class="panel" id="panel">
+        <div class="placeholder">
+          Click a node in the tree to open its panel.<br />
+          Solid outline = body present · dashed outline = body pending.
+        </div>
+      </aside>
+    </main>
+
+    <div class="footbar">
+      <div class="legend">
+        <span class="lg lg-high"><span class="sw"></span>high · glow</span>
+        <span class="lg lg-norm"><span class="sw"></span>normal</span>
+        <span class="lg lg-low"><span class="sw"></span>low · dim</span>
+        <span class="lg lg-rej"><span class="sw"></span>rejected · struck</span>
+        <span class="note">no weight entry ⇒ untouched under every lens</span>
+      </div>
+      <div class="coverage">
+        <span class="cap">Body coverage</span>
+        {clusterCoverage.map((c) => (
+          <span class:list={['cchip', c.bodies === 0 && 'zero']} title={c.gist}>
+            <span class="dot" style={`background:${clusterColor(c.order)}`}></span>
+            {c.name} — {c.bodies} of {c.total} bodies
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div class="statusbar">
+      <span>selected: <b id="stSelected">—</b></span>
+      <span>body: <b id="stBody">—</b></span>
+      <span>lens: <b id="stLens">no lens</b></span>
+      <span>url: <b id="stUrl">(bare)</b></span>
+    </div>
+
+    <noscript><p style="padding:16px;font-family:sans-serif">This page needs JavaScript to render the tree.</p></noscript>
+    <script type="application/json" is:inline set:html={json} id="domain-data"></script>
+    <script>
+      import { initTree } from '../scripts/tree-client';
+      initTree();
+    </script>
+  </body>
+</html>
