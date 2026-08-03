@@ -14,6 +14,8 @@ export interface School {
 
 export interface Cluster {
   id: string;
+  /** One emoji, part of the KTG spec; renderers fall back to a generic glyph. */
+  icon?: string;
   name: string;
   gist: string;
 }

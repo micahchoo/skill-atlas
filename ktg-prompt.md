@@ -30,7 +30,7 @@ for exactly those IDs. Never redefine the skeleton, never add nodes.
     "gives_up": "string",
     "quarrels_with": ["school_id"]
   }],
-  "clusters": [{ "id": "slug", "name": "string", "gist": "string" }],
+  "clusters": [{ "id": "slug", "icon": "one emoji for the cluster", "name": "string", "gist": "string" }],
   "spine": ["node_id"],
   "nodes": [{
     "id": "domain.cluster.node",

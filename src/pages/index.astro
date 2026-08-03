@@ -1,6 +1,5 @@
 ---
-// / — atlas index: a plain list of domains (ticket 004 URL scheme, fog: no
-// discovery design yet). Each entry links to /<domain>.
+// / — atlas index: the shelf of domains. Each entry links to /<domain>.
 import { loadAllDomains } from '../lib/data';
 import { buildGraph } from '../lib/graph';
 import '../styles/global.css';
@@ -8,9 +7,10 @@ import '../styles/global.css';
 const domains = loadAllDomains().map((d) => ({
   slug: d.domain,
   level: d.level,
-  graph: buildGraph(d),
+  nodes: buildGraph(d).nodes.length,
   bodies: Object.keys(d.bodies).length,
 }));
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 ---
 
 <!doctype html>
@@ -24,15 +24,14 @@ const domains = loadAllDomains().map((d) => ({
   <body>
     <main class="atlas">
       <h1>Skill Atlas</h1>
-      <p class="sub">Read-only skill trees, one page per domain. Click a domain to explore its tree.</p>
-      <div class="list">
+      <p class="sub">Skill trees for real domains. Choose one and walk its main quest.</p>
+      <hr class="rule" />
+      <div class="entries">
         {domains.map((d) => (
-          <a class="entry" href={`/${d.slug}`}>
-            <span class="name">{d.slug}</span>
-            <span class="meta">{d.level}</span>
-            <span class="right">
-              <b>{d.graph.nodes.length}</b> nodes · <b>{d.bodies}</b> of {d.graph.nodes.length} with bodies
-            </span>
+          <a class="entry" href={`${base}/${d.slug}`}>
+            <span class="ename">{d.slug}</span>
+            <span class="elevel">{d.level}</span>
+            <span class="estat"><b>{d.nodes}</b> skills · <b>{d.bodies}</b> tomes written</span>
           </a>
         ))}
       </div>

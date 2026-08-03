@@ -210,6 +210,8 @@ if (skelOk) {
     for (const f of ["name", "gist"]) {
       if (!isNonEmptyString(c[f])) error(`cluster '${c.id}' missing non-empty string '${f}'`);
     }
+    // icon is part of the spec (renderers fall back to a generic glyph) — warn, don't fail
+    if (!isNonEmptyString(c.icon)) warn(`cluster '${c.id}' has no 'icon' (an emoji) — renderers will use a fallback glyph`);
   }
 
   // ---- skeleton nodes, pass 1: shape, identity, cluster membership, hours

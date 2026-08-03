@@ -1,421 +1,586 @@
 /**
- * tree-client.ts — the interactive tree page (zero framework).
+ * tree-client.ts — the domain page at three altitudes (zero framework).
  *
- * Reads the merged DomainData embedded by the Astro page, builds the graph,
- * and wires: tiered-lane SVG tree, side panel (ticket 006), school lens
- * (ticket 007), chain highlight, and the /<domain>?node=<id>&school=<id> URL
- * contract (ticket 004) — one shared URLSearchParams object so the two
- * compose by construction; replaceState for reload stability.
+ * Semantic zoom in the Arcanum skin (issues/011): the overview shows
+ * disciplines (clusters), a cluster opens as a bottom-up talent board with a
+ * preview sidebar, a node opens as a full reading page. Text renders at
+ * readable size or not at all — you descend to see more, you never squint.
+ *
+ * URL contract (ticket 004, extended): one shared URLSearchParams so
+ * ?cluster= / ?node= / ?sel= / ?school= compose by construction; unknown ids
+ * are dropped leniently. Navigation is URL-native: every navigational control
+ * is a real <a href> (middle-click, share, keyboard for free), descents push
+ * history entries (Back ascends), and popstate re-renders from the URL.
+ * The school lens (ticket 007) is strictly additive: no school_weights entry
+ * for the active school ⇒ the socket is untouched.
  */
-import { buildGraph, type SkillGraph } from '../lib/graph';
-import { layoutLanes, type LaneLayout, type Box } from '../lib/layout';
-import { setupViewer, drawTree, bindTooltip, type Viewer, type TreeDraw } from '../lib/render';
+import { buildGraph, type SkillGraph, type Edge } from '../lib/graph';
 import type { BodyNode, DomainData, MergedNode, SchoolWeight } from '../lib/types';
 
-const SECTIONS = ['know_what', 'know_how', 'habits', 'know_why', 'school_weights', 'checkpoint', 'common_failure', 'sources'];
-
-const esc = (s: unknown): string =>
-  String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
-const $ = <T extends HTMLElement>(id: string): T => {
-  const el = document.getElementById(id);
-  if (!el) throw new Error(`missing element #${id}`);
-  return el as T;
-};
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const ICON_FALLBACK = '✦';
+/** Site root under the deploy base path (GitHub Pages serves at /skill-atlas/). */
+const ROOT = import.meta.env.BASE_URL.replace(/\/+$/, '') + '/';
 
 interface State {
-  graph: SkillGraph;
-  layout: LaneLayout;
-  viewer: Viewer;
-  selectedId: string | null;
-  deepId: string | null; // node id that arrived via ?node= — keeps its blue ring
-  activeSchool: string | null;
-  showSoft: boolean;
-  showSpine: boolean;
-  draw: TreeDraw | null;
+  cluster: string | null;
+  node: string | null;
+  sel: string | null;
+  school: string | null;
+  flash: string | null;
 }
 
-const params = new URLSearchParams(window.location.search);
+let G: SkillGraph;
+let BODY: Map<string, BodyNode>;
+let app: HTMLElement;
+let params = new URLSearchParams(window.location.search);
+const state: State = { cluster: null, node: null, sel: null, school: null, flash: null };
 
-export function initTree(): void {
+/** Lenient URL parse: unknown ids drop, node implies its cluster, sel lives in its cluster. */
+function readState(): void {
+  state.cluster = params.get('cluster');
+  state.node = params.get('node');
+  state.sel = params.get('sel');
+  state.school = params.get('school');
+  if (state.node && !G.byId.has(state.node)) state.node = null;
+  if (state.node) state.cluster = G.byId.get(state.node)!.cluster;
+  if (state.cluster && !G.clusterMeta.has(state.cluster)) state.cluster = null;
+  if (state.sel && G.byId.get(state.sel)?.cluster !== state.cluster) state.sel = null;
+  if (state.school && !G.schools.some((s) => s.id === state.school)) state.school = null;
+}
+
+function writeParams(q: URLSearchParams, s: State): string {
+  const set = (k: string, v: string | null) => (v ? q.set(k, v) : q.delete(k));
+  set('cluster', s.cluster);
+  set('node', s.node);
+  set('sel', s.sel);
+  set('school', s.school);
+  return `${window.location.pathname}${q.toString() ? `?${q}` : ''}`;
+}
+
+export function initAtlas(): void {
   const dataEl = document.getElementById('domain-data');
   if (!dataEl) throw new Error('missing embedded domain data');
   const data = JSON.parse(dataEl.textContent ?? '{}') as DomainData;
+  G = buildGraph(data);
+  BODY = new Map(Object.entries(data.bodies));
+  app = document.getElementById('app') as HTMLElement;
 
-  const graph = buildGraph(data);
-  const state: State = {
-    graph,
-    layout: layoutLanes(graph),
-    viewer: setupViewer($<HTMLElement>('stage')),
-    selectedId: null,
-    deepId: null,
-    activeSchool: null,
-    showSoft: true,
-    showSpine: true,
-    draw: null,
+  readState();
+  history.replaceState(null, '', writeParams(params, state)); // normalize dropped ids, no entry
+  window.addEventListener('popstate', () => {
+    params = new URLSearchParams(window.location.search);
+    state.flash = null;
+    readState();
+    render();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (state.node) go({ node: null });
+    else if (state.sel) go({ sel: null });
+    else if (state.cluster) go({ cluster: null });
+  });
+  window.addEventListener('resize', () => render());
+  render();
+}
+
+function go(patch: Partial<State>): void {
+  Object.assign(state, patch);
+  if (state.node) state.cluster = G.byId.get(state.node)!.cluster;
+  // a board selection only lives inside its own cluster
+  if (state.sel && G.byId.get(state.sel)?.cluster !== state.cluster) state.sel = null;
+  const url = writeParams(params, state);
+  if (url !== `${window.location.pathname}${window.location.search}`) {
+    history.pushState(null, '', url); // Back ascends the way you came
+  }
+  render();
+}
+
+/* ---------------------------------------------------------------- helpers */
+
+function el(tag: string, cls?: string, html?: string): HTMLElement {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
+const esc = (s: unknown): string =>
+  String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const cname = (cid: string): string => G.clusterMeta.get(cid)?.name ?? cid;
+const icon = (cid: string): string => G.clusterMeta.get(cid)?.icon ?? ICON_FALLBACK;
+const clusterNodes = (cid: string): MergedNode[] => G.nodes.filter((n) => n.cluster === cid);
+const coverage = (cid: string): { total: number; bodies: number } => {
+  const ns = clusterNodes(cid);
+  return { total: ns.length, bodies: ns.filter((n) => n.hasBody).length };
+};
+
+/** The URL go(patch) would land on — same invariants, no mutation. */
+function hrefFor(patch: Partial<State>): string {
+  const s = { ...state, ...patch };
+  if (s.node) s.cluster = G.byId.get(s.node)!.cluster;
+  if (s.sel && G.byId.get(s.sel)?.cluster !== s.cluster) s.sel = null;
+  return writeParams(new URLSearchParams(params), s);
+}
+
+/** Navigational anchor: real href for middle-click/share/keyboard, SPA go() on plain click. */
+function navA(cls: string | undefined, html: string, patch: Partial<State>, before?: () => void): HTMLAnchorElement {
+  const a = document.createElement('a');
+  if (cls) a.className = cls;
+  a.innerHTML = html;
+  a.href = hrefFor(patch);
+  a.addEventListener('click', (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.defaultPrevented) return;
+    e.preventDefault();
+    before?.();
+    go(patch);
+  });
+  return a;
+}
+
+function crumbs(...parts: { text: string; to?: Partial<State> }[]): HTMLElement {
+  const c = el('div', 'crumbs');
+  parts.forEach((p, i) => {
+    if (i) c.append(el('span', 'sep', '·'));
+    if (p.to !== undefined) c.append(navA(undefined, esc(p.text), p.to));
+    else c.append(el('b', undefined, esc(p.text)));
+  });
+  return c;
+}
+
+/* ------------------------------------------------------ altitude 1: overview */
+
+function renderOverview(): void {
+  const crumb = el('div', 'crumbs');
+  crumb.innerHTML = `<a href="${ROOT}">Skill Atlas</a><span class="sep">·</span><b>${esc(G.domain)}</b>`;
+  app.append(
+    crumb,
+    el('h1', undefined, esc(G.domain)),
+    el('p', 'sub', `${esc(G.level)} — choose a discipline. ${G.nodes.length} skills await.`),
+    el('hr', 'rule'),
+  );
+
+  // the main quest is a path across disciplines — badge only its start,
+  // count its stops everywhere else
+  const questStart = G.byId.get(G.spine[0])?.cluster;
+  const row = el('div', 'disciplines');
+  G.clusters.forEach((c, i) => {
+    const cov = coverage(c.id);
+    const spineCount = clusterNodes(c.id).filter((n) => n.spine).length;
+    const d = navA(`discipline${c.id === questStart ? ' lead' : ''}`, '', { cluster: c.id });
+    d.style.setProperty('--i', String(i));
+    if (c.id === questStart) d.append(el('span', 'questline', 'QUEST BEGINS'));
+    d.append(
+      el('div', 'emblem', icon(c.id)),
+      el('div', 'dname', esc(c.name)),
+      el('div', 'dgist', esc(c.gist)),
+      el('div', 'dstat',
+        `<b>${cov.bodies}</b> of <b>${cov.total}</b> tomes written` +
+        (spineCount ? ` · ★ ${spineCount} on the quest` : '')),
+    );
+    row.append(d);
+  });
+  app.append(row);
+
+  const first = G.byId.get(G.spine[0]);
+  if (first) {
+    app.append(navA('startwalk', `Take up the main quest → ${esc(first.label)}`, { node: first.id }));
+  }
+}
+
+/* -------------------------------------------------- altitude 2: talent board */
+
+function externalEdges(cid: string): { incoming: Edge[]; outgoing: Edge[]; softIn: Edge[]; softOut: Edge[] } {
+  const inC = (id: string) => G.byId.get(id)?.cluster === cid;
+  return {
+    incoming: G.hardEdges.filter((e) => !inC(e.from) && inC(e.to)),
+    outgoing: G.hardEdges.filter((e) => inC(e.from) && !inC(e.to)),
+    softIn: G.softEdges.filter((e) => !inC(e.from) && inC(e.to)),
+    softOut: G.softEdges.filter((e) => inC(e.from) && !inC(e.to)),
   };
+}
 
-  for (const [id, b] of Object.entries(data.bodies ?? {})) bodiesById.set(id, b);
+function renderBoard(cid: string): void {
+  const meta = G.clusterMeta.get(cid)!;
+  const cov = coverage(cid);
+  app.append(
+    crumbs({ text: G.domain, to: { cluster: null, node: null } }, { text: meta.name }),
+    el('h2', undefined, `${icon(cid)} ${esc(meta.name)}`),
+    el('p', 'sub', `${esc(meta.gist)} — ${cov.bodies} of ${cov.total} tomes written.`),
+  );
+  renderLensRow(cid);
 
-  bindTooltip(state.viewer, state.graph, () => state.activeSchool);
-
-  // URL state first (lenient parse: unknown school → no lens, param dropped;
-  // unknown node → simply not highlighted), so the first render already
-  // carries the deep ring and the lens.
-  const wantNode = params.get('node');
-  if (wantNode && state.graph.byId.has(wantNode)) state.deepId = wantNode;
-  const wantSchool = params.get('school');
-  if (wantSchool) {
-    if (state.graph.schools.some((s) => s.id === wantSchool)) state.activeSchool = wantSchool;
-    else {
-      params.delete('school');
-      syncUrlState();
+  const wrap = el('div', 'arcwrap');
+  const board = el('div', 'talentboard');
+  const cards = new Map<string, HTMLElement>();
+  const ns = clusterNodes(cid);
+  const tiers = [...new Set(ns.map((n) => n.tier))].sort((a, b) => b - a); // top row = highest tier
+  tiers.forEach((t, ti) => {
+    const row = el('div', 'trow');
+    row.style.setProperty('--i', String(ti));
+    row.append(el('span', 'trowlabel', `TIER ${t}`));
+    for (const n of ns.filter((x) => x.tier === t)) {
+      const cell = el('div', socketClasses(n));
+      cell.dataset.id = n.id;
+      // the hit target is the socket+label anchor; travel doors sit OUTSIDE it,
+      // so aiming at a skill can never teleport you to another cluster
+      const hit = navA('sockethit', '', { sel: n.id });
+      hit.append(
+        el('div', 'socket', n.hasBody ? icon(cid) : ''),
+        el('div', 'nlabel', esc(n.label)),
+        el('div', 'nmeta', n.hasBody ? `${n.hours} h` : `${n.hours} h · forthcoming`),
+      );
+      cell.append(hit);
+      if (state.flash === n.id) {
+        cell.classList.add('flash');
+        state.flash = null;
+      }
+      cards.set(n.id, cell);
+      row.append(cell);
     }
-  }
-
-  render(state);
-  wireControls(state);
-  if (state.deepId) selectNode(state, state.deepId, false);
-  updateSelector(state);
-  updateStrip(state);
-  updateStatus(state);
-}
-
-/* ------------------------------------------------------------- rendering */
-
-function render(state: State): void {
-  state.viewer.clear();
-  state.draw = drawTree(state.viewer, state.graph, state.layout, {
-    showSoft: state.showSoft,
-    showSpine: state.showSpine,
+    board.append(row);
   });
-  applyLens(state);
-  if (state.deepId) {
-    for (const g of state.draw.nodeEls) {
-      if (g.dataset.id === state.deepId) g.classList.add('deep');
-    }
+  board.append(legendRow());
+  wrap.append(board, renderPreview(cid));
+  app.append(wrap);
+  attachDoors(cid, cards);
+  drawEdges(board, inClusterPairs(cid, cards));
+}
+
+function socketClasses(n: MergedNode): string {
+  let cls = 'socketnode';
+  if (n.spine) cls += ' spine';
+  if (!n.hasBody) cls += ' pending';
+  if (state.sel === n.id) cls += ' selected';
+  if (state.school) {
+    const w: SchoolWeight | undefined = n.school_weights[state.school];
+    if (w && w !== 'normal') cls += ` lens-${w}`;
   }
-  if (state.selectedId) applyChain(state, state.selectedId);
-  requestAnimationFrame(() => state.viewer.fit(state.draw!.box));
+  return cls;
 }
 
-/** Lens grammar is strictly additive: no school_weights entry ⇒ untouched. */
-function applyLens(state: State): void {
-  const { graph, draw, activeSchool } = state;
-  if (!draw) return;
-  for (const g of draw.nodeEls) {
-    g.classList.remove('lens-high', 'lens-low', 'lens-rejected');
-    g.querySelector('.badge')?.remove();
-    const n = graph.byId.get(g.dataset.id!);
-    if (!n) continue;
-    const w: SchoolWeight | undefined = activeSchool ? n.school_weights[activeSchool] : undefined;
-    if (!w || w === 'normal') continue;
-    g.classList.add(`lens-${w}`);
-    const b = state.layout.pos.get(n.id)!;
-    const label = w === 'high' ? 'H' : w === 'low' ? 'L' : 'R';
-    const badge = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    badge.setAttribute('x', String(b.x + b.w - 5));
-    badge.setAttribute('y', String(b.y + b.h - 4));
-    badge.setAttribute('text-anchor', 'middle');
-    badge.setAttribute('dominant-baseline', 'middle');
-    badge.setAttribute('class', `badge ${w === 'high' ? 'hi' : w === 'low' ? 'lo' : 'rj'}`);
-    badge.textContent = label;
-    g.appendChild(badge);
+function renderLensRow(cid: string): void {
+  if (!G.schools.length) return;
+  const row = el('div', 'lensrow');
+  row.append(el('span', 'cap', 'School lens'));
+  const active = state.school ? G.schools.find((s) => s.id === state.school) : null;
+  for (const s of G.schools) {
+    // promise only what this board can show: non-normal weights in this cluster
+    const count = clusterNodes(cid).filter((n) => {
+      const w = n.school_weights[s.id];
+      return w && w !== 'normal';
+    }).length;
+    const enemy = s.id !== state.school && !!active?.quarrels_with?.includes(s.id);
+    const chip = el('button', 'schoolchip', `${enemy ? '⚔ ' : ''}${esc(s.name)} (${count})`);
+    if (s.id === state.school) chip.classList.add('active');
+    else if (enemy) chip.classList.add('enemy');
+    chip.title = `optimises for: ${s.optimises_for} · gives up: ${s.gives_up}`;
+    chip.addEventListener('click', () => go({ school: s.id === state.school ? null : s.id }));
+    row.append(chip);
   }
-}
-
-/* --------------------------------------------------------- chain highlight */
-
-function applyChain(state: State, id: string): { anc: string[]; desc: string[] } {
-  const { graph, draw } = state;
-  if (!draw) return { anc: [], desc: [] };
-  const anc = graph.ancestors(id);
-  const desc = graph.descendants(id);
-  const chainSet = new Set([...anc, id, ...desc]);
-
-  for (const g of draw.nodeEls) {
-    g.classList.remove('chain-anc', 'chain-desc', 'chain-selected');
-    const nid = g.dataset.id!;
-    if (nid === id) g.classList.add('chain-selected');
-    else if (anc.includes(nid)) g.classList.add('chain-anc');
-    else if (desc.includes(nid)) g.classList.add('chain-desc');
+  app.append(row);
+  const line = el('div', 'lensline');
+  if (active) {
+    const qw = (active.quarrels_with ?? []).map((id) => G.schools.find((s) => s.id === id)?.name ?? id).join(', ') || '—';
+    line.innerHTML =
+      `<b>${esc(active.name)}</b> — optimises for ${esc(active.optimises_for)} · ` +
+      `gives up ${esc(active.gives_up)} · quarrels with <span class="qw">${esc(qw)}</span>`;
+  } else {
+    line.textContent = 'No lens — the board as authored. Pick a school to see what it prizes and rejects.';
   }
-  for (const e of draw.hardEdgeEls) {
-    e.classList.remove('chain-edge');
-    if (chainSet.has(e.dataset.from!) && chainSet.has(e.dataset.to!)) e.classList.add('chain-edge');
-  }
-  return { anc, desc };
+  app.append(line);
 }
 
-/* ---------------------------------------------------------------- selection */
-
-function selectNode(state: State, id: string, syncUrl: boolean): void {
-  state.selectedId = id;
-  const { anc, desc } = applyChain(state, id);
-  renderPanel(state, id, anc, desc);
-  if (syncUrl) {
-    params.set('node', id);
-    syncUrlState();
-  }
-  updateStatus(state);
-}
-
-function deselect(state: State): void {
-  state.selectedId = null;
-  const { draw } = state;
-  if (draw) {
-    for (const g of draw.nodeEls) g.classList.remove('chain-anc', 'chain-desc', 'chain-selected');
-    for (const e of draw.hardEdgeEls) e.classList.remove('chain-edge');
-  }
-  $<HTMLElement>('panel').innerHTML =
-    '<div class="placeholder">Click a node in the tree to open its panel.<br>' +
-    'Solid outline = body present · dashed outline = body pending.</div>';
-  if (params.has('node')) {
-    params.delete('node');
-    syncUrlState();
-  }
-  updateStrip(state);
-  updateStatus(state);
-}
-
-function syncUrlState(): void {
-  history.replaceState(null, '', `${window.location.pathname}${params.toString() ? `?${params}` : ''}`);
-}
-
-/* ------------------------------------------------------------------- panel */
-
-function schoolName(state: State, id: string): string {
-  return state.graph.schools.find((s) => s.id === id)?.name ?? id;
-}
-
-function chips(state: State, list: string[], kind: 'hard' | 'soft'): string {
-  if (!list.length) return '<span class="none">— none</span>';
-  return list
-    .map((pid) => `<span class="chip ${kind}" data-nav="${esc(pid)}" title="${esc(pid)}">${esc(state.graph.byId.get(pid)?.label ?? pid)}</span>`)
-    .join('');
-}
-
-function bullets(list: string[]): string {
-  return `<ul>${list.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
-}
-
-function bodySections(state: State, b: BodyNode): string {
-  const parts: string[] = [];
-  // checkpoint — top billing, the only colored card, first body element
-  if (b.checkpoint) {
-    parts.push(`
-      <div class="checkpoint">
-        <div class="cp-kicker">Checkpoint · pass / fail</div>
-        <div class="cp-text">${esc(b.checkpoint)}</div>
-      </div>`);
-  }
-  if (b.know_what?.length) parts.push(`<div class="sec"><h3>What you must know <span class="count">${b.know_what.length}</span></h3>${bullets(b.know_what)}</div>`);
-  if (b.know_how?.length) parts.push(`<div class="sec"><h3>What you must do <span class="count">${b.know_how.length}</span></h3>${bullets(b.know_how)}</div>`);
-  if (b.habits?.length) parts.push(`<div class="sec"><h3>Habits to build <span class="count">${b.habits.length}</span></h3>${bullets(b.habits)}</div>`);
-  // common_failure is a single ';'-separated string — split into bullets
-  if (b.common_failure) {
-    parts.push(`<div class="sec warn"><h3>Common failure — avoid this</h3><ul>
-      ${b.common_failure.split(/;\s*/).filter(Boolean).map((x) => `<li>${esc(x)}</li>`).join('')}
-    </ul></div>`);
-  }
-  // know_why — a disagreement, rendered as two camps, never a paragraph
-  if (b.know_why && typeof b.know_why === 'object') {
-    const k = b.know_why;
-    parts.push(`<div class="sec"><h3>Why this is contested</h3>
-      <div class="kw-grid">
-        <div class="kw-claim">
-          <div class="kw-side">The claim</div>
-          <div class="kw-body">
-            <p>${esc(k.claim)}</p>
-            ${k.because ? `<div class="kw-because"><b>Because:</b> ${esc(k.because)}</div>` : ''}
-          </div>
-        </div>
-        <div class="kw-vs">VS</div>
-        <div class="kw-dispute">
-          <div class="kw-side">The dispute</div>
-          <div class="kw-body"><p>${esc(k.disputed_by)}</p></div>
-        </div>
-      </div>
-      ${k.source ? `<div class="kw-source">Debate sourced from: ${esc(k.source)}</div>` : ''}
-    </div>`);
-  }
-  // school_weights + sources are the collapsible annotation layers
-  const sw = b.school_weights ?? {};
-  const swChips = Object.keys(sw).length
-    ? `<div class="sw-chips">${Object.entries(sw)
-        .map(([sid, v]) => `<span class="sw-chip v-${esc(v)}">${esc(schoolName(state, sid))} · ${esc(v)}</span>`)
-        .join('')}</div>`
-    : '<div class="sw-neutral">School-neutral — no unusual weightings recorded for this node.</div>';
-  parts.push(`<details class="sec"><summary>School lens</summary>${swChips}</details>`);
-  if (b.sources?.length) {
-    parts.push(`<details class="sec"><summary>Sources</summary><ol>
-      ${b.sources.map((s) => `<li>${esc(s)}</li>`).join('')}
-    </ol></details>`);
-  }
-  return parts.join('');
-}
-
-function renderPanel(state: State, id: string, anc: string[], desc: string[]): void {
-  const { graph } = state;
-  const n = graph.byId.get(id);
-  if (!n) return;
-  const b = bodiesById.get(id);
-  const badges =
-    (n.spine ? '<span class="badge spine">★ spine</span>' : '') +
-    (n.hasBody ? '<span class="badge body">body</span>' : '<span class="badge pending">content pending</span>');
-
-  const html = `
-    <div class="p-label">${esc(n.label)}${badges}</div>
-    <div class="p-meta">Tier ${n.tier} · ${esc(graph.clusterMeta.get(n.cluster)?.name ?? n.cluster)} · ${esc(n.hours)} h</div>
-    ${n.one_line ? `<div class="p-line">${esc(n.one_line)}</div>` : ''}
-
-    <div class="prereqs">
-      <div class="row"><span class="lbl">Builds on</span>
-        <span class="chips">${chips(state, n.prereqs, 'hard')}</span></div>
-      <div class="row"><span class="lbl">Also useful</span>
-        <span class="chips">${chips(state, n.soft_prereqs, 'soft')}</span></div>
-    </div>
-
-    ${n.hasBody && b ? bodySections(state, b) : pendingCard(n)}
-
-    <div class="sec"><h3>Prereq chain <span class="count">${anc.length + 1 + desc.length} nodes</span></h3>
-      <div class="prereqs">
-        <div class="row"><span class="lbl">Ancestors</span><span class="chips">${chips(state, anc, 'hard')}</span></div>
-        <div class="row"><span class="lbl">This node</span><span class="chips">${chips(state, [n.id], 'hard')}</span></div>
-        <div class="row"><span class="lbl">Unlocks</span><span class="chips">${chips(state, desc, 'hard')}</span></div>
-      </div>
-    </div>`;
-
-  const panel = $<HTMLElement>('panel');
-  panel.innerHTML = html;
-  panel.querySelectorAll('[data-nav]').forEach((el) => {
-    el.addEventListener('click', () => selectNode(state, (el as HTMLElement).dataset.nav!, true));
-  });
-  panel.scrollTop = 0;
-}
-
-function pendingCard(n: MergedNode): string {
-  return `
-    <div class="pending-card">
-      <div class="pend-title">Content pending — tree done, body not yet generated</div>
-      <p>This node is fully mapped: tier, cluster, ${esc(n.hours)} h, and the one_line above are real
-         skeleton data. Its 8-section body has not been generated yet.</p>
-      <p class="pend-sub">These sections appear here when the body batch lands:</p>
-      <div class="pend-sections">${SECTIONS.map((s) => `<span class="pend-sec">${s}</span>`).join('')}</div>
-    </div>`;
-}
-
-/* ---------------------------------------------------------------- school lens */
-
-function weightedCount(state: State, schoolId: string): number {
-  return state.graph.nodes.filter((n) => n.school_weights[schoolId]).length;
-}
-
-function setSchool(state: State, schoolId: string | null): void {
-  state.activeSchool = schoolId;
-  if (schoolId) params.set('school', schoolId);
-  else params.delete('school');
-  syncUrlState();
-  applyLens(state);
-  updateSelector(state);
-  updateStrip(state);
-  updateStatus(state);
-}
-
-function updateSelector(state: State): void {
-  for (const chip of document.querySelectorAll<HTMLElement>('.lens-chip')) {
-    chip.classList.remove('active', 'enemy');
-    const sid = chip.dataset.school ?? '';
-    if (sid === (state.activeSchool ?? '')) {
-      chip.classList.add('active');
-      continue;
-    }
-    if (state.activeSchool) {
-      const s = state.graph.schools.find((x) => x.id === state.activeSchool);
-      if (s && (s.quarrels_with ?? []).includes(sid)) chip.classList.add('enemy');
-    }
-  }
-  document.body.dataset.lens = state.activeSchool ?? '';
-}
-
-function updateStrip(state: State): void {
-  const strip = $<HTMLElement>('lensStrip');
-  const lens = state.activeSchool;
-  const deepChip = state.deepId
-    ? `<span class="deepchip">deep link: ${esc(state.graph.byId.get(state.deepId)?.label ?? state.deepId)}</span>`
-    : '';
-  if (!lens) {
-    strip.className = 'strip off';
-    strip.innerHTML =
-      `<b>No school lens — overview.</b> The tree as authored. Pick a school above to re-tint it by that school's weights.` +
-      deepChip;
-    return;
-  }
-  const s = state.graph.schools.find((x) => x.id === lens);
-  if (!s) return;
-  const qw = (s.quarrels_with ?? []).map((id) => schoolName(state, id)).join(', ') || '—';
-  const count = weightedCount(state, lens);
-  const warn = count === 0
-    ? `<span class="warn">— no weight annotations for this school yet (0 nodes), so the tree stays neutral under this lens.</span>`
-    : `<span class="warn">— ${count} node${count === 1 ? '' : 's'} weighted by this school.</span>`;
-  strip.className = 'strip';
-  strip.innerHTML =
-    `<span class="sname">${esc(s.name)}</span>` +
-    `<span class="frag"><span class="k">optimises for</span>${esc(s.optimises_for)}</span>` +
-    `<span class="frag"><span class="k">gives up</span>${esc(s.gives_up)}</span>` +
-    `<span class="frag"><span class="k">quarrels with</span><span class="qw">${esc(qw)}</span></span>` +
-    warn + deepChip;
-}
-
-function updateStatus(state: State): void {
-  const n = state.selectedId ? state.graph.byId.get(state.selectedId) : null;
-  $<HTMLElement>('stSelected').textContent = n ? n.id : '—';
-  $<HTMLElement>('stBody').textContent = n ? (n.hasBody ? 'yes' : 'no — pending') : '—';
-  $<HTMLElement>('stLens').textContent = state.activeSchool ? state.activeSchool : 'no lens';
-  $<HTMLElement>('stUrl').textContent = params.toString() || '(bare)';
-}
-
-/* ------------------------------------------------------------------ wiring */
-
-function wireControls(state: State): void {
-  const viewer = state.viewer;
-
-  $<HTMLInputElement>('softToggle').addEventListener('change', (e) => {
-    state.showSoft = (e.target as HTMLInputElement).checked;
-    render(state);
-  });
-  $<HTMLInputElement>('spineToggle').addEventListener('change', (e) => {
-    state.showSpine = (e.target as HTMLInputElement).checked;
-    render(state);
-  });
-
-  const center = (): { cx: number; cy: number } => {
-    const r = viewer.svg.getBoundingClientRect();
-    return { cx: r.width / 2, cy: r.height / 2 };
+/** How to read the board — the visual grammar, taught once. */
+function legendRow(): HTMLElement {
+  const l = el('div', 'legend');
+  const item = (swatch: string, glyph: string, label: string) => {
+    const it = el('span', 'lg');
+    it.append(el('span', `lg-sw ${swatch}`, glyph), el('span', undefined, label));
+    l.append(it);
   };
-  $<HTMLButtonElement>('zoomIn').addEventListener('click', () => {
-    const c = center();
-    viewer.zoomBy(1.25, c.cx, c.cy);
-  });
-  $<HTMLButtonElement>('zoomOut').addEventListener('click', () => {
-    const c = center();
-    viewer.zoomBy(0.8, c.cx, c.cy);
-  });
-  $<HTMLButtonElement>('fitBtn').addEventListener('click', () => render(state));
+  item('lg-spine', '', 'main quest');
+  item('lg-hard', '', 'requires');
+  item('lg-soft', '', 'helps');
+  item('lg-forth', '✎', 'tome forthcoming');
+  item('lg-door', '⇠⇢', 'door to another discipline');
+  return l;
+}
 
-  viewer.svg.addEventListener('click', (e) => {
-    const g = (e.target as Element).closest('[data-id]') as SVGGElement | null;
-    if (g) selectNode(state, g.dataset.id!, true);
-    else deselect(state);
-  });
-
-  for (const chip of document.querySelectorAll<HTMLElement>('.lens-chip')) {
-    chip.addEventListener('click', () => {
-      const sid = chip.dataset.school ?? '';
-      setSchool(state, sid === (state.activeSchool ?? '') ? null : (sid || null));
-    });
+/** Cross-cluster prereqs as clickable travel chips under the touched socket. */
+function attachDoors(cid: string, cards: Map<string, HTMLElement>): void {
+  const { incoming, outgoing, softIn, softOut } = externalEdges(cid);
+  const byNode = new Map<string, { rid: string; dir: 'in' | 'out' }[]>();
+  const collect = (edges: Edge[], dir: 'in' | 'out') => {
+    for (const e of edges) {
+      const local = dir === 'in' ? e.to : e.from;
+      const remote = dir === 'in' ? e.from : e.to;
+      const list = byNode.get(local) ?? [];
+      list.push({ rid: remote, dir });
+      byNode.set(local, list);
+    }
+  };
+  collect(incoming, 'in');
+  collect(softIn, 'in');
+  collect(outgoing, 'out');
+  collect(softOut, 'out');
+  for (const [local, doors] of byNode) {
+    const row = el('div', 'doorrow');
+    for (const { rid, dir } of doors) {
+      const r = G.byId.get(rid)!;
+      // arrive selected: the preview describes what you traveled for
+      const chip = navA('door',
+        `${dir === 'in' ? '⇠' : '⇢'} ${esc(r.label)} · ${esc(cname(r.cluster))}`,
+        { cluster: r.cluster, node: null, sel: rid },
+        () => { state.flash = rid; });
+      chip.title = `Travel to ${cname(r.cluster)}`;
+      row.append(chip);
+    }
+    cards.get(local)?.append(row);
   }
 }
 
-/** Bodies are not part of the graph — keep them alongside, keyed by id. */
-const bodiesById = new Map<string, BodyNode>();
+function inClusterPairs(cid: string, cards: Map<string, HTMLElement>): { from: HTMLElement; to: HTMLElement; cls: string }[] {
+  const inC = (id: string) => G.byId.get(id)?.cluster === cid;
+  const spineLegs = new Set(G.spinePath.map((e) => `${e.from}>${e.to}`));
+  const pairs: { from: HTMLElement; to: HTMLElement; cls: string }[] = [];
+  const push = (e: Edge, cls: string) => {
+    const from = cards.get(e.from);
+    const to = cards.get(e.to);
+    if (from && to) pairs.push({ from, to, cls });
+  };
+  for (const e of G.hardEdges) {
+    if (inC(e.from) && inC(e.to)) push(e, spineLegs.has(`${e.from}>${e.to}`) ? 'e-spine' : 'e-hard');
+  }
+  for (const e of G.softEdges) {
+    if (inC(e.from) && inC(e.to)) push(e, 'e-soft');
+  }
+  return pairs;
+}
+
+/** Bezier edges between measured elements; bottom-up flow (prereq below dependent). */
+function drawEdges(container: HTMLElement, pairs: { from: HTMLElement; to: HTMLElement; cls: string }[]): void {
+  container.querySelector(':scope > .edgelayer')?.remove();
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('class', 'edgelayer');
+  const cr = container.getBoundingClientRect();
+  svg.setAttribute('width', String(container.scrollWidth));
+  svg.setAttribute('height', String(container.scrollHeight));
+  for (const p of pairs) {
+    const a = p.from.getBoundingClientRect(); // prereq (lower row)
+    const b = p.to.getBoundingClientRect();   // dependent (upper row)
+    const x1 = a.left + a.width / 2 - cr.left;
+    const y1 = a.top - cr.top;
+    const x2 = b.left + b.width / 2 - cr.left;
+    const y2 = b.bottom - cr.top;
+    const my = (y1 + y2) / 2;
+    const path = document.createElementNS(SVG_NS, 'path');
+    path.setAttribute('d', `M ${x1} ${y1} C ${x1} ${my}, ${x2} ${my}, ${x2} ${y2}`);
+    path.setAttribute('class', p.cls);
+    svg.append(path);
+  }
+  container.prepend(svg);
+}
+
+/* -------------------------------------------------------- preview sidebar */
+
+function renderPreview(cid: string): HTMLElement {
+  const box = el('aside', 'preview');
+  const n = state.sel ? G.byId.get(state.sel) : null;
+  if (!n) {
+    const cov = coverage(cid);
+    box.append(
+      el('div', 'pv-kicker', 'Inspect'),
+      el('div', 'pv-title', esc(cname(cid))),
+      el('p', 'pv-line', esc(G.clusterMeta.get(cid)?.gist ?? '')),
+      el('p', 'pv-hint', `${cov.bodies} of ${cov.total} tomes written. Click a skill on the board to inspect it here.`),
+    );
+    return box;
+  }
+  const b = BODY.get(n.id);
+  box.append(
+    el('div', 'pv-kicker', n.spine ? '★ Main quest skill' : 'Skill'),
+    el('div', 'pv-title', esc(n.label)),
+    el('div', 'pv-meta', `Tier ${n.tier} · ${n.hours} h · ${n.hasBody ? 'tome written' : 'tome forthcoming'}`),
+  );
+  if (n.one_line) box.append(el('p', 'pv-line', esc(n.one_line)));
+  if (b?.checkpoint) {
+    const cp = el('div', 'pv-trial');
+    cp.append(el('div', 'k', 'Trial'), el('p', undefined, esc(b.checkpoint)));
+    box.append(cp);
+  }
+  if (b?.know_what?.length) {
+    const head = b.know_what.slice(0, 3);
+    const more = b.know_what.length - head.length;
+    const s = el('div', 'pv-sec');
+    s.append(el('h3', undefined, 'You must know'),
+      el('ul', undefined,
+        head.map((x) => `<li>${esc(x)}</li>`).join('') +
+        (more > 0 ? `<li class="pv-more">… ${more} more in the tome</li>` : '')));
+    box.append(s);
+  }
+  const doors = el('div', 'pv-sec');
+  doors.append(el('h3', undefined, 'Builds on'));
+  const bo = el('div', 'chipline');
+  n.prereqs.forEach((p) => bo.append(previewChip(p)));
+  n.soft_prereqs.forEach((p) => bo.append(previewChip(p, true)));
+  if (!n.prereqs.length && !n.soft_prereqs.length) bo.append(el('span', 'pv-hint', '— a starting point'));
+  doors.append(bo, el('h3', undefined, 'Unlocks'));
+  const un = el('div', 'chipline');
+  const outs = G.outgoing(n.id).map((e) => e.to);
+  outs.forEach((t) => un.append(previewChip(t)));
+  if (!outs.length) un.append(el('span', 'pv-hint', '— nothing yet'));
+  doors.append(un);
+  box.append(doors);
+  if (n.hasBody) {
+    box.append(navA('pv-open', 'Open the tome →', { node: n.id }));
+  } else {
+    box.append(el('p', 'pv-hint', 'Forthcoming — the tome for this skill has not been written yet. Its place on the map (tier, hours, prereqs) is real.'));
+  }
+  return box;
+}
+
+/** Same-cluster chip selects on the board; cross-cluster chip travels there. */
+function previewChip(id: string, soft = false): HTMLElement {
+  const r = G.byId.get(id)!;
+  const cross = r.cluster !== state.cluster;
+  const cls = `nchip${soft ? ' softc' : ''}${r.hasBody ? '' : ' pendc'}`;
+  const html = `${esc(r.label)}${cross ? ` <span class="xc">· ${esc(cname(r.cluster))}</span>` : ''}`;
+  const chip = cross
+    ? navA(cls, html, { cluster: r.cluster, sel: id }, () => { state.flash = id; })
+    : navA(cls, html, { sel: id });
+  if (!r.hasBody) chip.title = 'tome forthcoming';
+  return chip;
+}
+
+/* ---------------------------------------------------- altitude 3: reading */
+
+function renderNode(id: string): void {
+  const n = G.byId.get(id)!;
+  const b = BODY.get(id);
+  app.append(crumbs(
+    { text: G.domain, to: { cluster: null, node: null } },
+    { text: cname(n.cluster), to: { cluster: n.cluster, node: null, sel: n.id } },
+    { text: n.label },
+  ));
+
+  const read = el('div', 'read');
+  const page = el('div', 'page');
+  page.append(
+    el('h2', undefined, `${esc(n.label)}${n.spine ? ' ★' : ''}`),
+    el('p', 'sub', `Tier ${n.tier} · ${esc(cname(n.cluster))} · ${n.hours} h${n.spine ? ' · main quest' : ''}`),
+  );
+  if (n.one_line) page.append(el('p', 'one-line', esc(n.one_line)));
+
+  if (b) {
+    if (b.checkpoint) {
+      const cp = el('div', 'checkpoint');
+      cp.append(el('div', 'k', 'Trial · pass or fail'), el('p', undefined, esc(b.checkpoint)));
+      page.append(cp);
+    }
+    const list = (title: string, items?: string[]) => {
+      if (!items?.length) return;
+      const s = el('div', 'sec');
+      s.append(el('h3', undefined, title), el('ul', undefined, items.map((x) => `<li>${esc(x)}</li>`).join('')));
+      page.append(s);
+    };
+    list('What you must know', b.know_what);
+    list('What you must do', b.know_how);
+    list('Habits to build', b.habits);
+    if (b.common_failure) {
+      const s = el('div', 'sec');
+      s.append(el('h3', undefined, '⚠ Where travelers fall'),
+        el('ul', undefined, b.common_failure.split(/;\s*/).filter(Boolean).map((x) => `<li>${esc(x)}</li>`).join('')));
+      page.append(s);
+    }
+    if (b.know_why && typeof b.know_why === 'object') {
+      const s = el('div', 'sec');
+      s.append(el('h3', undefined, 'The dispute'));
+      const kw = el('div', 'kw');
+      kw.append(
+        el('div', 'claim',
+          `<div class="side">The claim</div>${esc(b.know_why.claim)}` +
+          (b.know_why.because ? `<br><small><b>Because:</b> ${esc(b.know_why.because)}</small>` : '')),
+        el('div', 'dispute', `<div class="side">The counter</div>${esc(b.know_why.disputed_by)}`),
+      );
+      s.append(kw);
+      if (b.know_why.source) s.append(el('div', 'kw-source', `Debate sourced from: ${esc(b.know_why.source)}`));
+      page.append(s);
+    }
+    const sw = b.school_weights ?? {};
+    if (Object.keys(sw).length) {
+      const s = el('div', 'sec');
+      s.append(el('h3', undefined, 'Schools of thought'));
+      const chips = el('div', 'swchips');
+      for (const [sid, w] of Object.entries(sw)) {
+        const name = G.schools.find((x) => x.id === sid)?.name ?? sid;
+        chips.append(el('span', `swchip v-${esc(w)}`, `${esc(name)} · ${esc(w)}`));
+      }
+      s.append(chips);
+      page.append(s);
+    }
+    if (b.sources?.length) {
+      const d = el('details', 'sec');
+      d.append(el('summary', undefined, 'Sources'),
+        el('ol', undefined, b.sources.map((x) => `<li>${esc(x)}</li>`).join('')));
+      page.append(d);
+    }
+  } else {
+    page.append(el('div', 'pendnote',
+      'Forthcoming — this skill is on the map (tier, hours, position are real) but its tome has not been written yet.'));
+  }
+
+  // location rail — where you are, and the doors out
+  const rail = el('div', 'rail');
+  const here = el('div', 'box');
+  here.append(el('h3', undefined, `In ${esc(cname(n.cluster))}`));
+  const ns = clusterNodes(n.cluster);
+  for (const t of [...new Set(ns.map((x) => x.tier))].sort((a, b) => a - b)) {
+    here.append(el('div', 'trlabel', `Tier ${t}`));
+    for (const s of ns.filter((x) => x.tier === t)) {
+      const row = navA(`sib${s.id === id ? ' current' : ''}`, '', { node: s.id });
+      row.append(
+        el('span', `mini${s.spine ? ' gold' : s.hasBody ? ' lit' : ''}`),
+        el('span', undefined, esc(s.label)),
+      );
+      here.append(row);
+    }
+  }
+  rail.append(here);
+
+  const doors = el('div', 'box');
+  doors.append(el('h3', undefined, 'Builds on'));
+  const bo = el('div', 'chipline');
+  n.prereqs.forEach((p) => bo.append(nodeChip(p)));
+  n.soft_prereqs.forEach((p) => bo.append(nodeChip(p, true)));
+  if (!n.prereqs.length && !n.soft_prereqs.length) bo.append(el('span', 'pv-hint', '— a starting point'));
+  doors.append(bo, el('h3', undefined, 'Unlocks'));
+  const un = el('div', 'chipline');
+  const outs = G.outgoing(id).map((e) => e.to);
+  outs.forEach((t) => un.append(nodeChip(t)));
+  if (!outs.length) un.append(el('span', 'pv-hint', '— nothing yet'));
+  doors.append(un);
+  rail.append(doors);
+
+  read.append(page, rail);
+  app.append(read);
+}
+
+function nodeChip(id: string, soft = false): HTMLElement {
+  const r = G.byId.get(id)!;
+  const cross = r.cluster !== state.cluster;
+  const cls = `nchip${soft ? ' softc' : ''}${r.hasBody ? '' : ' pendc'}`;
+  const chip = navA(cls,
+    `${esc(r.label)}${cross ? ` <span class="xc">· ${esc(cname(r.cluster))}</span>` : ''}`,
+    { node: id });
+  if (!r.hasBody) chip.title = 'tome forthcoming';
+  return chip;
+}
+
+/* ---------------------------------------------------------------- render */
+
+function render(): void {
+  app.innerHTML = '';
+  if (state.node) renderNode(state.node);
+  else if (state.cluster) renderBoard(state.cluster);
+  else renderOverview();
+}
