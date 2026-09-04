@@ -1,0 +1,252 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-008",
+  "ids": [
+    "instructional-design.evaluation.kirkpatrick-model",
+    "instructional-design.evaluation.data-collection-instrument-design",
+    "instructional-design.evaluation.lms-analytics-reading",
+    "instructional-design.evaluation.level3-transfer-measurement",
+    "instructional-design.evaluation.roi-and-business-case",
+    "instructional-design.evaluation.continuous-improvement-cycle"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.evaluation.kirkpatrick-model",
+      "label": "Kirkpatrick's Four Levels",
+      "tier": 1,
+      "cluster": "evaluation",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Place any evaluation question at the right level — reaction, learning, behavior, or results — instead of only ever measuring reaction.",
+      "hours": 8,
+      "know_what": [
+        "Four levels — reaction, learning, behavior, results (Kirkpatrick), each answering a different evaluation question at increasing cost and difficulty to measure",
+        "Level 1: Reaction — whether participants found the training favorable, engaging, and relevant, typically measured with an end-of-session survey",
+        "Level 2: Learning — whether participants acquired the intended knowledge, skills, or attitude, typically measured with an assessment",
+        "Level 3: Behavior — whether participants apply what they learned back on the job, measured through observation, manager report, or performance data over time",
+        "Level 4: Results — whether the training produced a measurable organizational outcome, such as cost, quality, retention, or revenue, the hardest level to isolate and attribute",
+        "New World Kirkpatrick Model — a later revision emphasizing starting evaluation design at Level 4 and working backward, and adding 'leading indicators' at Level 3"
+      ],
+      "know_how": [
+        "Place a proposed evaluation question at the correct level before designing the instrument, since a Level 1 tool can't answer a Level 3 question",
+        "Design an evaluation plan starting from the Level 4 result the sponsor cares about and work backward to the Level 3 behaviors that would produce it",
+        "Choose an appropriately rigorous method for each level — a survey is sufficient for Level 1 but not for Level 3, which needs observation or job performance data",
+        "Set expectations with a sponsor about which levels a given evaluation budget and timeline can actually reach",
+        "Distinguish reaction data from learning data instead of treating a satisfied learner as evidence they learned anything",
+        "Identify leading indicators at Level 3 that predict Level 4 results, when full Level 4 attribution isn't feasible"
+      ],
+      "habits": [
+        "Ask which level a stakeholder's evaluation question actually belongs to before proposing a method",
+        "Resist reporting only Level 1 data as if it answered a Level 4 question",
+        "Start evaluation design from the business result and work backward, not the other way around",
+        "Flag when a sponsor's expectations exceed what the evaluation budget can actually measure",
+        "Check whether a claimed evaluation result is actually backed by data at the level it's being cited for"
+      ],
+      "know_why": {
+        "claim": "Evaluation should always aim to reach Level 3 or 4, not stop at Level 1 reaction data.",
+        "because": "reaction data measures satisfaction, not whether training actually changed behavior or produced a business result, and satisfaction is a weak predictor of either",
+        "disputed_by": "practitioners who argue Level 3/4 evaluation is often prohibitively expensive and slow relative to its value, and that Robert Brinkerhoff's Success Case Method, sampling a few extreme cases in depth rather than measuring every learner, gets usable answers faster and cheaper",
+        "source": "Kirkpatrick's Four Levels vs. Robert Brinkerhoff, The Success Case Method"
+      },
+      "school_weights": { "backward-design-assessment-first": "high" },
+      "checkpoint": "Given three stakeholder evaluation questions, correctly place each at its Kirkpatrick level and propose a method appropriate to that level's rigor requirement.",
+      "common_failure": "Reporting a high satisfaction score as evidence a training program worked, when satisfaction (Level 1) has been repeatedly shown to correlate weakly with actual behavior change or business results.",
+      "sources": ["Donald & James Kirkpatrick, Four Levels of Training Evaluation", "James & Wendy Kirkpatrick, the New World Kirkpatrick Model", "Robert Brinkerhoff, The Success Case Method"]
+    },
+    {
+      "id": "instructional-design.evaluation.data-collection-instrument-design",
+      "label": "Data Collection Instrument Design",
+      "tier": 2,
+      "cluster": "evaluation",
+      "prereqs": ["instructional-design.evaluation.kirkpatrick-model"],
+      "soft_prereqs": [],
+      "one_line": "Design a survey or observation instrument that measures the outcome you actually care about, not just what's easy to ask.",
+      "hours": 12,
+      "know_what": [
+        "Survey item design — writing a question that measures one thing at a time, avoiding double-barreled and leading phrasing",
+        "Likert scale — an ordinal agreement scale from strongly disagree to strongly agree, used for attitude and reaction measurement, with known pitfalls such as central tendency bias and acquiescence bias",
+        "Observation protocol — a structured checklist or rubric used to record behavior directly rather than relying on self-report",
+        "Response rate and non-response bias — the risk that only a skewed subset of the population responds to a voluntary instrument, distorting the results",
+        "Mixed methods — combining quantitative instruments, such as surveys, with qualitative ones, such as interviews and open-ended questions, to capture what a single method type would miss",
+        "Piloting an instrument — testing a draft survey or observation protocol on a small sample before full deployment to catch confusing items or missing response options"
+      ],
+      "know_how": [
+        "Write survey items that ask about one thing at a time, avoiding double-barreled questions that conflate two variables",
+        "Choose an observation protocol over self-report when the goal is measuring actual behavior rather than perceived behavior",
+        "Design for an adequate response rate, with a clear purpose statement, reasonable length, and appropriate timing, and check for non-response bias in the results",
+        "Combine a quantitative instrument with a small set of open-ended or interview questions when the evaluation question needs both breadth and depth",
+        "Pilot a new instrument with a small sample and revise confusing items before full deployment",
+        "Match instrument type to Kirkpatrick level — a survey fits Level 1, an observation protocol or work-sample review fits Level 3"
+      ],
+      "habits": [
+        "Read each survey item and ask whether it's actually measuring one specific thing",
+        "Pilot an instrument before trusting it at scale, even under time pressure",
+        "Check response rate and think about who might be missing from it before trusting a result",
+        "Reach for an observation protocol instead of a self-report survey when the question is about actual behavior",
+        "Match the instrument type to the actual Kirkpatrick level being measured, not to what's fastest to build"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Design a data collection instrument matched to a stated evaluation question and Kirkpatrick level, pilot it with at least three respondents, and revise at least one item based on pilot feedback.",
+      "common_failure": "Reusing a generic satisfaction survey template for every evaluation question regardless of what's actually being measured, producing Level 1 data dressed up to answer a Level 3 or 4 question.",
+      "sources": ["Floyd Fowler, Survey Research Methods", "Jack Phillips, Measuring ROI in Training and Development", "Michael Quinn Patton, mixed-methods evaluation guidance"]
+    },
+    {
+      "id": "instructional-design.evaluation.lms-analytics-reading",
+      "label": "LMS Analytics Reading",
+      "tier": 2,
+      "cluster": "evaluation",
+      "prereqs": ["instructional-design.evaluation.kirkpatrick-model"],
+      "soft_prereqs": [],
+      "one_line": "Read LMS completion, time-on-task, and drop-off data well enough to tell a real design problem from noise.",
+      "hours": 10,
+      "know_what": [
+        "Completion rate — the proportion of enrolled learners who finish a course, a coarse metric that says nothing about quality without more context",
+        "Time-on-task — how long a learner spends on a given screen or module, useful for spotting content that's confusingly slow or suspiciously fast, a sign of skipping",
+        "Drop-off point — the specific screen or module where the largest proportion of learners exit without completing, often more diagnostic than the overall completion rate",
+        "xAPI statement — a granular activity record such as 'learner X attempted Y with result Z', providing richer behavioral data than SCORM's completion-only tracking",
+        "Confounded metric — a metric whose interpretation depends on unstated context, since a low completion rate could mean bad content or a mandatory-but-ignored assignment, which needs a second data source to disambiguate",
+        "Dashboard literacy — reading an LMS or xAPI dashboard critically, distinguishing what it actually measures from what a stakeholder might assume it measures"
+      ],
+      "know_how": [
+        "Pull completion, time-on-task, and drop-off data for a course and identify the specific module where the largest drop-off occurs",
+        "Cross-reference a suspiciously short time-on-task with content difficulty to distinguish rapid mastery from skipping",
+        "Use xAPI statement-level data instead of SCORM completion-only data when the evaluation question needs behavioral detail SCORM can't provide",
+        "Pair a confounded LMS metric with a second data source, such as a survey or interview, before drawing a conclusion from it alone",
+        "Explain to a sponsor what a specific dashboard metric does and doesn't measure, correcting an assumption before it drives a wrong decision",
+        "Compare analytics across cohorts or time periods to distinguish a one-time anomaly from a persistent pattern"
+      ],
+      "habits": [
+        "Ask what a metric doesn't measure before reporting what it does",
+        "Go straight to the drop-off point instead of stopping at the overall completion rate",
+        "Check a surprising time-on-task number against content difficulty before interpreting it",
+        "Pair a quantitative LMS metric with a qualitative source before drawing a conclusion",
+        "Distinguish a confounded metric from a clean one before letting it drive a design decision on its own"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given raw LMS completion and time-on-task data for a course, identify the specific module with the highest drop-off and propose one plausible, testable explanation for it.",
+      "common_failure": "Reporting an overall completion rate as the headline evaluation metric without looking at module-level drop-off data, which hides exactly where and why learners are disengaging.",
+      "sources": ["xAPI (Experience API / Tin Can API) specification", "SCORM.com, tracking and reporting guidance", "Will Thalheimer, learning analytics critique and guidance"]
+    },
+    {
+      "id": "instructional-design.evaluation.level3-transfer-measurement",
+      "label": "Level 3 Transfer Measurement",
+      "tier": 3,
+      "cluster": "evaluation",
+      "prereqs": ["instructional-design.evaluation.data-collection-instrument-design"],
+      "soft_prereqs": [],
+      "one_line": "Measure whether a skill actually transferred to the job, not just whether the learner passed the course.",
+      "hours": 16,
+      "know_what": [
+        "Transfer of training — whether a skill learned in training is actually applied on the job, the specific thing Level 3 measures",
+        "Transfer climate — the workplace conditions, such as manager support, opportunity to apply, and resource availability, that determine whether transfer happens regardless of how good the training was",
+        "Manager reinforcement — the specific, documented practice of a manager following up on training application, one of the strongest predictors of whether transfer occurs",
+        "Self-report vs. observed transfer — a learner's own account of applying a skill versus a manager's or observer's independent account, which frequently diverge",
+        "Time lag for measurement — Level 3 transfer typically needs weeks to months to observe, unlike Level 1 or 2 which can be measured immediately",
+        "Barriers to transfer — specific, nameable obstacles, such as no opportunity to use the skill, conflicting incentives, or lack of tools, distinct from a simple 'the training didn't work' conclusion"
+      ],
+      "know_how": [
+        "Design a Level 3 measurement with an appropriate time lag, typically four to twelve weeks post-training, instead of measuring immediately",
+        "Collect both self-report and manager or observer data on transfer and compare them, rather than relying on self-report alone",
+        "Assess transfer climate alongside the transfer measurement itself, since climate often explains a low transfer result better than the training's quality does",
+        "Interview a sample of managers about specific instances of application, not just a general 'did they apply it' rating",
+        "Identify named barriers to transfer when transfer is low, distinguishing a training problem from an environment problem",
+        "Use a manager reinforcement checklist or nudge as an intervention paired with the training itself, since reinforcement measurably increases transfer"
+      ],
+      "habits": [
+        "Wait the appropriate time lag before measuring transfer instead of checking too soon",
+        "Collect manager or observer data alongside self-report, not instead of digging deeper",
+        "Check transfer climate before concluding a low transfer result means the training failed",
+        "Ask for a specific instance of application, not a general rating, when interviewing about transfer",
+        "Distinguish a training problem from a transfer-climate problem before recommending a fix"
+      ],
+      "know_why": null,
+      "school_weights": { "behaviorist-mastery": "normal" },
+      "checkpoint": "Design and run a Level 3 transfer measurement for a completed training program, including both self-report and manager-observed data collected after an appropriate time lag, and identify at least one specific barrier to transfer if transfer is low.",
+      "common_failure": "Measuring transfer immediately after training with a self-report-only survey, which produces an inflated and unreliable picture of whether the skill is actually being used on the job weeks later.",
+      "sources": ["Timothy Baldwin & J. Kevin Ford, transfer of training research", "Mary Broad & John Newstrom, Transfer of Training", "ATD Level 3 evaluation guidance"]
+    },
+    {
+      "id": "instructional-design.evaluation.roi-and-business-case",
+      "label": "ROI & Business Case Building",
+      "tier": 4,
+      "cluster": "evaluation",
+      "prereqs": ["instructional-design.evaluation.level3-transfer-measurement", "instructional-design.evaluation.lms-analytics-reading"],
+      "soft_prereqs": [],
+      "one_line": "Build the business case that connects training spend to a measurable organizational outcome a sponsor cares about.",
+      "hours": 16,
+      "know_what": [
+        "ROI formula (Phillips) — program benefits minus program costs, divided by program costs, expressed as a percentage, used to express training's return in financial terms",
+        "Isolating the effect of training — separating training's contribution to a result from other factors, such as a process change, a market shift, or a new tool, that happened at the same time",
+        "Converting data to monetary value — translating a non-financial outcome, such as fewer errors or faster onboarding, into a dollar figure using a defensible, documented method",
+        "Fully loaded cost — the total cost of a training program including design, development, delivery time, and participant opportunity cost, not just the visible line-item cost",
+        "Intangible benefits — real outcomes, such as morale, brand reputation, or retention, that resist reliable monetary conversion and should be reported alongside ROI, not forced into it",
+        "Business case — a forward-looking proposal justifying investment in a training program before it's built, distinct from an ROI calculation, which is typically done after the fact"
+      ],
+      "know_how": [
+        "Calculate fully loaded program cost, including development time and participant opportunity cost, not just the visible delivery budget",
+        "Apply an isolation technique, such as a control group, a trend-line extrapolation, or expert estimation with a confidence discount, to separate training's effect from other contributing factors",
+        "Convert a measured outcome to monetary value using a documented, defensible method, and state the assumptions behind the conversion openly",
+        "Report intangible benefits separately from the ROI percentage instead of forcing a rough monetary estimate onto something that resists it",
+        "Build a forward-looking business case using estimated costs and projected benefits when justifying a program before it exists, distinct from a retrospective ROI calculation",
+        "Present ROI results with the isolation and conversion assumptions visible, so a skeptical stakeholder can see exactly what the number does and doesn't account for"
+      ],
+      "habits": [
+        "State the isolation method and its limitations whenever presenting an ROI figure",
+        "Use fully loaded cost, not just the visible line-item budget, in any ROI calculation",
+        "Keep intangible benefits in the report as their own category instead of squeezing them into a shaky dollar estimate",
+        "Show the assumptions behind a monetary conversion instead of just presenting the final number",
+        "Distinguish a retrospective ROI calculation from a forward-looking business case, and use the right one for the audience's actual decision"
+      ],
+      "know_why": {
+        "claim": "Training's ROI should be calculated and reported as a specific percentage figure.",
+        "because": "sponsors and finance stakeholders think in financial terms, and a credible ROI number secures budget and demonstrates accountability in that language",
+        "disputed_by": "evaluation practitioners who argue the isolation and monetary-conversion steps require so many soft assumptions that a precise-looking ROI percentage often overstates its own certainty, and prefer reporting a range or qualitative business case instead of a single number",
+        "source": "Jack Phillips, ROI Methodology, vs. evaluation-rigor critiques, including from the American Evaluation Association, of over-precise causal claims in organizational evaluation"
+      },
+      "school_weights": {},
+      "checkpoint": "Build a business case or ROI report for one training program with fully loaded costs, a stated isolation method, a documented monetary conversion for at least one outcome, and intangible benefits reported separately.",
+      "common_failure": "Presenting an ROI percentage without stating the isolation method or conversion assumptions behind it, which collapses under the first skeptical question from a finance stakeholder.",
+      "sources": ["Jack Phillips, ROI Methodology", "Patricia Pulliam Phillips, business case development", "American Evaluation Association guidance on causal claims"]
+    },
+    {
+      "id": "instructional-design.evaluation.continuous-improvement-cycle",
+      "label": "Continuous Improvement Cycle",
+      "tier": 5,
+      "cluster": "evaluation",
+      "prereqs": ["instructional-design.evaluation.roi-and-business-case", "instructional-design.evaluation.data-collection-instrument-design"],
+      "soft_prereqs": [],
+      "one_line": "Turn pilot and evaluation data into a scheduled revision instead of a course that ships once and calcifies.",
+      "hours": 14,
+      "know_what": [
+        "Continuous improvement cycle — a scheduled, recurring loop of collect data, analyze, revise, and redeploy, applied to a live program rather than a one-time launch evaluation",
+        "PDSA cycle (Plan-Do-Study-Act) — a lightweight, repeatable improvement framework adapted from quality management into ongoing program revision",
+        "Revision backlog — a prioritized, tracked list of known issues and improvement ideas for a live program, reviewed on a set cadence instead of acted on ad hoc",
+        "Version history — a record of what changed in a program across revision cycles and why, which prevents re-litigating a decision already made and reversed once",
+        "Trigger for off-cycle revision — a defined threshold, such as a sudden completion-rate drop or a critical content error, that justifies an unscheduled fix rather than waiting for the next scheduled cycle",
+        "Sunset criteria — a stated condition under which a program gets retired or fully redesigned rather than incrementally revised, since not every problem is fixable through iteration"
+      ],
+      "know_how": [
+        "Set a recurring cadence, such as quarterly or per-cohort, for reviewing evaluation data and deciding on revisions, rather than only revising when something breaks visibly",
+        "Maintain a prioritized revision backlog fed by pilot findings, evaluation data, and facilitator feedback",
+        "Log each revision with what changed and why, building a version history that prevents re-debating settled decisions",
+        "Define a threshold that triggers an off-cycle emergency revision, distinct from the regular cadence",
+        "Apply a lightweight PDSA cycle to test a proposed revision on a small scale before rolling it out to the full program",
+        "Set sunset criteria for a program up front, so a program past its useful life gets retired deliberately instead of endlessly patched"
+      ],
+      "habits": [
+        "Check the revision backlog on the scheduled cadence, not just when something breaks",
+        "Log why a change was made, not just what changed",
+        "Test a revision at small scale before rolling it out everywhere",
+        "Ask whether a program has quietly crossed its own sunset criteria",
+        "Review evaluation data against the sunset criteria on schedule, not only when a program is already visibly failing"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Set up a revision backlog and a scheduled review cadence for a live program, log at least one prior revision with its rationale, and define both an off-cycle trigger and a sunset criterion.",
+      "common_failure": "Treating a course as finished at launch and only revisiting it when a stakeholder complains loudly, instead of running a scheduled review cycle that catches smaller problems before they compound.",
+      "sources": ["W. Edwards Deming, PDSA cycle", "ATD guidance on program lifecycle management", "Michael Allen, Leaving ADDIE for SAM"]
+    }
+  ]
+}

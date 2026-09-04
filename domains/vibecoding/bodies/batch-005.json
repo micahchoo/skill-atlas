@@ -1,0 +1,317 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-005",
+  "ids": [
+    "vibecoding.backend.rest-endpoint-scaffold",
+    "vibecoding.backend.schema-design",
+    "vibecoding.backend.orm-wiring",
+    "vibecoding.backend.auth-flow",
+    "vibecoding.backend.input-validation",
+    "vibecoding.backend.migration-discipline",
+    "vibecoding.backend.error-handling-contract",
+    "vibecoding.backend.background-jobs"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.backend.rest-endpoint-scaffold",
+      "label": "REST endpoint scaffold",
+      "tier": 1,
+      "cluster": "backend",
+      "prereqs": [],
+      "one_line": "Generate a REST endpoint — route, handler, response — with AI assistance and get it responding correctly to a real request.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "REST endpoint — a route bound to an HTTP method (GET/POST/PUT/DELETE) with a handler and a defined response shape, the smallest deployable backend unit",
+        "Request/response contract — the shape of what an endpoint accepts and returns, which must be pinned down before or during scaffolding so client and server agree",
+        "Status codes — using 200/201/400/404/500 correctly instead of always returning 200 with an error message in the body, a common AI-generated shortcut",
+        "Route framework conventions — the specific patterns of Express, Fastify, or Hono (middleware order, handler signature) that an AI must follow rather than invent",
+        "curl / HTTP client verification — testing an endpoint directly with a real request tool, independent of any frontend that might also be broken",
+        "Idempotency — whether calling an endpoint twice with the same input produces the same result, relevant for GET and PUT but not for POST by default"
+      ],
+      "know_how": [
+        "Define the request and response shape before or alongside the first scaffold prompt",
+        "Test the endpoint directly with curl or an HTTP client, not only through a frontend that could mask the real response",
+        "Check that the endpoint returns the correct status code for success, client error, and server error cases",
+        "Confirm the endpoint follows the framework's actual middleware and routing conventions, not a generic pattern the AI defaulted to",
+        "Verify the endpoint against malformed or missing input, not just a well-formed example request"
+      ],
+      "habits": [
+        "Hit every new endpoint with curl or an equivalent tool before considering it done",
+        "Check the response status code explicitly, not just that a response body came back",
+        "Test with an empty or malformed request body as a matter of course",
+        "Read the handler's error path, not just its success path, before accepting the scaffold",
+        "Confirm the endpoint is registered on the router the way the rest of the codebase does it"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a spec for a single endpoint (method, path, request shape, response shape), scaffold it and verify with curl that it returns correct status codes for a valid request, an invalid request, and a missing resource.",
+      "common_failure": "Scaffolding an endpoint that only handles the exact request shape shown in the prompt's example, returning a raw 500 or an unhandled exception for anything else — verified only by a demo request, never by an edge case.",
+      "sources": ["Express.js docs", "MDN — HTTP response status codes"]
+    },
+    {
+      "id": "vibecoding.backend.schema-design",
+      "label": "Schema design",
+      "tier": 1,
+      "cluster": "backend",
+      "prereqs": [],
+      "one_line": "Design a database schema, by hand or with AI assistance, well enough to defend every table and relationship in it.",
+      "hours": 12,
+      "soft_prereqs": [],
+      "know_what": [
+        "Schema — the set of tables, columns, types, and relationships that define what a database can store, the artifact a whole backend is built on top of",
+        "Normalization — structuring data to avoid duplication and update anomalies, and the specific tradeoffs (join cost, query complexity) of normalizing further",
+        "Foreign key — a column constrained to reference another table's primary key, which an AI will sometimes omit in favor of an unconstrained id column that looks the same until data goes wrong",
+        "Nullable vs required column — deciding whether a field can be absent, a decision with real downstream consequences for every query and every piece of code that reads it",
+        "Index — a structure that speeds up lookups on a column at the cost of write performance and storage, needed for any column queried or joined on frequently",
+        "Migration-friendliness — designing a schema so future changes (adding a column, splitting a table) are additive rather than requiring a risky rewrite"
+      ],
+      "know_how": [
+        "Draw out every table and its relationships before generating any migration or ORM code",
+        "Decide and state explicitly which columns are nullable and why, rather than accepting an AI's default",
+        "Add foreign key constraints for every relationship, not just an unconstrained id column that happens to hold the right values",
+        "Identify which columns need an index based on expected query patterns before the schema is finalized",
+        "Walk through the schema's ability to answer the app's actual known queries before accepting it as done"
+      ],
+      "habits": [
+        "Sketch the schema by hand or with a diagram before letting an AI generate migration code from it",
+        "Ask 'what breaks if this column is null' for every column before marking it nullable",
+        "Check that every relationship has an actual foreign key constraint, not just a same-looking id column",
+        "Walk through the app's known query patterns against the schema before considering it final",
+        "Treat a schema change to a shipped table as a bigger decision than a schema change to an unshipped one"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a feature description (e.g. 'users can comment on posts'), design a schema with correctly typed columns, foreign keys, and nullability, and defend every nullable column and every foreign key's ON DELETE behavior.",
+      "common_failure": "Accepting an AI-generated schema where every relationship is just a plain integer or string column with no foreign key constraint — it works until inconsistent data creeps in, at which point nothing in the database itself was ever enforcing the relationship.",
+      "sources": ["Postgres documentation", "Database Design for Mere Mortals (Hernandez)"]
+    },
+    {
+      "id": "vibecoding.backend.orm-wiring",
+      "label": "ORM wiring",
+      "tier": 2,
+      "cluster": "backend",
+      "prereqs": ["vibecoding.backend.rest-endpoint-scaffold", "vibecoding.backend.schema-design"],
+      "one_line": "Have an assistant wire an ORM or query layer to the schema and verify the generated queries actually match the intended relationships.",
+      "hours": 12,
+      "soft_prereqs": [],
+      "know_what": [
+        "ORM — a library (Prisma, Drizzle, TypeORM, SQLAlchemy) that maps database rows to application objects and generates queries from a schema definition",
+        "N+1 query — a pattern where fetching a list plus a related field per item issues one query per item instead of one join, a common AI-generated ORM mistake",
+        "Eager vs lazy loading — fetching related data up front in the same query versus fetching it on demand later, and the performance and correctness consequences of picking wrong",
+        "Generated SQL inspection — reading the actual SQL an ORM call produces, since the ORM's method name doesn't guarantee the query does what it implies",
+        "Schema-ORM drift — the ORM's model definitions falling out of sync with the actual database schema, a source of confusing runtime errors"
+      ],
+      "know_how": [
+        "Log or inspect the actual SQL generated by an ORM call during development, not just trust the method name",
+        "Check any query returning a list-plus-relation for an N+1 pattern before considering it done",
+        "Confirm the ORM's schema/model definitions match the real database schema after any migration",
+        "Test an ORM query against a realistic data volume, not just one or two rows, since N+1 patterns are invisible at tiny scale",
+        "Choose eager or lazy loading deliberately per query based on what's actually needed, not by ORM default alone"
+      ],
+      "habits": [
+        "Check generated SQL for any query touching more than one table",
+        "Run a new ORM-backed endpoint against a seeded dataset with realistic row counts, not just one row",
+        "Re-sync ORM model definitions immediately after every schema migration",
+        "Treat an ORM call in a loop as a red flag worth reading closely",
+        "Confirm a relationship's ORM-level cascade behavior actually matches the schema's foreign key ON DELETE setting"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an endpoint that returns a list of items with a related field for each, identify whether the ORM call produces an N+1 query pattern by inspecting the generated SQL, and fix it if so.",
+      "common_failure": "Trusting an ORM method name (like .include() or .with()) to mean the data is fetched efficiently — some patterns compile to a single join, others silently issue one query per row, and the only way to know is to look at the generated SQL.",
+      "sources": ["Prisma docs", "Drizzle ORM docs", "Use The Index, Luke (query performance)"]
+    },
+    {
+      "id": "vibecoding.backend.auth-flow",
+      "label": "Auth flow",
+      "tier": 2,
+      "cluster": "backend",
+      "prereqs": ["vibecoding.backend.rest-endpoint-scaffold"],
+      "one_line": "Implement a real authentication flow — sessions or tokens — with AI assistance, understanding every step well enough to spot a missing check.",
+      "hours": 16,
+      "soft_prereqs": [],
+      "know_what": [
+        "Session-based auth — a server-stored session referenced by a cookie, versus token-based auth (JWT) that's self-contained and verified without a server-side lookup",
+        "Password hashing — storing a salted hash (bcrypt, argon2) rather than plaintext or a fast general-purpose hash, non-negotiable regardless of how the rest of auth is built",
+        "Authorization vs authentication — confirming who a user is (authentication) versus confirming what they're allowed to do (authorization), two separate checks an AI can conflate or skip one of",
+        "Token expiry and refresh — a short-lived access token paired with a longer-lived refresh token, and the specific flow for renewing one without forcing a re-login",
+        "Auth library vs roll-your-own — using a maintained library (Auth.js, Passport, Lucia) versus implementing sessions or JWTs by hand, a real tradeoff in control versus battle-tested correctness",
+        "Common auth vulnerabilities — session fixation, missing CSRF protection, JWTs verified without checking their signature or expiry, all patterns an AI can reproduce from training data as easily as the correct version"
+      ],
+      "know_how": [
+        "Verify passwords are hashed with a slow, salted algorithm (bcrypt/argon2), never a fast hash or plaintext",
+        "Check every protected route enforces authorization, not just that a login endpoint exists",
+        "Test the full flow by hand: register, log in, access a protected route, let a token expire, log out",
+        "Confirm JWTs (if used) are verified for signature and expiry on every protected request, not just decoded",
+        "Choose a maintained auth library for anything beyond a toy project, and understand exactly what it's doing under the hood before trusting it"
+      ],
+      "habits": [
+        "Walk the entire auth flow by hand — including the expiry and logout paths — before calling it done",
+        "Check every new protected route for an authorization check, not just assume one earlier check covers it",
+        "Verify password hashing algorithm and salt explicitly rather than trusting it looked right in the diff",
+        "Treat any custom auth code with extra scrutiny compared to a maintained library's code",
+        "Re-test the auth flow after any unrelated change that touches routing or middleware order"
+      ],
+      "know_why": {
+        "claim": "Auth should be built on a maintained library rather than implemented by hand, even though an AI can generate a plausible hand-rolled version.",
+        "because": "Auth vulnerabilities (session fixation, token verification bypass, timing attacks on comparison) are subtle and well-studied; a maintained library has had many more eyes and real incidents shape its defaults than a single AI-generated implementation has had review.",
+        "disputed_by": "Some practitioners in the agentic-autonomy and vibe-loop schools argue a small, fully-understood hand-rolled auth flow is safer for a small project than a large, partially-understood library with its own surface area of misconfiguration risk.",
+        "source": "OWASP Authentication Cheat Sheet; practitioner debate on build-vs-buy for auth"
+      },
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given a basic app, implement a full auth flow (register, login, protected route, logout, token expiry) with hashed passwords and enforced authorization on every protected route, verified by hand end to end.",
+      "common_failure": "Implementing a login endpoint and a protected route separately, each individually working, without verifying that the protected route actually rejects an unauthenticated or unauthorized request — the gap between the two pieces is exactly where an AI-generated auth flow tends to have its real hole.",
+      "sources": ["OWASP Authentication Cheat Sheet", "Auth.js documentation", "Lucia auth docs"]
+    },
+    {
+      "id": "vibecoding.backend.input-validation",
+      "label": "Input validation",
+      "tier": 2,
+      "cluster": "backend",
+      "prereqs": ["vibecoding.backend.rest-endpoint-scaffold"],
+      "one_line": "Add server-side validation and sanitization to AI-generated endpoints so the client is never trusted with the last word.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Server-side validation — checking input on the backend regardless of what the frontend already checked, since the backend is the actual trust boundary",
+        "Schema validation library — a library (Zod, Yup, Joi, Pydantic) that validates and types incoming data against a declared shape, catching malformed input before it reaches business logic",
+        "Sanitization vs validation — rejecting bad input (validation) versus cleaning it into a safe form (sanitization), two different operations often conflated",
+        "Injection risk — unsanitized input reaching a database query or shell command, the specific class of bug input validation exists to prevent at the boundary",
+        "Client-trust assumption — the specific, dangerous default an AI can fall into when a frontend already validates a field and the backend skips re-checking it"
+      ],
+      "know_how": [
+        "Validate every field of every incoming request on the server, regardless of frontend validation",
+        "Use a schema validation library rather than ad hoc if-checks scattered through handler code",
+        "Test an endpoint with malformed, missing, and unexpected-type input, not just valid input",
+        "Confirm rejected input returns a clear 400-class error rather than causing a 500 or, worse, being silently accepted",
+        "Check that validation happens before any database query or side effect, not after"
+      ],
+      "habits": [
+        "Never trust that a frontend's validation makes backend validation optional",
+        "Send malformed requests directly to an endpoint (bypassing the frontend) as a standing test habit",
+        "Read a new endpoint's validation schema against the full set of fields it accepts, checking nothing was missed",
+        "Flag any endpoint that reaches a database call before validating its input",
+        "Confirm error messages from failed validation don't leak internal details unnecessarily"
+      ],
+      "know_why": null,
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given an endpoint that accepts user input, send it malformed and missing-field requests directly (bypassing the frontend) and confirm every one is rejected with a clear error, none reaching the database.",
+      "common_failure": "Relying on frontend form validation as the only check, because the endpoint 'always' receives requests from the app's own frontend during testing — anyone hitting the endpoint directly (a script, a modified request, another client) bypasses it entirely.",
+      "sources": ["OWASP Top 10 — Injection", "Zod documentation"]
+    },
+    {
+      "id": "vibecoding.backend.migration-discipline",
+      "label": "Migration discipline",
+      "tier": 3,
+      "cluster": "backend",
+      "prereqs": ["vibecoding.backend.schema-design", "vibecoding.backend.orm-wiring"],
+      "one_line": "Generate and review database migrations with AI, checking that each one is reversible and doesn't silently drop data.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "Migration — a versioned, ordered script that changes a database schema, the mechanism that keeps a schema's history reproducible across environments",
+        "Reversible migration — a migration with a working down/rollback step, versus a one-way migration that can only be undone by hand or from a backup",
+        "Destructive migration — one that drops a column, table, or data outright, which needs a higher bar of review than an additive one",
+        "Migration ordering — running migrations in the same sequence across every environment, since running them out of order can leave a database in a state no migration file describes",
+        "Backward-compatible migration — a schema change deployed before the code that depends on it, so a brief window with old code and new schema (or vice versa) doesn't break"
+      ],
+      "know_how": [
+        "Write and test a migration's rollback step before running the migration on any real data",
+        "Review any migration that drops a column or table with extra scrutiny, confirming the data loss is actually intended",
+        "Run a new migration against a copy of realistic data before running it against production",
+        "Sequence a schema change to be backward-compatible when code and schema can't deploy in the exact same instant",
+        "Confirm migrations run in the same order in every environment, not just locally"
+      ],
+      "habits": [
+        "Treat every destructive migration as requiring a second, deliberate confirmation before running it",
+        "Test a migration's down/rollback step, not just its up step",
+        "Run new migrations against realistic data volumes before trusting them on production",
+        "Keep migrations small and additive where possible, splitting a risky one into safer steps",
+        "Check migration order matches across every environment before assuming they're equivalent"
+      ],
+      "know_why": {
+        "claim": "A migration should be reversible before it's ever run against real data.",
+        "because": "An AI-generated migration that looks correct can still be wrong in a way that's only visible once it's run against real data shapes; without a tested rollback, the only recovery path left is a backup restore, which is slower and lossier than a rollback.",
+        "disputed_by": "Some practitioners argue writing and testing a rollback for every migration is disproportionate overhead for a young project with no production data yet, and prefer to add rollback discipline only once real user data exists.",
+        "source": "Database migration practice literature (Rails/Django migration conventions; practitioner discussion on migration safety)"
+      },
+      "school_weights": { "manual-gate": "high" },
+      "checkpoint": "Given a migration that adds a required column to an existing table with data, write it as a backward-compatible, reversible migration and demonstrate the rollback restores the prior schema cleanly.",
+      "common_failure": "Running a migration that looks correct in isolation without testing it against a copy of real data — a required-column migration that works on an empty test database can fail outright, or silently corrupt existing rows, once real data with unexpected shapes hits it.",
+      "sources": ["Postgres documentation — ALTER TABLE", "Rails Active Record migration guides"]
+    },
+    {
+      "id": "vibecoding.backend.error-handling-contract",
+      "label": "Error-handling contract",
+      "tier": 3,
+      "cluster": "backend",
+      "prereqs": ["vibecoding.backend.input-validation"],
+      "one_line": "Define and enforce a consistent error-response contract across AI-generated endpoints instead of an ad hoc shape per route.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Error-response contract — a fixed shape (e.g. { error: { code, message } }) that every endpoint's error response follows, so clients can handle errors generically",
+        "Error code taxonomy — a stable set of named error codes distinct from HTTP status codes, letting a client distinguish 'email already taken' from 'invalid email format' even though both are 400s",
+        "Internal vs external error detail — what's safe to expose to a client (a validation message) versus what should be logged internally only (a stack trace, a database error string)",
+        "Uncaught exception handling — a global error handler that guarantees any unhandled exception still returns the contract's shape instead of a raw framework error page",
+        "Contract drift — individual endpoints each inventing their own ad hoc error shape over time, which an explicit contract and its enforcement are meant to prevent"
+      ],
+      "know_how": [
+        "Define the error-response shape once, in one place, before endpoints are written rather than after they've each invented their own",
+        "Route every thrown error through a single global handler that enforces the contract shape",
+        "Check that internal details (stack traces, raw database errors) never reach the client response",
+        "Assign a stable error code to each distinct failure case, not just a generic message",
+        "Test an endpoint's error responses directly, not just its success response"
+      ],
+      "habits": [
+        "Check every new endpoint's error responses against the shared contract, not just its success response",
+        "Trigger an unhandled exception deliberately to confirm the global handler still returns the contract shape",
+        "Scan error responses for leaked internal detail (stack traces, raw SQL errors) before shipping",
+        "Flag any endpoint that returns an error shape different from the rest of the API",
+        "Keep the error code list in one place so it doesn't quietly diverge per endpoint"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given three endpoints each written in a separate session, verify all three return errors in the exact same shape, including for an uncaught exception, and fix any that drift from the contract.",
+      "common_failure": "Letting each AI session invent its own error response shape for the endpoint it happened to be working on — early on the differences look cosmetic, but they compound into a frontend that needs special-case handling per endpoint instead of one generic error handler.",
+      "sources": ["JSON:API error object spec (as a reference shape)", "Google API design guide — errors"]
+    },
+    {
+      "id": "vibecoding.backend.background-jobs",
+      "label": "Background jobs",
+      "tier": 4,
+      "cluster": "backend",
+      "prereqs": ["vibecoding.backend.orm-wiring", "vibecoding.backend.error-handling-contract"],
+      "one_line": "Move slow or scheduled work into background jobs or queues with AI assistance, verifying failure and retry behavior by hand.",
+      "hours": 14,
+      "soft_prereqs": [],
+      "know_what": [
+        "Background job — work moved off the request/response cycle (sending an email, processing an upload) so a slow operation doesn't block the client waiting on it",
+        "Job queue — a system (BullMQ, a Sidekiq-equivalent, a managed queue) that holds pending jobs and hands them to workers, distinct from just calling a function asynchronously in-process",
+        "Retry policy — how many times and with what backoff a failed job is retried before being treated as permanently failed, which an AI's first draft often omits entirely",
+        "Idempotent job design — writing a job so running it twice (from a retry) doesn't double-charge, double-send, or otherwise duplicate its effect",
+        "Dead-letter handling — where a job that's exhausted its retries ends up, so a permanently failing job is visible and investigable rather than silently vanishing"
+      ],
+      "know_how": [
+        "Move any operation slower than a couple hundred milliseconds, or any operation with an external dependency, out of the request/response cycle into a job",
+        "Design each job to be safely re-run (idempotent) before wiring up retries",
+        "Set an explicit retry count and backoff policy rather than accepting a queue library's silent default",
+        "Test a job's failure path deliberately (make it throw) to confirm retries and dead-lettering behave as expected",
+        "Monitor the job queue's failure and backlog counts, not just whether jobs were enqueued"
+      ],
+      "habits": [
+        "Ask 'what happens if this job runs twice' before shipping any new job type",
+        "Deliberately fail a new job once in testing to watch the retry and dead-letter path actually fire",
+        "Check queue depth and failure counts periodically instead of assuming enqueued jobs always complete",
+        "Treat a job with no defined retry policy as unfinished, not just conservative",
+        "Review any job touching money or user-facing communication with extra care for idempotency before shipping"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a job that sends a confirmation email, design it to be idempotent, set an explicit retry policy, and demonstrate that a deliberate failure retries correctly and lands in a visible dead-letter state after exhausting retries.",
+      "common_failure": "Shipping a background job with no retry policy and no idempotency guarantee — the first transient failure (a flaky network call) either silently drops the job forever or, once a naive retry is added later, duplicates its effect (a second email, a double charge) because the job wasn't designed to be safely re-run.",
+      "sources": ["BullMQ documentation", "Enterprise Integration Patterns — idempotent receiver"]
+    }
+  ]
+}

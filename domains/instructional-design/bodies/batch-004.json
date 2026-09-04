@@ -1,0 +1,247 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-004",
+  "ids": [
+    "instructional-design.design.udl-principles",
+    "instructional-design.design.worked-example-design",
+    "instructional-design.design.scaffolding-and-fading",
+    "instructional-design.design.sequencing-and-chunking",
+    "instructional-design.design.active-learning-activity-design",
+    "instructional-design.design.course-blueprint"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.design.udl-principles",
+      "label": "Universal Design for Learning Principles",
+      "tier": 1,
+      "cluster": "design",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Build one lesson that already works for learners who'd otherwise need three separate accommodated versions.",
+      "hours": 8,
+      "know_what": [
+        "Three UDL principles — multiple means of representation, action and expression, and engagement (CAST framework)",
+        "Means of representation — presenting content through more than one modality (text plus audio plus visual) so no single format is the only access point",
+        "Means of action and expression — letting a learner demonstrate mastery through more than one output format (write, speak, build, present)",
+        "Means of engagement — varying how content is framed and paced to sustain motivation across learners with different interests and self-regulation needs",
+        "UDL vs. accommodation — UDL designs flexibility in from the start; an accommodation retrofits access for one learner after the fact, at higher cost and lower coverage",
+        "Curb-cut effect — a UDL feature built for one group, such as captions for deaf learners, that benefits a much wider audience, such as anyone in a loud room"
+      ],
+      "know_how": [
+        "Check a lesson plan against all three UDL principles and note which ones are currently addressed by only one option",
+        "Add a second modality, such as audio narration or a visual diagram, to content that currently exists in only one format",
+        "Offer at least two ways for a learner to demonstrate mastery of an objective where the objective itself doesn't require a specific format",
+        "Build optional scaffolds, such as a glossary or background primer, into the design rather than distributing them only to learners who ask",
+        "Identify a planned accommodation that could instead be built in as a default option for everyone",
+        "Review captions, alt text, and color contrast against WCAG guidelines as part of the UDL pass, not a separate compliance step"
+      ],
+      "habits": [
+        "Ask what happens if a learner couldn't use this format, about every planned content type",
+        "Look for the accommodation that's really a design gap, not an individual exception",
+        "Default to offering options over building one 'main' version plus special-case fixes",
+        "Check representation, expression, and engagement separately — a design can nail one and miss the other two",
+        "Treat accessibility review as part of the design pass, not a QA step tacked on at the end"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Redesign one existing lesson against all three UDL principles, adding at least one new representation option, one new expression option, and one new engagement option, without changing the underlying objective.",
+      "common_failure": "Treating UDL as an accessibility add-on applied late to one 'main' version of a course, instead of a design principle that shapes the format choices from the first draft.",
+      "sources": ["CAST, Universal Design for Learning Guidelines", "Thomas Tobin & Kirsten Behling, Reach Everyone, Teach Everyone", "WCAG 2.1 accessibility guidelines"]
+    },
+    {
+      "id": "instructional-design.design.worked-example-design",
+      "label": "Worked Example Design",
+      "tier": 4,
+      "cluster": "design",
+      "prereqs": ["instructional-design.design.instructional-strategy-selection"],
+      "soft_prereqs": [],
+      "one_line": "Show a fully solved problem in a way that reduces a novice's cognitive load instead of just modeling the answer.",
+      "hours": 14,
+      "know_what": [
+        "Worked example — a fully solved problem showing every step, studied instead of attempted, to reduce a novice's extraneous cognitive load",
+        "Worked-example effect — the finding (Sweller, Cooper) that studying worked examples produces better novice learning outcomes than solving equivalent problems unaided",
+        "Faded worked example — a sequence moving from fully worked to partially worked to unaided, gradually transferring the cognitive work to the learner",
+        "Self-explanation prompt — a question embedded in a worked example asking the learner to justify a step, which increases engagement without adding search load",
+        "Near vs. far transfer example — a worked example matched closely to the target task versus one requiring further generalization, chosen based on how much transfer the objective needs",
+        "Split-attention effect — a design flaw where a worked example's text and diagram are physically or temporally separated, forcing the learner to hold one in memory while finding the other"
+      ],
+      "know_how": [
+        "Write out a fully worked example for a target task, showing every intermediate step an expert would otherwise skip",
+        "Build a faded sequence of three to four examples moving from fully worked to blank practice",
+        "Insert self-explanation prompts at key decision steps instead of just presenting the solution silently",
+        "Integrate text and diagram physically, with labels on the diagram itself instead of a separate legend, to avoid the split-attention effect",
+        "Choose near-transfer examples for procedural objectives and a mix of near and far examples for objectives requiring generalization",
+        "Pilot a worked example with a genuine novice and watch where their attention gets lost, not just whether they get the right answer"
+      ],
+      "habits": [
+        "Write the full expert solution first, then decide what to fade and what to keep",
+        "Check a worked example for split attention by looking at it as a first-time novice would",
+        "Ask whether a step that seems obvious to an expert actually needs to be shown",
+        "Build the fade sequence deliberately instead of jumping straight from fully worked to unaided practice",
+        "Watch a real novice work through the example before assuming it's clear"
+      ],
+      "know_why": null,
+      "school_weights": { "cognitive-load-first": "high" },
+      "checkpoint": "Design a three-step faded worked-example sequence for one procedural objective, with self-explanation prompts and no split-attention layout, and pilot it with one genuine novice.",
+      "common_failure": "Jumping straight from a single worked example to unaided practice, skipping the faded intermediate steps that actually transfer the cognitive work to the learner gradually.",
+      "sources": ["John Sweller & Graham Cooper, the worked-example effect", "Alexander Renkl, learning from worked examples and self-explanation", "Richard Mayer, Multimedia Learning (split-attention principle)"]
+    },
+    {
+      "id": "instructional-design.design.scaffolding-and-fading",
+      "label": "Scaffolding & Fading",
+      "tier": 4,
+      "cluster": "design",
+      "prereqs": ["instructional-design.design.instructional-strategy-selection"],
+      "soft_prereqs": [],
+      "one_line": "Support a learner just enough to succeed at a task they couldn't do alone yet, then remove the support on a plan, not a whim.",
+      "hours": 12,
+      "know_what": [
+        "Scaffolding — temporary support that lets a learner succeed at a task above their current independent ability, calibrated to be removable",
+        "Zone of proximal development (Vygotsky) — the gap between what a learner can do alone and what they can do with support, which scaffolding is designed to occupy",
+        "Fading — the planned, gradual withdrawal of scaffolding as competence increases, distinct from support that never gets removed",
+        "Types of scaffold — procedural (checklists, sentence starters), conceptual (concept maps, worked models), strategic (prompts for planning or self-monitoring), metacognitive (reflection prompts)",
+        "Scaffold overuse — support that remains past the point the learner needs it, which can suppress the independent performance a course is trying to build",
+        "Contingent support — adjusting the amount of scaffolding in real time based on how the specific learner is actually performing, rather than a fixed schedule for everyone"
+      ],
+      "know_how": [
+        "Identify a task just above the learner's current independent ability and design a scaffold specifically for that gap, not a generic aid",
+        "Choose a scaffold type — procedural, conceptual, strategic, or metacognitive — matched to what's actually blocking the learner",
+        "Plan a fading schedule across a course, specifying when each scaffold gets reduced or removed, before the course launches",
+        "Build in a checkpoint to confirm a learner is ready for a scaffold to fade, instead of fading on a fixed calendar regardless of readiness",
+        "Watch for scaffold overuse in a pilot — a learner who still needs support at a point the plan assumed independence",
+        "Differentiate fading pace for different learners when the format allows it, rather than applying one fixed schedule to everyone"
+      ],
+      "habits": [
+        "Ask what specific gap a scaffold is closing before adding it",
+        "Plan the removal of a scaffold at the same time it's designed, not as an afterthought",
+        "Watch for a scaffold that's become a permanent crutch instead of a temporary support",
+        "Check whether a struggling learner needs a scaffold added or an earlier scaffold that faded too soon",
+        "Differentiate fading pace across learners when the format allows it, rather than assuming uniform readiness"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Design a scaffolded task with a named scaffold type and a written fading schedule across three practice attempts, plus a readiness checkpoint before each fade.",
+      "common_failure": "Adding a support, such as a job aid, hint, or template, that helps in the moment but never gets removed, so the course produces learners who can only perform with the aid still in hand.",
+      "sources": ["Lev Vygotsky, zone of proximal development", "Wood, Bruner & Ross, the original scaffolding concept", "Roy Pea, the social and technical dimensions of scaffolding"]
+    },
+    {
+      "id": "instructional-design.design.sequencing-and-chunking",
+      "label": "Sequencing & Chunking",
+      "tier": 4,
+      "cluster": "design",
+      "prereqs": ["instructional-design.objectives.prerequisite-mapping", "instructional-design.design.udl-principles"],
+      "soft_prereqs": [],
+      "one_line": "Break content into pieces sized to working memory and order them so each piece leans on the last.",
+      "hours": 12,
+      "know_what": [
+        "Chunking — grouping related content into units sized to working memory, commonly cited around four plus or minus items, instead of one continuous stream",
+        "Micro-sequencing — the order of steps within a single chunk, distinct from macro-sequencing, the order of chunks across a whole course",
+        "Simple-to-complex sequencing — starting with the simplest whole version of a task and adding complexity, rather than teaching isolated sub-skills first",
+        "Spiral sequencing — revisiting a concept at increasing depth across a course, instead of covering it once and moving on",
+        "Elaboration theory (Reigeluth) — sequencing from a simplified 'epitome' of the whole task toward full complexity, in deliberate elaborative passes",
+        "Pacing signal — a design cue, such as a progress indicator or estimated time, that tells a learner where a chunk boundary is, reducing the cognitive cost of not knowing how much is left"
+      ],
+      "know_how": [
+        "Break a long content stream into chunks sized to a working-memory limit, checking against the audience's actual novice or expert level",
+        "Sequence chunks by dependency order established in the prerequisite map, not by convenience of the source material",
+        "Apply simple-to-complex sequencing to a skill-based unit by teaching a simplified whole version of the task before isolated sub-skills",
+        "Build a spiral revisit of a foundational concept later in the course at greater depth, instead of assuming one pass is sufficient",
+        "Mark chunk boundaries visibly in the delivered format, using headings, progress markers, or natural stopping points",
+        "Check total chunk count against the audience's realistic attention span for the delivery format, such as a webinar versus a self-paced module"
+      ],
+      "habits": [
+        "Count how many new elements a single chunk introduces before finalizing it",
+        "Ask whether a sequence teaches the whole task simplified first, or isolated parts with no whole in sight until the end",
+        "Mark a natural stopping point in every chunk instead of letting content run continuously",
+        "Revisit an early foundational concept later at more depth instead of assuming one exposure is enough",
+        "Check total chunk count against the audience's realistic attention span for the format"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Break a piece of dense source content into chunks sized to working memory, sequence them by dependency order rather than source order, and mark a visible boundary between chunks.",
+      "common_failure": "Chunking by convenient section breaks in the source material instead of by working-memory load and dependency, producing chunks that are still too dense or in the wrong order.",
+      "sources": ["George Miller, 'The Magical Number Seven, Plus or Minus Two'", "Charles Reigeluth, Elaboration Theory", "Ruth Clark, Building Expertise"]
+    },
+    {
+      "id": "instructional-design.design.active-learning-activity-design",
+      "label": "Active Learning Activity Design",
+      "tier": 5,
+      "cluster": "design",
+      "prereqs": ["instructional-design.design.worked-example-design", "instructional-design.design.scaffolding-and-fading"],
+      "soft_prereqs": [],
+      "one_line": "Design an activity that makes a learner do the cognitive work the objective actually requires, not just read about it.",
+      "hours": 18,
+      "know_what": [
+        "Generative activity — a task requiring the learner to produce something, such as an explanation, a solution, or a summary, rather than passively receive it",
+        "Retrieval practice — an activity requiring recall from memory rather than recognition from a provided list, which produces stronger retention than re-reading",
+        "Desirable difficulty (Bjork) — a level of challenge that slows performance in the moment but improves long-term retention, distinct from difficulty that just causes frustration",
+        "Productive failure — a designed sequence where learners attempt a problem before instruction and fail productively, which can deepen later understanding for some objective types",
+        "Fidelity — how closely a practice activity resembles the real-world performance context, and the tradeoff between higher fidelity (more realistic, more expensive) and lower fidelity (cheaper, faster to iterate)",
+        "Passive-activity trap — an activity that looks interactive, such as clicking a hotspot or dragging a label, but requires no real cognitive work matching the objective"
+      ],
+      "know_how": [
+        "Design an activity requiring the learner to generate an answer, explanation, or artifact instead of just selecting or reading one",
+        "Build in retrieval practice, recall without notes, at spaced intervals instead of relying only on initial exposure",
+        "Calibrate difficulty to be desirably hard — enough friction to require real effort, not so much that most learners fail outright",
+        "Match activity fidelity to the objective's real-world stakes, using lower-fidelity practice early and higher-fidelity practice closer to the terminal objective",
+        "Audit a planned activity by asking what cognitive operation it actually requires, catching passive-activity-trap designs before build",
+        "Pilot a new activity type with a small group and check whether they engage with the intended cognitive work or route around it"
+      ],
+      "habits": [
+        "Ask what the learner is actually doing mentally about every planned activity, not just what they're clicking",
+        "Prefer an activity that requires recall over one that only requires recognition",
+        "Notice when an interactive-looking activity is actually passive underneath",
+        "Check whether an activity's difficulty is productive or just frustrating",
+        "Match activity fidelity to how close the course is to the terminal objective"
+      ],
+      "know_why": {
+        "claim": "Practice activities should require retrieval from memory rather than recognition from provided options wherever the objective allows it.",
+        "because": "retrieval practice produces measurably stronger long-term retention than restudying or recognition-based review, even though it feels harder and slower in the moment",
+        "disputed_by": "some rapid-development and engagement-focused practitioners who favor lower-friction recognition-based interactions, such as drag-and-drop or click-reveal, because they're faster to build and score better on immediate learner-satisfaction surveys",
+        "source": "Roediger & Karpicke, the testing effect / retrieval practice research, vs. common e-learning engagement-metric practice"
+      },
+      "school_weights": { "cognitive-load-first": "normal" },
+      "checkpoint": "Design one activity per objective in a module that requires generative retrieval rather than recognition, with a stated fidelity level matched to the objective's real-world stakes.",
+      "common_failure": "Building an activity that's visually interactive, such as drag-and-drop or click-to-reveal, but cognitively equivalent to passive reading, so learners complete it without doing the mental work the objective requires.",
+      "sources": ["Robert Bjork, desirable difficulties", "Henry Roediger & Jeffrey Karpicke, the testing effect", "Manu Kapur, productive failure"]
+    },
+    {
+      "id": "instructional-design.design.course-blueprint",
+      "label": "Course Blueprint Assembly",
+      "tier": 5,
+      "cluster": "design",
+      "prereqs": ["instructional-design.design.sequencing-and-chunking", "instructional-design.design.instructional-strategy-selection"],
+      "soft_prereqs": [],
+      "one_line": "Produce the single document that specifies every module, activity, and assessment well enough that someone else could build from it.",
+      "hours": 24,
+      "know_what": [
+        "Course blueprint / design document — the single artifact specifying every module's objectives, strategy, activities, assessments, and duration, ready for a build team to work from",
+        "Design document vs. storyboard — the blueprint specifies the plan at the module level; a storyboard specifies it at the screen level for production",
+        "Traceability matrix — a section of the blueprint explicitly linking every objective to its assessment and its primary activity, so nothing gets lost between planning and build",
+        "Sign-off gate — a defined point where the sponsor and SME approve the blueprint before production spend begins, protecting against late-stage redesign",
+        "Level of detail calibration — a blueprint detailed enough to guide a build team without being so exhaustive it becomes a second full draft of the course",
+        "Change control — the process for handling a requested change after blueprint sign-off, distinguishing a small clarification from a scope change requiring re-approval"
+      ],
+      "know_how": [
+        "Assemble a single document specifying every module's objectives, chosen instructional strategy, activities, assessments, and estimated duration",
+        "Build a traceability matrix linking every objective to its assessment and primary activity within the blueprint",
+        "Route the blueprint through a formal sign-off gate with the sponsor and SME before authorizing production spend",
+        "Calibrate the blueprint's level of detail to guide the build team without duplicating the eventual storyboard",
+        "Set up a change-control process distinguishing a minor clarification from a scope change that needs re-approval",
+        "Cross-check the blueprint against the curriculum map to confirm this module still fits the larger program without new redundancy or gaps"
+      ],
+      "habits": [
+        "Check every objective in the blueprint has both an assessment and an activity before calling it done",
+        "Get sign-off in writing before authorizing any production spend against the blueprint",
+        "Ask whether a requested change is a clarification or a scope change before agreeing to it informally",
+        "Keep the blueprint at planning-level detail and resist the pull to turn it into a screen-by-screen storyboard",
+        "Cross-check the blueprint against the curriculum map before calling a module finished"
+      ],
+      "know_why": null,
+      "school_weights": { "backward-design-assessment-first": "high" },
+      "checkpoint": "Produce a signed-off course blueprint for one module with a complete traceability matrix linking every objective to an assessment and an activity, and a documented change-control process.",
+      "common_failure": "Starting production before the blueprint is signed off, so a late objective change forces already-built material to be reworked or discarded.",
+      "sources": ["ATD instructional design blueprint templates", "Michael Allen, Leaving ADDIE for SAM", "Cathy Moore, Action Mapping design document format"]
+    }
+  ]
+}

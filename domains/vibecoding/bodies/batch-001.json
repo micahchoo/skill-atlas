@@ -1,0 +1,293 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-001",
+  "ids": [
+    "vibecoding.frontend.single-page-scaffold",
+    "vibecoding.frontend.component-extraction",
+    "vibecoding.frontend.framework-adoption",
+    "vibecoding.frontend.state-management",
+    "vibecoding.frontend.api-integration-client",
+    "vibecoding.deployment.full-stack-deploy",
+    "vibecoding.architecture.full-stack-integration-review"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.frontend.single-page-scaffold",
+      "label": "Single-page scaffold",
+      "tier": 1,
+      "cluster": "frontend",
+      "prereqs": [],
+      "one_line": "Generate a static HTML/CSS/JS page from a prompt and get it rendering correctly in a browser on the first or second pass.",
+      "hours": 8,
+      "soft_prereqs": ["vibecoding.prompting.context-framing"],
+      "know_what": [
+        "Static site — HTML/CSS/JS served with no build step or server-side logic, the smallest unit an AI can scaffold end to end",
+        "Semantic HTML — using <nav>, <main>, <button> instead of generic <div>s so the AI's markup is accessible and inspectable by default",
+        "Single-file vs multi-file scaffold — one HTML file with inline <style>/<script> for a throwaway prompt, split files once the page is meant to last",
+        "CDN-linked libraries — pulling in a framework or icon set via a <script src> tag without a package manager, the fastest path from prompt to a running page",
+        "View-source verification — opening the rendered page's dev tools to confirm the DOM the AI claims it produced actually matches what loaded",
+        "Prompt-to-preview loop — the tool's built-in live preview (v0, Claude Artifacts, a local dev server) that shows the page without a manual copy-paste step",
+        "Placeholder content — Lorem ipsum, stock image URLs, and dummy links an AI inserts by default, which must be swapped before the page is real"
+      ],
+      "know_how": [
+        "State the page's purpose, sections, and any hard content in one prompt so the assistant doesn't guess at structure",
+        "Open the generated page immediately in a real browser, not just trust a description of what it does",
+        "Resize the viewport (mobile, tablet, desktop) before accepting the scaffold as done",
+        "Check every link and button actually does something instead of being a dead href",
+        "Ask for one revision at a time (change the hero, then the footer) instead of one giant re-prompt that regenerates the whole page",
+        "Diff the new HTML against the previous version to see exactly what changed on a revision"
+      ],
+      "habits": [
+        "Never accept a page as done from the chat transcript alone — always render it",
+        "Click every interactive element by hand before moving on",
+        "Keep the first working version saved before asking for the next revision",
+        "State constraints (no external fonts, no tracking scripts) up front instead of stripping them out after",
+        "Treat placeholder content as a checklist item, not a detail to forget"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a one-paragraph description of a landing page (hero, three feature blocks, footer with links), produce a working HTML/CSS/JS page that renders correctly and has no dead links, in two prompts or fewer.",
+      "common_failure": "Accepting the page because it 'looks right' in the chat transcript's description, without opening it in a browser — broken CSS, non-functional buttons, and layout overflow only show up on render, never in the code the assistant printed.",
+      "sources": ["MDN Web Docs", "v0 by Vercel", "web.dev — Learn HTML/CSS"]
+    },
+    {
+      "id": "vibecoding.frontend.component-extraction",
+      "label": "Component extraction",
+      "tier": 2,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.single-page-scaffold"],
+      "one_line": "Ask an assistant to split a monolithic page into reusable components without changing what the page does.",
+      "hours": 8,
+      "soft_prereqs": ["vibecoding.verification.diff-reading"],
+      "know_what": [
+        "Component — a self-contained chunk of markup, style, and behavior with a name and a boundary, the unit an AI needs to reason about one piece at a time",
+        "Props — the values a component takes as input instead of hardcoding content, what turns a one-off block into something reusable",
+        "Duplication signal — the same markup pattern appearing three or more times in a page, the concrete trigger for asking for extraction",
+        "Prop drilling — passing a value through several component layers that don't use it themselves, a smell an extraction can introduce if done carelessly",
+        "Naming by role, not appearance — calling a piece PricingCard instead of BlueBox, so future prompts can reference it by name",
+        "Behavior parity — the requirement that extraction changes structure, not output; the rendered page must look and act identical before and after"
+      ],
+      "know_how": [
+        "Point at the repeated markup and name the component you want extracted instead of asking for 'cleanup' in the abstract",
+        "Ask the assistant to list every prop a new component needs before it writes the component",
+        "Compare a screenshot or the rendered DOM before and after extraction to confirm nothing shifted",
+        "Extract one component per prompt so a bad extraction is easy to isolate and revert",
+        "Search the codebase afterward for any remaining copy of the pattern the extraction was meant to replace",
+        "Reject an extraction that changes visual output, even if the component 'looks cleaner' internally"
+      ],
+      "habits": [
+        "Before asking for a component, name what varies between its instances (the props) and what stays fixed",
+        "Read the extracted component's file in full, not just the diff summary, before accepting",
+        "Keep a component's file focused on one concern; push a second responsibility back to the assistant as a separate ask",
+        "Re-render the page after every extraction, not just after the whole pass is done",
+        "Flag any extraction that silently renamed a CSS class or id something else on the page depends on"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a 200-line single-file page with a repeated card pattern, extract it into a parameterized component used by every instance, with the rendered page pixel-identical to before.",
+      "common_failure": "Asking for a vague 'refactor into components' pass, which an assistant will happily do by inventing component boundaries that don't match how the page is actually reused — producing components with one caller each, or one god-component that just moved the mess.",
+      "sources": ["React docs — Thinking in React", "Every Layout (Andy Bell & Heydon Pickering)"]
+    },
+    {
+      "id": "vibecoding.frontend.framework-adoption",
+      "label": "Framework adoption",
+      "tier": 3,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.component-extraction", "vibecoding.prompting.spec-writing", "vibecoding.verification.diff-reading"],
+      "one_line": "Move a static page into a framework (React, Vue, Svelte) with AI generating correct component boilerplate, checked spec-first and diff-by-diff.",
+      "hours": 16,
+      "soft_prereqs": ["vibecoding.prompting.constraint-declaration", "vibecoding.tooling.multi-file-agent-tasks"],
+      "know_what": [
+        "Framework migration surface — every place a page's plain JS/DOM manipulation must become framework idioms (state, effects, event handlers)",
+        "Scaffolding tool — Vite, or a framework's own CLI, which lays out the project structure an AI should follow rather than invent",
+        "File-per-component convention — the framework's expected layout (one component per file, colocated styles), which an AI will violate if not told to follow it",
+        "Build step — the compile/bundle stage a framework introduces, meaning 'open in browser' now requires a dev server, not a double-click on the HTML file",
+        "Routing — client-side navigation (React Router, Vue Router, or a meta-framework's file-based router) replacing plain multi-page HTML links",
+        "Migration order — moving structure first, then styling, then behavior, so each AI pass has a narrow, checkable diff instead of one giant rewrite",
+        "Framework escape hatch — the ability to drop to raw DOM/CSS when the framework's abstraction doesn't fit, which an AI will avoid using unless prompted to consider it"
+      ],
+      "know_how": [
+        "Write the spec for the migration (which pages, which components, what stays out of scope) before the first migration prompt",
+        "Scaffold the framework project with its own CLI first, then ask the assistant to migrate content into that structure — never ask it to invent the project layout",
+        "Migrate one page or one component tree per session, verified and committed, before starting the next",
+        "Read every diff in the migration for accidental logic changes disguised as syntax translation",
+        "Run the dev server after each migrated piece, not just at the end of the whole migration",
+        "Ask explicitly whether the framework's idiomatic pattern (e.g. controlled inputs) was used, since an AI defaults to the plainest translation otherwise"
+      ],
+      "habits": [
+        "Treat 'migrate the whole app' as an instruction to refuse; decompose it into a spec and an ordered task list first",
+        "Keep the pre-migration static page running in a second tab to compare against the framework version feature by feature",
+        "Commit after each migrated component so a bad migration pass is isolated to one commit",
+        "Ask the assistant to name what idiom it used and why when the translation isn't obvious",
+        "Re-check accessibility and responsive behavior after migration; frameworks often lose hand-tuned CSS in translation"
+      ],
+      "know_why": {
+        "claim": "A framework migration should be driven by a written spec, not by conversational iteration.",
+        "because": "The migration touches structure across many files at once, and a wrong assumption made early (e.g. about routing) compounds into every file migrated afterward before anyone notices.",
+        "disputed_by": "The vibe-loop school argues a spec written before seeing the framework's real constraints is often wrong anyway, and prefers migrating one small piece, running it, and adjusting the plan live.",
+        "source": "Practitioner consensus in AI-assisted refactor writeups (Simon Willison's blog; Kent C. Dodds on incremental migration)"
+      },
+      "school_weights": { "vibe-loop": "low", "spec-first": "high" },
+      "checkpoint": "Given a 5-page static site, migrate it into a component-based framework with working client-side routing, with each page's rendered output matching the static version and no console errors.",
+      "common_failure": "Asking for the whole migration in one prompt: the assistant produces a plausible-looking framework app that silently drops behavior (a form handler, a media query) buried in the original page, and the loss isn't caught because nothing was checked mid-migration.",
+      "sources": ["Vite docs", "React Router docs", "Kent C. Dodds — incremental migration writings"]
+    },
+    {
+      "id": "vibecoding.frontend.state-management",
+      "label": "State management",
+      "tier": 4,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.framework-adoption"],
+      "one_line": "Get an assistant to wire up state — local state, forms, a simple store — correctly across components instead of duplicating it per screen.",
+      "hours": 12,
+      "soft_prereqs": ["vibecoding.frontend.component-extraction"],
+      "know_what": [
+        "Local state — data owned by one component (useState/ref) that doesn't need to be shared, the default an AI should reach for first",
+        "Lifted state — moving state up to the nearest common parent so sibling components can share it, instead of duplicating it in each",
+        "Global store — a store (Zustand, Redux, Pinia) for state genuinely needed across distant parts of the tree, not a default reach",
+        "Derived state — a value computed from other state (a filtered list, a total) that should never itself be stored as separate state",
+        "Controlled vs uncontrolled inputs — whether a form field's value lives in component state or the DOM, and the bugs (stale value, lost input) that come from mixing the two",
+        "Stale closure — a bug class where an event handler captures an old value of state because the handler was defined before a state update, common in AI-generated effect code"
+      ],
+      "know_how": [
+        "Ask for the smallest-scope state first (local), and only ask for lifting or a global store when a concrete sharing need appears",
+        "Point out any state that is actually derivable from other state and ask for it to be computed instead of stored",
+        "Test every form's edge cases by hand: empty submit, rapid double-click, browser back button after a partial fill",
+        "Trace one state update through the component tree in the diff to confirm it updates every place that reads it",
+        "Ask explicitly which state is local vs shared before accepting a global store recommendation from the assistant"
+      ],
+      "habits": [
+        "Default to asking for local state; treat every request for global state as something to justify, not assume",
+        "Read state-update code for stale-closure risk whenever an effect or callback references a value from an outer scope",
+        "Manually exercise every branch of a form (valid, invalid, empty) after any AI change to its state logic",
+        "Keep one state 'owner' per value; flag a diff that lets two components independently mutate the same data",
+        "Re-test browser back/forward after any change to form or navigation state"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a multi-step form (3 fields, one derived total, one validation error state), implement it with state that has no duplication, no stale-closure bugs, and correct behavior on browser back/forward.",
+      "common_failure": "Accepting an AI's default of a global store for state that's only ever read by one component — the store then quietly becomes the place every future feature's state gets dumped, because the AI, and then the developer, follow the established pattern.",
+      "sources": ["React docs — Managing State", "Zustand docs", "Kent C. Dodds — Application State Management"]
+    },
+    {
+      "id": "vibecoding.frontend.api-integration-client",
+      "label": "API integration (client)",
+      "tier": 5,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.state-management"],
+      "one_line": "Wire a frontend to a real API client with AI assistance, handling loading and error states, not just the happy path.",
+      "hours": 12,
+      "soft_prereqs": ["vibecoding.backend.rest-endpoint-scaffold"],
+      "know_what": [
+        "Loading state — the UI state shown between request and response, which an AI-generated happy-path fetch will omit unless asked",
+        "Error state — the UI state for a failed request (4xx, 5xx, network failure), distinct from loading and distinct from empty-result",
+        "Race condition on fast navigation — a slow response for a previous request overwriting a newer one's result, a real bug in naive fetch-in-effect code",
+        "Client-side data fetching library — React Query/TanStack Query or SWR, which handles caching, retries, and race conditions that hand-rolled fetch code usually gets wrong",
+        "Optimistic update — updating the UI before the server confirms, with a rollback path if the request fails, a pattern an AI won't add unless told the UX requires it",
+        "CORS — the browser policy that blocks a client from calling an API on a different origin unless the server allows it, a common first integration failure",
+        "Request cancellation — aborting an in-flight request when the component unmounts or the input changes again, missing by default in generated fetch code"
+      ],
+      "know_how": [
+        "Ask explicitly for loading, error, and empty states, not just the success-path rendering",
+        "Test the integration with the network tab throttled and with the backend stopped, not only with a fast local response",
+        "Prefer a data-fetching library over hand-rolled fetch+useEffect once more than one endpoint is involved, and say so in the prompt",
+        "Check that a fast double-navigation doesn't render a stale response over a newer one",
+        "Confirm the client sends and reads the exact error shape the backend's error-handling contract defines"
+      ],
+      "habits": [
+        "Open the network tab on every integration change, not just the console",
+        "Simulate a failed request (kill the server, throttle to offline) before calling an integration done",
+        "Ask whether the assistant used a fetching library's cache correctly when a value doesn't update after a mutation",
+        "Treat 'it works when I click it once' as insufficient; test rapid repeated actions",
+        "Re-check CORS and error handling every time the API base URL changes (local vs deployed)"
+      ],
+      "know_why": null,
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given a REST endpoint, wire the frontend to it with correct loading, error, and empty states, verified by throttling the network and by stopping the backend mid-session.",
+      "common_failure": "Shipping an integration that only handles the success path — the AI's first draft fetches and renders data with no loading spinner and no error boundary, and it looks done because the demo, run against a fast local backend, never hits the failure cases.",
+      "sources": ["TanStack Query docs", "MDN — Using Fetch", "web.dev — CORS errors"]
+    },
+    {
+      "id": "vibecoding.deployment.full-stack-deploy",
+      "label": "Full-stack deploy",
+      "tier": 6,
+      "cluster": "deployment",
+      "prereqs": ["vibecoding.frontend.api-integration-client", "vibecoding.backend.error-handling-contract", "vibecoding.deployment.env-config"],
+      "one_line": "Deploy a full-stack app — frontend, backend, database — with every piece correctly wired to the others in production.",
+      "hours": 16,
+      "soft_prereqs": ["vibecoding.backend.auth-flow", "vibecoding.deployment.ci-pipeline"],
+      "know_what": [
+        "Deploy target split — frontend on a static/edge host (Vercel, Netlify), backend on a server/container host (Railway, Fly.io, Render), or both together on one platform",
+        "Build-time vs runtime environment variables — a frontend value baked in at build (exposed to the client) versus a backend value read at runtime (kept server-side)",
+        "Database connection pooling — the limit on concurrent connections a serverless backend can exhaust quickly without a pooler (e.g. PgBouncer, a managed pool)",
+        "Preview deployments — a unique URL per branch/PR that exercises the real deploy pipeline before merging, catching integration breaks CI alone won't",
+        "CORS/allowed-origins config — the production frontend's real domain must be explicitly allowed on the backend, distinct from the permissive localhost setup used in development",
+        "Cold start — the latency spike on a serverless backend's first request after idling, which a frontend's loading state must tolerate",
+        "Zero-downtime deploy — a release strategy (rolling, blue-green) that avoids serving a half-updated app to a user mid-deploy"
+      ],
+      "know_how": [
+        "Deploy the backend and confirm it responds correctly with curl before pointing the frontend at it",
+        "Set every environment variable in the hosting platform's dashboard or CLI, never commit a working .env to the repo",
+        "Run the full user flow (load, log in, submit data, reload) against the deployed URLs, not just against localhost",
+        "Confirm the database migration ran in the deployed environment, not just locally, before considering the deploy complete",
+        "Check the browser console and network tab on the live URL for CORS or mixed-content errors",
+        "Roll the deploy back immediately if the smoke test fails, rather than debugging live in production"
+      ],
+      "habits": [
+        "Never treat 'it built successfully' as 'it deployed correctly' — build success and runtime correctness are different claims",
+        "Smoke-test the deployed app end to end before telling anyone it's live",
+        "Keep a written list of every environment variable each service needs, checked before each deploy",
+        "Watch the first few minutes of logs after a deploy instead of walking away once the build finishes",
+        "Re-verify CORS and allowed-origins every time a new frontend domain (staging, preview) is added"
+      ],
+      "know_why": null,
+      "school_weights": { "agentic-autonomy": "low", "manual-gate": "high" },
+      "checkpoint": "Deploy a frontend and backend with a shared database to production hosts, with a live end-to-end user flow (load, authenticate, create a record, see it persist on reload) working with no console errors.",
+      "common_failure": "Deploying frontend and backend separately, confirming each 'works' in isolation (the frontend renders, the backend responds to curl), and skipping the one test that would have caught it — the two talking to each other with the production URLs and CORS config, not the ones used in local development.",
+      "sources": ["The Twelve-Factor App", "Vercel deployment docs", "Railway docs"]
+    },
+    {
+      "id": "vibecoding.architecture.full-stack-integration-review",
+      "label": "Full-stack integration review",
+      "tier": 7,
+      "cluster": "architecture",
+      "prereqs": ["vibecoding.deployment.full-stack-deploy", "vibecoding.architecture.scaling-decision"],
+      "one_line": "Review a full-stack app end to end — frontend, backend, data, deploy — as one coherent system before calling it production-ready.",
+      "hours": 14,
+      "soft_prereqs": ["vibecoding.verification.review-checklist", "vibecoding.deployment.basic-monitoring"],
+      "know_what": [
+        "System-level review — checking the app as one thing a user experiences, not as a checklist of components that each individually passed review",
+        "Trust boundary — every point where client input reaches the backend or database, which must be validated and authorized regardless of what the frontend enforces",
+        "End-to-end test — a test that drives the real UI against the real backend and database (Playwright, Cypress), the only check that catches an integration gap unit tests miss",
+        "Single point of failure — a dependency (one database, one external API) with no fallback, whose outage takes down the whole app",
+        "Data lifecycle review — confirming create, read, update, and delete all have working, authorized paths, not just the create flow that got demoed",
+        "Definition of production-ready — a named, specific bar (auth works, errors are handled, secrets aren't exposed, rollback exists) rather than a feeling that the app 'seems solid'"
+      ],
+      "know_how": [
+        "Walk every trust boundary in the app and confirm the backend, not just the frontend, enforces validation and authorization at each one",
+        "Run an end-to-end test suite against a staging environment that mirrors production, not just against localhost",
+        "Check that every CRUD path a user can reach has been exercised, not only the one shown in the last demo",
+        "Review the deployed app's logs and error tracker for anything that fired during the review session",
+        "Confirm a rollback path exists and has actually been exercised once, not just documented",
+        "Name the specific bar for 'production-ready' before the review starts, so the review has something concrete to check against"
+      ],
+      "habits": [
+        "Review the system as a user would encounter it — click through the real flows on the real deployed URL",
+        "Treat a passing component-level checklist as necessary but not sufficient for the system-level review",
+        "Check auth and authorization at every boundary personally, rather than trusting that each endpoint 'probably' checked it",
+        "Keep the review's findings as a concrete list (fixed / accepted risk / blocking) rather than a verbal 'looks good'",
+        "Re-run the review after any post-review fix, instead of trusting the fix in isolation"
+      ],
+      "know_why": {
+        "claim": "The final review should be run by a human clicking through the real app, not delegated to an agent's own test summary.",
+        "because": "An agent's self-report of 'all tests pass' reflects the tests it was told to write, which share the same blind spots as the implementation; a human walking the real flows catches the gap between what was specified and what a user actually needs.",
+        "disputed_by": "The agentic-autonomy school argues a sufficiently broad automated suite (unit, integration, and end-to-end) plus monitoring after deploy is a better use of time than a manual click-through, and that manual review doesn't scale past the first few releases.",
+        "source": "Practitioner debate on AI-assisted release practices (Simon Willison; Gergely Orosz's engineering newsletter on shipping AI-written code)"
+      },
+      "school_weights": { "manual-gate": "high", "agentic-autonomy": "low" },
+      "checkpoint": "Given a deployed full-stack app, produce a review that walks every CRUD path and trust boundary, confirms monitoring and rollback exist, and ends in an explicit ship/no-ship decision with named blockers if any.",
+      "common_failure": "Declaring the app production-ready because every individual PR passed its own review — the failure mode lives in the gaps between components (an endpoint that's secure alone but exposed once combined with a frontend route that skips a permission check), which no single component-level review would catch.",
+      "sources": ["OWASP Top 10", "Playwright docs", "Gergely Orosz — The Pragmatic Engineer newsletter"]
+    }
+  ]
+}

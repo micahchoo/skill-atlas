@@ -1,0 +1,247 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-003",
+  "ids": [
+    "instructional-design.objectives.blooms-taxonomy",
+    "instructional-design.objectives.prerequisite-mapping",
+    "instructional-design.objectives.backward-design-map",
+    "instructional-design.objectives.objective-review-and-critique",
+    "instructional-design.objectives.curriculum-mapping",
+    "instructional-design.objectives.competency-framework-alignment"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.objectives.blooms-taxonomy",
+      "label": "Bloom's Taxonomy Classification",
+      "tier": 1,
+      "cluster": "objectives",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Name the cognitive level a goal actually requires, so 'understand' stops being where every objective quietly lands.",
+      "hours": 6,
+      "know_what": [
+        "Revised Bloom's Taxonomy — six cognitive process categories (remember, understand, apply, analyze, evaluate, create) crossed with four knowledge types (factual, conceptual, procedural, metacognitive)",
+        "Cognitive process vs. knowledge dimension — the two-dimensional structure that replaced the original one-dimensional 1956 taxonomy",
+        "Verb-to-level mapping — the standard verb lists (list, explain, apply, differentiate, justify, design) used to signal which level an objective targets",
+        "Level creep — the tendency for objectives to cluster at 'understand' or 'apply' because they're easy to write, even when the real target is higher",
+        "Affective and psychomotor domains — Krathwohl's affective taxonomy and Simpson's psychomotor taxonomy, used when the goal isn't purely cognitive",
+        "Taxonomy as a design tool, not a grading rubric — its main use is choosing the right verb and activity type, not scoring after the fact"
+      ],
+      "know_how": [
+        "Classify a stated goal by its actual cognitive process level, not by the verb someone happened to use to describe it",
+        "Select an objective verb from the level-appropriate verb list instead of defaulting to 'understand'",
+        "Cross a cognitive process level with a knowledge type to fully specify what the objective demands",
+        "Check a course's full objective list for level creep — an unusual cluster at 'remember' or 'apply' when the job task demands 'evaluate' or 'create'",
+        "Use the affective or psychomotor taxonomy instead of forcing a values or motor-skill goal into the cognitive taxonomy",
+        "Explain a taxonomy classification choice to an SME in plain terms so they can sanity-check it against the real job"
+      ],
+      "habits": [
+        "Ask 'what would doing this at the create/evaluate level actually look like' before settling for 'apply'",
+        "Notice when every objective in a course landed on the same two levels",
+        "Treat the taxonomy as a checking tool applied after a draft, not a fill-in-the-blank template",
+        "Match the taxonomy's knowledge type to the objective, not just the process level",
+        "Double-check a level classification against what the real job task demands, not just the wording of the goal statement"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given five stated learning goals, classify each by cognitive process level and knowledge type using the revised Bloom's Taxonomy, and rewrite any goal misclassified by its own verb.",
+      "common_failure": "Treating the taxonomy as a vocabulary list to make objectives sound more official, picking a high-level verb like 'analyze' for what's actually a remember-level task.",
+      "sources": ["Anderson & Krathwohl (eds.), A Taxonomy for Learning, Teaching, and Assessing", "Bloom et al. (1956), original taxonomy", "Simpson, psychomotor domain taxonomy"]
+    },
+    {
+      "id": "instructional-design.objectives.prerequisite-mapping",
+      "label": "Prerequisite Mapping",
+      "tier": 3,
+      "cluster": "objectives",
+      "prereqs": ["instructional-design.objectives.write-learning-objectives", "instructional-design.analysis.task-analysis"],
+      "soft_prereqs": [],
+      "one_line": "Order objectives by what a learner genuinely needs first, not by the order topics appear in the source material.",
+      "hours": 10,
+      "know_what": [
+        "Prerequisite relationship — objective B requires objective A's skill or knowledge as an input, distinct from merely being related in topic",
+        "Learning hierarchy (Gagné) — a structure built by asking what the learner would need to already know to learn this, recursively from the terminal objective down",
+        "Topic order vs. dependency order — the difference between how a textbook groups material and the actual order a learner needs to acquire it",
+        "Entry behavior — what a learner is assumed to already know coming into a course, which sets the bottom of the prerequisite map",
+        "Gap in the chain — a prerequisite the target audience doesn't actually have, discovered by comparing the map to the audience profile",
+        "Redundant prerequisite — a listed dependency the audience already reliably has, which can be dropped from the course without risk"
+      ],
+      "know_how": [
+        "Start from the terminal objective and recursively ask what a learner would need to already be able to do to learn this, until reaching entry behavior",
+        "Build a learning hierarchy diagram showing objectives as nodes and prerequisite relationships as directed links",
+        "Compare the bottom of the hierarchy against the audience profile to find gaps that need to be taught, not assumed",
+        "Cut a prerequisite from the course scope when the audience profile confirms they reliably already have it",
+        "Resequence a course's topic order when the dependency map contradicts the source material's chapter order",
+        "Validate a contested prerequisite link with an SME instead of assuming the intuitive order is the dependency order"
+      ],
+      "habits": [
+        "Ask what a learner would need to already know to do that, recursively, not just once",
+        "Check the source material's chapter order against the dependency map instead of trusting it by default",
+        "Flag an objective with no clear prerequisite as either genuinely foundational or under-analyzed",
+        "Re-verify entry behavior against real audience data instead of an assumed baseline",
+        "Redraw the hierarchy when a pilot reveals the assumed entry behavior was wrong"
+      ],
+      "know_why": null,
+      "school_weights": { "behaviorist-mastery": "high" },
+      "checkpoint": "Build a learning hierarchy for a terminal objective with at least three prerequisite levels, and identify one prerequisite gap where the target audience profile doesn't match the assumed entry behavior.",
+      "common_failure": "Sequencing a course by the order topics appear in a reference document or textbook instead of by actual dependency, so learners hit a concept before they have what they need to learn it.",
+      "sources": ["Robert Gagné, The Conditions of Learning", "David Merrill, Component Display Theory", "Van Merriënboer, Ten Steps to Complex Learning"]
+    },
+    {
+      "id": "instructional-design.objectives.backward-design-map",
+      "label": "Backward Design Mapping",
+      "tier": 3,
+      "cluster": "objectives",
+      "prereqs": ["instructional-design.objectives.write-learning-objectives"],
+      "soft_prereqs": [],
+      "one_line": "Decide what counts as evidence of mastery before designing a single activity, so the activities can't drift from the goal.",
+      "hours": 14,
+      "know_what": [
+        "Understanding by Design (UbD) — Wiggins & McTighe's three-stage backward design: identify desired results, determine acceptable evidence, plan learning experiences",
+        "Six facets of understanding — explain, interpret, apply, have perspective, empathize, self-assess; UbD's expanded target beyond simple recall",
+        "Essential question — an open, recurring question that frames a unit and can't be answered in one sentence, used to anchor genuine understanding goals",
+        "Enduring understanding — the big idea meant to outlast the course itself, distinct from a fact that will be forgotten",
+        "Evidence-first sequencing — designing the assessment (stage 2) before the learning activities (stage 3), the discipline that gives backward design its name",
+        "Twin sins of design — Wiggins & McTighe's term for activity-focused design (fun but aimless) and coverage-focused design (comprehensive but shallow)"
+      ],
+      "know_how": [
+        "Write the desired results (objectives, essential questions, enduring understandings) for a unit before touching any activity ideas",
+        "Draft the assessment evidence for stage 2 immediately after stage 1, resisting the pull to jump to activity design",
+        "Check a unit plan against the twin sins: is it a fun activity with no clear evidence trail, or comprehensive coverage with no depth",
+        "Write at least one essential question per unit that a learner couldn't fully answer on day one",
+        "Sequence stage 3 learning experiences only after stages 1 and 2 are locked, so activities serve the evidence, not the reverse",
+        "Use the six facets of understanding to check whether an objective is asking for real understanding or just recall dressed up"
+      ],
+      "habits": [
+        "Resist the pull to brainstorm activities first — that's the twin sin backward design exists to prevent",
+        "Ask what would count as evidence of this before designing anything a learner will do",
+        "Check whether a unit's essential question actually has more than one defensible answer",
+        "Notice when a plan is really a coverage list wearing a unit-plan's structure",
+        "Keep the three stages visibly separate in the document so the sequence can't quietly collapse"
+      ],
+      "know_why": null,
+      "school_weights": { "backward-design-assessment-first": "high", "constructivist-discovery": "low" },
+      "checkpoint": "Produce a three-stage backward design document for one unit: desired results with an essential question, assessment evidence, and a learning-experience outline, completed in that order.",
+      "common_failure": "Designing engaging activities first and writing objectives and assessments afterward to match them, which produces a course that feels busy but can't demonstrate what it actually taught.",
+      "sources": ["Grant Wiggins & Jay McTighe, Understanding by Design", "ASCD backward design resources", "Wiggins & McTighe, 'twin sins' of design essays"]
+    },
+    {
+      "id": "instructional-design.objectives.objective-review-and-critique",
+      "label": "Objective Review & Critique",
+      "tier": 3,
+      "cluster": "objectives",
+      "prereqs": ["instructional-design.objectives.write-learning-objectives"],
+      "soft_prereqs": [],
+      "one_line": "Catch an objective that's actually an activity, a topic, or an unmeasurable feeling wearing an objective's syntax.",
+      "hours": 8,
+      "know_what": [
+        "Objective vs. activity — an objective states what the learner can do; an activity describes what they'll be doing during the lesson, and the two get conflated constantly",
+        "Objective vs. topic — 'the four phases of onboarding' is a topic; 'sequence the four phases of onboarding for a new hire' is an objective",
+        "Compound objective — an objective silently containing two or more behaviors joined by 'and', which should usually be split",
+        "Unmeasurable modifier — words like 'effectively', 'thoroughly', or 'appropriately' that sound like a criterion but specify nothing checkable",
+        "SMART-for-objectives checklist — specific, measurable, achievable, relevant, time-bound, adapted as a review checklist rather than a writing template",
+        "Reviewer's rewrite pass — the practice of rewriting a flagged objective on the spot to demonstrate the fix, not just naming the problem"
+      ],
+      "know_how": [
+        "Test a draft objective by asking whether it states a topic, an activity, or a behavior, and reclassify accordingly",
+        "Split a compound objective joined by 'and' into two separate objectives with their own criteria",
+        "Flag any unmeasurable modifier and replace it with a stated, checkable criterion",
+        "Run a full objective list through a SMART checklist pass before it goes to an SME for content review",
+        "Rewrite a flagged objective immediately during review instead of only noting that it's weak",
+        "Check that an objective's verb matches its intended Bloom's level, not just that it has a verb"
+      ],
+      "habits": [
+        "Read an objective and ask whether it's a topic, an activity, or a behavior before anything else",
+        "Circle every 'and' in an objective list as a likely compound-objective flag",
+        "Distrust any objective that reads well but that you couldn't write a test item for",
+        "Rewrite on the spot instead of just marking an objective as weak",
+        "Check a reviewed objective's verb against its intended Bloom's level before signing off"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a list of ten draft objectives with mixed problems — topics, activities, compound objectives, unmeasurable modifiers — correctly flag each problem type and rewrite at least six into fully specified behavioral objectives.",
+      "common_failure": "Approving an objective because it uses the right sentence structure and an approved verb, without checking whether it's actually specific and measurable underneath the format.",
+      "sources": ["Robert Mager, Preparing Instructional Objectives", "Norman Gronlund, Writing Instructional Objectives", "ATD objective-writing review checklists"]
+    },
+    {
+      "id": "instructional-design.objectives.curriculum-mapping",
+      "label": "Curriculum Mapping",
+      "tier": 4,
+      "cluster": "objectives",
+      "prereqs": ["instructional-design.objectives.prerequisite-mapping", "instructional-design.objectives.backward-design-map"],
+      "soft_prereqs": [],
+      "one_line": "See the whole multi-module curriculum at once well enough to find the gaps and the redundant repeats.",
+      "hours": 16,
+      "know_what": [
+        "Curriculum map — a document showing every module's objectives, assessments, and estimated duration across a full multi-module program",
+        "Vertical alignment — objectives across modules building on each other in dependency order, checked at the whole-curriculum level rather than module by module",
+        "Horizontal redundancy — the same objective or content taught in two different modules without either module referencing the other, wasting learner time",
+        "Coverage gap — a competency the program is supposed to build toward that no module's objectives actually address",
+        "Curriculum-level pacing — cumulative hours across modules checked against the time the audience realistically has, not just each module's individual budget",
+        "Map review cadence — a scheduled point, such as annually or at each major content change, to re-check the map instead of letting it silently drift out of date"
+      ],
+      "know_how": [
+        "Build a spreadsheet or diagram listing every module's objectives, mapped against the overall program's terminal competencies",
+        "Trace vertical alignment by checking that every module's entry behavior is covered by an earlier module's objectives",
+        "Scan for horizontal redundancy by comparing objective wording across modules, not just module titles",
+        "Identify coverage gaps by checking the program's terminal competencies against the full objective list and flagging anything missing",
+        "Total cumulative hours across the mapped curriculum and check it against the audience's actual available time",
+        "Schedule a recurring review of the curriculum map so it stays a living document instead of a one-time artifact"
+      ],
+      "habits": [
+        "Look at the whole program map before approving a single new module's objectives",
+        "Ask whether a new module actually needs the prerequisites it assumes, or if it's re-teaching something covered earlier",
+        "Total the hours across the whole map periodically, not just per module",
+        "Treat a stale curriculum map as a problem to fix immediately, not a documentation nicety",
+        "Compare objective wording, not just titles, when checking for redundancy across modules"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given the objective lists for four related modules, produce a curriculum map that identifies at least one vertical alignment gap and one horizontal redundancy across the modules.",
+      "common_failure": "Designing each module in isolation to its own brief, so the finished program has modules that silently duplicate content and others that assume a prerequisite no earlier module actually taught.",
+      "sources": ["Heidi Hayes Jacobs, Curriculum Mapping", "ATD curriculum design guidance", "L. Dee Fink, Creating Significant Learning Experiences"]
+    },
+    {
+      "id": "instructional-design.objectives.competency-framework-alignment",
+      "label": "Competency Framework Alignment",
+      "tier": 5,
+      "cluster": "objectives",
+      "prereqs": ["instructional-design.objectives.curriculum-mapping"],
+      "soft_prereqs": [],
+      "one_line": "Map a course's objectives onto an external competency or certification framework without warping either one to fit.",
+      "hours": 14,
+      "know_what": [
+        "Competency framework — an externally defined set of competencies, from a certification body, industry standard, or internal job architecture, a course is meant to build toward",
+        "Crosswalk — a document mapping a course's objectives to a framework's competencies, showing coverage and gaps in both directions",
+        "Framework granularity mismatch — a common problem where a framework's competencies are broader or narrower than a course's objectives, requiring judgment to align rather than a clean one-to-one match",
+        "Certification constraint — when a framework is tied to a certification exam, the exam blueprint's weighting becomes a hard constraint on the course's own emphasis, not just a reference",
+        "Framework versioning — frameworks get revised on their own schedule, and a course aligned to an old version can silently drift out of compliance",
+        "Over-alignment risk — designing a course purely to a framework's checklist at the expense of the actual diagnosed performance gap"
+      ],
+      "know_how": [
+        "Build a two-directional crosswalk: every course objective mapped to a framework competency, and every framework competency mapped to a course objective or flagged as a gap",
+        "Resolve a granularity mismatch by splitting or merging objectives to align with the framework's actual grain, documenting the judgment call",
+        "Weight course emphasis to match a certification exam's published blueprint when the course exists to prepare learners for that exam",
+        "Check the framework's version and revision date against the course's alignment documentation at each course review cycle",
+        "Flag when framework alignment is pulling objectives away from the diagnosed performance gap, and resolve the conflict explicitly rather than silently favoring the framework",
+        "Present the crosswalk to the framework's certifying body or internal owner for validation before finalizing"
+      ],
+      "habits": [
+        "Check the framework's version date before trusting an existing alignment document",
+        "Ask whether an objective exists because of the diagnosed gap or because the framework demands it, when the two pull in different directions",
+        "Treat a framework crosswalk as living documentation that needs a re-check on a schedule, not a one-time deliverable",
+        "Push back when strict framework alignment would produce an objective the actual audience gap doesn't need",
+        "Validate a contested crosswalk mapping with the framework's own owner instead of guessing at intent"
+      ],
+      "know_why": {
+        "claim": "A course tied to an external competency or certification framework should weight its content to match the framework's published blueprint.",
+        "because": "learners and sponsors are relying on the course to prepare for a specific external standard, and misweighting it undermines that promise",
+        "disputed_by": "performance-consulting practitioners who argue framework alignment can pull a course toward testing the framework's checklist instead of closing the organization's actual diagnosed performance gap",
+        "source": "certification-preparation ID practice vs. Robert Brinkerhoff and performance-consulting critiques of framework-driven design"
+      },
+      "school_weights": { "behaviorist-mastery": "high" },
+      "checkpoint": "Produce a two-directional crosswalk between a course's objectives and an external competency framework's competencies, with every gap in either direction named and a resolution proposed.",
+      "common_failure": "Aligning a course to a framework by matching titles and keywords instead of actual competency content, producing a crosswalk that looks complete but doesn't hold up under a certifying body's own review.",
+      "sources": ["ISO/IEC competency framework standards practice", "ATD Talent Development Capability Model", "Robert Brinkerhoff, performance-consulting critiques of framework-driven training"]
+    }
+  ]
+}

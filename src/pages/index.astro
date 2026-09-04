@@ -1,14 +1,22 @@
 ---
-// / — atlas index: the shelf of domains. Each entry links to /<domain>.
+// / — the atlas shelf. One plate per domain, each linking to /<domain>.
+// Facts on a plate are computed at build time from the merged domain data;
+// the traveler's own "opened" count is filled client-side from localStorage,
+// the same visitor-side log the domain page keeps.
 import { loadAllDomains } from '../lib/data';
-import { buildGraph } from '../lib/graph';
 import '../styles/global.css';
+
+const humanize = (slug: string): string => slug.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 
 const domains = loadAllDomains().map((d) => ({
   slug: d.domain,
+  name: humanize(d.domain),
   level: d.level,
-  nodes: buildGraph(d).nodes.length,
-  bodies: Object.keys(d.bodies).length,
+  clusters: d.clusters.map((c) => ({ name: c.name, icon: c.icon ?? '✦' })),
+  skills: d.nodes.length,
+  written: d.nodes.filter((n) => n.hasBody).length,
+  hours: d.nodes.reduce((a, n) => a + (n.hours || 0), 0),
+  stops: d.spine.length,
 }));
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 ---
@@ -18,23 +26,51 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Skill trees for real domains. Pick one and walk its main quest." />
     <link rel="icon" href="data:," />
     <title>Skill Atlas</title>
   </head>
   <body>
     <main class="atlas">
-      <h1>Skill Atlas</h1>
-      <p class="sub">Skill trees for real domains. Choose one and walk its main quest.</p>
-      <hr class="rule" />
-      <div class="entries">
-        {domains.map((d) => (
-          <a class="entry" href={`${base}/${d.slug}`}>
-            <span class="ename">{d.slug}</span>
-            <span class="elevel">{d.level}</span>
-            <span class="estat"><b>{d.nodes}</b> skills · <b>{d.bodies}</b> tomes written</span>
+      <div class="atlas-head enter">
+        <h1>Skill Atlas</h1>
+        <p class="lede">Skill trees for real domains. Each one has a main quest: the shortest route from first tome to working competence.</p>
+      </div>
+      <div class="shelf">
+        {domains.map((d, i) => (
+          <a class="plate panel enter" href={`${base}/${d.slug}`} data-domain={d.slug} data-skills={d.skills} style={`--i:${i + 1}`}>
+            <span class="name display">{d.name}</span>
+            <span class="who">For a {d.level}.</span>
+            <span class="seals" aria-hidden="true">
+              {d.clusters.map((c) => <span class="emblem sm" title={c.name}>{c.icon}</span>)}
+            </span>
+            <span class="facts">
+              <span class="fact num"><b>{d.clusters.length}</b>disciplines</span>
+              <span class="fact num"><b>{d.skills}</b>skills</span>
+              <span class="fact num"><b>{d.stops}</b>quest stops</span>
+              <span class="fact num"><b>{d.hours}</b>hours</span>
+              {d.written < d.skills && <span class="fact num"><b>{d.written}</b>tomes written so far</span>}
+              <span class="fact num opened" hidden><b>0</b>opened by you</span>
+            </span>
           </a>
         ))}
       </div>
     </main>
+    <script>
+      // The traveler's own progress, per domain, from the same visitor-side log the domain page writes.
+      for (const plate of document.querySelectorAll<HTMLElement>('.plate')) {
+        try {
+          const raw = localStorage.getItem(`atlas.read.${plate.dataset.domain}`);
+          const n = raw ? (JSON.parse(raw) as unknown[]).length : 0;
+          if (!n) continue;
+          const opened = plate.querySelector<HTMLElement>('.opened');
+          if (!opened) continue;
+          opened.querySelector('b')!.textContent = String(n);
+          opened.hidden = false;
+        } catch {
+          /* private browsing: nothing to show */
+        }
+      }
+    </script>
   </body>
 </html>

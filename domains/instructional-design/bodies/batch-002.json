@@ -1,0 +1,252 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-002",
+  "ids": [
+    "instructional-design.analysis.stakeholder-interview",
+    "instructional-design.analysis.audience-profile",
+    "instructional-design.analysis.task-analysis",
+    "instructional-design.analysis.gap-and-root-cause",
+    "instructional-design.analysis.context-and-constraints",
+    "instructional-design.analysis.sme-collaboration-protocol"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.analysis.stakeholder-interview",
+      "label": "Stakeholder & SME Interviewing",
+      "tier": 1,
+      "cluster": "analysis",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Pull the real task knowledge out of a sponsor or SME's head instead of the sanitized version they lead with.",
+      "hours": 8,
+      "know_what": [
+        "Tacit knowledge — expert knowledge that's automatic enough the expert can't easily narrate it without a structured prompt",
+        "Critical incident technique — asking for a specific recent example ('walk me through the last time this went wrong') instead of a general description",
+        "Leading vs. open question — a question that supplies its own answer versus one that lets the interviewee surface what actually matters",
+        "Sponsor vs. SME vs. end-user — three different interview subjects with different blind spots and different stakes in the answer",
+        "Interview guide — a prepared but flexible question set that ensures coverage without turning the interview into a script read aloud",
+        "Saying-doing gap — the well-documented gap between how someone describes their process and what they actually do"
+      ],
+      "know_how": [
+        "Open with a critical-incident question ('tell me about the last time this happened') instead of an abstract one ('what's your process')",
+        "Follow a vague answer with 'what exactly did you do next' until the tacit steps surface",
+        "Interview the sponsor, at least one SME, and at least one end-user separately, since their answers will diverge",
+        "Observe the task being performed when possible, to catch the gap between the interview account and the actual behavior",
+        "Keep an interview guide as a checklist, not a script, and let follow-ups take priority over finishing the list",
+        "Write up notes within an hour of the interview, before the specific phrasing is lost"
+      ],
+      "habits": [
+        "Ask 'what exactly do you mean by that' whenever a term sounds like jargon everyone's supposed to already understand",
+        "Distrust any account that's suspiciously procedural and clean — real expertise has more exceptions than that",
+        "Let silence sit instead of filling it with a leading suggestion",
+        "Take the sponsor's opening framing as one data point, not the finding",
+        "Look for what an SME does that they didn't think to mention"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Conduct and write up an interview with a subject-matter expert using critical-incident technique, producing notes that specify at least three concrete steps or decisions the expert didn't initially think to mention.",
+      "common_failure": "Asking 'what's your process' and transcribing the tidy, after-the-fact narrative the expert gives, which omits the tacit judgment calls that actually make them an expert.",
+      "sources": ["John Flanagan, The Critical Incident Technique", "Cathy Moore, Action Mapping interview approach", "Beth Kanter & practitioner guidance on SME interviewing"]
+    },
+    {
+      "id": "instructional-design.analysis.audience-profile",
+      "label": "Learner Audience Profiling",
+      "tier": 1,
+      "cluster": "analysis",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Describe who is actually going to take the course — prior knowledge, motivation, access — well enough to design for them instead of yourself.",
+      "hours": 8,
+      "know_what": [
+        "Prior knowledge — what the audience already knows, the single biggest predictor of how much guidance a design needs",
+        "Motivation type — mandatory or compliance audiences versus self-selected audiences, which need different framing and pacing",
+        "Access constraints — device, bandwidth, language, and disability considerations that rule out design options before you propose them",
+        "Persona vs. profile — a persona is illustrative fiction; a profile is data (headcount, role mix, prior scores, survey results); don't mistake one for the other",
+        "Learner variance within a group — 'the audience' that's actually three different sub-audiences with different needs",
+        "Job context — where and when the learner will actually apply the skill (at a desk, on a floor, mid-call), which shapes format choices"
+      ],
+      "know_how": [
+        "Pull existing data (HR records, prior assessment scores, support tickets) before inventing a persona from assumption",
+        "Segment an apparently single audience into sub-groups when their prior knowledge or motivation clearly diverges",
+        "Check device and bandwidth constraints directly with IT or the field, not by assuming everyone has a laptop and broadband",
+        "Note where and when the learner will use the skill, and flag any design idea that assumes a context they don't have (quiet room, spare time)",
+        "State assumptions about the audience explicitly and mark which are data-backed and which are guesses",
+        "Revisit the profile when pilot data contradicts it, instead of treating the original profile as fixed"
+      ],
+      "habits": [
+        "Ask 'says who' about every audience claim that isn't backed by data",
+        "Picture a specific real person from the audience, not an averaged composite, when making a design call",
+        "Check for sub-groups before assuming the whole audience is one profile",
+        "Ask what the learner will be holding, wearing, or doing when they need this skill",
+        "Treat a persona as a summary of data already gathered, never as a substitute for gathering it"
+      ],
+      "know_why": {
+        "claim": "A learner persona is a useful design tool.",
+        "because": "a concrete, named persona makes design decisions faster and more consistent across a team than an abstract 'the learner'",
+        "disputed_by": "data-first practitioners who argue personas invite designers to design for a comfortable fiction instead of the messier real data, and prefer working directly from segmented profile data",
+        "source": "UX persona methodology (Alan Cooper) adapted into ID practice, vs. evidence-based L&D critiques (e.g. Will Thalheimer)"
+      },
+      "school_weights": { "andragogy-self-directed": "high" },
+      "checkpoint": "Given access to existing learner data, produce an audience profile with at least two sub-segments, each with prior knowledge, motivation, and access constraints stated separately, with every claim marked as data-backed or assumed.",
+      "common_failure": "Writing a single generic audience profile ('busy adult professionals') that's vague enough to justify any design choice, instead of specific enough to rule any out.",
+      "sources": ["Allison Rossett, front-end analysis", "Will Thalheimer on learner personas and evidence", "Alan Cooper, About Face"]
+    },
+    {
+      "id": "instructional-design.analysis.task-analysis",
+      "label": "Task Analysis",
+      "tier": 2,
+      "cluster": "analysis",
+      "prereqs": ["instructional-design.analysis.stakeholder-interview"],
+      "soft_prereqs": [],
+      "one_line": "Break a job task into the exact steps and decision points an expert makes without noticing.",
+      "hours": 12,
+      "know_what": [
+        "Hierarchical task analysis (HTA) — breaking a task into a goal, sub-goals, and operations, shown as a tree",
+        "Cognitive task analysis (CTA) — extracting the decision points and judgment calls behind a task, not just the observable steps",
+        "Procedural vs. principled task — a task with one correct sequence versus one that depends on situational judgment",
+        "Decision point — a step in a task where an expert branches based on a condition a novice might not even notice exists",
+        "Task inventory — the full list of tasks a role performs, used to decide which ones actually need training versus a job aid",
+        "Step granularity — the level of detail a task breakdown needs, calibrated to how much a novice can already do without help"
+      ],
+      "know_how": [
+        "Build a hierarchical task analysis tree for a task, breaking it into sub-goals and then into discrete operations",
+        "Interview or observe an expert specifically to extract decision points, asking 'how did you know to do that instead of the other thing'",
+        "Classify each task in a task inventory as procedural (fixed sequence, good for a checklist or job aid) or principled (situational judgment, good for training)",
+        "Calibrate step granularity to the audience profile — more granular for true novices, coarser for an audience with related experience",
+        "Cross-check a task breakdown with a second expert to catch idiosyncratic steps that aren't actually standard",
+        "Flag any procedural task that's better solved with a job aid than with training time"
+      ],
+      "habits": [
+        "Ask 'how did you know' at every branch point instead of accepting a step as self-evident",
+        "Watch for the step an expert skips describing because it's become automatic for them",
+        "Separate 'this is how I do it' from 'this is the only correct way to do it'",
+        "Check whether a task belongs in training at all or would be cheaper as a job aid",
+        "Cross-check a surprising step with a second expert before trusting it's standard practice"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce a hierarchical task analysis for a moderately complex job task, including at least two identified decision points that a novice wouldn't notice without the analysis.",
+      "common_failure": "Writing a task analysis that's really just a numbered list of what the expert does, missing the decision points and conditions that make the task actually hard to learn.",
+      "sources": ["Jonassen, Tessmer & Hannum, Task Analysis Methods for Instructional Design", "Crandall, Klein & Hoffman, Working Minds (cognitive task analysis)", "Annett & Duncan, hierarchical task analysis"]
+    },
+    {
+      "id": "instructional-design.analysis.gap-and-root-cause",
+      "label": "Gap & Root-Cause Diagnosis",
+      "tier": 2,
+      "cluster": "analysis",
+      "prereqs": ["instructional-design.analysis.training-needs-analysis"],
+      "soft_prereqs": [],
+      "one_line": "Sort a performance gap into its real cause — skill, knowledge, environment, or incentive — instead of defaulting to 'they need training.'",
+      "hours": 10,
+      "know_what": [
+        "Behavior Engineering Model (Gilbert) — six factors (information, resources, incentives, skill, capacity, motives) sorted into environment vs. person",
+        "Skill/knowledge deficit — a gap caused by the person genuinely not knowing or being unable to do the thing",
+        "Environmental deficit — a gap caused by missing information, tools, or incentives in the environment, not the person",
+        "Motivation vs. capacity — whether someone won't do the behavior versus can't do it, which imply opposite fixes",
+        "Root-cause vs. symptom — the difference between the visible problem (missed deadlines) and its actual driver (an unclear handoff process)",
+        "Fishbone / 5 Whys — lightweight root-cause techniques for tracing a symptom back through contributing causes"
+      ],
+      "know_how": [
+        "Run a Behavior Engineering Model pass on a reported gap, checking all six factors before concluding it's a skill or knowledge issue",
+        "Apply 5 Whys to a stated problem to trace it back past the first, most obvious cause",
+        "Distinguish a 'won't' from a 'can't' by checking whether the person can perform the behavior under direct observation or incentive",
+        "Rule out environmental causes (missing job aid, broken process, absent incentive) before recommending training",
+        "Write the root-cause finding in a form that names the specific factor, not just 'training gap', so the fix matches the cause",
+        "Flag when a gap has multiple root causes and needs a combined intervention, not a single fix"
+      ],
+      "habits": [
+        "Ask 'is this a won't or a can't' before proposing any fix",
+        "Run through all six Gilbert factors even when the answer seems obvious after the first one",
+        "Resist stopping at the first plausible cause; ask why at least twice more",
+        "Notice when 'they need training' is really 'the process is broken' in disguise",
+        "Name the specific Gilbert factor in the finding instead of writing 'training gap' as a catch-all"
+      ],
+      "know_why": null,
+      "school_weights": { "behaviorist-mastery": "high" },
+      "checkpoint": "Given a reported performance gap, apply the Behavior Engineering Model or 5 Whys to identify at least one environmental and one person-side contributing cause, with a fix recommendation matched to each.",
+      "common_failure": "Diagnosing every gap as a skill deficit because that's the diagnosis that justifies building training, when the data actually points to a missing job aid or broken incentive.",
+      "sources": ["Thomas Gilbert, Human Competence (Behavior Engineering Model)", "Robert Mager & Peter Pipe, Analyzing Performance Problems", "Toyota Production System — 5 Whys"]
+    },
+    {
+      "id": "instructional-design.analysis.context-and-constraints",
+      "label": "Delivery Context & Constraints Mapping",
+      "tier": 2,
+      "cluster": "analysis",
+      "prereqs": ["instructional-design.analysis.audience-profile"],
+      "soft_prereqs": [],
+      "one_line": "Map the time, budget, technology, and regulatory limits that will rule out design options before you propose them.",
+      "hours": 8,
+      "know_what": [
+        "Delivery constraint categories — time, budget, technology, regulatory or compliance, and organizational politics",
+        "Synchronous vs. asynchronous constraint — whether the audience can be gathered at one time, which rules out or requires live facilitation",
+        "Technology floor — the actual, verified minimum device and connectivity the audience has, not the IT department's assumed standard",
+        "Regulatory constraint — compliance requirements (accessibility law, industry certification rules) that are non-negotiable design inputs, not late-stage checks",
+        "Budget-to-scope ratio — the relationship between available budget and what level of production fidelity (text-only vs. custom video) is realistic",
+        "Political constraint — stakeholder relationships and organizational sensitivities that limit what content or framing is viable, regardless of instructional merit"
+      ],
+      "know_how": [
+        "Interview IT or field staff directly to verify the technology floor instead of assuming the documented standard is what people actually have",
+        "Convert a budget number into a realistic production fidelity level before promising a delivery format",
+        "Identify regulatory constraints (accessibility, certification) at the start of a project, not as a late compliance review",
+        "Map which stakeholders have veto power over content and note where that limits an otherwise sound design choice",
+        "Document constraints in writing and get sponsor sign-off, so a constraint discovered late doesn't get blamed on the designer",
+        "Distinguish a hard constraint that can't be changed from a soft preference that could be negotiated, before treating both as fixed"
+      ],
+      "habits": [
+        "Verify a stated constraint instead of taking a secondhand version of it at face value",
+        "Ask what happens if a constraint is violated, to test whether it's actually hard",
+        "Build the constraints list before the design proposal, not as a post-hoc excuse for scope cuts",
+        "Watch for a political constraint disguised as a technical or budget one",
+        "Get sponsor sign-off on the constraints list in writing before design starts"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce a written constraints document for a project covering time, budget, technology, and regulatory limits, with each constraint marked as hard or negotiable and a named source for how it was verified.",
+      "common_failure": "Discovering a hard constraint, such as a device limitation or an accessibility requirement, midway through production because it was assumed rather than verified at the start, forcing a costly redesign.",
+      "sources": ["Section 508 / WCAG accessibility requirements", "Cathy Moore, Action Mapping scoping guidance", "ATD project scoping guidance"]
+    },
+    {
+      "id": "instructional-design.analysis.sme-collaboration-protocol",
+      "label": "SME Collaboration Protocol",
+      "tier": 3,
+      "cluster": "analysis",
+      "prereqs": ["instructional-design.analysis.stakeholder-interview", "instructional-design.analysis.task-analysis"],
+      "soft_prereqs": [],
+      "one_line": "Run a review cycle with subject-matter experts that gets accurate sign-off without the scope creeping every round.",
+      "hours": 12,
+      "know_what": [
+        "Review cycle — a defined number of SME review rounds, typically two to three, with a stated purpose for each, instead of open-ended back-and-forth",
+        "Scope boundary — a written statement of what's in and out of an SME's authority (content accuracy) versus the designer's (instructional method)",
+        "Turnaround SLA — an agreed time limit for SME feedback, without which reviews stall a project indefinitely",
+        "Change log — a record of what changed between review rounds and why, so a returning SME isn't re-litigating a settled decision",
+        "SME fatigue — the real, predictable drop in review quality and willingness after too many rounds, which argues for tight scoping over unlimited iteration",
+        "Escalation path — a named person to resolve an SME disagreement or a stalled review, agreed before the project starts"
+      ],
+      "know_how": [
+        "Set the number and purpose of review rounds (for example round 1 for content accuracy, round 2 for final polish) before the first draft goes out",
+        "Write a scope boundary into the kickoff agreement so an SME's late request to change the whole approach is easy to decline",
+        "Set and hold a turnaround SLA, escalating politely when a review stalls past it",
+        "Keep a change log visible to the SME so each round shows what was addressed since the last one",
+        "Batch minor content questions into a single check-in instead of pinging the SME for every small item",
+        "Name an escalation contact at kickoff for when an SME and the designer disagree on a content call"
+      ],
+      "habits": [
+        "Scope the review before the first draft, not after the first round of feedback arrives",
+        "Say no to a late-round request that's actually an earlier-round conversation, and name why",
+        "Track SME response time and flag a stalling reviewer early instead of waiting silently",
+        "Treat an SME's frustration with 'yet another round' as a scoping failure to fix, not a personality problem",
+        "Confirm the escalation contact by name before a disagreement actually happens, not after"
+      ],
+      "know_why": {
+        "claim": "SME review should be capped at a fixed number of structured rounds, not left open-ended.",
+        "because": "unlimited review rounds produce SME fatigue and diminishing returns, while a project with no defined end to review never actually finishes",
+        "disputed_by": "SME-centric, expertise-heavy domains such as medical, legal, or safety-critical content, where practitioners argue accuracy risk justifies as many rounds as it takes, and a capped process trades safety for schedule",
+        "source": "general ID project-management practice vs. regulated-industry (pharma, aviation, clinical) SME sign-off requirements"
+      },
+      "school_weights": {},
+      "checkpoint": "Run a two-round SME review on a real content draft, staying within an agreed turnaround SLA, with a change log documenting what was addressed each round and no scope creep into a design-method debate.",
+      "common_failure": "Letting SME review become open-ended, where every round reopens decisions already made in an earlier round, until the review process consumes more time than the actual production.",
+      "sources": ["ATD SME collaboration guidance", "Cathy Moore, Action Mapping SME scoping", "Regulated-industry SME sign-off practices"]
+    }
+  ]
+}

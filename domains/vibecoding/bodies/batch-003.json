@@ -1,0 +1,279 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-003",
+  "ids": [
+    "vibecoding.verification.diff-reading",
+    "vibecoding.verification.hallucination-spotting",
+    "vibecoding.verification.manual-smoke-test",
+    "vibecoding.verification.unit-test-generation",
+    "vibecoding.verification.type-checking-gate",
+    "vibecoding.verification.regression-check",
+    "vibecoding.verification.review-checklist"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.verification.diff-reading",
+      "label": "Diff reading",
+      "tier": 1,
+      "cluster": "verification",
+      "prereqs": [],
+      "one_line": "Read an AI-generated diff line by line before accepting it, not just skim the changed file list.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Diff — the line-level change between two versions of a file, the unit that should be reviewed before any AI change is accepted",
+        "Hunk — a contiguous block of changed lines within a diff, useful for judging whether a change is as narrow as it claims to be",
+        "Unified vs side-by-side diff view — two ways of reading the same change; side-by-side often surfaces subtle reordering or logic shifts unified view hides",
+        "Semantic vs cosmetic change — a diff that alters behavior versus one that only reformats, and the need to tell which is which before skimming past it",
+        "Diff size as a review-cost signal — a diff far larger than the task implied is itself information, independent of whether any individual line looks wrong",
+        "Whitespace/formatting noise — reformatting-only changes that inflate a diff's line count and can hide a real change inside them"
+      ],
+      "know_how": [
+        "Read every changed hunk in a diff before accepting it, not just the files list or a change summary",
+        "Ask why a diff touches a file that wasn't part of the stated task",
+        "Separate formatting-only hunks from behavior-changing hunks mentally before judging the change",
+        "Compare the diff's size against the task's stated scope and treat a mismatch as a prompt to look closer, not a good sign of thoroughness",
+        "Read deletions as carefully as additions — a removed check or removed line is often the actual bug"
+      ],
+      "habits": [
+        "Never click accept on a diff without having actually read every hunk",
+        "Read the diff before reading any chat-provided summary of what it does",
+        "Pause on any file touched that wasn't named in the prompt",
+        "Treat 'the diff is large' as a reason to slow down, not a reason to skim faster",
+        "Re-read a diff a second time after a revision, since a second pass on a familiar change still catches things the first pass didn't"
+      ],
+      "know_why": null,
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given a 15-line diff with one subtly incorrect line hidden among correct changes, find and name the incorrect line by reading the diff alone, without running the code.",
+      "common_failure": "Skimming the diff for shape (file names, roughly how many lines changed) instead of reading the actual code, so a wrong comparison operator or an inverted condition slips through because it looked structurally like the rest of the change.",
+      "sources": ["Google engineering practices docs — code review", "GitHub diff review documentation"]
+    },
+    {
+      "id": "vibecoding.verification.hallucination-spotting",
+      "label": "Hallucination spotting",
+      "tier": 1,
+      "cluster": "verification",
+      "prereqs": [],
+      "one_line": "Recognize a hallucinated API, package, or function signature by checking it against real docs before running it.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Hallucinated API — a function, method, or package that doesn't exist but is confidently generated, often plausible because it matches a naming pattern from a real, similar API",
+        "Version mismatch — code correct for a different version of a library than the one actually installed, a frequent source of near-hallucinations",
+        "Confident wrong answer — the absence of any hedging or uncertainty marker in model output is not evidence the output is correct",
+        "Ground truth check — verifying an API call against the actual installed package's types, docs, or source, rather than against the model's own explanation of it",
+        "Plausibility bias — a hallucinated API is dangerous precisely because it looks like something that should exist, unlike an obviously wrong answer",
+        "Silent failure vs loud failure — a hallucinated API that throws immediately (safe, gets caught) versus one that silently does something adjacent to what was intended (dangerous, easy to miss)"
+      ],
+      "know_how": [
+        "Check any unfamiliar function or method call against the actual installed package version's docs or type definitions before trusting it",
+        "Run the code rather than just reading it whenever an API call looks unfamiliar",
+        "Treat confident, fluent explanation of an API as no evidence of its correctness",
+        "Search the installed package's source or changelog when a method's behavior seems surprising",
+        "Pin and check the exact library version in use, since a plausible-sounding call may be correct for a different version"
+      ],
+      "habits": [
+        "Look up any API call that isn't already familiar before running it in anything that matters",
+        "Distrust an explanation that came from the same source as the code being explained",
+        "Keep the relevant library's docs open in a tab while reviewing AI-generated calls to it",
+        "Treat a surprising or too-convenient-looking API as a prompt to verify, not a reason for relief",
+        "Note recurring hallucinated patterns (a specific package, a specific method name) so they're recognized faster next time"
+      ],
+      "know_why": {
+        "claim": "A model's fluency and confidence carry no information about whether an API call is real.",
+        "because": "Language models generate the most statistically plausible continuation, and a plausible-sounding function name from a familiar naming pattern is exactly as fluent whether or not it exists — fluency measures training-data pattern match, not ground truth.",
+        "disputed_by": "Some agentic-autonomy practitioners argue that as long as the code is run and its output verified immediately, rather than trusted from reading alone, the confidence question is moot — verification happens at execution, not at read time.",
+        "source": "Practitioner writing on LLM hallucination in code generation (industry blog posts on AI-assisted development pitfalls)"
+      },
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given five AI-generated function calls, three real and two plausible-sounding but nonexistent, correctly identify the two hallucinated calls by checking them against actual documentation.",
+      "common_failure": "Trusting a hallucinated API because the surrounding code and the explanation of it both read fluently — fluency is not correctness, and a hallucinated call often only fails at runtime, or worse, silently returns something adjacent to what was expected.",
+      "sources": ["Package documentation / type definitions (ground truth, not the model)", "industry writing on LLM code hallucination"]
+    },
+    {
+      "id": "vibecoding.verification.manual-smoke-test",
+      "label": "Manual smoke test",
+      "tier": 2,
+      "cluster": "verification",
+      "prereqs": ["vibecoding.verification.diff-reading"],
+      "one_line": "Run the actual feature by hand after an AI change instead of trusting that it compiled.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Smoke test — running the actual feature by hand through its main path, the minimum bar before trusting any change, AI-written or not",
+        "Compiles-but-wrong — code that type-checks and builds cleanly while still being behaviorally incorrect, the specific gap a smoke test closes",
+        "Happy-path smoke test — exercising the primary intended flow, the minimum useful smoke test even when it isn't exhaustive",
+        "Environment parity — running the smoke test in an environment close enough to real usage (real data shape, real browser) that it would actually catch a real bug",
+        "Click-through vs automated smoke test — a quick manual pass for immediate feedback versus a scripted one for repeatability; both have a place, neither replaces the other early on"
+      ],
+      "know_how": [
+        "Run the exact feature just changed, by hand, before considering a change done",
+        "Use realistic input, not just the first value that comes to mind, when exercising the change",
+        "Check the browser console or terminal output during the smoke test, not just the visible UI",
+        "Test the change in the environment it will actually run in, not only in an idealized local setup",
+        "Repeat the smoke test after any further AI revision, since a later fix can silently reintroduce an earlier bug"
+      ],
+      "habits": [
+        "Treat 'it compiled' and 'it works' as two separate claims, never conflate them",
+        "Run the feature by hand immediately after any AI change, before moving to the next task",
+        "Watch for errors in the console during a smoke test, not just watch the screen",
+        "Re-run the smoke test after each subsequent revision, not just the first version",
+        "Smoke-test the exact scenario from the original bug report or spec, not just something nearby"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an AI-generated change that compiles cleanly, manually exercise its actual behavior and correctly identify whether it does what the task asked, in under five minutes.",
+      "common_failure": "Treating a clean build or a passing type check as proof the feature works — many real bugs (wrong data displayed, a handler that doesn't fire, an off-by-one in a loop) are invisible to the compiler and only show up when the feature is actually run.",
+      "sources": ["General software QA practice", "Google engineering practices docs"]
+    },
+    {
+      "id": "vibecoding.verification.unit-test-generation",
+      "label": "Unit test generation",
+      "tier": 2,
+      "cluster": "verification",
+      "prereqs": ["vibecoding.verification.hallucination-spotting"],
+      "one_line": "Have an assistant write tests for the behavior it just implemented, then check the tests actually assert the right thing.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Generated test — a test an AI writes for code it (or a person) just implemented, useful but only as good as its assertions",
+        "Tautological test — a test that asserts the implementation does what the implementation does, rather than what the spec requires, a common AI-generated failure mode",
+        "Assertion strength — the difference between a test that checks a real property (a computed total is correct) and one that only checks a function didn't throw",
+        "Coverage vs correctness — a test suite covering every line without checking a single behavior correctly, versus fewer tests that check the behaviors that matter",
+        "Test-writes-to-pass risk — an AI generating both the implementation and its test in the same session, so a shared misunderstanding shows up in both and the test passes despite the bug"
+      ],
+      "know_how": [
+        "Read every generated assertion and confirm it checks the actual requirement, not just that code ran without error",
+        "Ask explicitly for edge-case tests (empty input, boundary values, error paths), since a first pass usually covers only the happy path",
+        "Have a different session or a human write the test when the same session wrote the implementation, to avoid a shared blind spot",
+        "Break a test on purpose (comment out the real logic) to confirm it actually fails when the implementation is wrong",
+        "Reject a test that only asserts 'no exception was thrown' as insufficient"
+      ],
+      "habits": [
+        "Read generated test assertions line by line, not just check that the test file exists",
+        "Deliberately break the implementation once to confirm each new test actually catches it",
+        "Ask for edge-case tests explicitly rather than assuming the first pass covered them",
+        "Treat a suspiciously easy 100% pass rate on a first generated suite as a reason to check the assertions, not a reason for confidence",
+        "Keep tests and implementation reviewed as a pair, not the test accepted just because it's green"
+      ],
+      "know_why": null,
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given an AI-generated function and an AI-generated test suite for it, find at least one assertion that would still pass even if the function had a real bug, by deliberately breaking the implementation.",
+      "common_failure": "Accepting a generated test suite because it's green — a test that only asserts a function returns 'something' or doesn't throw will pass against a badly broken implementation just as easily as a correct one.",
+      "sources": ["Kent Beck — Test-Driven Development", "Kent C. Dodds — testing writings"]
+    },
+    {
+      "id": "vibecoding.verification.type-checking-gate",
+      "label": "Type-checking gate",
+      "tier": 2,
+      "cluster": "verification",
+      "prereqs": ["vibecoding.verification.diff-reading"],
+      "one_line": "Run the type checker after every AI edit and treat a type error as a required gate, not a suggestion to ignore.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Type checker — a tool (TypeScript, mypy, Flow) that verifies a program's types are internally consistent without running it, catching a specific class of bug for free",
+        "any/unknown escape hatch — a type annotation that opts out of checking, which an AI will reach for under pressure to make an error go away rather than fix the real mismatch",
+        "Structural vs nominal typing — how two types are judged compatible, relevant because AI-generated code sometimes produces a type that's structurally close but not the type actually expected",
+        "Type error as gate, not suggestion — the practice of treating any type error as blocking, rather than something to silence with a cast or an ignore comment",
+        "Strict mode — a type checker's stricter setting (TypeScript strict, mypy --strict) that catches more classes of error, often not on by default in an AI-scaffolded project"
+      ],
+      "know_how": [
+        "Run the type checker after every AI-generated change, as a standing step, not an occasional one",
+        "Read a type error's actual message before asking the assistant to fix it, so the fix addresses the real mismatch",
+        "Reject a fix that resolves a type error by adding any, unknown, or an as cast without justification",
+        "Turn on strict mode early in a project rather than retrofitting it once errors have accumulated",
+        "Treat a type error surfaced after a change as a signal the change's assumptions were wrong somewhere, not just a formality to clear"
+      ],
+      "habits": [
+        "Run the type checker before manually testing anything, since it's faster and catches a distinct class of bug",
+        "Read every type error message in full before accepting a proposed fix for it",
+        "Flag any fix that silences a type error with a cast or ignore comment instead of resolving the mismatch",
+        "Keep strict mode on and treat a request to loosen it as something to question, not to grant by default",
+        "Re-run the type checker after every subsequent revision, not just the first pass"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an AI-generated change that introduces a type error, get a fix that resolves the actual type mismatch — not one that silences the error with any, an ignore comment, or an unjustified cast.",
+      "common_failure": "Accepting a fix that makes a type error disappear by weakening the type (adding any or an unchecked cast) instead of correcting the underlying mismatch — the error is gone but the bug the type checker was trying to catch is still there.",
+      "sources": ["TypeScript Handbook", "mypy documentation"]
+    },
+    {
+      "id": "vibecoding.verification.regression-check",
+      "label": "Regression check",
+      "tier": 3,
+      "cluster": "verification",
+      "prereqs": ["vibecoding.verification.manual-smoke-test", "vibecoding.verification.unit-test-generation"],
+      "one_line": "Run the existing test suite after an AI change to catch regressions the AI's own tests wouldn't reveal.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Regression — a previously working behavior that breaks as a side effect of an unrelated change, the specific risk a full test-suite run is meant to catch",
+        "Existing test suite as a second opinion — running tests the current session didn't write, so a shared blind spot in one session's work doesn't go unchecked",
+        "Flaky test — a test that fails intermittently for reasons unrelated to the change, which must be told apart from a real regression before either is dismissed",
+        "Blast radius of a change — which parts of the existing suite are even plausibly affected by a given change, useful for prioritizing where to look first at a failure",
+        "Full run vs targeted run — running the whole suite versus only the tests near the change, a tradeoff between speed and the chance of missing a distant regression"
+      ],
+      "know_how": [
+        "Run the full existing test suite after any AI change, not just the tests related to the change",
+        "Investigate every new failure individually rather than re-running until it happens to pass",
+        "Distinguish a genuinely flaky test (fails intermittently regardless of the change) from a real regression before dismissing a failure",
+        "Bisect a change into smaller pieces when a regression's cause isn't obvious from the diff alone",
+        "Re-run the full suite one more time after a regression fix, since a fix can introduce a second regression"
+      ],
+      "habits": [
+        "Never skip the full suite run because the change 'seems unrelated' to most of the code it covers",
+        "Treat a new failure as guilty until proven flaky, not the other way around",
+        "Keep a short list of known-flaky tests so a real regression doesn't get mistaken for one of them",
+        "Re-run the whole suite after a regression fix, not just the test that was failing",
+        "Log which change caused a regression once found, so the same class of side effect is easier to spot next time"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a passing test suite and an AI-generated change unrelated to a specific existing test, run the suite, find the test that now fails, and correctly determine whether it's a real regression or a flaky test.",
+      "common_failure": "Running only the tests that seem related to the change, missing a regression in a distant part of the codebase that depended on behavior the change altered incidentally — the exact case a full-suite run exists to catch.",
+      "sources": ["Google engineering practices docs — testing", "Martin Fowler — flaky tests writings"]
+    },
+    {
+      "id": "vibecoding.verification.review-checklist",
+      "label": "Review checklist",
+      "tier": 3,
+      "cluster": "verification",
+      "prereqs": ["vibecoding.verification.type-checking-gate"],
+      "one_line": "Apply a fixed checklist — security, error handling, edge cases — to AI-generated code the way you'd review a junior engineer's pull request.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Review checklist — a fixed, written set of checks (security, error handling, edge cases, resource cleanup) applied to every AI-generated change regardless of how confident it looks",
+        "Confidence-blindness — the fact that AI-generated code's fluency doesn't correlate with its risk, so a checklist that runs regardless of how 'obviously fine' something looks catches what confidence-based review misses",
+        "OWASP-class issues — injection, broken auth, sensitive data exposure — categories worth a standing checklist item since AI-generated code reproduces insecure patterns from training data as readily as secure ones",
+        "Resource cleanup — closing connections, clearing timers, unsubscribing listeners, a category of bug AI-generated code omits because the happy path doesn't need it to 'work'",
+        "Checklist fatigue — a checklist so long or generic it stops getting read carefully, the specific failure mode a good checklist must be designed to avoid"
+      ],
+      "know_how": [
+        "Apply the same fixed checklist to every AI-generated change of a given type (endpoint, component, migration), not a different ad hoc review each time",
+        "Check for injection and auth bypass explicitly on any change that touches user input or access control",
+        "Check for resource cleanup explicitly on any change that opens a connection, timer, or subscription",
+        "Keep the checklist short enough to actually run every time, adding an item only when a real past bug justifies it",
+        "Treat a checklist pass as necessary, not sufficient — it catches known categories, not everything"
+      ],
+      "habits": [
+        "Run the checklist even on a change that 'looks obviously fine'",
+        "Update the checklist after any bug that slipped through, so the same category is caught next time",
+        "Resist checklist bloat by removing an item that hasn't caught a real bug in a long stretch",
+        "Apply the checklist consistently across changes rather than only on ones that feel risky",
+        "Read the checklist itself periodically for staleness, not just apply it mechanically forever"
+      ],
+      "know_why": {
+        "claim": "A fixed checklist should be applied uniformly, even to changes that feel safe.",
+        "because": "Confidence in a change's safety is generated by the same fluency that makes hallucinations convincing, so 'this one looks fine' is not a signal that correlates with actual risk — the checklist exists precisely to substitute a mechanical check for that unreliable feeling.",
+        "disputed_by": "The vibe-loop and agentic-autonomy schools argue a uniform checklist on every change is exactly the ceremony that kills iteration speed, and prefer reserving deep checklist review for changes that touch auth, money, or data deletion, trusting lighter review elsewhere.",
+        "source": "Software review practice literature (Google engineering practices docs); practitioner debate on AI-assisted review overhead"
+      },
+      "school_weights": { "verification-first": "high", "vibe-loop": "low" },
+      "checkpoint": "Given an AI-generated endpoint that looks correct on read-through, apply a fixed security/error-handling/cleanup checklist and find at least one real issue a confidence-based read alone would have missed.",
+      "common_failure": "Reviewing AI-generated code only as carefully as it 'feels' like it needs, so a fluent, confident-looking change that happens to contain a real security or resource-leak issue gets the same light pass as something genuinely simple.",
+      "sources": ["OWASP Top 10", "Google engineering practices docs — code review"]
+    }
+  ]
+}

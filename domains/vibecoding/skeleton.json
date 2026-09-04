@@ -1,0 +1,128 @@
+{
+  "domain": "vibecoding",
+  "level": "serious amateur aiming at professional competence",
+  "schools": [
+    {
+      "id": "spec-first",
+      "name": "Spec-first school",
+      "optimises_for": "predictable scope — writing a short spec before generating code so the AI's first pass matches what was actually asked",
+      "gives_up": "the momentum of just typing a prompt and seeing what comes back",
+      "quarrels_with": ["vibe-loop"]
+    },
+    {
+      "id": "vibe-loop",
+      "name": "Vibe-loop school",
+      "optimises_for": "fast conversational iteration — prompt, run, look, refine — treating the running app as the source of truth over any written spec",
+      "gives_up": "predictable architecture; the codebase's shape emerges from the conversation instead of being decided upfront",
+      "quarrels_with": ["spec-first", "verification-first"]
+    },
+    {
+      "id": "verification-first",
+      "name": "Verification-first school",
+      "optimises_for": "catching AI mistakes before they merge — diffs read line by line, tests demanded for every change, types and checks as hard gates",
+      "gives_up": "raw throughput; every AI change costs a review pass before it counts as done",
+      "quarrels_with": ["vibe-loop", "agentic-autonomy"]
+    },
+    {
+      "id": "agentic-autonomy",
+      "name": "Agentic-autonomy school",
+      "optimises_for": "letting a coding agent run multi-step tasks unattended — plan, edit, run, fix — with the human reviewing outcomes, not keystrokes",
+      "gives_up": "fine-grained control over exactly how a change gets made, and the ability to catch a wrong turn mid-task",
+      "quarrels_with": ["manual-gate", "verification-first"]
+    },
+    {
+      "id": "manual-gate",
+      "name": "Manual-gate school",
+      "optimises_for": "a human decision at every consequential step — every diff read, every command approved, before it touches the real codebase",
+      "gives_up": "throughput and the ability to hand off long-running or overnight tasks to an agent",
+      "quarrels_with": ["agentic-autonomy"]
+    }
+  ],
+  "clusters": [
+    { "id": "prompting", "icon": "💬", "name": "Prompt & spec craft", "gist": "Turning an intent into a prompt an AI can actually execute: framing context, decomposing tasks, writing specs, and recovering when the first answer is wrong." },
+    { "id": "frontend", "icon": "🎨", "name": "Frontend generation", "gist": "Building the interface with AI assistance, from one static page to a component-driven, accessible frontend wired to a real API." },
+    { "id": "verification", "icon": "🔍", "name": "Verifying AI output", "gist": "Treating generated code the way you'd treat a junior engineer's PR: reading diffs, spotting hallucinated APIs, and gating merges on tests and types." },
+    { "id": "iteration", "icon": "🔁", "name": "Iterative workflow", "gist": "Running the prompt-run-refine loop without losing control: session scoping, checkpoint commits, and knowing when to roll back instead of prompting harder." },
+    { "id": "backend", "icon": "⚙️", "name": "Backend & data", "gist": "Endpoints, schemas, auth, and validation built with AI assistance but understood well enough to defend every line." },
+    { "id": "tooling", "icon": "🛠️", "name": "Agentic tooling", "gist": "Moving from single-file inline suggestions to agents that edit multiple files, run commands, and complete bounded tasks unattended." },
+    { "id": "deployment", "icon": "🚀", "name": "Deployment & ops", "gist": "Shipping an AI-assisted app to production: environment config, CI gates, rollback paths, and the monitoring that turns failures into alerts instead of complaints." },
+    { "id": "architecture", "icon": "🏗️", "name": "System architecture & scale", "gist": "Keeping a growing AI-assisted codebase coherent: conventions, boundaries, tech-debt triage, and the judgment call between another patch and a real restructure." }
+  ],
+  "spine": [
+    "vibecoding.frontend.single-page-scaffold",
+    "vibecoding.frontend.component-extraction",
+    "vibecoding.frontend.framework-adoption",
+    "vibecoding.frontend.state-management",
+    "vibecoding.frontend.api-integration-client",
+    "vibecoding.deployment.full-stack-deploy",
+    "vibecoding.architecture.full-stack-integration-review"
+  ],
+  "nodes": [
+    { "id": "vibecoding.prompting.context-framing", "label": "Context framing", "tier": 1, "cluster": "prompting", "prereqs": [], "one_line": "Frame a prompt with the goal, relevant files, and constraints so a coding assistant's first response is usable without a rewrite.", "hours": 6 },
+    { "id": "vibecoding.prompting.task-decomposition", "label": "Task decomposition", "tier": 1, "cluster": "prompting", "prereqs": [], "one_line": "Break a feature request into AI-sized subtasks small enough that each one's output can be checked on its own.", "hours": 6 },
+    { "id": "vibecoding.prompting.spec-writing", "label": "Spec writing", "tier": 2, "cluster": "prompting", "prereqs": ["vibecoding.prompting.context-framing"], "one_line": "Write a short spec — inputs, outputs, edge cases — before generating code so scope is fixed before the assistant starts.", "hours": 8 },
+    { "id": "vibecoding.prompting.example-anchoring", "label": "Example anchoring", "tier": 2, "cluster": "prompting", "prereqs": ["vibecoding.prompting.context-framing"], "one_line": "Anchor a prompt to an existing file or example so generated code matches the project's actual patterns instead of generic ones.", "hours": 6 },
+    { "id": "vibecoding.prompting.constraint-declaration", "label": "Constraint declaration", "tier": 2, "cluster": "prompting", "prereqs": ["vibecoding.prompting.task-decomposition"], "one_line": "State explicit boundaries — files not to touch, libraries not to add — so an AI edit can't quietly expand past its task.", "hours": 5 },
+    { "id": "vibecoding.prompting.diagnostic-reprompting", "label": "Diagnostic reprompting", "tier": 3, "cluster": "prompting", "prereqs": ["vibecoding.prompting.spec-writing"], "one_line": "Diagnose exactly where a wrong AI output missed the ask, then rewrite the prompt to close that specific gap instead of repeating it verbatim.", "hours": 8 },
+    { "id": "vibecoding.prompting.prompt-templates", "label": "Prompt templates", "tier": 3, "cluster": "prompting", "prereqs": ["vibecoding.prompting.example-anchoring", "vibecoding.prompting.constraint-declaration"], "one_line": "Save and reuse prompt templates for recurring task shapes (new component, new endpoint, bug fix) so context-gathering isn't rebuilt from scratch every time.", "hours": 6 },
+
+    { "id": "vibecoding.frontend.single-page-scaffold", "label": "Single-page scaffold", "tier": 1, "cluster": "frontend", "prereqs": [], "one_line": "Generate a static HTML/CSS/JS page from a prompt and get it rendering correctly in a browser on the first or second pass.", "hours": 8 },
+    { "id": "vibecoding.frontend.component-extraction", "label": "Component extraction", "tier": 2, "cluster": "frontend", "prereqs": ["vibecoding.frontend.single-page-scaffold"], "one_line": "Ask an assistant to split a monolithic page into reusable components without changing what the page does.", "hours": 8 },
+    { "id": "vibecoding.frontend.framework-adoption", "label": "Framework adoption", "tier": 3, "cluster": "frontend", "prereqs": ["vibecoding.frontend.component-extraction", "vibecoding.prompting.spec-writing", "vibecoding.verification.diff-reading"], "one_line": "Move a static page into a framework (React, Vue, Svelte) with AI generating correct component boilerplate, checked spec-first and diff-by-diff.", "hours": 16 },
+    { "id": "vibecoding.frontend.styling-system", "label": "Styling system", "tier": 3, "cluster": "frontend", "prereqs": ["vibecoding.frontend.component-extraction"], "one_line": "Direct AI-generated styling toward a consistent system — tokens, a utility framework — instead of one-off inline styles per component.", "hours": 10 },
+    { "id": "vibecoding.frontend.state-management", "label": "State management", "tier": 4, "cluster": "frontend", "prereqs": ["vibecoding.frontend.framework-adoption"], "one_line": "Get an assistant to wire up state — local state, forms, a simple store — correctly across components instead of duplicating it per screen.", "hours": 12 },
+    { "id": "vibecoding.frontend.api-integration-client", "label": "API integration (client)", "tier": 5, "cluster": "frontend", "prereqs": ["vibecoding.frontend.state-management"], "one_line": "Wire a frontend to a real API client with AI assistance, handling loading and error states, not just the happy path.", "hours": 12 },
+    { "id": "vibecoding.frontend.responsive-accessibility", "label": "Responsive & accessible layout", "tier": 4, "cluster": "frontend", "prereqs": ["vibecoding.frontend.styling-system"], "one_line": "Direct AI output toward responsive layout and basic accessibility — labels, contrast, keyboard nav — instead of visual-only correctness.", "hours": 10 },
+    { "id": "vibecoding.frontend.component-library", "label": "Component library", "tier": 5, "cluster": "frontend", "prereqs": ["vibecoding.frontend.state-management", "vibecoding.frontend.responsive-accessibility"], "one_line": "Build or adopt a shared component library so AI-generated screens draw from one consistent set instead of reinventing components each time.", "hours": 18 },
+
+    { "id": "vibecoding.verification.diff-reading", "label": "Diff reading", "tier": 1, "cluster": "verification", "prereqs": [], "one_line": "Read an AI-generated diff line by line before accepting it, not just skim the changed file list.", "hours": 5 },
+    { "id": "vibecoding.verification.hallucination-spotting", "label": "Hallucination spotting", "tier": 1, "cluster": "verification", "prereqs": [], "one_line": "Recognize a hallucinated API, package, or function signature by checking it against real docs before running it.", "hours": 6 },
+    { "id": "vibecoding.verification.manual-smoke-test", "label": "Manual smoke test", "tier": 2, "cluster": "verification", "prereqs": ["vibecoding.verification.diff-reading"], "one_line": "Run the actual feature by hand after an AI change instead of trusting that it compiled.", "hours": 5 },
+    { "id": "vibecoding.verification.unit-test-generation", "label": "Unit test generation", "tier": 2, "cluster": "verification", "prereqs": ["vibecoding.verification.hallucination-spotting"], "one_line": "Have an assistant write tests for the behavior it just implemented, then check the tests actually assert the right thing.", "hours": 8 },
+    { "id": "vibecoding.verification.type-checking-gate", "label": "Type-checking gate", "tier": 2, "cluster": "verification", "prereqs": ["vibecoding.verification.diff-reading"], "one_line": "Run the type checker after every AI edit and treat a type error as a required gate, not a suggestion to ignore.", "hours": 6 },
+    { "id": "vibecoding.verification.regression-check", "label": "Regression check", "tier": 3, "cluster": "verification", "prereqs": ["vibecoding.verification.manual-smoke-test", "vibecoding.verification.unit-test-generation"], "one_line": "Run the existing test suite after an AI change to catch regressions the AI's own tests wouldn't reveal.", "hours": 8 },
+    { "id": "vibecoding.verification.review-checklist", "label": "Review checklist", "tier": 3, "cluster": "verification", "prereqs": ["vibecoding.verification.type-checking-gate"], "one_line": "Apply a fixed checklist — security, error handling, edge cases — to AI-generated code the way you'd review a junior engineer's pull request.", "hours": 8 },
+
+    { "id": "vibecoding.iteration.session-scoping", "label": "Session scoping", "tier": 1, "cluster": "iteration", "prereqs": [], "one_line": "Keep one AI session focused on a single task so context doesn't drift across unrelated changes.", "hours": 5 },
+    { "id": "vibecoding.iteration.git-checkpointing", "label": "Git checkpointing", "tier": 1, "cluster": "iteration", "prereqs": [], "one_line": "Commit after each verified AI change so a bad iteration is one git reset away, not a lost afternoon.", "hours": 5 },
+    { "id": "vibecoding.iteration.context-window-management", "label": "Context-window management", "tier": 2, "cluster": "iteration", "prereqs": ["vibecoding.iteration.session-scoping"], "one_line": "Recognize when a session's context is degrading — contradicting itself, forgetting earlier constraints — and start fresh instead of pushing through.", "hours": 6 },
+    { "id": "vibecoding.iteration.diff-sized-commits", "label": "Diff-sized commits", "tier": 2, "cluster": "iteration", "prereqs": ["vibecoding.iteration.git-checkpointing"], "one_line": "Keep each AI-assisted commit small enough to review and revert independently.", "hours": 6 },
+    { "id": "vibecoding.iteration.branch-per-feature", "label": "Branch per feature", "tier": 2, "cluster": "iteration", "prereqs": ["vibecoding.iteration.git-checkpointing"], "one_line": "Run each AI-assisted feature on its own branch so a failed experiment doesn't contaminate main.", "hours": 5 },
+    { "id": "vibecoding.iteration.rollback-discipline", "label": "Rollback discipline", "tier": 3, "cluster": "iteration", "prereqs": ["vibecoding.iteration.context-window-management", "vibecoding.iteration.diff-sized-commits"], "one_line": "Recognize when an AI session has gone sideways and roll back to the last good checkpoint instead of prompting your way out.", "hours": 8 },
+    { "id": "vibecoding.iteration.session-handoff-notes", "label": "Session handoff notes", "tier": 3, "cluster": "iteration", "prereqs": ["vibecoding.iteration.branch-per-feature"], "one_line": "Write a short state note at the end of a session so the next session — yours or the AI's — resumes without re-deriving context.", "hours": 6 },
+
+    { "id": "vibecoding.backend.rest-endpoint-scaffold", "label": "REST endpoint scaffold", "tier": 1, "cluster": "backend", "prereqs": [], "one_line": "Generate a REST endpoint — route, handler, response — with AI assistance and get it responding correctly to a real request.", "hours": 10 },
+    { "id": "vibecoding.backend.schema-design", "label": "Schema design", "tier": 1, "cluster": "backend", "prereqs": [], "one_line": "Design a database schema, by hand or with AI assistance, well enough to defend every table and relationship in it.", "hours": 12 },
+    { "id": "vibecoding.backend.orm-wiring", "label": "ORM wiring", "tier": 2, "cluster": "backend", "prereqs": ["vibecoding.backend.rest-endpoint-scaffold", "vibecoding.backend.schema-design"], "one_line": "Have an assistant wire an ORM or query layer to the schema and verify the generated queries actually match the intended relationships.", "hours": 12 },
+    { "id": "vibecoding.backend.auth-flow", "label": "Auth flow", "tier": 2, "cluster": "backend", "prereqs": ["vibecoding.backend.rest-endpoint-scaffold"], "one_line": "Implement a real authentication flow — sessions or tokens — with AI assistance, understanding every step well enough to spot a missing check.", "hours": 16 },
+    { "id": "vibecoding.backend.input-validation", "label": "Input validation", "tier": 2, "cluster": "backend", "prereqs": ["vibecoding.backend.rest-endpoint-scaffold"], "one_line": "Add server-side validation and sanitization to AI-generated endpoints so the client is never trusted with the last word.", "hours": 8 },
+    { "id": "vibecoding.backend.migration-discipline", "label": "Migration discipline", "tier": 3, "cluster": "backend", "prereqs": ["vibecoding.backend.schema-design", "vibecoding.backend.orm-wiring"], "one_line": "Generate and review database migrations with AI, checking that each one is reversible and doesn't silently drop data.", "hours": 10 },
+    { "id": "vibecoding.backend.error-handling-contract", "label": "Error-handling contract", "tier": 3, "cluster": "backend", "prereqs": ["vibecoding.backend.input-validation"], "one_line": "Define and enforce a consistent error-response contract across AI-generated endpoints instead of an ad hoc shape per route.", "hours": 8 },
+    { "id": "vibecoding.backend.background-jobs", "label": "Background jobs", "tier": 4, "cluster": "backend", "prereqs": ["vibecoding.backend.orm-wiring", "vibecoding.backend.error-handling-contract"], "one_line": "Move slow or scheduled work into background jobs or queues with AI assistance, verifying failure and retry behavior by hand.", "hours": 14 },
+
+    { "id": "vibecoding.tooling.inline-assistant-use", "label": "Inline assistant use", "tier": 1, "cluster": "tooling", "prereqs": [], "one_line": "Use an inline AI coding assistant — completion, inline edit — inside the editor for single-file changes.", "hours": 5 },
+    { "id": "vibecoding.tooling.chat-to-code-loop", "label": "Chat-to-code loop", "tier": 1, "cluster": "tooling", "prereqs": [], "one_line": "Run the basic chat loop: describe a change, receive a diff or file, apply it, check the result.", "hours": 6 },
+    { "id": "vibecoding.tooling.multi-file-agent-tasks", "label": "Multi-file agent tasks", "tier": 2, "cluster": "tooling", "prereqs": ["vibecoding.tooling.chat-to-code-loop"], "one_line": "Direct an agentic coding tool to make a coordinated change across multiple files in a single task.", "hours": 10 },
+    { "id": "vibecoding.tooling.tool-permission-scoping", "label": "Tool permission scoping", "tier": 2, "cluster": "tooling", "prereqs": ["vibecoding.tooling.inline-assistant-use"], "one_line": "Configure what an agent may do unattended — read-only, edit, run commands — and set that scope deliberately per task.", "hours": 6 },
+    { "id": "vibecoding.tooling.command-execution-review", "label": "Command execution review", "tier": 2, "cluster": "tooling", "prereqs": ["vibecoding.tooling.chat-to-code-loop"], "one_line": "Review a shell command an agent proposes before letting it run, especially anything destructive or network-facing.", "hours": 6 },
+    { "id": "vibecoding.tooling.custom-agent-instructions", "label": "Custom agent instructions", "tier": 3, "cluster": "tooling", "prereqs": ["vibecoding.tooling.multi-file-agent-tasks"], "one_line": "Write persistent project instructions — a CLAUDE.md or AGENTS.md-style file — that steer every future agent session's defaults.", "hours": 8 },
+    { "id": "vibecoding.tooling.autonomous-task-delegation", "label": "Autonomous task delegation", "tier": 3, "cluster": "tooling", "prereqs": ["vibecoding.tooling.tool-permission-scoping", "vibecoding.tooling.command-execution-review"], "one_line": "Hand a bounded multi-step task to an agent to run unattended, with a clear definition of done and a way to check the result.", "hours": 12 },
+    { "id": "vibecoding.tooling.multi-agent-coordination", "label": "Multi-agent coordination", "tier": 4, "cluster": "tooling", "prereqs": ["vibecoding.tooling.autonomous-task-delegation"], "one_line": "Run multiple agents on independent parts of a codebase in parallel without their changes stepping on each other.", "hours": 14 },
+
+    { "id": "vibecoding.deployment.static-hosting", "label": "Static hosting", "tier": 1, "cluster": "deployment", "prereqs": [], "one_line": "Deploy a static site to a host from a repo and get a working public URL.", "hours": 6 },
+    { "id": "vibecoding.deployment.env-config", "label": "Environment config", "tier": 2, "cluster": "deployment", "prereqs": ["vibecoding.deployment.static-hosting"], "one_line": "Separate configuration and secrets from code using environment variables, correctly scoped per environment.", "hours": 6 },
+    { "id": "vibecoding.deployment.ci-pipeline", "label": "CI pipeline", "tier": 2, "cluster": "deployment", "prereqs": ["vibecoding.deployment.static-hosting"], "one_line": "Set up a CI pipeline that runs tests and checks on every AI-assisted commit before it can merge.", "hours": 10 },
+    { "id": "vibecoding.deployment.full-stack-deploy", "label": "Full-stack deploy", "tier": 6, "cluster": "deployment", "prereqs": ["vibecoding.frontend.api-integration-client", "vibecoding.backend.error-handling-contract", "vibecoding.deployment.env-config"], "one_line": "Deploy a full-stack app — frontend, backend, database — with every piece correctly wired to the others in production.", "hours": 16 },
+    { "id": "vibecoding.deployment.rollback-plan", "label": "Rollback plan", "tier": 4, "cluster": "deployment", "prereqs": ["vibecoding.deployment.ci-pipeline", "vibecoding.iteration.rollback-discipline"], "one_line": "Set up a deployment rollback path so a bad AI-assisted release can be reverted in minutes, not hours.", "hours": 8 },
+    { "id": "vibecoding.deployment.basic-monitoring", "label": "Basic monitoring", "tier": 7, "cluster": "deployment", "prereqs": ["vibecoding.deployment.full-stack-deploy"], "one_line": "Add logging and error tracking so a production failure surfaces as an alert instead of a user complaint.", "hours": 10 },
+    { "id": "vibecoding.deployment.secrets-rotation", "label": "Secrets rotation", "tier": 5, "cluster": "deployment", "prereqs": ["vibecoding.deployment.env-config", "vibecoding.deployment.rollback-plan"], "one_line": "Manage and rotate production secrets and credentials without an AI session ever seeing or logging them directly.", "hours": 8 },
+
+    { "id": "vibecoding.architecture.codebase-map", "label": "Codebase map", "tier": 1, "cluster": "architecture", "prereqs": [], "one_line": "Build and maintain a map of a codebase's modules and boundaries well enough to know where a new AI task belongs.", "hours": 8 },
+    { "id": "vibecoding.architecture.convention-enforcement", "label": "Convention enforcement", "tier": 2, "cluster": "architecture", "prereqs": ["vibecoding.architecture.codebase-map"], "one_line": "Establish and enforce naming and structure conventions so AI-generated code lands where a human would expect it, not wherever the prompt implied.", "hours": 8 },
+    { "id": "vibecoding.architecture.dependency-boundaries", "label": "Dependency boundaries", "tier": 2, "cluster": "architecture", "prereqs": ["vibecoding.architecture.codebase-map"], "one_line": "Define which modules may import which others, and catch an AI-generated change that crosses a boundary it shouldn't.", "hours": 8 },
+    { "id": "vibecoding.architecture.tech-debt-triage", "label": "Tech-debt triage", "tier": 3, "cluster": "architecture", "prereqs": ["vibecoding.architecture.convention-enforcement"], "one_line": "Distinguish AI-introduced shortcuts worth fixing now from ones safe to defer, and track the difference somewhere real.", "hours": 10 },
+    { "id": "vibecoding.architecture.refactor-with-agent", "label": "Refactor with an agent", "tier": 5, "cluster": "architecture", "prereqs": ["vibecoding.architecture.dependency-boundaries", "vibecoding.tooling.multi-agent-coordination"], "one_line": "Direct an agent through a cross-cutting refactor — rename, restructure — with checkpoints that catch a partial or inconsistent rewrite.", "hours": 16 },
+    { "id": "vibecoding.architecture.scaling-decision", "label": "Scaling decision", "tier": 6, "cluster": "architecture", "prereqs": ["vibecoding.architecture.tech-debt-triage", "vibecoding.architecture.refactor-with-agent"], "one_line": "Decide when a growing AI-assisted app needs a real architecture change — splitting a service, adding a queue — versus another prompt-and-patch cycle.", "hours": 12 },
+    { "id": "vibecoding.architecture.full-stack-integration-review", "label": "Full-stack integration review", "tier": 7, "cluster": "architecture", "prereqs": ["vibecoding.deployment.full-stack-deploy", "vibecoding.architecture.scaling-decision"], "one_line": "Review a full-stack app end to end — frontend, backend, data, deploy — as one coherent system before calling it production-ready.", "hours": 14 }
+  ]
+}

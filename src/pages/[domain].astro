@@ -1,9 +1,9 @@
 ---
 // /<domain> — one static page per domain, client-rendered at three altitudes
-// (overview → cluster board → node page; issues/011). Unknown slugs are not in
-// getStaticPaths, so they 404 by construction. URL contract (ticket 004, extended):
-// ?cluster=<id> board · ?node=<id> reading page · ?sel=<id> board selection ·
-// ?school=<id> lens — all composable, all lenient on unknown ids.
+// (overview, discipline board, reading page; issues/011). Unknown slugs are
+// not in getStaticPaths, so they 404 by construction. URL contract (ticket
+// 004, extended): ?cluster=<id> board · ?node=<id> reading page · ?sel=<id>
+// board selection · ?school=<id> lens. All composable, all lenient on unknown ids.
 import { loadDomain, loadAllDomains } from '../lib/data';
 import '../styles/global.css';
 
@@ -14,6 +14,8 @@ export function getStaticPaths() {
 const { domain } = Astro.params;
 const data = loadDomain(domain);
 if (!data) return Astro.NotFound;
+const name = data.domain.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+const title = `${name}, Skill Atlas`;
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
@@ -22,8 +24,9 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={`${name}: ${data.clusters.length} disciplines, ${data.nodes.length} skills, one main quest.`} />
     <link rel="icon" href="data:," />
-    <title>{data.domain} — Skill Atlas</title>
+    <title>{title}</title>
   </head>
   <body>
     <main id="app"></main>

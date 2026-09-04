@@ -1,0 +1,352 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-008",
+  "ids": [
+    "vibecoding.frontend.styling-system",
+    "vibecoding.frontend.responsive-accessibility",
+    "vibecoding.frontend.component-library",
+    "vibecoding.architecture.codebase-map",
+    "vibecoding.architecture.convention-enforcement",
+    "vibecoding.architecture.dependency-boundaries",
+    "vibecoding.architecture.tech-debt-triage",
+    "vibecoding.architecture.refactor-with-agent",
+    "vibecoding.architecture.scaling-decision"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.frontend.styling-system",
+      "label": "Styling system",
+      "tier": 3,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.component-extraction"],
+      "one_line": "Direct AI-generated styling toward a consistent system — tokens, a utility framework — instead of one-off inline styles per component.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "Design token — a named, reusable value (a color, a spacing unit, a font size) referenced by components instead of a hardcoded value repeated per component",
+        "Utility-first CSS — a framework (Tailwind) that composes styling from small utility classes in markup, versus component-scoped stylesheets or CSS-in-JS",
+        "Style consistency drift — each AI-generated component picking its own slightly different spacing or color because no shared system constrained it",
+        "Theming — a mechanism (CSS variables, a token object) for swapping a whole set of values (light/dark mode, a brand palette) without touching individual components",
+        "Specificity conflict — two competing CSS rules applying to the same element, a class of bug that grows more likely as ad hoc, ungoverned styles accumulate"
+      ],
+      "know_how": [
+        "Define a small set of tokens (colors, spacing scale, font sizes) before generating component styles, and point every prompt at them",
+        "Ask an assistant to use existing tokens or utility classes rather than hardcoded values when styling a new component",
+        "Audit a handful of components for style drift (slightly different paddings, near-duplicate colors) periodically",
+        "Test that a token change (e.g. a color) propagates correctly everywhere it's used, confirming components actually reference the token and don't hardcode a copy",
+        "Resolve a specificity conflict by simplifying selectors rather than adding a more specific override on top"
+      ],
+      "habits": [
+        "Point every new styling prompt at the existing token set or utility classes instead of asking for style from scratch",
+        "Scan new components for hardcoded values that should have been a token reference",
+        "Periodically diff similar components (two cards, two buttons) for accidental style drift",
+        "Change one token and verify it actually cascades to every place that should use it",
+        "Resist adding a new one-off color or spacing value without checking whether an existing token already covers it"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given five components styled in separate AI sessions, audit them for style drift (inconsistent spacing, near-duplicate colors) and consolidate them onto a shared token set with no visible difference in intended appearance.",
+      "common_failure": "Letting each new AI-generated component introduce its own slightly different spacing or color value instead of reusing existing tokens — individually each looks fine, but the accumulated inconsistency makes the whole app feel visually unplanned.",
+      "sources": ["Tailwind CSS documentation", "Design Tokens Community Group spec"]
+    },
+    {
+      "id": "vibecoding.frontend.responsive-accessibility",
+      "label": "Responsive & accessible layout",
+      "tier": 4,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.styling-system"],
+      "one_line": "Direct AI output toward responsive layout and basic accessibility — labels, contrast, keyboard nav — instead of visual-only correctness.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "Responsive breakpoint — a viewport width at which layout changes, and the practice of testing at real breakpoints rather than only at the default browser window size",
+        "Semantic landmark — using nav, main, header, footer so assistive technology and keyboard navigation can jump between sections, which generic divs don't provide",
+        "Color contrast ratio — the WCAG-specified minimum contrast between text and background (4.5:1 for normal text), checkable with a real tool rather than eyeballed",
+        "Keyboard navigability — every interactive element reachable and operable via keyboard alone (Tab, Enter, Space), a check an AI's visual-only generation won't verify itself",
+        "Alt text — a meaningful text alternative for an image, distinct from a filename or a generic 'image' placeholder an AI might insert by default",
+        "Focus indicator — a visible outline showing which element currently has keyboard focus, easy to accidentally remove with a CSS reset and easy to forget to check for"
+      ],
+      "know_how": [
+        "Test the page at real breakpoints (mobile, tablet, desktop), not just by resizing the browser window loosely",
+        "Run an automated accessibility checker (axe, Lighthouse) and then manually verify what it flags, since automated tools catch a subset of real issues",
+        "Tab through the entire page using only the keyboard and confirm every interactive element is reachable and clearly focused",
+        "Check text/background color contrast against WCAG thresholds with an actual contrast checker, not by eye",
+        "Write meaningful alt text for every image that conveys information, and mark purely decorative images appropriately"
+      ],
+      "habits": [
+        "Tab through a new page with the mouse untouched before considering it done",
+        "Run an automated accessibility check on every new page or major component, not just at the end of a project",
+        "Check contrast with a real tool whenever a new color pairing is introduced",
+        "Test the page at each real breakpoint, not just by eyeballing a resize",
+        "Treat a missing or generic alt text as an incomplete component, not a polish item for later"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a newly generated page, verify it at three real breakpoints, pass an automated accessibility check with zero critical issues, and complete the primary user flow using only the keyboard.",
+      "common_failure": "Trusting a page 'looks responsive' because it was resized casually in the browser during development — a real mobile viewport, or an automated accessibility scan, routinely surfaces broken layouts, unreachable buttons, or failing contrast that a casual visual check missed entirely.",
+      "sources": ["WCAG 2.1 guidelines", "axe accessibility testing tools", "web.dev — accessibility"]
+    },
+    {
+      "id": "vibecoding.frontend.component-library",
+      "label": "Component library",
+      "tier": 5,
+      "cluster": "frontend",
+      "prereqs": ["vibecoding.frontend.state-management", "vibecoding.frontend.responsive-accessibility"],
+      "one_line": "Build or adopt a shared component library so AI-generated screens draw from one consistent set instead of reinventing components each time.",
+      "hours": 18,
+      "soft_prereqs": [],
+      "know_what": [
+        "Component library — a curated, shared set of components (buttons, inputs, cards) that every screen draws from, instead of each screen generating its own version",
+        "Headless vs styled component library — a library that provides behavior and accessibility without visual opinion (Radix, Headless UI) versus one that also ships a visual style (Chakra, Material UI)",
+        "API consistency across components — every component in the library following the same prop naming and behavior conventions, so learning one predicts the others",
+        "Library adoption cost — the real cost of migrating existing ad hoc components into the shared library, which must be weighed against the cost of continued drift without one",
+        "Component documentation — a living reference (Storybook or equivalent) showing each component's variants and usage, without which a library's components get reinvented anyway because no one can find them"
+      ],
+      "know_how": [
+        "Identify which components are duplicated or near-duplicated across the app before starting a library, so it consolidates real drift rather than guessing at abstractions",
+        "Design each library component's prop API deliberately, checking it against the library's existing naming conventions",
+        "Document each component's variants so future prompts and future developers can find and reuse them instead of regenerating similar ones",
+        "Migrate existing ad hoc components into the library incrementally, verifying each migration doesn't change behavior",
+        "Anchor future component-generation prompts to the library's existing components rather than generating fresh ones"
+      ],
+      "habits": [
+        "Check the component library before asking an assistant to generate a new component from scratch",
+        "Keep component documentation current as new variants are added",
+        "Audit periodically for new components built outside the library that duplicate something already in it",
+        "Review a new library component's prop API against existing components' conventions before merging it in",
+        "Treat an undocumented library component as effectively invisible to future prompts"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given three screens each with their own near-duplicate button implementation, consolidate them into one documented library component used by all three, with no visible change in behavior.",
+      "common_failure": "Building a component library that never gets referenced in future prompts because it isn't documented or discoverable — new AI sessions keep generating fresh, slightly different components instead of reusing the library, and the duplication the library was meant to solve continues anyway.",
+      "sources": ["Storybook documentation", "Radix UI documentation", "React docs — component API design"]
+    },
+    {
+      "id": "vibecoding.architecture.codebase-map",
+      "label": "Codebase map",
+      "tier": 1,
+      "cluster": "architecture",
+      "prereqs": [],
+      "one_line": "Build and maintain a map of a codebase's modules and boundaries well enough to know where a new AI task belongs.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Codebase map — a mental or written model of a codebase's modules, their responsibilities, and how they connect, the prerequisite for knowing where any new task belongs",
+        "Entry point — where execution or a request actually starts (main file, router, app root), the natural starting point for building a map of an unfamiliar codebase",
+        "Module boundary — the edge of a self-contained piece of the system, distinct from just a folder, since folders don't always correspond to real architectural boundaries",
+        "Written vs mental map — a diagram or short doc capturing the map versus holding it only in your head, with the written version surviving context switches and onboarding a lot better",
+        "Map staleness — a written map that no longer matches the actual codebase after enough changes, which needs periodic revisiting rather than being trusted forever"
+      ],
+      "know_how": [
+        "Trace a real request or user action end to end through the codebase to build the map from an actual path, not just a folder listing",
+        "Ask an AI assistant to summarize a directory's responsibility as a first pass, then verify that summary against the actual code",
+        "Write the map down (even briefly) rather than relying on it staying accurate in memory across sessions",
+        "Identify the 3-5 core modules that most changes touch, and understand those in more depth than the long tail",
+        "Revisit and update the map after a significant structural change, rather than trusting a stale one"
+      ],
+      "habits": [
+        "Trace at least one real flow through the codebase before making a first change in an unfamiliar area",
+        "Keep a short written map current rather than relying purely on memory",
+        "Ask 'which module does this belong in' before starting any new task, using the map to answer it",
+        "Flag a task that doesn't map cleanly onto any existing module as a possible architecture signal, not just an awkward fit",
+        "Re-verify the map after a large AI-assisted refactor, since it's exactly the kind of change likely to invalidate it"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an unfamiliar 15,000-line codebase, produce a short written map (5-8 modules, each with a one-line responsibility) by tracing two real user flows, verified accurate by a maintainer or by re-reading the actual code.",
+      "common_failure": "Building a 'map' that's really just a copy of the folder structure — folders don't always correspond to real architectural boundaries, and a map based only on file layout misses the actual coupling and responsibility lines a new task needs to respect.",
+      "sources": ["software architecture literature (general)", "codebase onboarding practice writing"]
+    },
+    {
+      "id": "vibecoding.architecture.convention-enforcement",
+      "label": "Convention enforcement",
+      "tier": 2,
+      "cluster": "architecture",
+      "prereqs": ["vibecoding.architecture.codebase-map"],
+      "one_line": "Establish and enforce naming and structure conventions so AI-generated code lands where a human would expect it, not wherever the prompt implied.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Convention — an agreed pattern (naming, file structure, error handling shape) that isn't enforced by the compiler but is expected everywhere in the codebase",
+        "Linter rule as enforced convention — turning a convention into an automated lint rule so it's caught by tooling instead of relying on every reviewer noticing a violation",
+        "Convention documentation — writing conventions down (in a style guide or a standing instructions file) so both humans and AI sessions can find and follow them",
+        "Convention drift — a convention that was followed early in a project's life gradually eroding as more code, especially AI-generated code, ignores it",
+        "Convention vs preference — a convention worth enforcing (affects consistency, searchability, or correctness) versus a personal style preference not worth the enforcement overhead"
+      ],
+      "know_how": [
+        "Write down a convention the first time it needs to be explained more than once, rather than relying on tribal knowledge",
+        "Turn an enforceable convention into a lint rule where possible, rather than depending on manual review to catch violations",
+        "Point AI prompts at the convention documentation or an exemplary file, rather than describing the convention in prose each time",
+        "Audit a sample of recent AI-generated code periodically for convention drift",
+        "Distinguish which conventions are worth the enforcement cost from ones that are just preference, and only formalize the former"
+      ],
+      "habits": [
+        "Check new AI-generated code against documented conventions before accepting it, not just against correctness",
+        "Add a lint rule for any convention that's been manually flagged more than twice",
+        "Point prompts at a convention doc or exemplar file rather than re-explaining the convention in prose each time",
+        "Periodically sample recent code for convention drift rather than assuming it holds by default",
+        "Update convention documentation when a convention changes, rather than letting docs and practice diverge"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a codebase with an established naming convention, review five recently AI-generated files, identify any that violate the convention, and add a lint rule that would have caught the violation automatically.",
+      "common_failure": "Relying on conventions living only in a senior developer's head — an AI session has no access to unwritten tribal knowledge, and will generate plausible-looking code that violates a convention nobody told it about, because nobody wrote it down anywhere the assistant could see it.",
+      "sources": ["ESLint documentation", "Google style guides"]
+    },
+    {
+      "id": "vibecoding.architecture.dependency-boundaries",
+      "label": "Dependency boundaries",
+      "tier": 2,
+      "cluster": "architecture",
+      "prereqs": ["vibecoding.architecture.codebase-map"],
+      "one_line": "Define which modules may import which others, and catch an AI-generated change that crosses a boundary it shouldn't.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Import boundary — a rule about which modules may import which others, preventing an accidental coupling between parts of the system meant to stay independent",
+        "Layered architecture — a common boundary shape (UI depends on domain logic, domain logic doesn't depend on UI) that gives a concrete direction to check imports against",
+        "Boundary enforcement tooling — lint rules or dependency-graph checkers (dependency-cruiser, ESLint import rules) that catch a boundary violation automatically instead of relying on review",
+        "Circular dependency — two modules importing each other, directly or transitively, a specific and often AI-introduced violation that boundary rules are meant to catch",
+        "Boundary violation as an architecture smell — a violation that's hard to avoid without restructuring code often signals the boundary itself, not just the specific import, needs reconsidering"
+      ],
+      "know_how": [
+        "Define which modules may depend on which others explicitly, ideally as an enforced rule rather than a verbal convention",
+        "Run a dependency-graph tool to check for circular dependencies periodically, especially after multi-file AI changes",
+        "Review an AI-generated change that imports across a module boundary with extra scrutiny",
+        "Treat a boundary violation that's hard to avoid as a signal to reconsider the boundary, not just to grant an exception",
+        "Configure automated tooling to catch boundary violations rather than relying on manual review to notice them"
+      ],
+      "habits": [
+        "Check any new cross-module import against the defined boundary rules before accepting it",
+        "Run a circular dependency check after any multi-file AI-assisted change",
+        "Treat a persistent need to violate a boundary as an architecture question, not a one-off exception to quietly grant",
+        "Keep boundary rules enforced by tooling rather than relying on memory or review alone",
+        "Revisit boundary definitions when the codebase's actual shape has organically outgrown them"
+      ],
+      "know_why": {
+        "claim": "A hard-to-avoid boundary violation is a signal to reconsider the boundary, not to grant a one-off exception.",
+        "because": "Exceptions accumulate quietly, especially from AI-generated changes that don't have the context to recognize a boundary was meant to matter; each individual exception looks small, but the boundary stops meaning anything once enough have been granted.",
+        "disputed_by": "Some practitioners argue a small number of explicit, documented exceptions is healthier than repeatedly restructuring a boundary under pressure — a boundary that never bends can itself become an obstacle to shipping.",
+        "source": "Software architecture practice literature (dependency management and layered architecture writing)"
+      },
+      "school_weights": {},
+      "checkpoint": "Given an AI-generated change that imports a UI component directly into a domain logic module, identify the boundary violation, and decide whether to fix the import or reconsider the boundary, with a stated reason either way.",
+      "common_failure": "Granting a 'just this once' exception to a dependency boundary because the fix looks like more refactoring than the task warrants — the exception is rarely revisited, and the next AI session, seeing the precedent already in the codebase, follows it as if it were the actual convention.",
+      "sources": ["dependency-cruiser documentation", "layered architecture practice writing"]
+    },
+    {
+      "id": "vibecoding.architecture.tech-debt-triage",
+      "label": "Tech-debt triage",
+      "tier": 3,
+      "cluster": "architecture",
+      "prereqs": ["vibecoding.architecture.convention-enforcement"],
+      "one_line": "Distinguish AI-introduced shortcuts worth fixing now from ones safe to defer, and track the difference somewhere real.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "Tech debt — a shortcut or simplification taken to ship faster, incurring a cost (harder to change, more bug-prone) that must eventually be paid down or explicitly accepted",
+        "AI-introduced debt — a shortcut an assistant took without being asked to (a duplicated block instead of an abstraction, a missing edge case) versus one deliberately chosen for speed",
+        "Triage categories — fix now, track and defer, or explicitly accept, three distinct decisions that shouldn't collapse into either 'fix everything' or 'ignore everything'",
+        "Debt visibility — tracking known debt somewhere real (an issue tracker, a code comment with a ticket reference) instead of letting it live only in someone's memory",
+        "Interest rate of debt — some shortcuts get more expensive the longer they're left (a growing duplication) while others stay flat (an isolated one-off hack), a real factor in triage priority"
+      ],
+      "know_how": [
+        "Name a shortcut explicitly as debt the moment it's introduced, rather than letting it pass silently as just 'how it's done'",
+        "Decide and record whether a piece of debt is fix-now, tracked-for-later, or accepted, rather than leaving it undecided",
+        "Track deferred debt in a real, visible place (an issue, a tagged comment) rather than only in memory",
+        "Prioritize debt whose cost grows over time (duplicated logic that keeps getting copied again) over debt that stays isolated",
+        "Revisit tracked debt periodically rather than letting a 'later' list grow forever unreviewed"
+      ],
+      "habits": [
+        "Flag a shortcut out loud the moment it's noticed, rather than letting it silently become the pattern",
+        "Record every deferred piece of debt somewhere findable, not just in the memory of whoever noticed it",
+        "Periodically review the tracked debt list and re-triage rather than letting it grow indefinitely unread",
+        "Distinguish debt that's actively getting worse from debt that's stable before prioritizing",
+        "Treat an explicit 'accepted' decision as different from silence — silence isn't a decision"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given three AI-introduced shortcuts in a recent feature (a duplicated validation block, a missing edge case, a hardcoded value), triage each as fix-now, track, or accept, with a stated reason for each decision.",
+      "common_failure": "Letting AI-introduced shortcuts pass without any explicit triage decision — they don't get fixed because no one decided to fix them, and they don't get tracked because no one decided to defer them either, so the debt just silently accumulates as invisible risk.",
+      "sources": ["Ward Cunningham — technical debt metaphor (original formulation)", "software engineering debt-tracking practice"]
+    },
+    {
+      "id": "vibecoding.architecture.refactor-with-agent",
+      "label": "Refactor with an agent",
+      "tier": 5,
+      "cluster": "architecture",
+      "prereqs": ["vibecoding.architecture.dependency-boundaries", "vibecoding.tooling.multi-agent-coordination"],
+      "one_line": "Direct an agent through a cross-cutting refactor — rename, restructure — with checkpoints that catch a partial or inconsistent rewrite.",
+      "hours": 16,
+      "soft_prereqs": [],
+      "know_what": [
+        "Cross-cutting refactor — a change (a rename, a restructure, an interface change) that touches many files for a shared reason, distinct from a feature that touches many files for many reasons",
+        "Refactor checkpoint — an intermediate point in a multi-step refactor where the codebase is verified to still build and pass tests, so a partial refactor can be safely paused or rolled back",
+        "Partial rewrite risk — a refactor that changes some call sites but not others, leaving the codebase in an inconsistent, sometimes silently wrong, intermediate state",
+        "Refactor vs rewrite — a refactor changes structure while preserving behavior; conflating the two lets unintended behavior changes hide inside what should be a behavior-neutral change",
+        "Automated verification for refactors — a full type check and test suite run as the primary evidence a refactor preserved behavior, since manual review of every touched file doesn't scale to a large refactor"
+      ],
+      "know_how": [
+        "Define the refactor's exact scope and the behavior-preservation guarantee before starting, distinguishing it explicitly from a feature change",
+        "Break a large refactor into checkpointed steps, each independently buildable and testable, rather than one giant unverified pass",
+        "Run the full type check and test suite after each checkpoint, not just at the very end of the refactor",
+        "Grep for the old pattern after each step to confirm no call site was missed",
+        "Roll back to the last checkpoint rather than pushing forward if a step leaves the codebase in a broken, inconsistent state"
+      ],
+      "habits": [
+        "Run the full build and test suite after every checkpoint in a multi-step refactor, not just the final one",
+        "Grep for remnants of the old pattern after each refactor step",
+        "Treat any unexpected behavior change discovered mid-refactor as a stop-and-reassess signal, not a detail to note and continue past",
+        "Keep each refactor checkpoint small enough to roll back cleanly if something goes wrong",
+        "Confirm the refactor's actual diff matches its stated scope — structure changed, behavior didn't"
+      ],
+      "know_why": null,
+      "school_weights": { "agentic-autonomy": "high" },
+      "checkpoint": "Direct an agent through a rename that touches 15 files across 3 modules, in checkpointed steps each verified by a full build and test run, with the final result passing every test and matching the pre-refactor behavior exactly.",
+      "common_failure": "Letting an agent perform a large refactor in one unverified pass — a build and test run only at the very end means a partial or inconsistent rewrite (some call sites updated, others missed) isn't caught until the whole thing is already tangled together, making the actual point of failure hard to isolate.",
+      "sources": ["Martin Fowler — Refactoring", "Anthropic — building effective agents"]
+    },
+    {
+      "id": "vibecoding.architecture.scaling-decision",
+      "label": "Scaling decision",
+      "tier": 6,
+      "cluster": "architecture",
+      "prereqs": ["vibecoding.architecture.tech-debt-triage", "vibecoding.architecture.refactor-with-agent"],
+      "one_line": "Decide when a growing AI-assisted app needs a real architecture change — splitting a service, adding a queue — versus another prompt-and-patch cycle.",
+      "hours": 12,
+      "soft_prereqs": [],
+      "know_what": [
+        "Scaling decision — the choice between another incremental prompt-and-patch change and a real architecture change (splitting a service, adding a queue, introducing caching)",
+        "Premature scaling — over-engineering for load or complexity the app doesn't have yet, a real cost (time, complexity) paid against a hypothetical future need",
+        "Concrete scaling signal — an actual measured symptom (response time crossing a threshold, a specific query timing out under real load) versus a vague feeling that 'this won't scale'",
+        "Vertical vs horizontal scaling — adding more capacity to one instance versus adding more instances, a first, often simpler lever before a deeper architecture change is warranted",
+        "Reversibility of the decision — some scaling changes are easy to undo if wrong (adding a cache), others are expensive to reverse (splitting a monolith into services), which should weigh into how much evidence is needed before committing"
+      ],
+      "know_how": [
+        "Base a scaling decision on a concrete, measured signal (a specific slow query, a specific threshold crossed under real load), not a general feeling that the app might not scale",
+        "Try a simpler lever (an index, vertical scaling, a cache) before reaching for a bigger architecture change",
+        "Weigh the reversibility of a proposed scaling change against how confident the signal actually is",
+        "Distinguish a scaling problem that's actually a tech-debt problem (an unindexed query, an N+1 pattern) from one that genuinely needs new architecture",
+        "State explicitly what would have to be true for the decision to have been premature, as a check before committing to a big change"
+      ],
+      "habits": [
+        "Ask for the concrete measured signal before agreeing a scaling change is needed, not just a feeling that something 'won't scale'",
+        "Reach for the simplest lever (an index, a cache, vertical scaling) before a deeper architecture change",
+        "Weigh a scaling change's reversibility explicitly against the strength of the evidence for it",
+        "Check whether a perceived scaling problem is actually an unaddressed piece of tech debt in disguise",
+        "Write down what evidence would prove a scaling decision wrong, before committing to it"
+      ],
+      "know_why": {
+        "claim": "A scaling decision should be triggered by a concrete measured signal, not a general feeling that the current architecture 'won't scale'.",
+        "because": "A big architecture change (splitting a service, introducing a queue) carries real cost and risk of its own, and that cost is only worth paying against a specific, measured problem — building for hypothetical future load routinely adds complexity that never pays for itself because the assumed load never arrives in the shape anticipated.",
+        "disputed_by": "Some practitioners argue that for a small number of genuinely foreseeable scaling needs (e.g. a known upcoming traffic event), waiting for the measured signal is too late, and it's cheaper to build the capacity ahead of the concrete symptom.",
+        "source": "YAGNI / premature optimization discourse (Knuth on premature optimization; general software architecture practice)"
+      },
+      "school_weights": {},
+      "checkpoint": "Given a report that 'the app feels slow', find or demand the concrete measured signal behind it, and correctly decide whether a simple fix (an index, a cache) resolves it or whether it genuinely warrants a larger architecture change.",
+      "common_failure": "Committing to a large architecture change (splitting a service, adding a message queue) based on a vague sense that the current approach won't scale, without a concrete measured signal — the new complexity gets paid for immediately while the anticipated load problem may never actually materialize in the assumed shape.",
+      "sources": ["Donald Knuth — premature optimization", "software architecture practice writing on scaling triggers"]
+    }
+  ]
+}

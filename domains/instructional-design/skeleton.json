@@ -1,0 +1,116 @@
+{
+  "domain": "instructional-design",
+  "level": "serious amateur aiming at professional competence",
+  "schools": [
+    {
+      "id": "cognitive-load-first",
+      "name": "Cognitive Load First",
+      "optimises_for": "retention and transfer for novices working within tight working-memory limits",
+      "gives_up": "learner autonomy and the motivational payoff of open-ended discovery",
+      "quarrels_with": ["constructivist-discovery"]
+    },
+    {
+      "id": "constructivist-discovery",
+      "name": "Constructivist / Discovery",
+      "optimises_for": "authentic problem-solving, motivation, and ownership through learner-driven inquiry",
+      "gives_up": "efficiency and protection of novice working memory",
+      "quarrels_with": ["cognitive-load-first"]
+    },
+    {
+      "id": "backward-design-assessment-first",
+      "name": "Backward Design / Assessment-First",
+      "optimises_for": "tight alignment between the stated goal, the evidence collected, and the activities built",
+      "gives_up": "responsiveness to needs that emerge mid-course",
+      "quarrels_with": ["andragogy-self-directed"]
+    },
+    {
+      "id": "andragogy-self-directed",
+      "name": "Andragogy / Self-Directed",
+      "optimises_for": "learner ownership and relevance to the learner's own experience and immediate problems",
+      "gives_up": "standardization, predictable pacing, and comparability across learners",
+      "quarrels_with": ["backward-design-assessment-first", "behaviorist-mastery"]
+    },
+    {
+      "id": "behaviorist-mastery",
+      "name": "Behaviorist / Mastery Learning",
+      "optimises_for": "measurable mastery of a defined objective before a learner advances",
+      "gives_up": "nuance in higher-order transfer and tolerance for learner-chosen paths",
+      "quarrels_with": ["andragogy-self-directed", "constructivist-discovery"]
+    }
+  ],
+  "clusters": [
+    { "id": "analysis", "icon": "🔍", "name": "Analysis", "gist": "figuring out whether training is the right fix, for whom, and what the gap actually is" },
+    { "id": "objectives", "icon": "🎯", "name": "Objectives", "gist": "turning a fuzzy goal into a measurable target and mapping it before you build anything" },
+    { "id": "design", "icon": "🏗️", "name": "Design", "gist": "choosing and sequencing the instructional strategy that will actually close the gap" },
+    { "id": "assessment", "icon": "📊", "name": "Assessment", "gist": "proving the objective was met, fairly and validly" },
+    { "id": "media", "icon": "🎬", "name": "Media", "gist": "turning the design into built, deliverable material without breaking cognition" },
+    { "id": "facilitation", "icon": "🗣️", "name": "Facilitation", "gist": "running the live or async session and reading the room" },
+    { "id": "evaluation", "icon": "🔁", "name": "Evaluation", "gist": "finding out whether it worked and using that to revise" }
+  ],
+  "spine": [
+    "instructional-design.analysis.training-needs-analysis",
+    "instructional-design.objectives.write-learning-objectives",
+    "instructional-design.design.instructional-strategy-selection",
+    "instructional-design.assessment.build-assessment-blueprint",
+    "instructional-design.media.storyboard-and-build",
+    "instructional-design.facilitation.design-facilitation-plan",
+    "instructional-design.evaluation.pilot-and-revise"
+  ],
+  "nodes": [
+    { "id": "instructional-design.analysis.training-needs-analysis", "label": "Training Needs Analysis", "tier": 1, "cluster": "analysis", "prereqs": [], "one_line": "Tell whether a performance gap is actually a training problem before a budget gets spent building training for it.", "hours": 10 },
+    { "id": "instructional-design.analysis.stakeholder-interview", "label": "Stakeholder & SME Interviewing", "tier": 1, "cluster": "analysis", "prereqs": [], "one_line": "Pull the real task knowledge out of a sponsor or SME's head instead of the sanitized version they lead with.", "hours": 8 },
+    { "id": "instructional-design.analysis.audience-profile", "label": "Learner Audience Profiling", "tier": 1, "cluster": "analysis", "prereqs": [], "one_line": "Describe who is actually going to take the course — prior knowledge, motivation, access — well enough to design for them instead of yourself.", "hours": 8 },
+    { "id": "instructional-design.analysis.task-analysis", "label": "Task Analysis", "tier": 2, "cluster": "analysis", "prereqs": ["instructional-design.analysis.stakeholder-interview"], "one_line": "Break a job task into the exact steps and decision points an expert makes without noticing.", "hours": 12 },
+    { "id": "instructional-design.analysis.gap-and-root-cause", "label": "Gap & Root-Cause Diagnosis", "tier": 2, "cluster": "analysis", "prereqs": ["instructional-design.analysis.training-needs-analysis"], "one_line": "Sort a performance gap into its real cause — skill, knowledge, environment, or incentive — instead of defaulting to 'they need training.'", "hours": 10 },
+    { "id": "instructional-design.analysis.context-and-constraints", "label": "Delivery Context & Constraints Mapping", "tier": 2, "cluster": "analysis", "prereqs": ["instructional-design.analysis.audience-profile"], "one_line": "Map the time, budget, technology, and regulatory limits that will rule out design options before you propose them.", "hours": 8 },
+    { "id": "instructional-design.analysis.sme-collaboration-protocol", "label": "SME Collaboration Protocol", "tier": 3, "cluster": "analysis", "prereqs": ["instructional-design.analysis.stakeholder-interview", "instructional-design.analysis.task-analysis"], "one_line": "Run a review cycle with subject-matter experts that gets accurate sign-off without the scope creeping every round.", "hours": 12 },
+
+    { "id": "instructional-design.objectives.blooms-taxonomy", "label": "Bloom's Taxonomy Classification", "tier": 1, "cluster": "objectives", "prereqs": [], "one_line": "Name the cognitive level a goal actually requires, so 'understand' stops being where every objective quietly lands.", "hours": 6 },
+    { "id": "instructional-design.objectives.write-learning-objectives", "label": "Writing Measurable Learning Objectives", "tier": 2, "cluster": "objectives", "prereqs": ["instructional-design.analysis.training-needs-analysis", "instructional-design.objectives.blooms-taxonomy"], "one_line": "Write an objective specific enough that two different people would agree on whether a learner met it.", "hours": 12 },
+    { "id": "instructional-design.objectives.prerequisite-mapping", "label": "Prerequisite Mapping", "tier": 3, "cluster": "objectives", "prereqs": ["instructional-design.objectives.write-learning-objectives", "instructional-design.analysis.task-analysis"], "one_line": "Order objectives by what a learner genuinely needs first, not by the order topics appear in the source material.", "hours": 10 },
+    { "id": "instructional-design.objectives.backward-design-map", "label": "Backward Design Mapping", "tier": 3, "cluster": "objectives", "prereqs": ["instructional-design.objectives.write-learning-objectives"], "one_line": "Decide what counts as evidence of mastery before designing a single activity, so the activities can't drift from the goal.", "hours": 14 },
+    { "id": "instructional-design.objectives.objective-review-and-critique", "label": "Objective Review & Critique", "tier": 3, "cluster": "objectives", "prereqs": ["instructional-design.objectives.write-learning-objectives"], "one_line": "Catch an objective that's actually an activity, a topic, or an unmeasurable feeling wearing an objective's syntax.", "hours": 8 },
+    { "id": "instructional-design.objectives.curriculum-mapping", "label": "Curriculum Mapping", "tier": 4, "cluster": "objectives", "prereqs": ["instructional-design.objectives.prerequisite-mapping", "instructional-design.objectives.backward-design-map"], "one_line": "See the whole multi-module curriculum at once well enough to find the gaps and the redundant repeats.", "hours": 16 },
+    { "id": "instructional-design.objectives.competency-framework-alignment", "label": "Competency Framework Alignment", "tier": 5, "cluster": "objectives", "prereqs": ["instructional-design.objectives.curriculum-mapping"], "one_line": "Map a course's objectives onto an external competency or certification framework without warping either one to fit.", "hours": 14 },
+
+    { "id": "instructional-design.design.udl-principles", "label": "Universal Design for Learning Principles", "tier": 1, "cluster": "design", "prereqs": [], "one_line": "Build one lesson that already works for learners who'd otherwise need three separate accommodated versions.", "hours": 8 },
+    { "id": "instructional-design.design.instructional-strategy-selection", "label": "Instructional Strategy Selection", "tier": 3, "cluster": "design", "prereqs": ["instructional-design.objectives.write-learning-objectives", "instructional-design.design.udl-principles"], "one_line": "Pick direct instruction, worked examples, PBL, or simulation based on the objective's cognitive demand and the learner's novice/expert level, not habit.", "hours": 16 },
+    { "id": "instructional-design.design.worked-example-design", "label": "Worked Example Design", "tier": 4, "cluster": "design", "prereqs": ["instructional-design.design.instructional-strategy-selection"], "one_line": "Show a fully solved problem in a way that reduces a novice's cognitive load instead of just modeling the answer.", "hours": 14 },
+    { "id": "instructional-design.design.scaffolding-and-fading", "label": "Scaffolding & Fading", "tier": 4, "cluster": "design", "prereqs": ["instructional-design.design.instructional-strategy-selection"], "one_line": "Support a learner just enough to succeed at a task they couldn't do alone yet, then remove the support on a plan, not a whim.", "hours": 12 },
+    { "id": "instructional-design.design.sequencing-and-chunking", "label": "Sequencing & Chunking", "tier": 4, "cluster": "design", "prereqs": ["instructional-design.objectives.prerequisite-mapping", "instructional-design.design.udl-principles"], "one_line": "Break content into pieces sized to working memory and order them so each piece leans on the last.", "hours": 12 },
+    { "id": "instructional-design.design.active-learning-activity-design", "label": "Active Learning Activity Design", "tier": 5, "cluster": "design", "prereqs": ["instructional-design.design.worked-example-design", "instructional-design.design.scaffolding-and-fading"], "one_line": "Design an activity that makes a learner do the cognitive work the objective actually requires, not just read about it.", "hours": 18 },
+    { "id": "instructional-design.design.course-blueprint", "label": "Course Blueprint Assembly", "tier": 5, "cluster": "design", "prereqs": ["instructional-design.design.sequencing-and-chunking", "instructional-design.design.instructional-strategy-selection"], "one_line": "Produce the single document that specifies every module, activity, and assessment well enough that someone else could build from it.", "hours": 24 },
+
+    { "id": "instructional-design.assessment.formative-vs-summative", "label": "Formative vs. Summative Assessment", "tier": 1, "cluster": "assessment", "prereqs": [], "one_line": "Choose whether a check is meant to shape learning in progress or certify it's done, and stop treating a quiz as both.", "hours": 6 },
+    { "id": "instructional-design.assessment.write-selected-response-items", "label": "Writing Selected-Response Items", "tier": 2, "cluster": "assessment", "prereqs": ["instructional-design.assessment.formative-vs-summative"], "one_line": "Write a multiple-choice item whose distractors reflect real misconceptions instead of being obviously wrong.", "hours": 10 },
+    { "id": "instructional-design.assessment.write-performance-tasks", "label": "Writing Performance Tasks", "tier": 2, "cluster": "assessment", "prereqs": ["instructional-design.assessment.formative-vs-summative"], "one_line": "Design a task that requires demonstrating the skill itself, not recalling facts about it.", "hours": 12 },
+    { "id": "instructional-design.assessment.rubric-design", "label": "Rubric Design", "tier": 3, "cluster": "assessment", "prereqs": ["instructional-design.assessment.write-performance-tasks"], "one_line": "Write a rubric with performance levels distinct enough that two raters score the same work the same way.", "hours": 12 },
+    { "id": "instructional-design.assessment.build-assessment-blueprint", "label": "Assessment Blueprint Construction", "tier": 4, "cluster": "assessment", "prereqs": ["instructional-design.design.instructional-strategy-selection", "instructional-design.assessment.formative-vs-summative"], "one_line": "Produce a test blueprint that maps every item to an objective, so nothing on the assessment is untaught and nothing taught goes unmeasured.", "hours": 20 },
+    { "id": "instructional-design.assessment.validity-and-reliability-check", "label": "Validity & Reliability Checking", "tier": 5, "cluster": "assessment", "prereqs": ["instructional-design.assessment.build-assessment-blueprint", "instructional-design.assessment.rubric-design"], "one_line": "Check whether an assessment actually measures the objective it claims to, and whether it does so consistently.", "hours": 16 },
+    { "id": "instructional-design.assessment.item-analysis-and-revision", "label": "Item Analysis & Revision", "tier": 6, "cluster": "assessment", "prereqs": ["instructional-design.assessment.validity-and-reliability-check"], "one_line": "Read item-level data to find the question that's failing your best learners, and fix or cut it.", "hours": 14 },
+
+    { "id": "instructional-design.media.multimedia-learning-principles", "label": "Multimedia Learning Principles", "tier": 1, "cluster": "media", "prereqs": [], "one_line": "Apply Mayer's principles (coherence, signaling, redundancy) so added media reduces cognitive load instead of competing for it.", "hours": 8 },
+    { "id": "instructional-design.media.accessible-media-production", "label": "Accessible Media Production", "tier": 2, "cluster": "media", "prereqs": ["instructional-design.media.multimedia-learning-principles"], "one_line": "Produce media that's usable without sight, hearing, or a mouse, built in from the start instead of retrofitted.", "hours": 12 },
+    { "id": "instructional-design.media.authoring-tool-fluency", "label": "Authoring Tool Fluency", "tier": 2, "cluster": "media", "prereqs": ["instructional-design.media.multimedia-learning-principles"], "one_line": "Build interactive e-learning content in an authoring tool (Articulate, Rise, H5P) without hand-coding around its limits.", "hours": 16 },
+    { "id": "instructional-design.media.interactivity-design", "label": "Interactivity Design", "tier": 3, "cluster": "media", "prereqs": ["instructional-design.media.authoring-tool-fluency"], "one_line": "Design an interaction that requires a real decision from the learner, not a click-to-continue disguised as engagement.", "hours": 14 },
+    { "id": "instructional-design.media.video-and-screencast-production", "label": "Video & Screencast Production", "tier": 3, "cluster": "media", "prereqs": ["instructional-design.media.accessible-media-production"], "one_line": "Script, record, and edit instructional video short enough and clear enough that learners actually finish it.", "hours": 14 },
+    { "id": "instructional-design.media.storyboard-and-build", "label": "Storyboarding & Build", "tier": 5, "cluster": "media", "prereqs": ["instructional-design.assessment.build-assessment-blueprint", "instructional-design.media.multimedia-learning-principles"], "one_line": "Turn a course blueprint into built, sequenced material — storyboard first, then production — without losing the objective-to-content trace.", "hours": 30 },
+    { "id": "instructional-design.media.production-review-and-qa", "label": "Production Review & QA", "tier": 6, "cluster": "media", "prereqs": ["instructional-design.media.storyboard-and-build", "instructional-design.media.interactivity-design"], "one_line": "Catch the broken link, mistimed caption, and off-brand asset before a learner does.", "hours": 16 },
+
+    { "id": "instructional-design.facilitation.active-listening-and-questioning", "label": "Active Listening & Questioning", "tier": 1, "cluster": "facilitation", "prereqs": [], "one_line": "Ask the follow-up question that surfaces what a learner actually thinks instead of what they think you want to hear.", "hours": 8 },
+    { "id": "instructional-design.facilitation.discussion-design", "label": "Discussion Design", "tier": 2, "cluster": "facilitation", "prereqs": ["instructional-design.facilitation.active-listening-and-questioning"], "one_line": "Design a discussion prompt and structure that gets more than the same two people talking.", "hours": 10 },
+    { "id": "instructional-design.facilitation.feedback-delivery", "label": "Feedback Delivery", "tier": 2, "cluster": "facilitation", "prereqs": ["instructional-design.facilitation.active-listening-and-questioning"], "one_line": "Give feedback specific and timely enough that a learner knows exactly what to do differently next time.", "hours": 10 },
+    { "id": "instructional-design.facilitation.online-facilitation-technique", "label": "Online Facilitation Technique", "tier": 3, "cluster": "facilitation", "prereqs": ["instructional-design.facilitation.discussion-design"], "one_line": "Run a synchronous or asynchronous online session without the silence, lag, and disengagement that sink most of them.", "hours": 14 },
+    { "id": "instructional-design.facilitation.difficult-moment-management", "label": "Difficult Moment Management", "tier": 3, "cluster": "facilitation", "prereqs": ["instructional-design.facilitation.feedback-delivery", "instructional-design.facilitation.discussion-design"], "one_line": "Handle a derailing question, a dominant participant, or a room that's gone quiet without losing the session's objective.", "hours": 12 },
+    { "id": "instructional-design.facilitation.design-facilitation-plan", "label": "Facilitation Plan Design", "tier": 6, "cluster": "facilitation", "prereqs": ["instructional-design.media.storyboard-and-build", "instructional-design.facilitation.active-listening-and-questioning"], "one_line": "Write a facilitator's guide detailed enough that someone other than the designer could run the session and hit the same objectives.", "hours": 18 },
+    { "id": "instructional-design.facilitation.cohort-facilitation-at-scale", "label": "Cohort Facilitation at Scale", "tier": 7, "cluster": "facilitation", "prereqs": ["instructional-design.facilitation.design-facilitation-plan", "instructional-design.facilitation.online-facilitation-technique"], "one_line": "Facilitate the same course design across multiple cohorts or facilitators while keeping the experience consistent.", "hours": 24 },
+
+    { "id": "instructional-design.evaluation.kirkpatrick-model", "label": "Kirkpatrick's Four Levels", "tier": 1, "cluster": "evaluation", "prereqs": [], "one_line": "Place any evaluation question at the right level — reaction, learning, behavior, or results — instead of only ever measuring reaction.", "hours": 8 },
+    { "id": "instructional-design.evaluation.data-collection-instrument-design", "label": "Data Collection Instrument Design", "tier": 2, "cluster": "evaluation", "prereqs": ["instructional-design.evaluation.kirkpatrick-model"], "one_line": "Design a survey or observation instrument that measures the outcome you actually care about, not just what's easy to ask.", "hours": 12 },
+    { "id": "instructional-design.evaluation.lms-analytics-reading", "label": "LMS Analytics Reading", "tier": 2, "cluster": "evaluation", "prereqs": ["instructional-design.evaluation.kirkpatrick-model"], "one_line": "Read LMS completion, time-on-task, and drop-off data well enough to tell a real design problem from noise.", "hours": 10 },
+    { "id": "instructional-design.evaluation.level3-transfer-measurement", "label": "Level 3 Transfer Measurement", "tier": 3, "cluster": "evaluation", "prereqs": ["instructional-design.evaluation.data-collection-instrument-design"], "one_line": "Measure whether a skill actually transferred to the job, not just whether the learner passed the course.", "hours": 16 },
+    { "id": "instructional-design.evaluation.roi-and-business-case", "label": "ROI & Business Case Building", "tier": 4, "cluster": "evaluation", "prereqs": ["instructional-design.evaluation.level3-transfer-measurement", "instructional-design.evaluation.lms-analytics-reading"], "one_line": "Build the business case that connects training spend to a measurable organizational outcome a sponsor cares about.", "hours": 16 },
+    { "id": "instructional-design.evaluation.continuous-improvement-cycle", "label": "Continuous Improvement Cycle", "tier": 5, "cluster": "evaluation", "prereqs": ["instructional-design.evaluation.roi-and-business-case", "instructional-design.evaluation.data-collection-instrument-design"], "one_line": "Turn pilot and evaluation data into a scheduled revision instead of a course that ships once and calcifies.", "hours": 14 },
+    { "id": "instructional-design.evaluation.pilot-and-revise", "label": "Piloting & Revision", "tier": 7, "cluster": "evaluation", "prereqs": ["instructional-design.facilitation.design-facilitation-plan", "instructional-design.evaluation.kirkpatrick-model"], "one_line": "Run a course through one real cohort before full launch, and use what breaks to revise it.", "hours": 24 }
+  ]
+}

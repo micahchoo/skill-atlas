@@ -1,0 +1,314 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-006",
+  "ids": [
+    "vibecoding.tooling.inline-assistant-use",
+    "vibecoding.tooling.chat-to-code-loop",
+    "vibecoding.tooling.multi-file-agent-tasks",
+    "vibecoding.tooling.tool-permission-scoping",
+    "vibecoding.tooling.command-execution-review",
+    "vibecoding.tooling.custom-agent-instructions",
+    "vibecoding.tooling.autonomous-task-delegation",
+    "vibecoding.tooling.multi-agent-coordination"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.tooling.inline-assistant-use",
+      "label": "Inline assistant use",
+      "tier": 1,
+      "cluster": "tooling",
+      "prereqs": [],
+      "one_line": "Use an inline AI coding assistant — completion, inline edit — inside the editor for single-file changes.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Inline completion — ghost-text suggestions as you type (Copilot, Cursor Tab), accepted or dismissed per keystroke, the lightest-weight form of AI assistance",
+        "Inline edit — selecting a block of code and asking for a targeted rewrite in place, distinct from a full chat conversation",
+        "Suggestion acceptance rate as a signal — noticing how often you're rejecting suggestions, which says something about whether the tool is tuned to the codebase's conventions",
+        "Latency-accuracy tradeoff — inline tools optimize for speed over the deeper reasoning a chat-based session can do, appropriate for small, local edits, not larger changes",
+        "Autocomplete vs intent — an inline suggestion completing what's typically written next versus what this specific task actually needs, a gap worth noticing"
+      ],
+      "know_how": [
+        "Accept an inline suggestion only after reading it, not by reflex",
+        "Reject a suggestion that pattern-matches to something generic rather than the actual local context",
+        "Use inline edit for small, local, mechanical changes and switch to a chat session for anything needing broader context",
+        "Notice repeated wrong suggestions in one area as a signal the assistant lacks context there, not just bad luck",
+        "Keep an eye on suggestions for the same near-miss pattern (off-by-one, wrong variable) to catch it before it becomes a habit of quick acceptance"
+      ],
+      "habits": [
+        "Read every inline suggestion before accepting it, especially longer ones",
+        "Switch to a chat-based tool once an inline edit starts needing more than one file of context",
+        "Notice and mentally flag any suggestion that seems to ignore visible local conventions",
+        "Slow down acceptance speed on unfamiliar files compared to ones you know well",
+        "Treat a string of rejected suggestions in a row as a cue to add more context rather than keep tabbing through"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an editor with inline AI completion enabled, write a small function while correctly accepting useful suggestions and rejecting at least one plausible-looking but subtly wrong one.",
+      "common_failure": "Accepting inline suggestions by reflex because they're fast and usually right — the rare wrong one (a swapped argument order, a slightly wrong comparison) slips through exactly because acceptance became automatic rather than reviewed.",
+      "sources": ["GitHub Copilot docs", "Cursor documentation"]
+    },
+    {
+      "id": "vibecoding.tooling.chat-to-code-loop",
+      "label": "Chat-to-code loop",
+      "tier": 1,
+      "cluster": "tooling",
+      "prereqs": [],
+      "one_line": "Run the basic chat loop: describe a change, receive a diff or file, apply it, check the result.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Chat-to-code loop — describe, receive, apply, check: the basic cycle of any chat-based coding assistant interaction",
+        "Apply step — the moment a proposed diff or file actually gets written to disk, distinct from the assistant merely describing what it would do",
+        "Copy-paste vs tool-integrated apply — manually moving code from a chat window versus a tool that applies a diff directly, with different risks of transcription error",
+        "Turn-by-turn verification — checking the result after each turn of the loop rather than running several turns unchecked and reviewing at the end",
+        "Loop termination — recognizing when the loop has actually converged on a correct result versus when it's cycling without making real progress"
+      ],
+      "know_how": [
+        "Describe one change, apply it, and check the result before describing the next change",
+        "Verify the applied result matches what was actually proposed, not just trust the apply step worked",
+        "Check for a wrong or partial apply (a diff that didn't fully land) before continuing the loop",
+        "Recognize loop stagnation — repeated turns with no real progress — and stop rather than continuing indefinitely",
+        "Keep each turn's ask narrow enough that checking its result is fast"
+      ],
+      "habits": [
+        "Check the result after every single turn, not after a batch of several",
+        "Confirm an applied diff actually landed as described before building on it",
+        "Stop the loop and reassess once two turns in a row haven't made real progress",
+        "Keep asks in the loop small enough to verify quickly, splitting a big ask into turns",
+        "Treat a loop where each turn expands scope instead of narrowing it as a sign to stop and re-decompose"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Run a five-turn chat-to-code loop implementing a small feature, verifying the applied result after each turn, and correctly recognize and stop a sixth turn that would just repeat a prior failed attempt.",
+      "common_failure": "Running several turns of the loop back to back without checking in between, so a bad apply in turn two silently becomes the foundation every later turn builds on, and the error isn't caught until a much bigger review at the end.",
+      "sources": ["Anthropic — Claude Code best practices", "Cursor documentation"]
+    },
+    {
+      "id": "vibecoding.tooling.multi-file-agent-tasks",
+      "label": "Multi-file agent tasks",
+      "tier": 2,
+      "cluster": "tooling",
+      "prereqs": ["vibecoding.tooling.chat-to-code-loop"],
+      "one_line": "Direct an agentic coding tool to make a coordinated change across multiple files in a single task.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "Multi-file agent task — a single instruction that results in coordinated edits across several files, requiring the agent to maintain consistency between them",
+        "Cross-file consistency — a rename, type change, or interface update correctly propagated to every caller, not just the file where it was defined",
+        "Task scope for multi-file changes — naming which files are in scope up front, since an agent's search for 'everywhere this needs to change' can over- or under-reach",
+        "Partial application risk — a multi-file change landing correctly in some files but not others, leaving the codebase in an inconsistent, non-compiling state",
+        "Search-then-edit pattern — an agent finding every relevant location before editing, versus editing opportunistically as it encounters references, with different risk of missing a spot"
+      ],
+      "know_how": [
+        "State the scope of a multi-file change explicitly (which files, which callers) before letting an agent search freely",
+        "Run a build or type check immediately after a multi-file change to catch any file that wasn't updated consistently",
+        "Ask the agent to list every file it identified as needing a change before it starts editing, so omissions are visible up front",
+        "Review every touched file in a multi-file diff, not just the one that was the nominal target",
+        "Grep for the old pattern after a rename or interface change to confirm nothing was missed"
+      ],
+      "habits": [
+        "Run a full build or type check immediately after any multi-file agent change",
+        "Search for the old identifier or pattern after a rename to confirm the change was complete",
+        "Read the list of touched files before the diff content, checking it matches expectations",
+        "Treat a multi-file change that touches fewer files than expected as a signal something was missed, not a pleasant surprise",
+        "Confirm the touched-file count roughly matches a manual grep of where the old pattern actually appeared"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an interface used in 6 files, direct an agent to change its shape and confirm all 6 call sites were updated consistently by running a full type check afterward.",
+      "common_failure": "Trusting an agent's own claim that a rename or interface change is complete — a multi-file task can miss a caller in a file the agent didn't think to search, and the gap only surfaces later as a type error or runtime failure in an unrelated part of the app.",
+      "sources": ["Anthropic — building effective agents", "software engineering writing on large-scale refactors"]
+    },
+    {
+      "id": "vibecoding.tooling.tool-permission-scoping",
+      "label": "Tool permission scoping",
+      "tier": 2,
+      "cluster": "tooling",
+      "prereqs": ["vibecoding.tooling.inline-assistant-use"],
+      "one_line": "Configure what an agent may do unattended — read-only, edit, run commands — and set that scope deliberately per task.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Permission scope — the explicit set of actions an agent is allowed to take unattended (read-only, file edit, command execution, network access), configured per task rather than granted globally",
+        "Read-only mode — an agent that can inspect and propose changes but not apply them, useful for exploration or a first pass before granting write access",
+        "Allowlist vs denylist — permitting specific known-safe commands versus blocking specific known-dangerous ones, with different failure modes when a new, unlisted case appears",
+        "Scope-per-task vs scope-per-session — granting broad permissions once for a whole session versus re-scoping for each distinct task within it, a real tradeoff between friction and safety",
+        "Elevated-risk actions — file deletion, force-push, package installation, and similar actions that warrant a narrower default scope than routine file edits"
+      ],
+      "know_how": [
+        "Set an agent's permission scope deliberately before starting a task, rather than accepting whatever the tool defaults to",
+        "Use read-only or plan-only mode for exploration or a first pass on an unfamiliar area before granting write access",
+        "Narrow the scope for any task involving deletion, force operations, or installing new dependencies",
+        "Re-evaluate scope per task rather than leaving a broad grant in place indefinitely out of convenience",
+        "Check what scope was actually granted after configuring it, rather than assuming the configuration took effect as intended"
+      ],
+      "habits": [
+        "Default to the narrowest scope that lets a task get done, widening only when a concrete need appears",
+        "Treat any request for command-execution or network scope with more scrutiny than a request for file-edit scope",
+        "Re-check granted scope before starting a new, different task rather than assuming yesterday's scope still fits",
+        "Note which scope a task actually needed after finishing it, to calibrate the next similar task's default",
+        "Revoke or narrow a broad grant once the task that needed it is finished, rather than leaving it standing"
+      ],
+      "know_why": null,
+      "school_weights": { "manual-gate": "high", "agentic-autonomy": "low" },
+      "checkpoint": "Given a task that only requires reading and proposing changes, configure an agent's permission scope to read-only/propose-only, and verify it cannot apply an edit without further explicit approval.",
+      "common_failure": "Granting broad edit-and-execute permissions by default because narrowing them per task feels like friction — the cost of that convenience shows up the one time a task goes sideways and the agent had more reach than the task actually needed.",
+      "sources": ["Anthropic — Claude Code permissions documentation", "principle of least privilege (security engineering)"]
+    },
+    {
+      "id": "vibecoding.tooling.command-execution-review",
+      "label": "Command execution review",
+      "tier": 2,
+      "cluster": "tooling",
+      "prereqs": ["vibecoding.tooling.chat-to-code-loop"],
+      "one_line": "Review a shell command an agent proposes before letting it run, especially anything destructive or network-facing.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Proposed command — a shell command an agent wants to run, which should be read and understood before approval just like a code diff",
+        "Destructive command class — deletion, force-push, database drops, and similar commands whose effects are hard or impossible to undo, warranting a higher bar of scrutiny",
+        "Network-facing command — a command that sends data externally (curl to an unfamiliar host, a package install from an unusual source), worth checking the destination and payload of",
+        "Command intent vs command effect — what a command is meant to do versus what it will actually do, which can diverge with a subtly wrong flag or argument",
+        "Approval fatigue — the tendency to rubber-stamp command approvals after many uneventful ones in a row, exactly when a dangerous one is most likely to slip through"
+      ],
+      "know_how": [
+        "Read a proposed command's full text, including flags, before approving it, not just its general shape",
+        "Look up an unfamiliar flag or command before approving it rather than assuming it's safe because the rest of the command looks routine",
+        "Check the target of any network-facing command (the URL, the host) explicitly",
+        "Pause longer on any command in the destructive class (rm, drop, force-push) than on a routine read or build command",
+        "Notice and counteract approval fatigue by re-reading commands carefully even after many safe approvals in a row"
+      ],
+      "habits": [
+        "Read every proposed command in full before approving, regardless of how many safe ones preceded it",
+        "Treat any destructive or network-facing command as worth extra scrutiny by default",
+        "Look up unfamiliar flags rather than assuming they're benign",
+        "Notice when approvals are starting to feel automatic and deliberately slow back down",
+        "Keep a mental or written list of command patterns that always deserve a second look (rm, force-push, drop, curl to a new host)"
+      ],
+      "know_why": null,
+      "school_weights": { "manual-gate": "high" },
+      "checkpoint": "Given a sequence of ten proposed commands, nine routine and one a disguised destructive command (e.g. rm -rf with a wildcard), correctly identify and block the destructive one before it runs.",
+      "common_failure": "Approving commands quickly after a long streak of safe ones, exactly the condition under which a genuinely dangerous command is most likely to be waved through without being read carefully.",
+      "sources": ["Anthropic — Claude Code permissions documentation", "software engineering writing on automation approval fatigue"]
+    },
+    {
+      "id": "vibecoding.tooling.custom-agent-instructions",
+      "label": "Custom agent instructions",
+      "tier": 3,
+      "cluster": "tooling",
+      "prereqs": ["vibecoding.tooling.multi-file-agent-tasks"],
+      "one_line": "Write persistent project instructions — a CLAUDE.md or AGENTS.md-style file — that steer every future agent session's defaults.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Standing instructions file — a file (CLAUDE.md, AGENTS.md, .cursorrules) an agent reads automatically at the start of every session, setting defaults without re-stating them each time",
+        "Project conventions as instructions — naming, testing, and structural conventions written down once so every future session follows them without being told per prompt",
+        "Instruction scope — what belongs in a standing file (durable, cross-session conventions) versus what belongs in a one-off prompt (task-specific detail)",
+        "Instruction drift — a standing instructions file going stale as the project's actual conventions evolve, producing agent output that follows outdated guidance",
+        "Instruction precedence — how a standing instruction interacts with a conflicting one-off prompt instruction, and which should win (usually the more specific, current one)"
+      ],
+      "know_how": [
+        "Write down a convention in the standing instructions file the second time it has to be repeated in a prompt, not the fifth",
+        "Keep the instructions file scoped to durable, cross-session facts, not task-specific detail that belongs in a single prompt",
+        "Review and update the instructions file when project conventions actually change, not just when writing it the first time",
+        "Test that a fresh session actually follows a new instruction before assuming it's absorbed",
+        "Keep the file short enough to be read and internalized, not a dumping ground for everything ever said"
+      ],
+      "habits": [
+        "Add a new convention to the standing file the moment it's had to be repeated across sessions",
+        "Periodically re-read the instructions file for anything that's now stale or contradicted by current code",
+        "Verify a new instruction actually changes agent behavior in a fresh session before trusting it's working",
+        "Keep the file organized enough that a specific convention can be found quickly, not buried in an undifferentiated list",
+        "Remove an instruction from the file once it no longer reflects how the project actually works"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a convention that's had to be manually restated in three separate sessions, add it to the standing instructions file and confirm a fresh session follows it without being told again.",
+      "common_failure": "Letting the instructions file grow into an unmaintained dumping ground of every past correction, most of them stale — a bloated, contradictory instructions file gets followed less reliably than a short, current one, defeating its purpose.",
+      "sources": ["Anthropic — Claude Code best practices (CLAUDE.md)", "AGENTS.md convention documentation"]
+    },
+    {
+      "id": "vibecoding.tooling.autonomous-task-delegation",
+      "label": "Autonomous task delegation",
+      "tier": 3,
+      "cluster": "tooling",
+      "prereqs": ["vibecoding.tooling.tool-permission-scoping", "vibecoding.tooling.command-execution-review"],
+      "one_line": "Hand a bounded multi-step task to an agent to run unattended, with a clear definition of done and a way to check the result.",
+      "hours": 12,
+      "soft_prereqs": [],
+      "know_what": [
+        "Bounded task — a task with a clear start, a clear definition of done, and a clear scope, the specific shape suitable for unattended agent delegation",
+        "Definition of done — the concrete, checkable condition that tells you (and the agent) the task is actually finished, stated before delegation, not inferred afterward",
+        "Unattended run — an agent working through a multi-step task without a human approving each individual step, relying instead on its configured permission scope and its own judgment",
+        "Result verification vs process trust — checking the actual outcome of a delegated task against its definition of done, rather than trusting that the agent's own summary of what it did is accurate",
+        "Delegation failure modes — a task that was too loosely bounded (agent goes off in an unintended direction) versus one that was too tightly scoped (agent gets stuck unable to complete it), both signals for how to write the next delegation"
+      ],
+      "know_how": [
+        "Write a clear definition of done before delegating a task, not after the agent has already started",
+        "Scope the task narrowly enough that 'done' is unambiguous, splitting an ambiguous task into bounded pieces first",
+        "Check the actual result against the definition of done after the run, not just read the agent's self-report",
+        "Review the diff and any side effects (files created, commands run) of an unattended run in full before accepting it",
+        "Note whether a delegated task went off-track due to scope or due to an unclear definition of done, to calibrate the next delegation"
+      ],
+      "habits": [
+        "Write the definition of done before delegating, every time, even for a task that feels obvious",
+        "Verify a completed delegated task against its actual result, not against the agent's summary of the result",
+        "Review the full diff and command history of an unattended run before accepting it",
+        "Treat an agent's self-reported 'done' as a claim to check, not a fact",
+        "Delegate a smaller, more tightly bounded version of a task after a run that went off-track, rather than repeating the same loose delegation"
+      ],
+      "know_why": {
+        "claim": "A delegated task's definition of done should be written before the agent starts, not inferred from what it produces.",
+        "because": "Without a definition fixed in advance, 'done' silently becomes whatever the agent produced, and a plausible-looking result gets accepted even when it diverges from what was actually needed — the same confirmation-bias risk as grading your own exam after seeing the answer.",
+        "disputed_by": "The vibe-loop school argues that for exploratory tasks, the definition of done genuinely isn't knowable until you've seen a first attempt, and prefers delegating loosely and refining scope based on what comes back.",
+        "source": "Anthropic — building effective agents; practitioner writing on agent task delegation"
+      },
+      "school_weights": { "agentic-autonomy": "high", "manual-gate": "low" },
+      "checkpoint": "Write a definition of done for a bounded multi-step task, delegate it to an agent to run unattended, and correctly judge whether the result satisfies the definition — not just whether the agent claims success.",
+      "common_failure": "Delegating a task with only a vague goal and no definition of done, then accepting whatever the agent produces because it looks plausible and the agent reports success — without a concrete bar, there's no way to distinguish a correct result from a confident-looking wrong one.",
+      "sources": ["Anthropic — building effective agents", "practitioner writing on autonomous coding agents"]
+    },
+    {
+      "id": "vibecoding.tooling.multi-agent-coordination",
+      "label": "Multi-agent coordination",
+      "tier": 4,
+      "cluster": "tooling",
+      "prereqs": ["vibecoding.tooling.autonomous-task-delegation"],
+      "one_line": "Run multiple agents on independent parts of a codebase in parallel without their changes stepping on each other.",
+      "hours": 14,
+      "soft_prereqs": [],
+      "know_what": [
+        "Parallel agent run — multiple agents working simultaneously on different parts of a codebase, each with its own session and context",
+        "Partition boundary — the division of work (by directory, by module, by feature) chosen so parallel agents' changes don't overlap or conflict",
+        "Merge conflict at the task level — two agents both needing to touch the same shared file, the specific risk that makes partition choice the central design decision of parallel delegation",
+        "Shared-state hazard — a file, config, or interface that multiple parallel tasks depend on, needing either to be excluded from all of them or explicitly coordinated",
+        "Coordination overhead — the real cost (defining partitions, reviewing more surface area at once, resolving any overlap) that has to be smaller than the time saved by running in parallel for it to be worth it"
+      ],
+      "know_how": [
+        "Partition work along real module or directory boundaries before starting parallel agents, not by arbitrary task count",
+        "Identify shared files or interfaces up front and exclude them from parallel tasks, or handle them in a separate, sequential step",
+        "Review each parallel agent's diff separately before merging, rather than reviewing the combined result as one undifferentiated blob",
+        "Run each parallel task on its own branch so a conflict, if one occurs, surfaces as a normal git merge conflict rather than silent overwrite",
+        "Compare the actual time saved against the coordination overhead honestly, since parallelizing a task with heavy shared state can cost more than it saves"
+      ],
+      "habits": [
+        "Choose partition boundaries before launching parallel agents, never split work arbitrarily after the fact",
+        "Check for a shared file or interface touched by more than one parallel task before merging",
+        "Review each agent's branch independently before combining, not just the final merged diff",
+        "Reconsider parallelizing the next similar task if this one's coordination overhead exceeded its time savings",
+        "Default to sequential delegation unless a partition is genuinely obvious, rather than parallelizing by default"
+      ],
+      "know_why": {
+        "claim": "Parallel agents are only worth the coordination overhead when the work partitions along real, independent boundaries.",
+        "because": "The cost of running agents in parallel isn't the agent time, it's the human cost of defining non-overlapping partitions and reviewing multiple simultaneous diffs; when the work doesn't actually decompose cleanly, that overhead exceeds whatever time parallel execution saved.",
+        "disputed_by": "Some agentic-autonomy practitioners argue that with good tooling (automatic conflict detection, isolated worktrees), the partitioning overhead is small enough that defaulting to parallel agents for any multi-part task is still a net win, even when boundaries are imperfect.",
+        "source": "Practitioner writing on multi-agent coding workflows (Anthropic's agentic coding guidance; community writeups on parallel agent orchestration)"
+      },
+      "school_weights": { "agentic-autonomy": "high" },
+      "checkpoint": "Given a task naturally split across two independent modules, run two agents in parallel on separate branches with no shared-file overlap, and merge both without a conflict.",
+      "common_failure": "Splitting a task into 'parallel' pieces that both need to touch the same shared config or interface file — the agents don't coordinate with each other, so one's change silently overwrites or conflicts with the other's, and the time saved by parallelizing is lost resolving the collision.",
+      "sources": ["Anthropic — building effective agents", "community writeups on multi-agent coding orchestration"]
+    }
+  ]
+}

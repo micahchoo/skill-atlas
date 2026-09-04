@@ -1,25 +1,26 @@
 /**
  * tree-client.ts — the domain page at three altitudes (zero framework).
  *
- * Semantic zoom in the Arcanum skin (issues/011): the overview shows
- * disciplines (clusters), a cluster opens as a bottom-up talent board with a
- * preview sidebar, a node opens as a full reading page. Text renders at
- * readable size or not at all — you descend to see more, you never squint.
+ * Semantic zoom in the Arcanum skin (issues/011): the overview shows the main
+ * quest as a route plus the disciplines; a discipline opens as a bottom-up
+ * talent board with an inspector; a skill opens as a full reading page.
+ * Text renders at readable size or not at all: you descend to see more.
  *
- * URL contract (ticket 004, extended): one shared URLSearchParams so
- * ?cluster= / ?node= / ?sel= / ?school= compose by construction; unknown ids
- * are dropped leniently. Navigation is URL-native: every navigational control
- * is a real <a href> (middle-click, share, keyboard for free), descents push
- * history entries (Back ascends), and popstate re-renders from the URL.
- * The school lens (ticket 007) is strictly additive: no school_weights entry
- * for the active school ⇒ the socket is untouched.
+ * Rendering contract: an ALTITUDE change rebuilds the page (inside a view
+ * transition when the browser and the reader allow it); a change WITHIN an
+ * altitude (selection, lens) patches the DOM in place, so focus, scroll and
+ * the drawn edges all survive the click.
+ *
+ * URL contract (ticket 004, extended): one URLSearchParams so ?cluster= /
+ * ?node= / ?sel= / ?school= compose by construction; unknown ids drop
+ * leniently. Every navigational control is a real <a href>; descents push
+ * history (Back ascends); popstate re-renders from the URL.
  */
 import { buildGraph, type SkillGraph, type Edge } from '../lib/graph';
 import type { BodyNode, DomainData, MergedNode, SchoolWeight } from '../lib/types';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const ICON_FALLBACK = '✦';
-/** Site root under the deploy base path (GitHub Pages serves at /skill-atlas/). */
 const ROOT = import.meta.env.BASE_URL.replace(/\/+$/, '') + '/';
 
 interface State {
@@ -36,7 +37,38 @@ let app: HTMLElement;
 let params = new URLSearchParams(window.location.search);
 const state: State = { cluster: null, node: null, sel: null, school: null, flash: null };
 
-/** Lenient URL parse: unknown ids drop, node implies its cluster, sel lives in its cluster. */
+/** What is mounted right now: 'overview' | 'board:<cid>' | 'node:<id>'. */
+let mounted = '';
+/** The patch each navigational anchor applies, so hrefs can be refreshed after an in-place patch. */
+const PATCHES = new WeakMap<HTMLAnchorElement, Partial<State>>();
+
+/* ------------------------------------------------------------ traveler log */
+
+const LS_PREFIX = 'atlas.read.';
+let READ: Set<string> = new Set();
+function readLog(): string[] {
+  try {
+    const raw = localStorage.getItem(LS_PREFIX + G.domain);
+    if (!raw) return [];
+    const a = JSON.parse(raw) as unknown;
+    return Array.isArray(a) ? a.filter((x): x is string => typeof x === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+function recordRead(id: string): void {
+  if (!BODY.get(id)) return;
+  try {
+    const a = readLog().filter((x) => x !== id);
+    a.push(id);
+    localStorage.setItem(LS_PREFIX + G.domain, JSON.stringify(a));
+  } catch {
+    /* private browsing: the record simply does not persist */
+  }
+}
+
+/* ------------------------------------------------------------------ URL */
+
 function readState(): void {
   state.cluster = params.get('cluster');
   state.node = params.get('node');
@@ -58,6 +90,13 @@ function writeParams(q: URLSearchParams, s: State): string {
   return `${window.location.pathname}${q.toString() ? `?${q}` : ''}`;
 }
 
+function hrefFor(patch: Partial<State>): string {
+  const s = { ...state, ...patch };
+  if (s.node) s.cluster = G.byId.get(s.node)!.cluster;
+  if (s.sel && G.byId.get(s.sel)?.cluster !== s.cluster) s.sel = null;
+  return writeParams(new URLSearchParams(params), s);
+}
+
 export function initAtlas(): void {
   const dataEl = document.getElementById('domain-data');
   if (!dataEl) throw new Error('missing embedded domain data');
@@ -67,36 +106,38 @@ export function initAtlas(): void {
   app = document.getElementById('app') as HTMLElement;
 
   readState();
-  history.replaceState(null, '', writeParams(params, state)); // normalize dropped ids, no entry
+  history.replaceState(null, '', writeParams(params, state));
   window.addEventListener('popstate', () => {
     params = new URLSearchParams(window.location.search);
     state.flash = null;
     readState();
-    render();
+    render(false);
   });
   window.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    if (state.node) go({ node: null });
+    if (state.node) go({ node: null, sel: state.node });
     else if (state.sel) go({ sel: null });
     else if (state.cluster) go({ cluster: null });
   });
-  window.addEventListener('resize', () => render());
-  render();
+  let raf = 0;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => redrawEdges());
+  });
+  document.fonts?.ready.then(() => redrawEdges());
+  render(false);
 }
 
 function go(patch: Partial<State>): void {
   Object.assign(state, patch);
   if (state.node) state.cluster = G.byId.get(state.node)!.cluster;
-  // a board selection only lives inside its own cluster
   if (state.sel && G.byId.get(state.sel)?.cluster !== state.cluster) state.sel = null;
   const url = writeParams(params, state);
-  if (url !== `${window.location.pathname}${window.location.search}`) {
-    history.pushState(null, '', url); // Back ascends the way you came
-  }
-  render();
+  if (url !== `${window.location.pathname}${window.location.search}`) history.pushState(null, '', url);
+  render(true);
 }
 
-/* ---------------------------------------------------------------- helpers */
+/* -------------------------------------------------------------- helpers */
 
 function el(tag: string, cls?: string, html?: string): HTMLElement {
   const e = document.createElement(tag);
@@ -108,26 +149,24 @@ const esc = (s: unknown): string =>
   String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const cname = (cid: string): string => G.clusterMeta.get(cid)?.name ?? cid;
 const icon = (cid: string): string => G.clusterMeta.get(cid)?.icon ?? ICON_FALLBACK;
+const humanize = (slug: string): string => slug.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
+const vt = (prefix: string, id: string): string => `${prefix}-${id.replace(/[^a-zA-Z0-9_-]/g, '-')}`;
 const clusterNodes = (cid: string): MergedNode[] => G.nodes.filter((n) => n.cluster === cid);
-const coverage = (cid: string): { total: number; bodies: number } => {
-  const ns = clusterNodes(cid);
-  return { total: ns.length, bodies: ns.filter((n) => n.hasBody).length };
-};
+const hours = (h: number): string => `${h} h`;
 
-/** The URL go(patch) would land on — same invariants, no mutation. */
-function hrefFor(patch: Partial<State>): string {
-  const s = { ...state, ...patch };
-  if (s.node) s.cluster = G.byId.get(s.node)!.cluster;
-  if (s.sel && G.byId.get(s.sel)?.cluster !== s.cluster) s.sel = null;
-  return writeParams(new URLSearchParams(params), s);
+function leadHtml(x: string): string {
+  const i = x.indexOf('—');
+  if (i <= 0) return `<li>${esc(x)}</li>`;
+  return `<li><b>${esc(x.slice(0, i).trim())}</b> ${esc(x.slice(i).trim())}</li>`;
 }
 
-/** Navigational anchor: real href for middle-click/share/keyboard, SPA go() on plain click. */
+/** Navigational anchor: real href for middle-click, share and keyboard; SPA go() on plain click. */
 function navA(cls: string | undefined, html: string, patch: Partial<State>, before?: () => void): HTMLAnchorElement {
   const a = document.createElement('a');
   if (cls) a.className = cls;
   a.innerHTML = html;
   a.href = hrefFor(patch);
+  PATCHES.set(a, patch);
   a.addEventListener('click', (e) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.defaultPrevented) return;
     e.preventDefault();
@@ -136,58 +175,125 @@ function navA(cls: string | undefined, html: string, patch: Partial<State>, befo
   });
   return a;
 }
+function refreshHrefs(root: ParentNode): void {
+  for (const a of root.querySelectorAll('a')) {
+    const p = PATCHES.get(a);
+    if (p) a.href = hrefFor(p);
+  }
+}
 
-function crumbs(...parts: { text: string; to?: Partial<State> }[]): HTMLElement {
-  const c = el('div', 'crumbs');
+function crumbs(...parts: { text: string; to?: Partial<State>; href?: string }[]): HTMLElement {
+  const c = el('nav', 'crumbs');
+  c.setAttribute('aria-label', 'Where you are');
   parts.forEach((p, i) => {
-    if (i) c.append(el('span', 'sep', '·'));
-    if (p.to !== undefined) c.append(navA(undefined, esc(p.text), p.to));
-    else c.append(el('b', undefined, esc(p.text)));
+    if (i) c.append(el('span', 'sep'));
+    if (p.href) {
+      const a = el('a', undefined, esc(p.text)) as HTMLAnchorElement;
+      a.href = p.href;
+      c.append(a);
+    } else if (p.to !== undefined) c.append(navA(undefined, esc(p.text), p.to));
+    else c.append(el('span', 'here', esc(p.text)));
   });
   return c;
 }
 
-/* ------------------------------------------------------ altitude 1: overview */
-
-function renderOverview(): void {
-  const crumb = el('div', 'crumbs');
-  crumb.innerHTML = `<a href="${ROOT}">Skill Atlas</a><span class="sep">·</span><b>${esc(G.domain)}</b>`;
-  app.append(
-    crumb,
-    el('h1', undefined, esc(G.domain)),
-    el('p', 'sub', `${esc(G.level)} — choose a discipline. ${G.nodes.length} skills await.`),
-    el('hr', 'rule'),
-  );
-
-  // the main quest is a path across disciplines — badge only its start,
-  // count its stops everywhere else
-  const questStart = G.byId.get(G.spine[0])?.cluster;
-  const row = el('div', 'disciplines');
-  G.clusters.forEach((c, i) => {
-    const cov = coverage(c.id);
-    const spineCount = clusterNodes(c.id).filter((n) => n.spine).length;
-    const d = navA(`discipline${c.id === questStart ? ' lead' : ''}`, '', { cluster: c.id });
-    d.style.setProperty('--i', String(i));
-    if (c.id === questStart) d.append(el('span', 'questline', 'QUEST BEGINS'));
-    d.append(
-      el('div', 'emblem', icon(c.id)),
-      el('div', 'dname', esc(c.name)),
-      el('div', 'dgist', esc(c.gist)),
-      el('div', 'dstat',
-        `<b>${cov.bodies}</b> of <b>${cov.total}</b> tomes written` +
-        (spineCount ? ` · ★ ${spineCount} on the quest` : '')),
-    );
-    row.append(d);
-  });
-  app.append(row);
-
-  const first = G.byId.get(G.spine[0]);
-  if (first) {
-    app.append(navA('startwalk', `Take up the main quest → ${esc(first.label)}`, { node: first.id }));
-  }
+/** The first unopened stop on the main quest, or null when every stop is opened. */
+function nextQuestStop(): MergedNode | null {
+  for (const id of G.spine) if (!READ.has(id)) return G.byId.get(id) ?? null;
+  return null;
+}
+/** Where to go after a tome: the next quest stop, else the first skill it unlocks. */
+function onwardFrom(n: MergedNode): MergedNode | null {
+  const i = G.spine.indexOf(n.id);
+  if (i >= 0 && i + 1 < G.spine.length) return G.byId.get(G.spine[i + 1]) ?? null;
+  const out = G.outgoing(n.id).map((e) => G.byId.get(e.to)).filter((x): x is MergedNode => !!x);
+  return out.find((x) => x.cluster === n.cluster) ?? out[0] ?? null;
 }
 
-/* -------------------------------------------------- altitude 2: talent board */
+/* ----------------------------------------------------------- altitude 1 */
+
+function renderOverview(): void {
+  const c = el('nav', 'crumbs');
+  c.setAttribute('aria-label', 'Where you are');
+  c.innerHTML = `<a href="${ROOT}">Skill Atlas</a><span class="sep"></span><span class="here">${esc(humanize(G.domain))}</span>`;
+  const h1 = el('h1', undefined, esc(humanize(G.domain)));
+  h1.tabIndex = -1;
+  app.append(
+    c,
+    h1,
+    el('p', 'lede', `For a ${esc(G.level)}. ${G.clusters.length} disciplines, ${G.nodes.length} skills.`),
+  );
+
+  // the main quest: the authored route across disciplines, lit as far as you have read
+  if (G.spine.length) {
+    const q = el('section', 'questpanel panel enter');
+    q.setAttribute('aria-labelledby', 'quest-h');
+    const head = el('div', 'quest-head');
+    const h2 = el('h2', undefined, 'The main quest');
+    h2.id = 'quest-h';
+    const opened = G.spine.filter((id) => READ.has(id)).length;
+    const total = G.spine.reduce((a, id) => a + (G.byId.get(id)?.hours ?? 0), 0);
+    head.append(h2, el('span', 'meta num', `${G.spine.length} stops, ${hours(total)}${opened ? `, <b>${opened}</b> opened` : ''}`));
+    q.append(head);
+    const route = el('div', 'route');
+    const next = nextQuestStop();
+    G.spine.forEach((id, i) => {
+      const n = G.byId.get(id);
+      if (!n) return;
+      const cls = `stop${READ.has(id) ? ' lit' : ''}${next?.id === id ? ' next' : ''}`;
+      const a = navA(cls, '', { node: id });
+      a.append(
+        el('span', 'stop-k', `${next?.id === id ? 'Next: ' : ''}${esc(cname(n.cluster))}`),
+        el('span', 'stop-name', esc(n.label)),
+      );
+      a.style.setProperty('--i', String(i));
+      route.append(a);
+    });
+    q.append(route);
+    const foot = el('div', 'quest-foot');
+    if (next) {
+      foot.append(navA('btn', opened ? `Resume at ${esc(next.label)}` : 'Take up the main quest', { node: next.id }));
+    } else {
+      foot.append(el('span', 'meta', 'Every stop on the quest is opened. The side paths remain.'));
+    }
+    if (READ.size) foot.append(el('span', 'meta num', `You have opened <b>${READ.size}</b> of ${G.nodes.length} tomes.`));
+    q.append(foot);
+    app.append(q);
+  }
+
+  const questStart = G.byId.get(G.spine[0])?.cluster;
+  const grid = el('div', 'disciplines');
+  const ordered = [...G.clusters].sort((a, b) => Number(b.id === questStart) - Number(a.id === questStart));
+  ordered.forEach((cl, i) => {
+    const ns = clusterNodes(cl.id);
+    const written = ns.filter((n) => n.hasBody).length;
+    const opened = ns.filter((n) => READ.has(n.id)).length;
+    const onQuest = ns.filter((n) => n.spine).length;
+    const lead = cl.id === questStart;
+    const d = navA(`discipline panel enter${lead ? ' lead' : ''}`, '', { cluster: cl.id });
+    d.style.setProperty('--i', String(i + 1));
+    const em = el('div', 'emblem', esc(icon(cl.id)));
+    em.setAttribute('aria-hidden', 'true');
+    em.style.viewTransitionName = vt('emblem', cl.id);
+    const facts = written < ns.length
+      ? `<b>${written}</b> of ${ns.length} tomes written${onQuest ? `, ${onQuest} on the quest` : ''}`
+      : `<b>${ns.length}</b> tomes${onQuest ? `, ${onQuest} on the quest` : ''}`;
+    const foot = el('div', 'dfoot');
+    foot.append(el('span', 'meta num', facts));
+    if (opened) {
+      const bar = el('div', 'bar', '<i></i>');
+      bar.style.setProperty('--w', `${Math.round((opened / ns.length) * 100)}%`);
+      bar.title = `${opened} of ${ns.length} opened`;
+      foot.append(bar, el('span', 'meta num', `${opened} opened`));
+    }
+    d.append(em, el('div', 'dname display', esc(cl.name)), el('p', 'dgist', esc(cl.gist)), foot);
+    if (lead) d.append(el('span', 'questmark plaque', 'Quest begins'));
+    grid.append(d);
+  });
+  app.append(grid);
+}
+
+/* ----------------------------------------------------------- altitude 2 */
 
 function externalEdges(cid: string): { incoming: Edge[]; outgoing: Edge[]; softIn: Edge[]; softOut: Edge[] } {
   const inC = (id: string) => G.byId.get(id)?.cluster === cid;
@@ -199,57 +305,11 @@ function externalEdges(cid: string): { incoming: Edge[]; outgoing: Edge[]; softI
   };
 }
 
-function renderBoard(cid: string): void {
-  const meta = G.clusterMeta.get(cid)!;
-  const cov = coverage(cid);
-  app.append(
-    crumbs({ text: G.domain, to: { cluster: null, node: null } }, { text: meta.name }),
-    el('h2', undefined, `${icon(cid)} ${esc(meta.name)}`),
-    el('p', 'sub', `${esc(meta.gist)} — ${cov.bodies} of ${cov.total} tomes written.`),
-  );
-  renderLensRow(cid);
-
-  const wrap = el('div', 'arcwrap');
-  const board = el('div', 'talentboard');
-  const cards = new Map<string, HTMLElement>();
-  const ns = clusterNodes(cid);
-  const tiers = [...new Set(ns.map((n) => n.tier))].sort((a, b) => b - a); // top row = highest tier
-  tiers.forEach((t, ti) => {
-    const row = el('div', 'trow');
-    row.style.setProperty('--i', String(ti));
-    row.append(el('span', 'trowlabel', `TIER ${t}`));
-    for (const n of ns.filter((x) => x.tier === t)) {
-      const cell = el('div', socketClasses(n));
-      cell.dataset.id = n.id;
-      // the hit target is the socket+label anchor; travel doors sit OUTSIDE it,
-      // so aiming at a skill can never teleport you to another cluster
-      const hit = navA('sockethit', '', { sel: n.id });
-      hit.append(
-        el('div', 'socket', n.hasBody ? icon(cid) : ''),
-        el('div', 'nlabel', esc(n.label)),
-        el('div', 'nmeta', n.hasBody ? `${n.hours} h` : `${n.hours} h · forthcoming`),
-      );
-      cell.append(hit);
-      if (state.flash === n.id) {
-        cell.classList.add('flash');
-        state.flash = null;
-      }
-      cards.set(n.id, cell);
-      row.append(cell);
-    }
-    board.append(row);
-  });
-  board.append(legendRow());
-  wrap.append(board, renderPreview(cid));
-  app.append(wrap);
-  attachDoors(cid, cards);
-  drawEdges(board, inClusterPairs(cid, cards));
-}
-
-function socketClasses(n: MergedNode): string {
-  let cls = 'socketnode';
+function skillClasses(n: MergedNode): string {
+  let cls = 'skill';
   if (n.spine) cls += ' spine';
   if (!n.hasBody) cls += ' pending';
+  if (READ.has(n.id)) cls += ' read';
   if (state.sel === n.id) cls += ' selected';
   if (state.school) {
     const w: SchoolWeight | undefined = n.school_weights[state.school];
@@ -258,56 +318,130 @@ function socketClasses(n: MergedNode): string {
   return cls;
 }
 
-function renderLensRow(cid: string): void {
+function renderBoard(cid: string): void {
+  const meta = G.clusterMeta.get(cid)!;
+  const ns = clusterNodes(cid);
+
+  app.append(crumbs({ text: humanize(G.domain), to: { cluster: null, node: null, sel: null } }, { text: meta.name }));
+  const head = el('div', 'board-head');
+  const em = el('div', 'emblem lg', esc(icon(cid)));
+  em.setAttribute('aria-hidden', 'true');
+  em.style.viewTransitionName = vt('emblem', cid);
+  const titles = el('div');
+  const h1 = el('h1', undefined, esc(meta.name));
+  h1.tabIndex = -1;
+  titles.append(h1, el('p', 'lede', esc(meta.gist)));
+  head.append(em, titles);
+  app.append(head);
+
+  renderLens(cid);
+
+  const arc = el('div', 'arc');
+  const board = el('section', 'board well');
+  board.setAttribute('aria-label', `${meta.name} talent board`);
+  const scroll = el('div', 'board-scroll');
+  const inner = el('div', 'board-inner');
+  const tiers = [...new Set(ns.map((n) => n.tier))].sort((a, b) => b - a); // top row = highest tier
+  tiers.forEach((t, ti) => {
+    const row = el('div', 'tier');
+    row.append(el('span', 'tier-k plaque', `Tier ${t}`));
+    const body = el('div', 'tier-body');
+    for (const n of ns.filter((x) => x.tier === t)) {
+      const cell = el('div', skillClasses(n));
+      cell.dataset.id = n.id;
+      const link = navA('skill-link', '', { sel: n.id });
+      const gem = el('div', 'gem');
+      gem.setAttribute('aria-hidden', 'true');
+      const name = el('div', 'skill-name', esc(n.label));
+      link.append(gem, name, el('div', 'skill-meta', n.hasBody ? hours(n.hours) : `${hours(n.hours)}, forthcoming`));
+      if (state.sel === n.id) name.style.viewTransitionName = 'vt-node';
+      cell.append(link);
+      if (state.flash === n.id) {
+        cell.classList.add('flash');
+        state.flash = null;
+      }
+      body.append(cell);
+    }
+    row.append(body);
+    row.style.setProperty('--i', String(ti));
+    inner.append(row);
+  });
+  scroll.append(inner);
+  board.append(scroll, legendRow(cid));
+  arc.append(board, renderInspector(cid));
+  app.append(arc);
+  attachDoors(cid, inner);
+  redrawEdges();
+}
+
+function renderLens(cid: string): void {
   if (!G.schools.length) return;
-  const row = el('div', 'lensrow');
-  row.append(el('span', 'cap', 'School lens'));
-  const active = state.school ? G.schools.find((s) => s.id === state.school) : null;
+  const row = el('div', 'lens');
+  row.setAttribute('role', 'group');
+  row.setAttribute('aria-label', 'School lens');
+  row.append(el('span', 'plaque', 'School lens'));
   for (const s of G.schools) {
-    // promise only what this board can show: non-normal weights in this cluster
+    const chip = el('button', 'chip schoolchip') as HTMLButtonElement;
+    chip.type = 'button';
+    chip.dataset.school = s.id;
+    chip.title = `Prizes ${s.optimises_for}. Gives up ${s.gives_up}.`;
+    chip.addEventListener('click', () => go({ school: s.id === state.school ? null : s.id }));
+    row.append(chip);
+  }
+  app.append(row, el('p', 'lensline'));
+  patchLens(cid);
+}
+
+/** Chip state and the lens line, from state; safe to call on a mounted board. */
+function patchLens(cid: string): void {
+  const active = state.school ? G.schools.find((s) => s.id === state.school) : null;
+  for (const chip of app.querySelectorAll<HTMLButtonElement>('.schoolchip')) {
+    const s = G.schools.find((x) => x.id === chip.dataset.school)!;
     const count = clusterNodes(cid).filter((n) => {
       const w = n.school_weights[s.id];
       return w && w !== 'normal';
     }).length;
     const enemy = s.id !== state.school && !!active?.quarrels_with?.includes(s.id);
-    const chip = el('button', 'schoolchip', `${enemy ? '⚔ ' : ''}${esc(s.name)} (${count})`);
-    if (s.id === state.school) chip.classList.add('active');
-    else if (enemy) chip.classList.add('enemy');
-    chip.title = `optimises for: ${s.optimises_for} · gives up: ${s.gives_up}`;
-    chip.addEventListener('click', () => go({ school: s.id === state.school ? null : s.id }));
-    row.append(chip);
+    chip.setAttribute('aria-pressed', String(s.id === state.school));
+    chip.classList.toggle('enemy', enemy);
+    chip.innerHTML = `${esc(s.name)} <span class="dim num">${count}</span>`;
   }
-  app.append(row);
-  const line = el('div', 'lensline');
+  const line = app.querySelector('.lensline')!;
   if (active) {
-    const qw = (active.quarrels_with ?? []).map((id) => G.schools.find((s) => s.id === id)?.name ?? id).join(', ') || '—';
+    const qw = (active.quarrels_with ?? []).map((id) => G.schools.find((s) => s.id === id)?.name ?? id).join(', ');
     line.innerHTML =
-      `<b>${esc(active.name)}</b> — optimises for ${esc(active.optimises_for)} · ` +
-      `gives up ${esc(active.gives_up)} · quarrels with <span class="qw">${esc(qw)}</span>`;
+      `<b>${esc(active.name)}</b> prizes ${esc(active.optimises_for)}. It gives up ${esc(active.gives_up)}.` +
+      (qw ? ` It quarrels with <span class="qw">${esc(qw)}</span>.` : '');
   } else {
-    line.textContent = 'No lens — the board as authored. Pick a school to see what it prizes and rejects.';
+    line.textContent = 'No lens. The board as authored. Pick a school to see what it prizes and rejects.';
   }
-  app.append(line);
 }
 
-/** How to read the board — the visual grammar, taught once. */
-function legendRow(): HTMLElement {
+function legendRow(cid: string): HTMLElement {
   const l = el('div', 'legend');
-  const item = (swatch: string, glyph: string, label: string) => {
+  l.setAttribute('aria-label', 'How to read the board');
+  const item = (sw: string, label: string) => {
     const it = el('span', 'lg');
-    it.append(el('span', `lg-sw ${swatch}`, glyph), el('span', undefined, label));
+    it.append(el('span', `sw ${sw}`), el('span', undefined, label));
     l.append(it);
   };
-  item('lg-spine', '', 'main quest');
-  item('lg-hard', '', 'requires');
-  item('lg-soft', '', 'helps');
-  item('lg-forth', '✎', 'tome forthcoming');
-  item('lg-door', '⇠⇢', 'door to another discipline');
+  const ns = clusterNodes(cid);
+  const spineLegs = G.spinePath.some((e) => G.byId.get(e.from)?.cluster === cid && G.byId.get(e.to)?.cluster === cid);
+  if (spineLegs) item('sw-spine', 'main quest');
+  item('sw-hard', 'requires');
+  if (G.softEdges.some((e) => G.byId.get(e.to)?.cluster === cid)) item('sw-soft', 'helps');
+  item('sw-read', 'tome opened');
+  if (ns.some((n) => n.spine)) item('sw-quest', 'quest stop opened');
+  if (ns.some((n) => !n.hasBody)) {
+    const it = el('span', 'lg');
+    it.append(el('span', undefined, '✎'), el('span', undefined, 'tome forthcoming'));
+    l.append(it);
+  }
   return l;
 }
 
-/** Cross-cluster prereqs as clickable travel chips under the touched socket. */
-function attachDoors(cid: string, cards: Map<string, HTMLElement>): void {
+/** Cross-discipline prereqs as travel chips under the touched skill. */
+function attachDoors(cid: string, inner: HTMLElement): void {
   const { incoming, outgoing, softIn, softOut } = externalEdges(cid);
   const byNode = new Map<string, { rid: string; dir: 'in' | 'out' }[]>();
   const collect = (edges: Edge[], dir: 'in' | 'out') => {
@@ -324,196 +458,248 @@ function attachDoors(cid: string, cards: Map<string, HTMLElement>): void {
   collect(outgoing, 'out');
   collect(softOut, 'out');
   for (const [local, doors] of byNode) {
-    const row = el('div', 'doorrow');
+    const row = el('div', 'doors');
     for (const { rid, dir } of doors) {
       const r = G.byId.get(rid)!;
-      // arrive selected: the preview describes what you traveled for
-      const chip = navA('door',
-        `${dir === 'in' ? '⇠' : '⇢'} ${esc(r.label)} · ${esc(cname(r.cluster))}`,
+      const chip = navA('chip door', `${dir === 'in' ? '←' : '→'} ${esc(r.label)}`,
         { cluster: r.cluster, node: null, sel: rid },
         () => { state.flash = rid; });
       chip.title = `Travel to ${cname(r.cluster)}`;
+      chip.setAttribute('aria-label', `${r.label}, in ${cname(r.cluster)}`);
       row.append(chip);
     }
-    cards.get(local)?.append(row);
+    inner.querySelector<HTMLElement>(`.skill[data-id="${CSS.escape(local)}"]`)?.append(row);
   }
 }
 
-function inClusterPairs(cid: string, cards: Map<string, HTMLElement>): { from: HTMLElement; to: HTMLElement; cls: string }[] {
+/** Edges between gem centres; bottom-up flow (prereq below dependent). Cheap enough to rerun on resize. */
+function redrawEdges(): void {
+  const inner = app.querySelector<HTMLElement>('.board-inner');
+  if (!inner || !state.cluster) return;
+  inner.querySelector(':scope > .tiermap')?.remove();
+  const cid = state.cluster;
   const inC = (id: string) => G.byId.get(id)?.cluster === cid;
+  const gemOf = (id: string) => inner.querySelector<HTMLElement>(`.skill[data-id="${CSS.escape(id)}"] .gem`);
   const spineLegs = new Set(G.spinePath.map((e) => `${e.from}>${e.to}`));
-  const pairs: { from: HTMLElement; to: HTMLElement; cls: string }[] = [];
-  const push = (e: Edge, cls: string) => {
-    const from = cards.get(e.from);
-    const to = cards.get(e.to);
-    if (from && to) pairs.push({ from, to, cls });
-  };
-  for (const e of G.hardEdges) {
-    if (inC(e.from) && inC(e.to)) push(e, spineLegs.has(`${e.from}>${e.to}`) ? 'e-spine' : 'e-hard');
-  }
-  for (const e of G.softEdges) {
-    if (inC(e.from) && inC(e.to)) push(e, 'e-soft');
-  }
-  return pairs;
-}
-
-/** Bezier edges between measured elements; bottom-up flow (prereq below dependent). */
-function drawEdges(container: HTMLElement, pairs: { from: HTMLElement; to: HTMLElement; cls: string }[]): void {
-  container.querySelector(':scope > .edgelayer')?.remove();
   const svg = document.createElementNS(SVG_NS, 'svg');
-  svg.setAttribute('class', 'edgelayer');
-  const cr = container.getBoundingClientRect();
-  svg.setAttribute('width', String(container.scrollWidth));
-  svg.setAttribute('height', String(container.scrollHeight));
-  for (const p of pairs) {
-    const a = p.from.getBoundingClientRect(); // prereq (lower row)
-    const b = p.to.getBoundingClientRect();   // dependent (upper row)
-    const x1 = a.left + a.width / 2 - cr.left;
-    const y1 = a.top - cr.top;
-    const x2 = b.left + b.width / 2 - cr.left;
-    const y2 = b.bottom - cr.top;
+  svg.setAttribute('class', 'tiermap');
+  svg.setAttribute('aria-hidden', 'true');
+  const cr = inner.getBoundingClientRect();
+  svg.setAttribute('width', String(inner.scrollWidth));
+  svg.setAttribute('height', String(inner.scrollHeight));
+  const path = (e: Edge, cls: string) => {
+    const a = gemOf(e.from);
+    const b = gemOf(e.to);
+    if (!a || !b) return;
+    const ar = a.getBoundingClientRect();
+    const br = b.getBoundingClientRect();
+    const x1 = ar.left + ar.width / 2 - cr.left;
+    const y1 = ar.top - cr.top;
+    const x2 = br.left + br.width / 2 - cr.left;
+    const y2 = br.bottom - cr.top;
     const my = (y1 + y2) / 2;
-    const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute('d', `M ${x1} ${y1} C ${x1} ${my}, ${x2} ${my}, ${x2} ${y2}`);
-    path.setAttribute('class', p.cls);
-    svg.append(path);
-  }
-  container.prepend(svg);
+    const d = `M ${x1} ${y1} C ${x1} ${my}, ${x2} ${my}, ${x2} ${y2}`;
+    for (const c of cls.split(' ')) {
+      const p = document.createElementNS(SVG_NS, 'path');
+      p.setAttribute('d', d);
+      p.setAttribute('class', c);
+      svg.append(p);
+    }
+  };
+  for (const e of G.softEdges) if (inC(e.from) && inC(e.to)) path(e, 'e-soft');
+  for (const e of G.hardEdges) if (inC(e.from) && inC(e.to) && !spineLegs.has(`${e.from}>${e.to}`)) path(e, 'e-hard');
+  for (const e of G.hardEdges) if (inC(e.from) && inC(e.to) && spineLegs.has(`${e.from}>${e.to}`)) path(e, 'e-spine-glow e-spine');
+  inner.prepend(svg);
 }
 
-/* -------------------------------------------------------- preview sidebar */
+function renderInspector(cid: string): HTMLElement {
+  const box = el('aside', 'inspect panel');
+  box.setAttribute('aria-label', 'Inspector');
+  fillInspector(box, cid);
+  return box;
+}
 
-function renderPreview(cid: string): HTMLElement {
-  const box = el('aside', 'preview');
+function fillInspector(box: HTMLElement, cid: string): void {
+  box.innerHTML = '';
+  const scroll = el('div', 'inspect-scroll');
   const n = state.sel ? G.byId.get(state.sel) : null;
   if (!n) {
-    const cov = coverage(cid);
-    box.append(
-      el('div', 'pv-kicker', 'Inspect'),
-      el('div', 'pv-title', esc(cname(cid))),
-      el('p', 'pv-line', esc(G.clusterMeta.get(cid)?.gist ?? '')),
-      el('p', 'pv-hint', `${cov.bodies} of ${cov.total} tomes written. Click a skill on the board to inspect it here.`),
+    const ns = clusterNodes(cid);
+    const opened = ns.filter((x) => READ.has(x.id)).length;
+    const start = ns.find((x) => x.spine && x.tier === Math.min(...ns.map((y) => y.tier)))
+      ?? ns.filter((x) => x.hasBody).sort((a, b) => a.tier - b.tier)[0];
+    scroll.append(
+      el('div', 'kicker plaque', 'Inspect'),
+      el('h2', undefined, esc(cname(cid))),
+      el('p', 'meta num', `${ns.length} skills${opened ? `, <b>${opened}</b> opened` : ''}`),
+      el('p', 'hint', 'Select a skill on the board to see its trial and what it asks of you.'),
     );
-    return box;
+    if (start) {
+      const s = el('div', 'start');
+      s.append(navA('btn quiet', `Start at ${esc(start.label)}`, { sel: start.id }));
+      scroll.append(s);
+    }
+    box.append(scroll);
+    return;
   }
   const b = BODY.get(n.id);
-  box.append(
-    el('div', 'pv-kicker', n.spine ? '★ Main quest skill' : 'Skill'),
-    el('div', 'pv-title', esc(n.label)),
-    el('div', 'pv-meta', `Tier ${n.tier} · ${n.hours} h · ${n.hasBody ? 'tome written' : 'tome forthcoming'}`),
+  scroll.append(
+    el('div', `kicker plaque${n.spine ? ' is-quest' : ''}`, n.spine ? 'Main quest' : 'Skill'),
+    el('h2', undefined, esc(n.label)),
+    el('p', 'meta num', `Tier ${n.tier}, ${hours(n.hours)}${n.hasBody ? '' : ', tome forthcoming'}`),
   );
-  if (n.one_line) box.append(el('p', 'pv-line', esc(n.one_line)));
+  if (n.one_line) scroll.append(el('p', 'epigraph', esc(n.one_line)));
   if (b?.checkpoint) {
-    const cp = el('div', 'pv-trial');
-    cp.append(el('div', 'k', 'Trial'), el('p', undefined, esc(b.checkpoint)));
-    box.append(cp);
+    const cp = el('div', 'trial');
+    cp.append(el('div', 'plaque', 'Trial'), el('p', undefined, esc(b.checkpoint)));
+    scroll.append(cp);
   }
   if (b?.know_what?.length) {
     const head = b.know_what.slice(0, 3);
     const more = b.know_what.length - head.length;
-    const s = el('div', 'pv-sec');
+    const s = el('div', 'sec');
     s.append(el('h3', undefined, 'You must know'),
-      el('ul', undefined,
-        head.map((x) => `<li>${esc(x)}</li>`).join('') +
-        (more > 0 ? `<li class="pv-more">… ${more} more in the tome</li>` : '')));
-    box.append(s);
+      el('ul', undefined, head.map(leadHtml).join('') + (more > 0 ? `<li class="more">and ${more} more in the tome</li>` : '')));
+    scroll.append(s);
   }
-  const doors = el('div', 'pv-sec');
-  doors.append(el('h3', undefined, 'Builds on'));
+  scroll.append(linksSection(n, 'board'));
+  box.append(scroll);
+  const foot = el('div', 'inspect-foot');
+  if (n.hasBody) foot.append(navA('btn block', 'Open the tome', { node: n.id }));
+  else foot.append(el('p', 'note', 'The tome for this skill is not written yet. Its place on the map is real.'));
+  box.append(foot);
+}
+
+/** Builds on / Unlocks chips. On the board a same-discipline chip selects; a far chip travels. */
+function linksSection(n: MergedNode, where: 'board' | 'page'): HTMLElement {
+  const wrap = el('div', 'sec');
+  const chipFor = (id: string, soft = false): HTMLElement => {
+    const r = G.byId.get(id)!;
+    const cross = r.cluster !== n.cluster;
+    const cls = `chip${soft ? ' soft' : ''}${r.hasBody ? '' : ' pending'}`;
+    const html = `${esc(r.label)}${cross ? ` <span class="dim">${esc(cname(r.cluster))}</span>` : ''}`;
+    const patch: Partial<State> = where === 'page'
+      ? { node: id }
+      : cross ? { cluster: r.cluster, sel: id } : { sel: id };
+    const chip = navA(cls, html, patch, cross && where === 'board' ? () => { state.flash = id; } : undefined);
+    if (!r.hasBody) chip.title = 'tome forthcoming';
+    return chip;
+  };
+  wrap.append(el('h3', undefined, 'Builds on'));
   const bo = el('div', 'chipline');
-  n.prereqs.forEach((p) => bo.append(previewChip(p)));
-  n.soft_prereqs.forEach((p) => bo.append(previewChip(p, true)));
-  if (!n.prereqs.length && !n.soft_prereqs.length) bo.append(el('span', 'pv-hint', '— a starting point'));
-  doors.append(bo, el('h3', undefined, 'Unlocks'));
+  n.prereqs.forEach((p) => bo.append(chipFor(p)));
+  n.soft_prereqs.forEach((p) => bo.append(chipFor(p, true)));
+  if (!n.prereqs.length && !n.soft_prereqs.length) bo.append(el('span', 'meta', 'A starting point.'));
+  wrap.append(bo);
+  if (n.soft_prereqs.length) wrap.append(el('p', 'note', 'Dashed: helpful context, not a hard gate.'));
+  const h = el('h3', undefined, 'Unlocks');
+  h.style.marginTop = '14px';
+  wrap.append(h);
   const un = el('div', 'chipline');
   const outs = G.outgoing(n.id).map((e) => e.to);
-  outs.forEach((t) => un.append(previewChip(t)));
-  if (!outs.length) un.append(el('span', 'pv-hint', '— nothing yet'));
-  doors.append(un);
-  box.append(doors);
-  if (n.hasBody) {
-    box.append(navA('pv-open', 'Open the tome →', { node: n.id }));
-  } else {
-    box.append(el('p', 'pv-hint', 'Forthcoming — the tome for this skill has not been written yet. Its place on the map (tier, hours, prereqs) is real.'));
+  outs.forEach((t) => un.append(chipFor(t)));
+  if (!outs.length) un.append(el('span', 'meta', 'Nothing yet.'));
+  wrap.append(un);
+  return wrap;
+}
+
+/** Selection and lens changed on a mounted board: touch only what changed. */
+function patchBoard(cid: string): void {
+  for (const cell of app.querySelectorAll<HTMLElement>('.skill')) {
+    const n = G.byId.get(cell.dataset.id!)!;
+    const flash = cell.classList.contains('flash');
+    cell.className = skillClasses(n) + (flash ? ' flash' : '');
+    const name = cell.querySelector<HTMLElement>('.skill-name')!;
+    name.style.viewTransitionName = state.sel === n.id ? 'vt-node' : '';
   }
-  return box;
+  patchLens(cid);
+  const box = app.querySelector<HTMLElement>('.inspect')!;
+  fillInspector(box, cid);
+  refreshHrefs(app);
 }
 
-/** Same-cluster chip selects on the board; cross-cluster chip travels there. */
-function previewChip(id: string, soft = false): HTMLElement {
-  const r = G.byId.get(id)!;
-  const cross = r.cluster !== state.cluster;
-  const cls = `nchip${soft ? ' softc' : ''}${r.hasBody ? '' : ' pendc'}`;
-  const html = `${esc(r.label)}${cross ? ` <span class="xc">· ${esc(cname(r.cluster))}</span>` : ''}`;
-  const chip = cross
-    ? navA(cls, html, { cluster: r.cluster, sel: id }, () => { state.flash = id; })
-    : navA(cls, html, { sel: id });
-  if (!r.hasBody) chip.title = 'tome forthcoming';
-  return chip;
-}
-
-/* ---------------------------------------------------- altitude 3: reading */
+/* ----------------------------------------------------------- altitude 3 */
 
 function renderNode(id: string): void {
   const n = G.byId.get(id)!;
   const b = BODY.get(id);
+  if (n.hasBody) recordRead(id);
+  READ = new Set(readLog());
+
   app.append(crumbs(
-    { text: G.domain, to: { cluster: null, node: null } },
+    { text: humanize(G.domain), to: { cluster: null, node: null, sel: null } },
     { text: cname(n.cluster), to: { cluster: n.cluster, node: null, sel: n.id } },
     { text: n.label },
   ));
 
   const read = el('div', 'read');
-  const page = el('div', 'page');
-  page.append(
-    el('h2', undefined, `${esc(n.label)}${n.spine ? ' ★' : ''}`),
-    el('p', 'sub', `Tier ${n.tier} · ${esc(cname(n.cluster))} · ${n.hours} h${n.spine ? ' · main quest' : ''}`),
-  );
-  if (n.one_line) page.append(el('p', 'one-line', esc(n.one_line)));
+  const page = el('article', 'page');
+  page.append(el('div', `kicker plaque${n.spine ? ' is-quest' : ''}`, n.spine ? 'Main quest' : 'Skill'));
+  const h1 = el('h1', undefined, esc(n.label));
+  h1.tabIndex = -1;
+  h1.style.viewTransitionName = 'vt-node';
+  page.append(h1, el('p', 'meta num', `Tier ${n.tier} in ${esc(cname(n.cluster))}, ${hours(n.hours)}`));
+  if (n.one_line) page.append(el('p', 'epigraph', esc(n.one_line)));
+  if (b?.checkpoint) {
+    const jump = document.createElement('a');
+    jump.className = 'totrial';
+    jump.textContent = 'Skip to the trial';
+    jump.href = '#trial';
+    jump.addEventListener('click', (e) => {
+      e.preventDefault();
+      const t = document.getElementById('trial');
+      t?.scrollIntoView({ block: 'start' });
+      t?.focus();
+    });
+    page.append(jump);
+  }
 
   if (b) {
     if (b.checkpoint) {
-      const cp = el('div', 'checkpoint');
-      cp.append(el('div', 'k', 'Trial · pass or fail'), el('p', undefined, esc(b.checkpoint)));
+      const cp = el('div', 'trial');
+      cp.id = 'trial';
+      cp.tabIndex = -1;
+      cp.append(el('div', 'plaque', 'Trial, pass or fail'), el('p', undefined, esc(b.checkpoint)));
       page.append(cp);
     }
-    const list = (title: string, items?: string[]) => {
+    const list = (title: string, items?: string[], lead = false) => {
       if (!items?.length) return;
-      const s = el('div', 'sec');
-      s.append(el('h3', undefined, title), el('ul', undefined, items.map((x) => `<li>${esc(x)}</li>`).join('')));
+      const s = el('section', 'sec');
+      s.append(el('h3', undefined, title),
+        el('ul', undefined, items.map((x) => (lead ? leadHtml(x) : `<li>${esc(x)}</li>`)).join('')));
       page.append(s);
     };
-    list('What you must know', b.know_what);
+    list('What you must know', b.know_what, true);
     list('What you must do', b.know_how);
     list('Habits to build', b.habits);
     if (b.common_failure) {
-      const s = el('div', 'sec');
-      s.append(el('h3', undefined, '⚠ Where travelers fall'),
+      const s = el('section', 'sec');
+      s.append(el('h3', undefined, 'Where travelers fall'),
         el('ul', undefined, b.common_failure.split(/;\s*/).filter(Boolean).map((x) => `<li>${esc(x)}</li>`).join('')));
       page.append(s);
     }
     if (b.know_why && typeof b.know_why === 'object') {
-      const s = el('div', 'sec');
+      const s = el('section', 'sec');
       s.append(el('h3', undefined, 'The dispute'));
-      const kw = el('div', 'kw');
+      const kw = el('div', 'dispute');
       kw.append(
         el('div', 'claim',
-          `<div class="side">The claim</div>${esc(b.know_why.claim)}` +
-          (b.know_why.because ? `<br><small><b>Because:</b> ${esc(b.know_why.because)}</small>` : '')),
-        el('div', 'dispute', `<div class="side">The counter</div>${esc(b.know_why.disputed_by)}`),
+          `<div class="side plaque">The claim</div>${esc(b.know_why.claim)}` +
+          (b.know_why.because ? `<small><b>Because</b> ${esc(b.know_why.because)}</small>` : '')),
+        el('div', 'counter', `<div class="side plaque">The counter</div>${esc(b.know_why.disputed_by)}`),
       );
       s.append(kw);
-      if (b.know_why.source) s.append(el('div', 'kw-source', `Debate sourced from: ${esc(b.know_why.source)}`));
+      if (b.know_why.source) s.append(el('p', 'source', `Debate sourced from ${esc(b.know_why.source)}`));
       page.append(s);
     }
     const sw = b.school_weights ?? {};
     if (Object.keys(sw).length) {
-      const s = el('div', 'sec');
+      const s = el('section', 'sec');
       s.append(el('h3', undefined, 'Schools of thought'));
-      const chips = el('div', 'swchips');
+      const chips = el('div', 'chipline');
       for (const [sid, w] of Object.entries(sw)) {
         const name = G.schools.find((x) => x.id === sid)?.name ?? sid;
-        chips.append(el('span', `swchip v-${esc(w)}`, `${esc(name)} · ${esc(w)}`));
+        chips.append(el('span', `chip swchip v-${esc(w)}`, `${esc(name)} <span class="dim">${esc(w)}</span>`));
       }
       s.append(chips);
       page.append(s);
@@ -526,61 +712,79 @@ function renderNode(id: string): void {
     }
   } else {
     page.append(el('div', 'pendnote',
-      'Forthcoming — this skill is on the map (tier, hours, position are real) but its tome has not been written yet.'));
+      'This skill is on the map, with a real tier, hours and prerequisites, but its tome is not written yet.'));
   }
 
-  // location rail — where you are, and the doors out
-  const rail = el('div', 'rail');
-  const here = el('div', 'box');
+  // onward: the quest continues, or the board waits
+  const onward = el('nav', 'onward');
+  onward.setAttribute('aria-label', 'Onward');
+  const next = onwardFrom(n);
+  if (next) {
+    onward.append(el('span', 'plaque', next.spine && n.spine ? 'Next on the quest' : 'Next'));
+    onward.append(navA('btn', esc(next.label), { node: next.id }));
+  }
+  onward.append(navA('btn quiet', `Back to ${esc(cname(n.cluster))}`, { node: null, sel: n.id }));
+  page.append(onward);
+
+  // rail: where you are, and the doors out
+  const rail = el('aside', 'rail');
+  rail.setAttribute('aria-label', 'Your position');
+  const here = el('div', 'box panel');
   here.append(el('h3', undefined, `In ${esc(cname(n.cluster))}`));
   const ns = clusterNodes(n.cluster);
   for (const t of [...new Set(ns.map((x) => x.tier))].sort((a, b) => a - b)) {
-    here.append(el('div', 'trlabel', `Tier ${t}`));
+    here.append(el('div', 'plaque', `Tier ${t}`));
     for (const s of ns.filter((x) => x.tier === t)) {
-      const row = navA(`sib${s.id === id ? ' current' : ''}`, '', { node: s.id });
+      const row = navA('sib', '', { node: s.id });
+      if (s.id === id) row.setAttribute('aria-current', 'page');
       row.append(
-        el('span', `mini${s.spine ? ' gold' : s.hasBody ? ' lit' : ''}`),
+        el('span', `dot${s.spine ? ' is-quest' : ''}${READ.has(s.id) ? ' read' : ''}`),
         el('span', undefined, esc(s.label)),
       );
       here.append(row);
     }
   }
   rail.append(here);
-
-  const doors = el('div', 'box');
-  doors.append(el('h3', undefined, 'Builds on'));
-  const bo = el('div', 'chipline');
-  n.prereqs.forEach((p) => bo.append(nodeChip(p)));
-  n.soft_prereqs.forEach((p) => bo.append(nodeChip(p, true)));
-  if (!n.prereqs.length && !n.soft_prereqs.length) bo.append(el('span', 'pv-hint', '— a starting point'));
-  doors.append(bo, el('h3', undefined, 'Unlocks'));
-  const un = el('div', 'chipline');
-  const outs = G.outgoing(id).map((e) => e.to);
-  outs.forEach((t) => un.append(nodeChip(t)));
-  if (!outs.length) un.append(el('span', 'pv-hint', '— nothing yet'));
-  doors.append(un);
+  const doors = el('div', 'box panel');
+  doors.append(linksSection(n, 'page'));
   rail.append(doors);
 
   read.append(page, rail);
   app.append(read);
 }
 
-function nodeChip(id: string, soft = false): HTMLElement {
-  const r = G.byId.get(id)!;
-  const cross = r.cluster !== state.cluster;
-  const cls = `nchip${soft ? ' softc' : ''}${r.hasBody ? '' : ' pendc'}`;
-  const chip = navA(cls,
-    `${esc(r.label)}${cross ? ` <span class="xc">· ${esc(cname(r.cluster))}</span>` : ''}`,
-    { node: id });
-  if (!r.hasBody) chip.title = 'tome forthcoming';
-  return chip;
-}
+/* --------------------------------------------------------------- render */
 
-/* ---------------------------------------------------------------- render */
-
-function render(): void {
+function mount(): void {
+  READ = new Set(readLog());
   app.innerHTML = '';
   if (state.node) renderNode(state.node);
   else if (state.cluster) renderBoard(state.cluster);
   else renderOverview();
+}
+
+/**
+ * @param userNav true when a click or key caused this render: the new page
+ * title takes focus so keyboard and screen-reader travelers land somewhere.
+ */
+function render(userNav: boolean): void {
+  const key = state.node ? `node:${state.node}` : state.cluster ? `board:${state.cluster}` : 'overview';
+  if (key === mounted && state.cluster && !state.node) {
+    patchBoard(state.cluster);
+    return;
+  }
+  const wasMounted = mounted !== '';
+  mounted = key;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const settle = () => {
+    if (userNav) app.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true });
+    if (wasMounted) window.scrollTo({ top: 0 });
+  };
+  const vtDoc = document as Document & { startViewTransition?: (cb: () => void) => { finished: Promise<void> } };
+  if (wasMounted && !reduce && vtDoc.startViewTransition) {
+    vtDoc.startViewTransition(() => { mount(); settle(); });
+  } else {
+    mount();
+    settle();
+  }
 }

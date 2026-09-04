@@ -1,0 +1,247 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-006",
+  "ids": [
+    "instructional-design.media.multimedia-learning-principles",
+    "instructional-design.media.accessible-media-production",
+    "instructional-design.media.authoring-tool-fluency",
+    "instructional-design.media.interactivity-design",
+    "instructional-design.media.video-and-screencast-production",
+    "instructional-design.media.production-review-and-qa"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.media.multimedia-learning-principles",
+      "label": "Multimedia Learning Principles",
+      "tier": 1,
+      "cluster": "media",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Apply Mayer's principles (coherence, signaling, redundancy) so added media reduces cognitive load instead of competing for it.",
+      "hours": 8,
+      "know_what": [
+        "Coherence principle — exclude extraneous words, pictures, and sounds that don't support the instructional goal, even when they're engaging",
+        "Signaling principle — use cues such as arrows, highlighting, or headings to draw attention to essential material within a display",
+        "Redundancy principle — avoid presenting identical text and narration simultaneously, since reading and listening to the same words competes for the same channel",
+        "Spatial contiguity principle — place printed words near the corresponding part of a graphic rather than separated on the page or screen",
+        "Temporal contiguity principle — present corresponding narration and animation at the same time rather than sequentially",
+        "Modality principle — present words as narration alongside a graphic rather than as on-screen text alongside the same graphic, freeing the visual channel"
+      ],
+      "know_how": [
+        "Cut a decorative image, sound effect, or tangent that doesn't support the instructional goal, even if it makes the slide more engaging",
+        "Add a signaling cue, such as an arrow, bold text, or a callout, to direct attention to the one element in a busy display that matters most",
+        "Replace simultaneous identical on-screen text and narration with narration alone plus a supporting visual",
+        "Move a text label physically next to the part of a diagram it describes instead of into a separate legend",
+        "Synchronize narration timing with the animation or diagram it describes, instead of narrating before or after the visual changes",
+        "Choose narration over on-screen text for explanatory content that pairs with a graphic, reserving on-screen text for technical terms or non-native-language support"
+      ],
+      "habits": [
+        "Ask what instructional goal a decorative element serves before keeping it",
+        "Read a slide's text and listen to its narration separately to check for word-for-word redundancy",
+        "Check that a diagram's labels sit next to what they're labeling",
+        "Notice when narration and the visual it describes are out of sync",
+        "Prefer narration paired with a graphic over on-screen text paired with the same graphic, for explanatory content"
+      ],
+      "know_why": {
+        "claim": "Interesting but instructionally irrelevant details, such as an engaging photo or an entertaining anecdote, should be cut from learning material even when they increase interest.",
+        "because": "seductive-details research shows irrelevant-but-interesting material reliably harms retention of the actual content by diverting limited attention",
+        "disputed_by": "practitioners focused on motivation and completion, who argue that in low-stakes or voluntary contexts a small engagement cost is worth the retention tradeoff if it keeps learners from dropping out before finishing the material at all",
+        "source": "Mayer and colleagues, coherence principle and seductive-details research, vs. motivational-design practitioners such as Keller's ARCS model prioritizing sustained attention"
+      },
+      "school_weights": { "cognitive-load-first": "high" },
+      "checkpoint": "Redesign one existing slide or screen against the coherence, signaling, redundancy, and spatial/temporal contiguity principles, and identify at least one specific element removed or moved.",
+      "common_failure": "Adding narration that reads the on-screen text word for word, which research shows actively hurts retention compared to either channel alone, despite feeling thorough.",
+      "sources": ["Richard Mayer, Multimedia Learning", "Mayer & Moreno, cognitive theory of multimedia learning", "Ruth Clark & Richard Mayer, e-Learning and the Science of Instruction"]
+    },
+    {
+      "id": "instructional-design.media.accessible-media-production",
+      "label": "Accessible Media Production",
+      "tier": 2,
+      "cluster": "media",
+      "prereqs": ["instructional-design.media.multimedia-learning-principles"],
+      "soft_prereqs": [],
+      "one_line": "Produce media that's usable without sight, hearing, or a mouse, built in from the start instead of retrofitted.",
+      "hours": 12,
+      "know_what": [
+        "WCAG success criteria — the specific, testable rules covering contrast ratio, keyboard operability, and text alternatives that define what 'accessible' means in practice, not just the general principle",
+        "Alt text — a text alternative for an image conveyed to screen-reader users, written to communicate the image's instructional purpose, not just describe its contents literally",
+        "Closed captions vs. open captions — captions a viewer can toggle off versus captions burned permanently into the video, each appropriate to different distribution contexts",
+        "Color contrast ratio — the minimum luminance difference between text and background, commonly 4.5:1 for normal text under WCAG AA, required for readability by low-vision users",
+        "Keyboard operability — every interactive element reachable and operable without a mouse, a requirement for users with motor impairments and many screen-reader users",
+        "Transcript — a full text version of audio or video content, useful for deaf users, non-native speakers, and anyone who can't play audio in their current environment"
+      ],
+      "know_how": [
+        "Write alt text that conveys an image's instructional purpose in context, rather than a generic literal description or leaving it blank",
+        "Check color contrast against WCAG AA thresholds using a contrast-checking tool before finalizing a color palette",
+        "Add accurate closed captions to every video, synced to the audio, not auto-generated captions left uncorrected",
+        "Test every interactive screen using only a keyboard, confirming every action a mouse user could take is also reachable by tab and enter",
+        "Provide a full transcript for any audio-only content, such as podcasts or narration-only segments",
+        "Run an accessibility checker, built into most authoring tools, as a build step, not a separate audit weeks after launch"
+      ],
+      "habits": [
+        "Write alt text for what an image is doing instructionally, not just what it shows",
+        "Tab through a new interactive screen with the mouse unplugged before calling it done",
+        "Correct auto-generated captions instead of shipping them uncorrected",
+        "Check contrast ratios during design, not after a stakeholder or user flags a problem",
+        "Provide a transcript for any audio-only content by default, not only when a learner requests one"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Produce one media asset, a video or interactive screen, that passes a WCAG AA contrast check, has accurate captions or a transcript, and is fully operable using only a keyboard.",
+      "common_failure": "Treating accessibility as a final compliance pass done by someone else after content is built, so structural problems such as color choices or missing keyboard paths require expensive rework instead of being avoided in the first draft.",
+      "sources": ["WCAG 2.1 (W3C)", "Section 508 accessibility standards", "WebAIM accessibility guidance and contrast checker"]
+    },
+    {
+      "id": "instructional-design.media.authoring-tool-fluency",
+      "label": "Authoring Tool Fluency",
+      "tier": 2,
+      "cluster": "media",
+      "prereqs": ["instructional-design.media.multimedia-learning-principles"],
+      "soft_prereqs": [],
+      "one_line": "Build interactive e-learning content in an authoring tool (Articulate, Rise, H5P) without hand-coding around its limits.",
+      "hours": 16,
+      "know_what": [
+        "Authoring tool — software such as Articulate Storyline, Rise, Adobe Captivate, or H5P, purpose-built to produce interactive e-learning without general programming",
+        "SCORM / xAPI — the packaging and tracking standards authoring tools export to, determining what an LMS can actually record about a learner's interaction",
+        "Slide-based vs. responsive-block authoring — a distinction between tools built around fixed-layout slides, such as Storyline, and tools built around reflowing content blocks, such as Rise, each with different tradeoffs for custom interactivity versus mobile responsiveness",
+        "Master slide / template — a reusable layout and style definition that keeps a course visually consistent without manually reformatting every screen",
+        "Variable and trigger logic — the tool's mechanism for building conditional behavior, such as showing specific feedback based on a selected answer, without code",
+        "Publish and test cycle — the process of publishing a build, testing it in a real LMS or browser context, and catching platform-specific bugs before final delivery"
+      ],
+      "know_how": [
+        "Build a course section using master slides or templates so visual consistency doesn't require manually reformatting every screen",
+        "Set up variables and triggers to build a conditional interaction, such as branching feedback or a knowledge check gating progress, without writing code",
+        "Choose between a slide-based and a responsive-block tool based on whether the project needs custom interactivity or true mobile responsiveness",
+        "Publish a build to SCORM or xAPI and test it inside a real LMS or a SCORM test player, not just inside the authoring tool's preview",
+        "Diagnose a common publish-time bug, such as a tracking issue, a broken trigger, or a font substitution, using the tool's known troubleshooting steps",
+        "Keep a source file organized, with named slides and grouped layers, so another team member could pick up the build without reverse-engineering it"
+      ],
+      "habits": [
+        "Test a build in the actual target LMS, not just the authoring tool's internal preview",
+        "Use master slides and templates from the start instead of retrofitting consistency later",
+        "Name and organize the source file as if someone else will need to open it",
+        "Check that a trigger or variable actually fires as intended, not just that it compiles without an error",
+        "Publish and re-test after every significant change instead of assuming the last successful test still holds"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Build a short interactive module in an authoring tool using at least one master template, one conditional trigger, and a published SCORM or xAPI package that tracks correctly in a real LMS.",
+      "common_failure": "Building an entire course as one-off custom slides with no template, so a late brand or layout change requires manually editing every single screen instead of updating one master.",
+      "sources": ["Articulate Storyline / Rise 360 documentation", "SCORM.com, SCORM and xAPI standards guidance", "Adobe Captivate documentation"]
+    },
+    {
+      "id": "instructional-design.media.interactivity-design",
+      "label": "Interactivity Design",
+      "tier": 3,
+      "cluster": "media",
+      "prereqs": ["instructional-design.media.authoring-tool-fluency"],
+      "soft_prereqs": [],
+      "one_line": "Design an interaction that requires a real decision from the learner, not a click-to-continue disguised as engagement.",
+      "hours": 14,
+      "know_what": [
+        "Meaningful interactivity — an interaction requiring a decision relevant to the objective, as opposed to clicking to proceed",
+        "Branching scenario — a decision-point structure where a learner's choice changes what they see next, used to practice judgment under realistic consequences",
+        "Gating vs. free navigation — restricting progress until a step is completed versus letting a learner move freely, a tradeoff between control and learner autonomy",
+        "Feedback specificity — feedback that explains why an answer was right or wrong, tied to the underlying concept, rather than just marking correct or incorrect",
+        "Interaction pattern library — a set of proven, reusable interaction types, such as scenario, sorting, drag-classification, or simulation, chosen for fit to the objective rather than novelty",
+        "Cognitive cost of interactivity — every interaction has a cost in learner time and attention, which must be justified by what it teaches, not just by making a screen feel less static"
+      ],
+      "know_how": [
+        "Design a branching scenario with at least two meaningfully different consequence paths, not a single 'right answer, try again' loop",
+        "Write feedback that explains the underlying reasoning for a wrong answer, not just 'incorrect, try again'",
+        "Decide whether to gate progress or allow free navigation based on whether the sequence has a genuine dependency, not by default",
+        "Select an interaction pattern from what's proven to fit the objective's cognitive demand, resisting the pull toward a novel interaction that doesn't add instructional value",
+        "Estimate the time cost of a planned interaction against what it actually teaches before committing production budget to it",
+        "Pilot a branching scenario's paths to confirm every path is reachable and none dead-ends without resolution"
+      ],
+      "habits": [
+        "Ask what decision this interaction requires the learner to make",
+        "Write feedback that teaches the concept, not just the verdict",
+        "Question a gate that exists out of habit rather than a real dependency",
+        "Trace every branch in a scenario to confirm it resolves, before calling it finished",
+        "Check whether an interaction is justified by what it teaches, not just by making a screen feel less static"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Design a branching scenario with at least three decision points and two distinct consequence paths, with feedback at each point explaining the underlying reasoning, and confirm every branch resolves.",
+      "common_failure": "Building an interaction that looks sophisticated, such as drag-and-drop or animated branching, but reduces to a single correct path with generic 'try again' feedback, adding production cost without adding instructional value.",
+      "sources": ["Cathy Moore, Action Mapping scenario-based design", "Clark Aldrich, simulation and scenario design", "Michael Allen, Michael Allen's Guide to E-Learning"]
+    },
+    {
+      "id": "instructional-design.media.video-and-screencast-production",
+      "label": "Video & Screencast Production",
+      "tier": 3,
+      "cluster": "media",
+      "prereqs": ["instructional-design.media.accessible-media-production"],
+      "soft_prereqs": [],
+      "one_line": "Script, record, and edit instructional video short enough and clear enough that learners actually finish it.",
+      "hours": 14,
+      "know_what": [
+        "Script — a written, timed document specifying every line of narration and corresponding visual, reviewed and approved before recording starts",
+        "Screencast — a recorded capture of a screen, such as a software demo or workflow walkthrough, typically requiring a clean environment and rehearsed pacing rather than live improvisation",
+        "Chunked video length — instructional video retention drops sharply past a well-documented length threshold, commonly cited around six minutes for online video, arguing for multiple short videos over one long one",
+        "B-roll and cutaways — supplementary footage used to maintain visual interest and illustrate a concept without requiring the primary subject to be on screen the whole time",
+        "Audio quality floor — the minimum microphone and room-noise standard below which viewers disengage regardless of content quality, often a more common failure point than video quality",
+        "Editing pass structure — a defined sequence, such as rough cut, narration sync, graphics or caption pass, and final review, that keeps production organized instead of one continuous edit session"
+      ],
+      "know_how": [
+        "Write and get sign-off on a timed script before recording, specifying narration and corresponding visuals line by line",
+        "Break a long topic into multiple short videos at natural conceptual boundaries rather than one long continuous recording",
+        "Record with a dedicated microphone and a quiet, treated space, prioritizing audio quality over video production value",
+        "Rehearse a screencast recording at least once to fix pacing and eliminate dead air before the final take",
+        "Add captions and check them against the transcript for accuracy, not just auto-generated placement",
+        "Run a structured editing pass, rough cut, narration sync, graphics, final review, instead of one continuous unstructured edit"
+      ],
+      "habits": [
+        "Script and approve before recording, not the reverse",
+        "Check audio quality first when a draft video feels off, before assuming the problem is visual",
+        "Cut a long recording into shorter, single-concept videos at natural breaks",
+        "Watch a finished video start to finish once before calling it done, not just spot-check clips",
+        "Get script sign-off from the SME or sponsor before recording, to avoid re-recording after the fact"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Script, record, and edit a single-concept instructional video under six minutes with accurate captions, clean audio, and a structured editing pass documented in stages.",
+      "common_failure": "Recording a long, unscripted screencast in one take and publishing it with minor trims, producing a video with dead air, rambling explanation, and a length that guarantees most learners drop off before the end.",
+      "sources": ["Cathy Moore, video for learning guidance", "edX/Coursera video-length engagement research", "Ruth Clark & Richard Mayer, e-Learning and the Science of Instruction"]
+    },
+    {
+      "id": "instructional-design.media.production-review-and-qa",
+      "label": "Production Review & QA",
+      "tier": 6,
+      "cluster": "media",
+      "prereqs": ["instructional-design.media.storyboard-and-build", "instructional-design.media.interactivity-design"],
+      "soft_prereqs": [],
+      "one_line": "Catch the broken link, mistimed caption, and off-brand asset before a learner does.",
+      "hours": 16,
+      "know_what": [
+        "QA pass types — functional (does every button and trigger work), content (does it match the approved storyboard), and technical (does it run correctly on target devices, browsers, and the LMS)",
+        "Cross-browser / cross-device testing — checking a build on the actual range of browsers, devices, and screen sizes the audience will use, not just the developer's own setup",
+        "QA checklist — a standardized, reusable list of things to check on every build, so review quality doesn't depend on one reviewer's memory",
+        "Broken-link and dead-trigger audit — a specific, common category of e-learning defect, such as a button that goes nowhere or a link to a removed page, that's easy to miss without a systematic pass",
+        "Regression — a defect introduced by a later fix that breaks something that previously worked, which argues for retesting beyond just the specific change made",
+        "Sign-off record — a documented approval, with reviewer name and date, that a build passed QA before it's released, protecting against 'I thought someone checked that'"
+      ],
+      "know_how": [
+        "Run a QA pass using a standardized checklist covering functional, content, and technical categories, not an unstructured click-through",
+        "Test a build across the actual range of target browsers, devices, and screen sizes rather than only the developer's own setup",
+        "Audit every link, button, and trigger systematically for dead ends or mismatched destinations",
+        "Compare the built content against the approved storyboard line by line to catch content drift introduced during build",
+        "Retest around a bug fix for regressions, not just the specific defect that was fixed",
+        "Record sign-off with reviewer name and date before a build is marked ready for release"
+      ],
+      "habits": [
+        "Use the checklist every time, even on a build that looks obviously fine",
+        "Test on a device or browser you don't personally use, not just your own setup",
+        "Click every interactive element at least once, not just the ones on the happy path",
+        "Retest around any late fix instead of assuming it only touched what it was meant to touch",
+        "Keep a signed-off defect log for every release, not just a mental note that it looked fine"
+      ],
+      "know_why": null,
+      "school_weights": { "backward-design-assessment-first": "normal" },
+      "checkpoint": "Run a full QA pass on a built module using a standardized checklist across functional, content, and technical categories, across at least two different browsers or devices, and produce a signed-off defect log.",
+      "common_failure": "QA-ing only the happy path a designer expects learners to take, missing the broken link or dead trigger on a less obvious path that a real learner finds within the first week of launch.",
+      "sources": ["ATD QA and production review guidance", "ISTQB software testing fundamentals, adapted for e-learning QA", "Articulate / Rise publishing and testing documentation"]
+    }
+  ]
+}

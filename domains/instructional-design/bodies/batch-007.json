@@ -1,0 +1,252 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-007",
+  "ids": [
+    "instructional-design.facilitation.active-listening-and-questioning",
+    "instructional-design.facilitation.discussion-design",
+    "instructional-design.facilitation.feedback-delivery",
+    "instructional-design.facilitation.online-facilitation-technique",
+    "instructional-design.facilitation.difficult-moment-management",
+    "instructional-design.facilitation.cohort-facilitation-at-scale"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.facilitation.active-listening-and-questioning",
+      "label": "Active Listening & Questioning",
+      "tier": 1,
+      "cluster": "facilitation",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Ask the follow-up question that surfaces what a learner actually thinks instead of what they think you want to hear.",
+      "hours": 8,
+      "know_what": [
+        "Active listening — paraphrasing and reflecting back what a speaker said to confirm understanding before responding, rather than just waiting for a turn to talk",
+        "Open vs. closed question — an open question invites elaboration, a closed question invites a single fact or yes/no, and each has a different facilitation use",
+        "Wait time — the pause after asking a question before calling on someone or answering it yourself, which research shows most facilitators cut short by reflex",
+        "Probing question — a follow-up that goes deeper into an answer already given, such as 'say more about that', instead of moving to a new topic",
+        "Redirect — routing a question or comment to another participant instead of answering it yourself, used to build group ownership of a discussion",
+        "Non-verbal listening cue — posture, eye contact, and note-taking behavior that signals genuine attention and shapes whether participants keep contributing"
+      ],
+      "know_how": [
+        "Paraphrase a participant's point back to them before responding, to confirm understanding and show it was heard",
+        "Ask an open question when the goal is exploration and a closed question when the goal is confirming a specific fact",
+        "Hold at least three to five seconds of wait time after a question before calling on someone or filling the silence",
+        "Follow an initial answer with a probing question instead of moving straight to the next agenda item",
+        "Redirect a direct question back to the group when the goal is building group ownership rather than positioning the facilitator as the sole expert",
+        "Take visible notes or nod at key points to signal attention without interrupting the speaker's flow"
+      ],
+      "habits": [
+        "Let silence sit for a beat longer than feels comfortable",
+        "Paraphrase before reacting, especially to a comment that surprises or challenges you",
+        "Ask one more probing question before moving on",
+        "Notice when you're answering a question the group could answer themselves",
+        "Track how often you're talking versus how often participants are, and correct course if the ratio drifts too far toward the facilitator"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Facilitate a 15-minute discussion segment using paraphrasing, at least three probing questions, and at least one redirect, with wait time held for a minimum of three seconds after each question.",
+      "common_failure": "Filling every silence immediately after asking a question, which trains participants to wait out the facilitator instead of thinking and answering, since the facilitator reliably rescues them from the discomfort.",
+      "sources": ["Mary Budd Rowe, wait time research", "Sam Kaner, Facilitator's Guide to Participatory Decision-Making", "Roger & David Johnson, active listening in group facilitation"]
+    },
+    {
+      "id": "instructional-design.facilitation.discussion-design",
+      "label": "Discussion Design",
+      "tier": 2,
+      "cluster": "facilitation",
+      "prereqs": ["instructional-design.facilitation.active-listening-and-questioning"],
+      "soft_prereqs": [],
+      "one_line": "Design a discussion prompt and structure that gets more than the same two people talking.",
+      "hours": 10,
+      "know_what": [
+        "Discussion prompt — a question or scenario designed to have more than one reasonable answer, since a prompt with one correct answer produces recitation, not discussion",
+        "Think-pair-share — a structure where participants think individually, discuss in pairs, then share with the full group, used to raise participation beyond the few who speak first",
+        "Fishbowl — a structure where a small group discusses in the center while the rest of the group observes, then roles rotate, used for modeling discussion skills or handling contentious topics",
+        "Discussion norms — explicit, agreed ground rules, such as one voice at a time and no interrupting, set before a discussion starts rather than enforced ad hoc after a problem occurs",
+        "Participation equity — a discussion design goal distinct from participation volume; a lively discussion dominated by two people is not equitable even if it's engaged",
+        "Silent-start technique — having participants write a response individually before any verbal discussion starts, which surfaces more varied thinking than an immediate open-floor question"
+      ],
+      "know_how": [
+        "Write a discussion prompt that has no single correct answer and requires participants to draw on their own experience or judgment",
+        "Use think-pair-share to raise participation when a full-group open question is producing only a few habitual speakers",
+        "Set discussion norms explicitly at the start of a session rather than only correcting behavior after a norm is broken",
+        "Use a silent-start write-first step before an open discussion to surface a wider range of initial thinking",
+        "Structure a fishbowl for a contentious or skill-modeling topic, rotating who's in the center partway through",
+        "Track who's spoken and who hasn't during a live discussion, and deliberately invite quieter participants in"
+      ],
+      "habits": [
+        "Check a draft discussion prompt for whether it actually has more than one reasonable answer",
+        "Watch for the same two or three voices dominating and adjust the structure mid-session if needed",
+        "Set norms out loud at the start instead of assuming they're understood",
+        "Use a silent-start step when a topic is likely to produce a rush of first-mover answers that anchor everyone else",
+        "Debrief a discussion's participation pattern afterward and adjust the structure for next time if it was lopsided"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Design a discussion segment using a genuinely open prompt, a stated participation structure such as think-pair-share or fishbowl, and explicit ground rules, and facilitate it with participation from at least 80% of the group.",
+      "common_failure": "Asking an open-floor question to the whole group with no structure, which reliably produces the same two or three confident voices while the rest of the group stays silent for the entire session.",
+      "sources": ["Frank Lyman, think-pair-share", "Sam Kaner, Facilitator's Guide to Participatory Decision-Making", "Stephen Brookfield, Discussion as a Way of Teaching"]
+    },
+    {
+      "id": "instructional-design.facilitation.feedback-delivery",
+      "label": "Feedback Delivery",
+      "tier": 2,
+      "cluster": "facilitation",
+      "prereqs": ["instructional-design.facilitation.active-listening-and-questioning"],
+      "soft_prereqs": [],
+      "one_line": "Give feedback specific and timely enough that a learner knows exactly what to do differently next time.",
+      "hours": 10,
+      "know_what": [
+        "Specific vs. general feedback — feedback naming the exact behavior or output observed versus a general judgment, where only the former is actionable",
+        "Feedback sandwich — the practice of surrounding critical feedback with praise, widely taught but contested for diluting the actual message",
+        "Timeliness — feedback delivered close to the performance it addresses, since delayed feedback loses its connection to the specific decision that produced it",
+        "Feed forward — framing feedback around what to do differently next time rather than only evaluating what already happened",
+        "Feedback on process vs. person — feedback aimed at the work or the decision versus the person, where only the former reliably improves performance without triggering defensiveness",
+        "Self-assessment prompt — asking the learner to assess their own work first, before the facilitator gives feedback, which increases the feedback's uptake"
+      ],
+      "know_how": [
+        "Name the specific behavior or output observed instead of offering a general evaluative judgment",
+        "Deliver feedback as close to the performance as the format allows, instead of batching it for a later summary",
+        "Frame feedback in terms of what to do differently next time, not only what was wrong this time",
+        "Direct feedback language at the work or decision, not at the person's character or ability",
+        "Ask a learner to self-assess before giving feedback, and build on where their self-assessment agrees or diverges from yours",
+        "Check a piece of feedback for actionability by asking whether the learner would know exactly what to change after hearing it"
+      ],
+      "habits": [
+        "Name the specific behavior, not a general impression, every time",
+        "Ask for a self-assessment before jumping straight to your own feedback",
+        "Frame critical feedback around the next attempt, not just this one",
+        "Check whether feedback landed on the work or on the person",
+        "Ask the learner to restate what they'll do differently, to confirm the feedback actually landed"
+      ],
+      "know_why": {
+        "claim": "Critical feedback should not automatically be wrapped in a praise-criticism-praise sandwich.",
+        "because": "the sandwich pattern is well-documented to dilute or obscure the critical message, and experienced learners often just wait for the criticism and discount the praise as procedural",
+        "disputed_by": "some facilitation traditions, particularly in cultures or contexts with strong face-saving norms, that argue direct unsandwiched criticism damages trust and reduces receptivity regardless of specificity",
+        "source": "general feedback-research critique of the sandwich technique, such as Kim Scott's Radical Candor, vs. face-saving and high-context facilitation traditions"
+      },
+      "school_weights": {},
+      "checkpoint": "Deliver feedback on a real piece of learner work using specific, process-focused, feed-forward language, preceded by a self-assessment prompt, and have the learner restate what they'll do differently next time.",
+      "common_failure": "Defaulting to a feedback sandwich that leads and closes with vague praise, so the one specific, actionable point in the middle gets lost or discounted.",
+      "sources": ["Kim Scott, Radical Candor", "Grant Wiggins, seven keys to effective feedback", "Douglas Stone & Sheila Heen, Thanks for the Feedback"]
+    },
+    {
+      "id": "instructional-design.facilitation.online-facilitation-technique",
+      "label": "Online Facilitation Technique",
+      "tier": 3,
+      "cluster": "facilitation",
+      "prereqs": ["instructional-design.facilitation.discussion-design"],
+      "soft_prereqs": [],
+      "one_line": "Run a synchronous or asynchronous online session without the silence, lag, and disengagement that sink most of them.",
+      "hours": 14,
+      "know_what": [
+        "Synchronous vs. asynchronous online facilitation — live video or chat sessions versus discussion boards or delayed-response formats, each with different pacing and engagement techniques",
+        "Chat backchannel — the parallel text conversation happening in a video call's chat window, which a solo facilitator can't monitor and run the main session at the same time",
+        "Breakout room design — structuring small-group work in a video platform with a clear task, time limit, and reporting-back mechanism, since an unstructured breakout reliably produces silence",
+        "Camera-on norms — the tradeoff between requiring cameras on, which raises accountability but also the access and comfort barrier, and camera-optional, which lowers the barrier but makes the room harder to read",
+        "Digital body language — the online-equivalent engagement cues, such as chat activity, reaction emojis, and camera presence, a facilitator reads in place of in-room body language",
+        "Producer / co-host role — a second person managing tech, chat, and breakout logistics so the lead facilitator can focus on content and discussion, especially important above roughly 15-20 participants"
+      ],
+      "know_how": [
+        "Assign a producer or co-host to monitor chat and handle tech issues when running a session above roughly 15-20 participants",
+        "Structure every breakout room with a specific task, a time limit, and a clear reporting-back mechanism",
+        "Build in a chat-based low-barrier participation option, such as a poll or chat prompt, alongside verbal discussion for participants uncomfortable speaking on camera",
+        "Set camera norms explicitly at the session's start, matched to the session's actual accountability needs rather than a default assumption",
+        "Read digital body language, such as chat activity and reaction emojis, as a substitute for in-room cues and adjust pacing accordingly",
+        "Design asynchronous discussion prompts with a stated response deadline and a required reply-to-a-peer step to avoid a board of disconnected monologues"
+      ],
+      "habits": [
+        "Check the chat regularly, or delegate it, instead of only watching the main video feed",
+        "Give every breakout room a concrete task and time limit, never an open 'go discuss'",
+        "Offer a non-verbal way to participate alongside speaking up",
+        "Read engagement through chat and reactions when camera cues aren't available",
+        "Debrief session tech and pacing issues afterward with the producer, and adjust the run-of-show for next time"
+      ],
+      "know_why": null,
+      "school_weights": { "andragogy-self-directed": "normal" },
+      "checkpoint": "Run a 45-minute synchronous online session including at least one structured breakout with a defined task and report-back, and a low-barrier participation channel for camera-off participants.",
+      "common_failure": "Running an online session identically to an in-person one, with an unstructured breakout that has no task or timer, which reliably produces a silent room with everyone waiting for someone else to start.",
+      "sources": ["Cynthia Clay & Ryan Olcott, Engaging the Distributed Workforce", "Jonathan Halls, virtual facilitation guidance", "ATD virtual facilitation resources"]
+    },
+    {
+      "id": "instructional-design.facilitation.difficult-moment-management",
+      "label": "Difficult Moment Management",
+      "tier": 3,
+      "cluster": "facilitation",
+      "prereqs": ["instructional-design.facilitation.feedback-delivery", "instructional-design.facilitation.discussion-design"],
+      "soft_prereqs": [],
+      "one_line": "Handle a derailing question, a dominant participant, or a room that's gone quiet without losing the session's objective.",
+      "hours": 12,
+      "know_what": [
+        "Derailing question — a question that pulls the session away from its objective, requiring a judgment call between addressing it briefly, deferring it, or redirecting it",
+        "Parking lot — a visible, tracked list for capturing an off-topic but valid question or concern without losing it or letting it derail the current agenda item",
+        "Dominant participant — a participant whose volume of contribution crowds out others, requiring a specific, low-confrontation technique rather than public correction",
+        "Silent room — a group that's gone quiet, which can stem from several different causes, such as confusion, disengagement, fatigue, or social risk, that require different fixes",
+        "De-escalation technique — a specific move, such as acknowledging the emotion, separating the person from the position, or proposing a process step, for handling a moment of visible frustration or conflict",
+        "Facilitator neutrality — maintaining a process-focused stance during a contentious exchange rather than taking a side on the content, which preserves the facilitator's ability to manage the room"
+      ],
+      "know_how": [
+        "Use a parking lot to capture a derailing but valid question, with a stated commitment to return to it, instead of ignoring or fully indulging it",
+        "Redirect a dominant participant by explicitly inviting other named participants to weigh in, rather than publicly asking them to stop talking",
+        "Diagnose a silent room by asking a low-stakes calibration question, such as a quick poll or a show of hands, before assuming the cause",
+        "Acknowledge visible frustration explicitly before attempting to move the discussion forward, rather than plowing past it",
+        "Maintain a process-focused stance during a contentious exchange, redirecting to the discussion's ground rules instead of weighing in on content",
+        "Debrief a difficult moment after the session to identify whether it reflects a one-off or a pattern needing a design fix"
+      ],
+      "habits": [
+        "Reach for the parking lot before letting a derailing question eat the agenda",
+        "Invite quieter participants by name instead of publicly silencing a dominant one",
+        "Check for a room's actual cause of silence before assuming it's disengagement",
+        "Name the emotion in the room before trying to move past it",
+        "Debrief a difficult moment afterward to check whether it was a one-off or a pattern the session design needs to fix"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a live session scenario with a dominant participant and a derailing question, demonstrate a parking-lot redirect and a named invitation to a quieter participant without breaking session flow.",
+      "common_failure": "Letting a dominant participant continue unchecked because redirecting them feels confrontational, which trains the rest of the group to stay quiet for the remainder of the session.",
+      "sources": ["Sam Kaner, Facilitator's Guide to Participatory Decision-Making", "Roger Schwarz, The Skilled Facilitator", "Adam Kahane, Facilitating Breakthrough"]
+    },
+    {
+      "id": "instructional-design.facilitation.cohort-facilitation-at-scale",
+      "label": "Cohort Facilitation at Scale",
+      "tier": 7,
+      "cluster": "facilitation",
+      "prereqs": ["instructional-design.facilitation.design-facilitation-plan", "instructional-design.facilitation.online-facilitation-technique"],
+      "soft_prereqs": [],
+      "one_line": "Facilitate the same course design across multiple cohorts or facilitators while keeping the experience consistent.",
+      "hours": 24,
+      "know_what": [
+        "Facilitator fidelity — the degree to which multiple facilitators running the same design deliver a consistent learner experience, the core challenge of scaling facilitation",
+        "Train-the-trainer — a structured process for preparing a new facilitator to run an existing design, distinct from simply handing them the facilitator's guide",
+        "Facilitator calibration session — a live or recorded practice run where multiple facilitators run the same segment and compare notes, used to catch drift before it reaches learners",
+        "Facilitator community of practice — an ongoing channel, such as regular check-ins or a shared forum, for facilitators to surface issues and share adaptations across cohorts",
+        "Local adaptation vs. drift — the difference between a facilitator's reasonable adjustment for their specific cohort and an unauthorized deviation that changes what's actually being taught",
+        "Cross-cohort data — comparing completion, assessment, and satisfaction data across cohorts and facilitators to detect where fidelity is breaking down"
+      ],
+      "know_how": [
+        "Run a structured train-the-trainer session for a new facilitator, including a practice run-through, not just a handoff of the facilitator's guide",
+        "Hold a calibration session where multiple facilitators run the same segment and compare their choices, before a design goes to full scale",
+        "Set up a facilitator community of practice channel for surfacing real-time issues and sharing adaptations across cohorts",
+        "Distinguish a facilitator's reasonable local adaptation from unauthorized drift by checking it against the design's stated objectives, not just its script",
+        "Compare completion, assessment, and satisfaction data across cohorts and facilitators to identify where fidelity is breaking down",
+        "Update the facilitator's guide based on patterns surfaced across multiple cohorts, instead of treating it as fixed once published"
+      ],
+      "habits": [
+        "Watch for a facilitator's local adaptation that's quietly become a change to what's actually being taught",
+        "Compare notes across facilitators regularly, not just after something goes wrong",
+        "Look at cross-cohort data patterns, not just one cohort's results, before concluding a design is stable",
+        "Treat facilitator drift as a design-and-training problem to fix, not an individual facilitator's fault to correct informally",
+        "Run a calibration check before scaling a design to a new facilitator, not after issues surface"
+      ],
+      "know_why": {
+        "claim": "A facilitation design should be run through a structured train-the-trainer and calibration process before scaling to multiple facilitators.",
+        "because": "without calibration, facilitator fidelity drifts silently, and learners in different cohorts end up with meaningfully different experiences of what's supposed to be the same course",
+        "disputed_by": "practitioners in andragogy-heavy or expert-facilitator contexts who argue over-standardizing facilitation strips out the facilitator's own expertise and responsiveness to their specific cohort, trading real-time adaptation for uniformity",
+        "source": "train-the-trainer and fidelity-of-implementation research vs. adult-learning practitioners favoring facilitator autonomy"
+      },
+      "school_weights": { "andragogy-self-directed": "low" },
+      "checkpoint": "Run a train-the-trainer session and a calibration run-through with at least two facilitators for the same design, and compare cross-cohort data from their first sessions to identify at least one fidelity gap.",
+      "common_failure": "Scaling a design to multiple facilitators by handing out the facilitator's guide with no calibration process, so each facilitator quietly interprets ambiguous parts of the guide differently and learner experience diverges across cohorts.",
+      "sources": ["Dane & Schneider, fidelity-of-implementation research", "ATD facilitator development guidance", "Michael Fullan, implementation fidelity in scaled programs"]
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-007",
+  "ids": [
+    "vibecoding.deployment.static-hosting",
+    "vibecoding.deployment.env-config",
+    "vibecoding.deployment.ci-pipeline",
+    "vibecoding.deployment.rollback-plan",
+    "vibecoding.deployment.basic-monitoring",
+    "vibecoding.deployment.secrets-rotation"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.deployment.static-hosting",
+      "label": "Static hosting",
+      "tier": 1,
+      "cluster": "deployment",
+      "prereqs": [],
+      "one_line": "Deploy a static site to a host from a repo and get a working public URL.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Static host — a platform (Vercel, Netlify, GitHub Pages, Cloudflare Pages) that serves pre-built files from a CDN, with no server-side runtime",
+        "Build command / output directory — the two settings a static host needs to know: how to build the site and where the built files land",
+        "Custom domain vs default subdomain — pointing a real domain at the host versus using its free generated subdomain, a DNS configuration step distinct from the deploy itself",
+        "Deploy trigger — what causes a new deploy (a git push, a manual trigger, a webhook), and confirming the trigger you expect is actually the one configured",
+        "Cache invalidation — a CDN serving a stale version of a file after a new deploy until its cache expires or is explicitly purged"
+      ],
+      "know_how": [
+        "Connect the repository to the host and configure the build command and output directory correctly before the first deploy",
+        "Confirm the deployed URL actually serves the latest commit, not a stale cached build",
+        "Set up a custom domain and verify DNS propagation before considering the deploy done",
+        "Check the deploy log for build warnings, not just a green 'deployed' status",
+        "Confirm the deploy trigger matches expectations (e.g. every push to main, not every push to every branch)"
+      ],
+      "habits": [
+        "Check the actual deployed URL after every deploy, not just the host's dashboard status",
+        "Read build logs even on a successful deploy, since warnings there often predict future failures",
+        "Verify the deploy trigger configuration explicitly rather than assuming the default matches intent",
+        "Hard-refresh or check in an incognito window when a deploy doesn't seem to reflect recent changes, to rule out caching",
+        "Recheck the live site after any change to build configuration, not just after a code change"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Connect a repository to a static host, configure the build correctly, and get a live public URL that reflects the latest commit, verified by checking the deployed page directly.",
+      "common_failure": "Assuming a 'deploy successful' status means the site is actually correct — a misconfigured build output directory can deploy successfully while serving an empty or stale page, and the failure is only visible by actually checking the live URL.",
+      "sources": ["Vercel deployment docs", "Netlify documentation"]
+    },
+    {
+      "id": "vibecoding.deployment.env-config",
+      "label": "Environment config",
+      "tier": 2,
+      "cluster": "deployment",
+      "prereqs": ["vibecoding.deployment.static-hosting"],
+      "one_line": "Separate configuration and secrets from code using environment variables, correctly scoped per environment.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Environment variable — a value injected into the running app from outside the codebase, the standard way to keep config and secrets out of source",
+        ".env file — a local file holding environment variables for development, which must never be committed to version control",
+        "Environment-specific values — different values for the same variable name across local, staging, and production, and the risk of a value leaking from the wrong environment",
+        "Build-time vs runtime injection — a frontend value baked into the built bundle (visible to anyone) versus a backend value read at runtime (kept server-side), a distinction with real security consequences",
+        "Secret vs config — a value that must stay confidential (an API key) versus one that's just environment-specific but not sensitive (a base URL), treated with different handling"
+      ],
+      "know_how": [
+        "Add a real .env file to .gitignore before it's ever created, not after a secret has already been committed",
+        "Set environment variables in the hosting platform's dashboard or CLI for each environment separately",
+        "Check whether a frontend variable is build-time (baked into the bundle, effectively public) before putting anything sensitive in it",
+        "Use a .env.example file with placeholder values so the required variables are documented without leaking real ones",
+        "Verify the correct set of variables is present in each environment before considering a deploy configured"
+      ],
+      "habits": [
+        "Check .gitignore includes .env before the first commit of a new project",
+        "Scan git history for any accidentally committed secret if a .env file is ever found tracked",
+        "Never put a genuinely secret value in a frontend/build-time environment variable",
+        "Keep a .env.example file current as new variables are added",
+        "Verify environment variables are actually set in each deploy target, not just assumed from local .env"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an app that needs a secret API key, configure it as a runtime (not build-time) environment variable, confirm it never appears in the built frontend bundle, and confirm .env is excluded from version control.",
+      "common_failure": "Committing a working .env file to get a deploy working quickly, intending to remove it later — the secret is now in git history permanently, recoverable even after the file is deleted from a later commit.",
+      "sources": ["The Twelve-Factor App", "OWASP — secrets management"]
+    },
+    {
+      "id": "vibecoding.deployment.ci-pipeline",
+      "label": "CI pipeline",
+      "tier": 2,
+      "cluster": "deployment",
+      "prereqs": ["vibecoding.deployment.static-hosting"],
+      "one_line": "Set up a CI pipeline that runs tests and checks on every AI-assisted commit before it can merge.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "CI pipeline — an automated sequence (install, lint, type-check, test, build) that runs on every push or pull request before a change can merge",
+        "Required check — a CI job configured to block merging when it fails, versus one that runs informationally without blocking",
+        "Pipeline speed vs coverage — a fast pipeline that only runs a subset of checks versus a thorough one that runs everything, and the tradeoff in feedback latency",
+        "Flaky CI job — a job that fails intermittently for reasons unrelated to the actual change, which erodes trust in the pipeline if not addressed",
+        "CI environment parity — running CI against a similar Node/language version and dependency lockfile as production, so a pipeline pass actually predicts a working deploy"
+      ],
+      "know_how": [
+        "Configure lint, type-check, and test as required checks that block merging on failure",
+        "Run the pipeline against the exact dependency lockfile committed to the repo, not a freshly resolved one",
+        "Investigate any newly flaky job immediately rather than letting 're-run until green' become the norm",
+        "Keep the pipeline fast enough that it doesn't discourage frequent small commits",
+        "Confirm a required check is actually configured as required in the repository's branch protection settings, not just present in the workflow file"
+      ],
+      "habits": [
+        "Check branch protection settings actually enforce the pipeline as required, not just that the workflow file exists",
+        "Investigate a newly failing or flaky job the same day, rather than re-running past it",
+        "Keep the pipeline's dependency versions pinned to match what's actually deployed",
+        "Watch pipeline run time creeping up over time as a signal to prune or parallelize",
+        "Treat a green pipeline as necessary, not sufficient, for merging — pair it with the review practices it doesn't replace"
+      ],
+      "know_why": null,
+      "school_weights": { "verification-first": "high" },
+      "checkpoint": "Given a repository with no CI, set up a pipeline that runs lint, type-check, and tests as required checks, and confirm a failing test actually blocks a pull request from being merged.",
+      "common_failure": "Setting up a CI workflow file that runs the right checks but never configuring branch protection to require it — the pipeline runs and reports status, but nothing actually stops a failing change from being merged.",
+      "sources": ["GitHub Actions documentation", "GitLab CI/CD documentation"]
+    },
+    {
+      "id": "vibecoding.deployment.rollback-plan",
+      "label": "Rollback plan",
+      "tier": 4,
+      "cluster": "deployment",
+      "prereqs": ["vibecoding.deployment.ci-pipeline", "vibecoding.iteration.rollback-discipline"],
+      "one_line": "Set up a deployment rollback path so a bad AI-assisted release can be reverted in minutes, not hours.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Rollback path — a concrete, tested way to return production to the last known-good deployed version, distinct from just having version control history",
+        "Deploy history — the hosting platform's record of prior deployed builds, which a rollback typically targets by redeploying a specific prior one",
+        "Database migration rollback risk — a code rollback that leaves the database schema ahead of what the reverted code expects, a common gap in an otherwise clean rollback plan",
+        "Rollback time — how long it actually takes from noticing a bad deploy to production serving the previous version, the number that matters during an incident",
+        "Feature flag as rollback alternative — disabling a feature via a flag instead of redeploying, faster for isolated features but not a substitute for a full deploy rollback"
+      ],
+      "know_how": [
+        "Identify and test the platform's actual rollback mechanism before it's needed in an incident, not during one",
+        "Check whether a given deploy included a database migration that a code rollback alone wouldn't undo",
+        "Measure how long a rollback actually takes end to end, from decision to production serving the old version",
+        "Keep the last few deploys readily redeployable rather than only ever the most recent one",
+        "Practice a rollback at least once outside of an actual incident, so the mechanism is trusted, not just assumed to work"
+      ],
+      "habits": [
+        "Know the exact rollback command or button before the first real incident, not during it",
+        "Check whether a migration in the current deploy would survive a code-only rollback",
+        "Treat a rollback that's never been tested as a rollback plan that doesn't actually exist yet",
+        "Keep rollback time as a tracked number, not a guess",
+        "Re-verify the rollback path still works after any change to the deploy pipeline or database migration process"
+      ],
+      "know_why": {
+        "claim": "A rollback plan isn't real until it's been exercised at least once, before an incident.",
+        "because": "A rollback mechanism that's only ever been read about, not used, routinely turns out to have a gap (a migration that doesn't roll back cleanly, a config value that isn't captured in the deploy history) that's only discovered under incident pressure, when discovering it is most expensive.",
+        "disputed_by": "Some practitioners argue that for a small, low-traffic project, the setup cost of practicing rollbacks regularly isn't worth it compared to just redeploying a fixed-forward commit quickly when something breaks.",
+        "source": "Site reliability engineering practice (Google SRE book — release engineering)"
+      },
+      "school_weights": { "manual-gate": "high" },
+      "checkpoint": "Deploy a small change, then execute an actual rollback to the prior version, measuring the time from decision to the old version serving live traffic.",
+      "common_failure": "Assuming a rollback will work because the hosting platform advertises one-click rollback, without ever having tried it — the first real attempt, during an actual incident, is when a database migration mismatch or a missing environment variable in the old deploy surfaces.",
+      "sources": ["Google SRE book — release engineering", "hosting platform rollback documentation"]
+    },
+    {
+      "id": "vibecoding.deployment.basic-monitoring",
+      "label": "Basic monitoring",
+      "tier": 7,
+      "cluster": "deployment",
+      "prereqs": ["vibecoding.deployment.full-stack-deploy"],
+      "one_line": "Add logging and error tracking so a production failure surfaces as an alert instead of a user complaint.",
+      "hours": 10,
+      "soft_prereqs": [],
+      "know_what": [
+        "Error tracker — a service (Sentry, Rollbar) that captures unhandled exceptions from production with stack traces and context, instead of relying on users to report bugs",
+        "Structured logging — logging with consistent fields (timestamp, request id, severity) that can be searched and filtered, versus unstructured print statements",
+        "Alert threshold — the specific condition (error rate above X%, response time above Y ms) that triggers a notification, tuned to avoid both silence and alert fatigue",
+        "Uptime check — an external probe that periodically confirms the app is reachable, catching a full outage that internal error tracking might miss if the app can't even respond",
+        "Signal vs noise — the practice of alerting only on conditions that need a response, since an alert that fires constantly for non-issues gets ignored like any other noise"
+      ],
+      "know_how": [
+        "Wire an error tracker into both frontend and backend so an unhandled exception anywhere surfaces automatically",
+        "Set an alert threshold specific enough to page for real problems without firing on routine noise",
+        "Add an external uptime check independent of the app's own error tracking, so a full outage is still caught",
+        "Test the alerting path end to end by triggering a deliberate error and confirming a notification actually arrives",
+        "Review captured errors periodically even when no alert fired, since low-severity errors can still indicate a real problem"
+      ],
+      "habits": [
+        "Trigger a deliberate test error after setting up monitoring to confirm the whole alert path actually works",
+        "Check the error tracker's dashboard periodically, not only when an alert fires",
+        "Tune alert thresholds down when they're too noisy rather than letting them get ignored",
+        "Treat a service with no monitoring configured as not actually deployed yet, not just an item for later",
+        "Review a new alert's context (stack trace, request data) before acting rather than reacting to the alert title alone"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Set up an error tracker and an uptime check for a deployed app, trigger a deliberate error, and confirm a notification arrives with enough context (stack trace, request info) to start debugging without reproducing it locally first.",
+      "common_failure": "Deploying monitoring tooling but never testing that it actually alerts — a misconfigured integration (wrong project key, alert rule that never matches) can sit silently broken for months, discovered only when an incident happens and no one was notified.",
+      "sources": ["Sentry documentation", "Google SRE book — monitoring distributed systems"]
+    },
+    {
+      "id": "vibecoding.deployment.secrets-rotation",
+      "label": "Secrets rotation",
+      "tier": 5,
+      "cluster": "deployment",
+      "prereqs": ["vibecoding.deployment.env-config", "vibecoding.deployment.rollback-plan"],
+      "one_line": "Manage and rotate production secrets and credentials without an AI session ever seeing or logging them directly.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Secret rotation — periodically replacing a credential (API key, database password) with a new one, limiting how long a leaked secret stays useful if compromised",
+        "Secrets manager — a dedicated service (platform-native secrets, Doppler, Vault) for storing and injecting secrets, distinct from plain environment variables checked into a dashboard by hand",
+        "Blast radius of a leaked secret — what a compromised credential actually grants access to, which should be scoped as narrowly as possible per secret rather than one broad key used everywhere",
+        "Zero-downtime rotation — rotating a secret without an outage, usually by supporting both old and new values briefly during the transition",
+        "Secret exposure in logs or AI sessions — a credential accidentally printed to logs, error messages, or pasted into an AI chat session, a real and easy-to-miss leak path"
+      ],
+      "know_how": [
+        "Scope each secret narrowly to what it actually needs access to, rather than reusing one broad credential everywhere",
+        "Rotate a secret on a schedule or immediately after any suspected exposure, not only after a confirmed breach",
+        "Support both the old and new value briefly during a rotation so in-flight requests don't fail",
+        "Check logs and error messages for accidentally leaked secret values before considering a service production-ready",
+        "Never paste a real secret value into an AI chat session; use a placeholder and swap it in locally instead"
+      ],
+      "habits": [
+        "Treat any secret pasted into a chat session, even accidentally, as compromised and due for rotation",
+        "Scope new secrets as narrowly as the service allows from the moment they're created",
+        "Check logging output periodically for accidentally leaked credential values",
+        "Rotate a secret immediately on any suspicion of exposure rather than waiting for confirmation",
+        "Keep an inventory of which secrets exist and what they grant access to, so a rotation after exposure is fast, not a scramble"
+      ],
+      "know_why": null,
+      "school_weights": { "manual-gate": "high" },
+      "checkpoint": "Given a service with one broad database credential, scope it down to a narrower role-based credential and rotate it with zero downtime, verified by confirming in-flight requests don't fail during the transition.",
+      "common_failure": "Pasting a real API key or database URL into an AI chat session for debugging convenience — even if the session is 'private', the secret should now be treated as exposed and rotated, a step that's easy to skip because nothing appears to break immediately.",
+      "sources": ["OWASP — secrets management", "The Twelve-Factor App"]
+    }
+  ]
+}

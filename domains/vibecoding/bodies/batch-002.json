@@ -1,0 +1,275 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-002",
+  "ids": [
+    "vibecoding.prompting.context-framing",
+    "vibecoding.prompting.task-decomposition",
+    "vibecoding.prompting.spec-writing",
+    "vibecoding.prompting.example-anchoring",
+    "vibecoding.prompting.constraint-declaration",
+    "vibecoding.prompting.diagnostic-reprompting",
+    "vibecoding.prompting.prompt-templates"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.prompting.context-framing",
+      "label": "Context framing",
+      "tier": 1,
+      "cluster": "prompting",
+      "prereqs": [],
+      "one_line": "Frame a prompt with the goal, relevant files, and constraints so a coding assistant's first response is usable without a rewrite.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Context window — the finite amount of text (code, chat history, instructions) a model can attend to at once; irrelevant content pushed in crowds out what matters",
+        "System/project instructions — a standing instruction file (CLAUDE.md, .cursorrules, AGENTS.md) read automatically, versus one-off context pasted into a single prompt",
+        "Relevant-file selection — naming or attaching the 2-5 files that actually bear on the task, instead of letting the assistant search or guess",
+        "Goal statement — the one sentence naming what done looks like, which anchors everything else in the prompt",
+        "Constraint vs preference — a hard boundary ('do not modify the database schema') versus a soft preference ('prefer functional style'), and saying which is which",
+        "Ambient assumptions — facts about the codebase or stack (framework version, package manager) the assistant can't see and will guess wrong without being told"
+      ],
+      "know_how": [
+        "Open with the goal in one sentence before any code or file content",
+        "Name the specific files or functions relevant to the task instead of pasting the whole repo or saying nothing",
+        "State the stack and version explicitly (e.g. 'React 18 with TypeScript, not JS') when it isn't obvious from attached files",
+        "Separate hard constraints from nice-to-haves so the assistant can prioritize correctly under ambiguity",
+        "Re-state context that scrolled out of view instead of assuming the model still remembers it",
+        "Trim unrelated files or history from the prompt so the signal isn't diluted"
+      ],
+      "habits": [
+        "Write the goal sentence first, even when the rest of the prompt is copy-pasted code",
+        "Before pasting a whole file, ask whether a smaller excerpt would give equivalent context",
+        "Check a standing instructions file exists and is current before assuming the assistant knows project conventions",
+        "Notice when a response ignores a stated constraint and re-state it more explicitly rather than repeating the same prompt",
+        "Treat a rambling, unfocused prompt as a sign to stop and decompose the task, not to add more words"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a bug report and a small codebase, write a single prompt (goal, relevant files named, constraints stated) that gets a correct fix on the first attempt, without pasting the entire repository.",
+      "common_failure": "Pasting an entire file or repository 'just in case' instead of naming what's relevant — the assistant then has to guess which part matters, and often optimizes the wrong section or invents unrelated changes.",
+      "sources": ["Anthropic — Claude Code best practices", "Simon Willison's blog on prompting patterns"]
+    },
+    {
+      "id": "vibecoding.prompting.task-decomposition",
+      "label": "Task decomposition",
+      "tier": 1,
+      "cluster": "prompting",
+      "prereqs": [],
+      "one_line": "Break a feature request into AI-sized subtasks small enough that each one's output can be checked on its own.",
+      "hours": 6,
+      "soft_prereqs": ["vibecoding.prompting.context-framing"],
+      "know_what": [
+        "AI-sized task — a unit of work small enough that its output can be read and verified in one sitting, typically one file or one narrow behavior",
+        "Vertical slice — a decomposition that cuts through every layer (UI, logic, data) for one thin feature, versus a horizontal slice (all of one layer) that leaves nothing usable until every slice is done",
+        "Dependency ordering — sequencing subtasks so each one only needs what already exists, not a feature that hasn't been built yet",
+        "Definition of done per subtask — a concrete, checkable outcome for each piece, not just 'part of the feature'",
+        "Task list vs single mega-prompt — writing an ordered list of subtasks up front versus discovering them one at a time inside a single long conversation",
+        "Scope creep at the task level — a subtask that grows mid-implementation because the boundary wasn't stated, the decomposition-level version of constraint declaration"
+      ],
+      "know_how": [
+        "Split a feature request into subtasks before writing the first implementation prompt, not after the first attempt sprawls",
+        "Order subtasks so each has everything it needs from a prior subtask, never from one that comes later",
+        "Write a one-line definition of done for each subtask before starting it",
+        "Re-decompose when a subtask's diff comes back touching far more files than expected",
+        "Prefer several small, verifiable prompts over one prompt that tries to do the whole feature"
+      ],
+      "habits": [
+        "Write the subtask list down (even a scratch checklist) rather than holding the decomposition in your head",
+        "Check off each subtask only after its own verification, not after the assistant claims it's done",
+        "When a subtask's prompt starts needing three paragraphs of caveats, split it again",
+        "Revisit the task list after each subtask in case the real decomposition looks different once code exists",
+        "Prefer three small subtasks that each ship something checkable over one subtask that only becomes checkable once several others finish"
+      ],
+      "know_why": {
+        "claim": "Decomposition should happen before the first prompt, not emerge from iterating on one big prompt.",
+        "because": "A single large prompt collapses many decisions into one AI turn, so a wrong assumption in the middle of the feature is invisible until the whole thing is reviewed at once, at which point it's expensive to isolate.",
+        "disputed_by": "The vibe-loop school argues upfront decomposition is often wrong before you've seen any real code, and prefers discovering the natural task boundaries by running a rough first pass and then splitting what didn't work.",
+        "source": "Practitioner writing on AI-assisted task breakdown (Anthropic's agentic coding guidance; Simon Willison)"
+      },
+      "school_weights": { "vibe-loop": "low", "spec-first": "high" },
+      "checkpoint": "Given a feature request spanning UI and backend (e.g. 'add a comment feature'), produce an ordered subtask list where each subtask is independently promptable and verifiable, with no subtask depending on one that comes later.",
+      "common_failure": "Writing one prompt for 'the whole feature' because decomposing feels like overhead — the resulting diff touches a dozen files at once, and when something's wrong, there's no way to isolate which part of the prompt caused it.",
+      "sources": ["Anthropic — building effective agents", "Simon Willison's blog on AI-assisted development"]
+    },
+    {
+      "id": "vibecoding.prompting.spec-writing",
+      "label": "Spec writing",
+      "tier": 2,
+      "cluster": "prompting",
+      "prereqs": ["vibecoding.prompting.context-framing"],
+      "one_line": "Write a short spec — inputs, outputs, edge cases — before generating code so scope is fixed before the assistant starts.",
+      "hours": 8,
+      "soft_prereqs": ["vibecoding.prompting.task-decomposition"],
+      "know_what": [
+        "Spec — a short written statement of inputs, outputs, and edge cases for one task, distinct from a full requirements document",
+        "Edge case enumeration — explicitly listing empty input, invalid input, and boundary values before generation, since an AI's first draft covers only the case implied by the example given",
+        "Acceptance criteria — the specific, checkable conditions that make a spec's implementation correct, written before the code exists so review has something to check against",
+        "Spec-to-prompt translation — turning a written spec into the actual prompt text, keeping the spec's precision instead of compressing it into a vaguer ask",
+        "Living vs throwaway spec — a spec worth keeping in the repo (for a feature that will be revisited) versus one that only needs to exist for the length of one prompt"
+      ],
+      "know_how": [
+        "Write inputs, outputs, and at least two edge cases before opening the coding assistant",
+        "State acceptance criteria as testable statements ('returns 404 for a missing id') rather than descriptions ('handles errors well')",
+        "Paste the spec directly into the prompt rather than paraphrasing it looser",
+        "Check the generated code against every line of the spec, not just against the primary example",
+        "Keep specs for recurring task shapes so the next similar task starts from a template, not from a blank page"
+      ],
+      "habits": [
+        "Refuse to start a non-trivial prompt without writing the spec first, even three bullet points count",
+        "Read the diff against each acceptance criterion individually rather than skimming for general shape",
+        "Flag when the assistant's output covers the happy path but not a stated edge case",
+        "Keep specs short — a spec that takes longer to write than the code was worth is a smell that the task should be smaller",
+        "Store a spec next to the code it describes when the feature is worth revisiting, instead of letting it live only in chat history"
+      ],
+      "know_why": null,
+      "school_weights": { "spec-first": "high", "vibe-loop": "low" },
+      "checkpoint": "Given a vague feature request, write a spec (inputs, outputs, 3+ edge cases, acceptance criteria) and get an implementation from a single prompt that satisfies every listed criterion.",
+      "common_failure": "Writing a spec so long and formal that it takes longer than doing the task by hand, or skipping edge cases in the spec entirely so the implementation's blind spots exactly mirror the spec's blind spots.",
+      "sources": ["Anthropic — Claude Code best practices", "Michael Feathers — Working Effectively with Legacy Code (spec-by-example lineage)"]
+    },
+    {
+      "id": "vibecoding.prompting.example-anchoring",
+      "label": "Example anchoring",
+      "tier": 2,
+      "cluster": "prompting",
+      "prereqs": ["vibecoding.prompting.context-framing"],
+      "one_line": "Anchor a prompt to an existing file or example so generated code matches the project's actual patterns instead of generic ones.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Anchoring example — an existing file or snippet shown to the assistant as the pattern to follow, more precise than a verbal style description",
+        "Style drift — the tendency of generated code to default to generic conventions when no local example is given, even in a codebase with strong existing conventions",
+        "Positive vs negative example — showing what to imitate (a similar working feature) versus what to avoid (a past mistake), both useful and often confused",
+        "Convention surface — naming, file layout, error handling shape, and test structure, each of which needs its own anchor since one example rarely covers all of them",
+        "Copy-then-diverge risk — an anchored example being followed so literally that irrelevant details (a one-off variable name, an unrelated comment) get copied along with the pattern"
+      ],
+      "know_how": [
+        "Attach or paste the single closest existing example before describing the new task in words",
+        "Point out explicitly which parts of the example are the pattern to follow and which are incidental",
+        "Use a second, contrasting example when one anchor risks over-fitting to its specific details",
+        "Check the new code for copied incidental details (stale comments, unrelated variable names) that shouldn't have carried over",
+        "Update or replace the anchoring example once conventions change, instead of anchoring to something now-outdated"
+      ],
+      "habits": [
+        "Reach for an existing file before writing a prose style description from scratch",
+        "Scan new output for anything that looks copied rather than adapted from the anchor",
+        "Keep a short list of 'best example' files per task type (a good endpoint, a good component) to anchor future prompts",
+        "Re-anchor to a newer example once the old anchor no longer reflects current conventions",
+        "Prefer a real file over a hypothetical description even when writing the anchor takes an extra minute to find"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a new endpoint to add to an existing API with 10+ endpoints, anchor a prompt to the closest existing endpoint and get a new one that matches its error handling, naming, and structure conventions exactly.",
+      "common_failure": "Describing conventions in prose ('use our standard error format') instead of pointing at a real example — the assistant produces a plausible-looking but subtly different convention, since prose descriptions are always looser than a concrete file.",
+      "sources": ["Anthropic — Claude Code best practices", "GitHub Copilot docs on context"]
+    },
+    {
+      "id": "vibecoding.prompting.constraint-declaration",
+      "label": "Constraint declaration",
+      "tier": 2,
+      "cluster": "prompting",
+      "prereqs": ["vibecoding.prompting.task-decomposition"],
+      "one_line": "State explicit boundaries — files not to touch, libraries not to add — so an AI edit can't quietly expand past its task.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Hard boundary — a constraint that must never be crossed (no schema changes, no new dependencies) versus a preference that can bend under pressure",
+        "Blast radius — the set of files or systems a task is allowed to touch, stated explicitly so an agent doesn't 'helpfully' expand it",
+        "Allowed vs forbidden tools — which commands, packages, or external calls a task may use, distinct from what files it may edit",
+        "Implicit scope creep — a change that technically serves the goal but wasn't asked for (renaming unrelated variables, upgrading a dependency), which constraints exist specifically to block",
+        "Constraint precedence — what happens when a stated constraint conflicts with doing the task well, and which one should win (usually the constraint, restated as a blocker to raise, not silently override)"
+      ],
+      "know_how": [
+        "State the allowed file or directory scope before describing the change itself",
+        "List forbidden actions explicitly (no new dependencies, no schema migration) when they're plausible things an assistant might otherwise do",
+        "Ask the assistant to flag when a stated constraint conflicts with the cleanest implementation, rather than letting it silently choose",
+        "Review a diff specifically for files outside the declared scope, not just for correctness within it",
+        "Restate constraints on a fresh prompt in a new session rather than assuming they carried over"
+      ],
+      "habits": [
+        "Write the 'don't touch' list before the 'do this' instruction",
+        "Treat any out-of-scope file in a diff as a stop-and-ask moment, not a minor cleanup to accept",
+        "Re-declare constraints explicitly at the start of every new session, since they don't persist automatically",
+        "Distinguish out loud between 'I'd prefer' and 'never do this' so the assistant weighs them differently",
+        "When a constraint would make the task impossible as scoped, raise that as a blocker instead of quietly dropping the constraint"
+      ],
+      "know_why": null,
+      "school_weights": { "manual-gate": "high" },
+      "checkpoint": "Given a one-line bug fix task in a shared file, declare scope and forbidden actions up front, and get a diff that touches only the declared scope with no incidental renames or dependency changes.",
+      "common_failure": "Assuming an assistant will infer scope from good taste — without an explicit boundary, a request to 'fix the bug' can come back with unrelated formatting changes, a renamed variable, or a new dependency, each individually defensible and collectively a much bigger diff than intended.",
+      "sources": ["Anthropic — Claude Code best practices", "Google engineering practices docs — small CLs"]
+    },
+    {
+      "id": "vibecoding.prompting.diagnostic-reprompting",
+      "label": "Diagnostic reprompting",
+      "tier": 3,
+      "cluster": "prompting",
+      "prereqs": ["vibecoding.prompting.spec-writing"],
+      "one_line": "Diagnose exactly where a wrong AI output missed the ask, then rewrite the prompt to close that specific gap instead of repeating it verbatim.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Surprise-first diagnosis — naming exactly what's unexpected about the output before rewriting the prompt, then treating the rewrite as a hypothesis to test rather than a certainty",
+        "Repeat-prompt trap — resending a lightly reworded version of a failed prompt and expecting a different result, instead of diagnosing the specific gap",
+        "Root-cause vs symptom prompt — a reprompt that fixes the underlying misunderstanding (wrong assumption about the data shape) versus one that patches the visible symptom (adds a null check) without addressing why it was needed",
+        "Minimal reproduction — isolating the smallest failing case before reprompting, the same discipline as debugging code, applied to debugging a prompt",
+        "Prompt hypothesis — treating a reprompt as a testable guess about what was missing from the first prompt, not a certainty"
+      ],
+      "know_how": [
+        "State explicitly what the output should have done differently before writing the next prompt",
+        "Check whether the failure came from missing context, an ambiguous instruction, or a genuine model limitation, since each calls for a different fix",
+        "Isolate the smallest example that reproduces the wrong output before reprompting on the full task",
+        "Change one variable at a time between reprompts (more context, or a different instruction, not both) to learn which one mattered",
+        "Stop reprompting and switch to writing the fix by hand once two or three targeted attempts haven't converged"
+      ],
+      "habits": [
+        "Name the specific gap out loud before touching the prompt again",
+        "Resist sending a near-identical prompt a second time hoping for a different roll",
+        "Keep a running note of what changed between reprompt attempts so the pattern of what works becomes visible",
+        "Treat a third failed reprompt on the same task as a signal to decompose the task further, not to keep pushing",
+        "When a reprompt succeeds, note which specific change fixed it so the same diagnosis is faster next time"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an AI output that fails a stated requirement, name the specific gap between what was asked and what was produced, then get a correct result in one targeted reprompt.",
+      "common_failure": "Reprompting with a vaguer, more emphatic version of the same instruction ('please make sure it actually works this time') instead of diagnosing what specifically was missing — this rarely changes the outcome because the actual gap (missing context, an ambiguous edge case) was never identified.",
+      "sources": ["Anthropic — Claude Code best practices", "Peirce — abductive reasoning / diagnosis literature"]
+    },
+    {
+      "id": "vibecoding.prompting.prompt-templates",
+      "label": "Prompt templates",
+      "tier": 3,
+      "cluster": "prompting",
+      "prereqs": ["vibecoding.prompting.example-anchoring", "vibecoding.prompting.constraint-declaration"],
+      "one_line": "Save and reuse prompt templates for recurring task shapes (new component, new endpoint, bug fix) so context-gathering isn't rebuilt from scratch every time.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Prompt template — a reusable skeleton (goal, context slots, constraints, output format) for a recurring task shape, filled in per instance rather than rewritten from scratch",
+        "Task shape — a category of recurring request (new component, new endpoint, bug fix, migration) with predictable context needs, the unit a template is built around",
+        "Template drift — a saved template going stale as project conventions change, producing outputs that no longer match current patterns",
+        "Slot vs boilerplate — the parts of a template that must be filled in per use (the specific goal) versus the parts that stay fixed (standing constraints, stack facts)",
+        "Template library location — where templates live (a project's docs, a snippets tool, a standing instructions file) so they're findable instead of re-invented from memory each time"
+      ],
+      "know_how": [
+        "Extract a template from a prompt only after it's been used successfully two or three times, not from a single lucky prompt",
+        "Separate the fixed boilerplate from the task-specific slots explicitly when writing the template",
+        "Store templates somewhere the whole team or future sessions can find them, not just in personal scratch notes",
+        "Review and update a template when the codebase's conventions shift, rather than letting it silently drift stale",
+        "Prefer a slightly generic template that still needs light editing over an ultra-specific one that only fits one past task"
+      ],
+      "habits": [
+        "Reach for an existing template before writing a task-shape prompt from scratch",
+        "Note when filling in a template feels awkward, since that's a signal the template needs revision",
+        "Periodically re-check saved templates against current project conventions",
+        "Add a new template once the same task shape has come up for the third time, not the first",
+        "Delete or rewrite a template once it stops matching two tasks in a row, rather than letting a stale template linger"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given three completed similar tasks (e.g. three new API endpoints), extract a reusable prompt template with clear slots, and use it to complete a fourth in less time than the first three took individually.",
+      "common_failure": "Building a template so specific to one past task that reusing it for the next similar-but-not-identical task requires more editing than writing a fresh prompt would have — the template saves nothing because it wasn't actually generalized.",
+      "sources": ["Anthropic — Claude Code best practices", "community-maintained prompt engineering pattern libraries"]
+    }
+  ]
+}

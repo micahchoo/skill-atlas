@@ -1,0 +1,306 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-001",
+  "ids": [
+    "instructional-design.analysis.training-needs-analysis",
+    "instructional-design.objectives.write-learning-objectives",
+    "instructional-design.design.instructional-strategy-selection",
+    "instructional-design.assessment.build-assessment-blueprint",
+    "instructional-design.media.storyboard-and-build",
+    "instructional-design.facilitation.design-facilitation-plan",
+    "instructional-design.evaluation.pilot-and-revise"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.analysis.training-needs-analysis",
+      "label": "Training Needs Analysis",
+      "tier": 1,
+      "cluster": "analysis",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Tell whether a performance gap is actually a training problem before a budget gets spent building training for it.",
+      "hours": 10,
+      "know_what": [
+        "Performance gap — the measurable difference between what people currently do and what the organization needs them to do",
+        "Front-end analysis (Rossett) — the assessment package (job, task, organizational, and gap analysis) done before deciding on a solution",
+        "Non-training solutions — job aids, incentive redesign, tool changes, staffing changes that fix a gap training can't touch",
+        "Mager & Pipe's flowchart — a diagnostic sequence asking 'could they do it if their life depended on it?' to separate skill deficits from everything else",
+        "Business impact vs. learning impact — the distinction between what the organization needs to see change and what a learner needs to be able to do",
+        "Sponsor's presenting problem — the framing a sponsor arrives with, which is often the symptom, not the cause"
+      ],
+      "know_how": [
+        "Interview the sponsor for the presenting problem, then ask for the data behind it (metrics, complaints, error rates) before agreeing training is the fix",
+        "Apply Mager & Pipe's could-they-do-it-if-their-life-depended-on-it test to separate a skill deficit from a motivation or environment problem",
+        "Draft a one-page problem statement naming the current state, desired state, and the gap in observable terms",
+        "Identify at least one plausible non-training intervention for every training request, and rule it out explicitly rather than silently",
+        "Estimate the cost of doing nothing against the cost of a training solution before recommending one",
+        "Document the decision (train / don't train / hybrid) with the evidence that drove it, so it survives a later 'why did we build this'"
+      ],
+      "habits": [
+        "Ask 'what would you see them doing differently' before asking 'what do you want them to know'",
+        "Treat the first request as a hypothesis, not a spec",
+        "Default to suspicion of any request that names a solution before naming a problem",
+        "Look for the metric that already exists before proposing a new one",
+        "Assume some of the gap is non-training and go looking for which part"
+      ],
+      "know_why": {
+        "claim": "A full front-end analysis should precede every training request, even a small one.",
+        "because": "skipping it produces training built for the wrong gap, which costs more in production rework than the analysis would have taken",
+        "disputed_by": "rapid/agile instructional design practitioners, who argue a lightweight one-page problem statement plus a fast prototype finds the same information cheaper than a formal analysis phase",
+        "source": "Rossett's front-end analysis framework vs. Michael Allen's Successive Approximation Model (SAM)"
+      },
+      "school_weights": { "behaviorist-mastery": "high", "constructivist-discovery": "low" },
+      "checkpoint": "Given a stakeholder's request for a training solution, produce a one-page analysis that names the performance gap, rules out at least one non-training cause, and states a go/no-go recommendation with evidence.",
+      "common_failure": "Accepting the sponsor's requested solution (a course) as the deliverable spec instead of treating it as a hypothesis about the cause, then building training that doesn't move the metric the sponsor actually cared about.",
+      "sources": ["Robert Mager & Peter Pipe, Analyzing Performance Problems", "Allison Rossett, front-end analysis framework", "Thomas Gilbert, Human Competence (Behavior Engineering Model)"]
+    },
+    {
+      "id": "instructional-design.objectives.write-learning-objectives",
+      "label": "Writing Measurable Learning Objectives",
+      "tier": 2,
+      "cluster": "objectives",
+      "prereqs": ["instructional-design.analysis.training-needs-analysis", "instructional-design.objectives.blooms-taxonomy"],
+      "soft_prereqs": ["instructional-design.analysis.gap-and-root-cause"],
+      "one_line": "Write an objective specific enough that two different people would agree on whether a learner met it.",
+      "hours": 12,
+      "know_what": [
+        "ABCD format — Audience, Behavior, Condition, Degree; the four slots a fully specified objective fills",
+        "Mager's three-part objective — performance, condition, criterion, a simpler ancestor of ABCD",
+        "Verb bank — observable-behavior verbs (identify, calculate, troubleshoot) versus banned verbs (understand, know, appreciate) that can't be observed",
+        "Terminal vs. enabling objective — the one big objective a module builds toward versus the smaller objectives that support it",
+        "Condition statement — the tools, references, or constraints available when the behavior is performed ('given a live ticketing queue', 'without notes')",
+        "Criterion — the standard that separates passing from failing performance (accuracy percentage, time limit, error tolerance)"
+      ],
+      "know_how": [
+        "Rewrite a topic ('participants will learn about de-escalation') as a behavior with a condition and criterion",
+        "Run every draft objective through the verb bank and flag any objective using an unobservable verb",
+        "Separate a module's terminal objective from its enabling objectives and check the enabling set is sufficient to reach the terminal one",
+        "Set a criterion using existing performance data (current error rate, current time-to-completion) rather than an arbitrary round number",
+        "Check an objective is assessable by drafting the assessment item for it on the spot; if you can't write the item, the objective isn't specific enough",
+        "Cut objectives that don't trace back to the diagnosed gap, even if they're 'nice to know'"
+      ],
+      "habits": [
+        "Read a draft objective and ask 'what would the test question for this look like' before accepting it",
+        "Flag 'understand' and 'know' on sight",
+        "Ask whether an objective is terminal or enabling before deciding how much time it gets",
+        "Push back on objectives added because they're easy to teach rather than because they close the gap",
+        "Keep a running check: a module with a full page of objectives usually isn't chunked yet"
+      ],
+      "know_why": {
+        "claim": "Every objective should specify an observable behavior, banning verbs like 'understand' or 'appreciate.'",
+        "because": "an unobservable objective can't be assessed, so the course has no way to prove it worked",
+        "disputed_by": "constructivist and andragogy-leaning designers, who argue behavioral objectives flatten open-ended or dispositional goals (like 'develop a habit of reflection') into things that were never meant to be checklist-measurable",
+        "source": "Robert Mager, Preparing Instructional Objectives, vs. Elliot Eisner's critique of behavioral objectives"
+      },
+      "school_weights": { "behaviorist-mastery": "high", "constructivist-discovery": "low", "andragogy-self-directed": "low" },
+      "checkpoint": "Given a training request and a diagnosed gap, write a terminal objective and at least two enabling objectives in full ABCD form, each one you could draft an assessment item for on the spot.",
+      "common_failure": "Writing an objective that names the topic ('participants will learn about the new CRM') instead of the behavior, which then makes every downstream assessment and activity decision unmoored.",
+      "sources": ["Robert Mager, Preparing Instructional Objectives", "Bloom's Taxonomy, revised edition (Anderson & Krathwohl)", "ABCD framework (Heinich, Molenda, Russell & Smaldino)"]
+    },
+    {
+      "id": "instructional-design.design.instructional-strategy-selection",
+      "label": "Instructional Strategy Selection",
+      "tier": 3,
+      "cluster": "design",
+      "prereqs": ["instructional-design.objectives.write-learning-objectives", "instructional-design.design.udl-principles"],
+      "soft_prereqs": ["instructional-design.analysis.audience-profile"],
+      "one_line": "Pick direct instruction, worked examples, PBL, or simulation based on the objective's cognitive demand and the learner's novice/expert level, not habit.",
+      "hours": 16,
+      "know_what": [
+        "Direct instruction — explicit, instructor-led explanation and demonstration, strongest for novices and procedural or factual objectives",
+        "Worked-example effect — showing a fully solved problem outperforms unsupported problem-solving for novices (Sweller)",
+        "Problem-based learning (PBL) — presenting an authentic ill-structured problem before instruction, strongest for advanced learners with prior knowledge to draw on",
+        "Expertise reversal effect — a strategy that helps a novice (heavy guidance) can hurt an expert, since redundant guidance competes with their existing schema",
+        "Simulation / scenario-based learning — practicing a decision in a consequence-bearing but safe environment, strongest for judgment-heavy objectives",
+        "4C/ID model (van Merriënboer) — whole tasks first, part-task practice second, for complex professional skills"
+      ],
+      "know_how": [
+        "Match a strategy to the objective's cognitive demand: procedural or recall objectives to direct instruction, judgment or troubleshooting objectives to scenario or PBL",
+        "Check the audience's prior-knowledge level before choosing between heavy-guidance and minimal-guidance approaches",
+        "Default to worked examples plus faded guidance for a genuinely novice audience, regardless of how sophisticated the objective looks",
+        "Switch strategy mid-curriculum as learners move from novice to intermediate, instead of running one strategy the whole course",
+        "Justify a strategy choice in writing against the objective and audience so a reviewer can trace the decision",
+        "Pilot a contested strategy choice on a small group before committing a full production budget to it"
+      ],
+      "habits": [
+        "Ask what the learner already knows before deciding how much guidance to give them",
+        "Resist the default of 'let's make it a simulation' when the objective is actually recall or basic procedure",
+        "Distrust a strategy chosen because it's trendy or because the SME happens to prefer it",
+        "Reconsider the strategy choice whenever the audience profile turns out to be wrong",
+        "Write the justification down before defending it out loud, so the reasoning outlives the meeting"
+      ],
+      "know_why": {
+        "claim": "Minimally guided instructional approaches (pure discovery, unguided PBL) are less effective than explicit direct instruction for novices.",
+        "because": "novices lack the schema to structure an unguided problem, so working memory is spent on search instead of on the material to be learned",
+        "disputed_by": "PBL and discovery-learning researchers, who argue well-scaffolded (not unguided) problem-based approaches outperform direct instruction on transfer and motivation measures, and that the minimal-guidance critique conflates 'minimal guidance' with 'no guidance'",
+        "source": "Kirschner, Sweller & Clark (2006), 'Why Minimal Guidance During Instruction Does Not Work', vs. Hmelo-Silver, Duncan & Chinn's response"
+      },
+      "school_weights": { "cognitive-load-first": "high", "constructivist-discovery": "high" },
+      "checkpoint": "Given three objectives at different cognitive levels and an audience profile, select and justify a distinct instructional strategy for each, naming the guidance level appropriate to that audience's prior knowledge.",
+      "common_failure": "Picking one instructional strategy for a whole course because it's the designer's favorite or the client's expectation, then bending every objective to fit it instead of matching strategy to objective.",
+      "sources": ["John Sweller, Cognitive Load Theory", "Jeroen van Merriënboer, Ten Steps to Complex Learning (4C/ID)", "Kirschner, Sweller & Clark (2006)"]
+    },
+    {
+      "id": "instructional-design.assessment.build-assessment-blueprint",
+      "label": "Assessment Blueprint Construction",
+      "tier": 4,
+      "cluster": "assessment",
+      "prereqs": ["instructional-design.design.instructional-strategy-selection", "instructional-design.assessment.formative-vs-summative"],
+      "soft_prereqs": ["instructional-design.assessment.rubric-design"],
+      "one_line": "Produce a test blueprint that maps every item to an objective, so nothing on the assessment is untaught and nothing taught goes unmeasured.",
+      "hours": 20,
+      "know_what": [
+        "Test blueprint / table of specifications — a grid mapping every objective to item count, item type, and cognitive level",
+        "Item-to-objective ratio — the rule of thumb (often 3-5 items per objective for a stable score) that keeps a single item from deciding pass or fail",
+        "Weighting by objective importance — allocating more items to terminal objectives than to minor enabling ones",
+        "Item type selection — matching selected-response, constructed-response, or performance-based items to what the objective actually requires",
+        "Cut score — the score that separates pass from fail, set by a defensible method (Angoff, bookmark) rather than a round number",
+        "Blueprint review — checking the finished blueprint against the objective list for orphaned objectives (untested) and orphaned items (untraceable)"
+      ],
+      "know_how": [
+        "Build a grid with one row per objective and columns for item count, item type, and Bloom level",
+        "Allocate item counts by objective importance and cognitive complexity, not evenly across the list",
+        "Trace every planned item back to a specific objective before a single item gets written",
+        "Set a cut score using a stated method and document the rationale, not a default 70 or 80 percent",
+        "Flag any objective with zero items and any item with no objective before sign-off",
+        "Route the finished blueprint through an SME review pass focused only on coverage, not wording"
+      ],
+      "habits": [
+        "Build the blueprint before writing a single item, every time, even under deadline pressure",
+        "Ask 'what objective does this item test' before accepting any item into the pool",
+        "Distrust a blueprint where every objective got exactly the same number of items",
+        "Re-check the blueprint against the objectives list whenever an objective changes late",
+        "Treat an untestable objective as a signal to go back and rewrite the objective, not the blueprint"
+      ],
+      "know_why": null,
+      "school_weights": { "andragogy-self-directed": "low" },
+      "checkpoint": "Given a set of 8-10 learning objectives, produce a test blueprint that allocates item counts and types to each objective by importance, with zero orphaned objectives and zero orphaned items.",
+      "common_failure": "Writing items first because they're easier to brainstorm than to plan, then reverse-engineering a blueprint to match — which hides objectives no item actually tests.",
+      "sources": ["Robert Linn & Norman Gronlund, Measurement and Assessment in Teaching", "Angoff method for standard setting", "James Popham, Classroom Assessment: What Teachers Need to Know"]
+    },
+    {
+      "id": "instructional-design.media.storyboard-and-build",
+      "label": "Storyboarding & Build",
+      "tier": 5,
+      "cluster": "media",
+      "prereqs": ["instructional-design.assessment.build-assessment-blueprint", "instructional-design.media.multimedia-learning-principles"],
+      "soft_prereqs": ["instructional-design.media.authoring-tool-fluency", "instructional-design.design.course-blueprint"],
+      "one_line": "Turn a course blueprint into built, sequenced material — storyboard first, then production — without losing the objective-to-content trace.",
+      "hours": 30,
+      "know_what": [
+        "Storyboard — a screen-by-screen or scene-by-scene document specifying on-screen text, media, narration, and interaction before production starts",
+        "Content-to-objective trace — a column or tag on every storyboard frame linking it back to the objective it serves",
+        "Production pass order — script/storyboard, then asset gathering, then build, then media integration, then QA, in that order to avoid rework",
+        "Placeholder discipline — marking unfinished assets clearly (for example [PLACEHOLDER: SME video]) so a draft never gets mistaken for final",
+        "Version control for builds — naming and archiving storyboard and build versions so a stakeholder's 'go back to the last one' is actually possible",
+        "Localization/reuse tagging — marking which frames are likely to need translation or reuse in another course, before build, not after"
+      ],
+      "know_how": [
+        "Draft a storyboard frame by frame with on-screen text, narration, and interaction spelled out before opening the authoring tool",
+        "Tag every frame with the objective ID it serves, and flag any objective from the blueprint with zero frames",
+        "Sequence production so scripting and SME review finish before asset production starts, to avoid rebuilding finished assets",
+        "Run a storyboard review with the SME and sponsor before build, since revising a storyboard is cheap and revising a built course is not",
+        "Build in the authoring tool in the same order as the storyboard, checking off frames as they're completed",
+        "Keep a running list of open placeholders and chase each one to a named owner and date"
+      ],
+      "habits": [
+        "Refuse to open the authoring tool until the storyboard has been reviewed",
+        "Ask 'which objective is this frame for' on every frame that doesn't obviously trace back to one",
+        "Batch similar production tasks (all narration recording, all screenshot capture) instead of building screen by screen",
+        "Flag scope creep the moment a stakeholder asks for a new frame mid-build instead of absorbing it silently",
+        "Keep the storyboard as the single source of truth and update it when the build diverges, instead of letting the build silently drift ahead"
+      ],
+      "know_why": {
+        "claim": "A full storyboard should be reviewed and signed off before any build work starts in the authoring tool.",
+        "because": "revising a storyboard costs a redline; revising a built interactive screen costs a rebuild, so catching problems early is far cheaper",
+        "disputed_by": "rapid-prototyping practitioners (the SAM model), who argue a low-fidelity storyboard hides problems that only show up once something is clickable, and prefer building a rough working prototype early even at the cost of some rework",
+        "source": "traditional ADDIE storyboard-first workflow vs. Michael Allen's Successive Approximation Model (SAM)"
+      },
+      "school_weights": { "backward-design-assessment-first": "high", "constructivist-discovery": "low" },
+      "checkpoint": "Produce a reviewed storyboard for one module where every frame traces to an objective from the blueprint, then build it in the authoring tool with zero unresolved placeholders at hand-off.",
+      "common_failure": "Skipping the storyboard and building directly in the authoring tool, which feels faster until a stakeholder wants a structural change deep into production and the whole build has to be re-sequenced.",
+      "sources": ["Michael Allen, Leaving ADDIE for SAM", "Cathy Moore, Action Mapping", "Articulate Storyline / Rise production workflow documentation"]
+    },
+    {
+      "id": "instructional-design.facilitation.design-facilitation-plan",
+      "label": "Facilitation Plan Design",
+      "tier": 6,
+      "cluster": "facilitation",
+      "prereqs": ["instructional-design.media.storyboard-and-build", "instructional-design.facilitation.active-listening-and-questioning"],
+      "soft_prereqs": ["instructional-design.facilitation.discussion-design"],
+      "one_line": "Write a facilitator's guide detailed enough that someone other than the designer could run the session and hit the same objectives.",
+      "hours": 18,
+      "know_what": [
+        "Facilitator's guide — the document specifying timing, talking points, materials, and contingency moves for every segment of a session",
+        "Run-of-show — a minute-by-minute schedule that keeps a live session on time without the facilitator watching a clock constantly",
+        "Contingency branch — a pre-planned alternate move for when an activity runs short, runs long, or falls flat",
+        "Materials checklist — everything a facilitator, including one who isn't the designer, needs staged before the session starts",
+        "Co-facilitation handoff points — planned moments where a second facilitator takes over, so a handoff doesn't look improvised",
+        "Facilitator notes vs. participant materials — content meant only for the person running the session, kept separate from what learners see"
+      ],
+      "know_how": [
+        "Build a run-of-show with timing for every segment, padded for the slowest realistic version of each activity",
+        "Write contingency moves for the two or three activities most likely to run short or fall flat",
+        "Draft facilitator talking points as prompts and cues, not a script to be read verbatim",
+        "Stage a materials checklist a facilitator can run through five minutes before the session starts",
+        "Pilot the plan with a facilitator who wasn't involved in designing it, and revise based on where they got stuck",
+        "Separate facilitator-only notes from participant-facing materials clearly enough that the wrong version never gets projected"
+      ],
+      "habits": [
+        "Time every segment against a real run-through, not a guess",
+        "Ask 'what does the facilitator do if this activity dies' before finalizing a segment",
+        "Write for a facilitator who is not you and has never seen this material before",
+        "Revisit the plan after every live run and log what actually happened against what was planned",
+        "Separate what must happen from what would be nice, so a rushed facilitator still hits the objectives"
+      ],
+      "know_why": null,
+      "school_weights": { "andragogy-self-directed": "low" },
+      "checkpoint": "Hand a completed facilitation plan to a facilitator who has never seen the course, and have them run the session hitting the stated objectives within 10% of the planned time, using only the plan and materials checklist.",
+      "common_failure": "Writing a facilitator's guide only the designer can actually run, because the timing and contingencies exist in the designer's head and never made it onto the page.",
+      "sources": ["Sam Kaner, Facilitator's Guide to Participatory Decision-Making", "Cathy Moore, Action Mapping facilitation planning", "ATD facilitator guide templates"]
+    },
+    {
+      "id": "instructional-design.evaluation.pilot-and-revise",
+      "label": "Piloting & Revision",
+      "tier": 7,
+      "cluster": "evaluation",
+      "prereqs": ["instructional-design.facilitation.design-facilitation-plan", "instructional-design.evaluation.kirkpatrick-model"],
+      "soft_prereqs": ["instructional-design.assessment.item-analysis-and-revision", "instructional-design.media.production-review-and-qa"],
+      "one_line": "Run a course through one real cohort before full launch, and use what breaks to revise it.",
+      "hours": 24,
+      "know_what": [
+        "Pilot cohort — a small, representative group who runs the course before full launch, specifically to surface problems",
+        "Pilot vs. beta vs. soft launch — a pilot expects and budgets for major revision; a soft launch expects only minor fixes",
+        "Kirkpatrick Level 1/2 pilot data — reaction and immediate learning data collected specifically during the pilot to catch design problems, distinct from ongoing evaluation",
+        "Debrief protocol — a structured session with the pilot cohort and facilitator to surface what broke, separate from the survey data",
+        "Go / no-go / revise-and-repilot decision — the three real outcomes of a pilot, each with different cost and timeline implications",
+        "Revision log — a running record of what changed after the pilot and why, so the next pilot isn't debugging the same issue"
+      ],
+      "know_how": [
+        "Recruit a pilot cohort that matches the real audience profile, not the most available or most forgiving group",
+        "Collect Level 1 and Level 2 data during the pilot using the instruments built for ongoing evaluation, so the pilot doubles as a dry run of the evaluation plan itself",
+        "Run a structured debrief with the facilitator immediately after the pilot while the failure points are still fresh",
+        "Sort pilot findings into must-fix-before-launch, fix-in-next-revision, and won't-fix, with a stated reason for each",
+        "Make an explicit go/no-go/repilot decision and document what evidence drove it",
+        "Log every post-pilot change against the specific pilot finding that caused it"
+      ],
+      "habits": [
+        "Treat every pilot as expected to find real problems, and get suspicious of one that surfaces nothing",
+        "Watch the facilitator and the room during a pilot, not just the survey results afterward",
+        "Resist the pressure to skip the pilot when the launch date is already public",
+        "Ask whether a finding is a content problem, a facilitation problem, or a technical problem before deciding who fixes it",
+        "Close the loop with the pilot cohort — tell them what changed because of their feedback"
+      ],
+      "know_why": {
+        "claim": "A course should run through at least one full pilot cohort before general launch, even under deadline pressure.",
+        "because": "problems that are invisible on paper — timing, a confusing transition, a broken interaction — only surface when real learners run the actual sequence",
+        "disputed_by": "rapid-development practitioners who ship a soft launch to a small live slice of the real audience instead of a separate pilot, arguing a true pilot adds a full cycle of delay for findings a soft launch catches just as well",
+        "source": "traditional ADDIE evaluate-before-launch practice vs. Michael Allen's SAM iterative-prototyping approach"
+      },
+      "school_weights": { "backward-design-assessment-first": "high" },
+      "checkpoint": "Run a pilot with a representative cohort, collect Level 1/2 data plus a facilitator debrief, and produce a revision log with a go/no-go/repilot decision backed by the evidence collected.",
+      "common_failure": "Treating the pilot as a formality to check off rather than a real test — recruiting the easiest group instead of a representative one, then launching regardless of what the pilot found because the date was already announced.",
+      "sources": ["Donald & James Kirkpatrick, Four Levels of Training Evaluation", "Michael Allen, Leaving ADDIE for SAM", "Robert Brinkerhoff, The Success Case Method"]
+    }
+  ]
+}

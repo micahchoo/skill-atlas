@@ -1,0 +1,242 @@
+{
+  "domain": "instructional-design",
+  "batch": "batch-005",
+  "ids": [
+    "instructional-design.assessment.formative-vs-summative",
+    "instructional-design.assessment.write-selected-response-items",
+    "instructional-design.assessment.write-performance-tasks",
+    "instructional-design.assessment.rubric-design",
+    "instructional-design.assessment.validity-and-reliability-check",
+    "instructional-design.assessment.item-analysis-and-revision"
+  ],
+  "nodes": [
+    {
+      "id": "instructional-design.assessment.formative-vs-summative",
+      "label": "Formative vs. Summative Assessment",
+      "tier": 1,
+      "cluster": "assessment",
+      "prereqs": [],
+      "soft_prereqs": [],
+      "one_line": "Choose whether a check is meant to shape learning in progress or certify it's done, and stop treating a quiz as both.",
+      "hours": 6,
+      "know_what": [
+        "Formative assessment — a check used to guide and adjust learning while it's still happening, low or no stakes",
+        "Summative assessment — a check used to certify that learning has occurred, typically higher stakes and occurring at the end",
+        "Assessment for/of/as learning (Earl) — a three-part distinction: for learning (formative, instructor-driven), of learning (summative, certifying), as learning (learner self-monitoring)",
+        "Stakes — the consequence attached to a result, which should shape both item difficulty and how a result gets used, not just labeled",
+        "Diagnostic assessment — a pre-instruction check used to establish a baseline or identify misconceptions, a formative use that happens before teaching starts rather than during",
+        "Assessment purpose drift — when a formative check, such as a low-stakes practice quiz, quietly starts getting used for a summative decision without being redesigned for that stakes level"
+      ],
+      "know_how": [
+        "Decide a check's purpose, formative or summative, before writing a single item, since the purpose changes what 'good' looks like",
+        "Design a formative check to surface a misconception quickly, with feedback delivered close to the attempt",
+        "Design a summative check to a defensible standard, using a blueprint and a stated cut score, since a result will carry real consequences",
+        "Flag when a formative tool is being repurposed for a summative decision, and redesign it to the higher stakes standard before that happens",
+        "Use diagnostic assessment before instruction to set a baseline, distinct from either formative or summative use",
+        "Build feedback timing into a formative check as immediate, differently from a summative check, which may withhold detailed feedback until scoring is final"
+      ],
+      "habits": [
+        "Ask what happens to this result before designing the check that produces it",
+        "Distinguish a check meant to help a learner improve from one meant to certify they've arrived",
+        "Notice when a low-stakes tool is quietly becoming a high-stakes gate",
+        "Design feedback timing to match the check's actual purpose",
+        "Check whether a summative decision is riding on a tool that was only ever validated for formative use"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a course plan, design one formative check and one summative check for the same objective, each with feedback timing and stakes appropriate to its purpose.",
+      "common_failure": "Using the same quiz format and feedback timing for both formative and summative purposes, so learners either get punished for exploratory mistakes or get no useful feedback on a final judgment.",
+      "sources": ["Paul Black & Dylan Wiliam, formative assessment research", "Lorna Earl, Assessment As Learning", "James Popham, Classroom Assessment"]
+    },
+    {
+      "id": "instructional-design.assessment.write-selected-response-items",
+      "label": "Writing Selected-Response Items",
+      "tier": 2,
+      "cluster": "assessment",
+      "prereqs": ["instructional-design.assessment.formative-vs-summative"],
+      "soft_prereqs": [],
+      "one_line": "Write a multiple-choice item whose distractors reflect real misconceptions instead of being obviously wrong.",
+      "hours": 10,
+      "know_what": [
+        "Stem — the question or incomplete statement part of a selected-response item, which should be understandable without reading the options",
+        "Distractor — an incorrect option written to reflect a specific, real misconception rather than an obviously wrong filler",
+        "Item-writing flaw — a known defect category, such as grammatical cueing, absolute terms like 'always' or 'never', implausible distractors, or overlapping options, that makes an item easier or harder for reasons unrelated to the objective",
+        "Plausibility — a distractor's believability to someone with a specific misconception, the property that makes a multiple-choice item actually discriminate between mastery and non-mastery",
+        "Cognitive complexity ceiling — selected-response items are well suited to recall, comprehension, and application, but struggle to assess evaluation or creation without significant item-writing sophistication",
+        "Item difficulty and discrimination — statistical properties, such as proportion correct and correlation with total score, used after piloting to judge whether an item is doing its job"
+      ],
+      "know_how": [
+        "Write a stem that states a complete question or problem understandable without seeing the answer options",
+        "Write each distractor to reflect a specific, real misconception, drawn from actual learner errors when possible",
+        "Check a draft item against the standard item-writing flaw list before finalizing it",
+        "Avoid 'all of the above' and 'none of the above' options, which change what the item actually measures and are easy to game",
+        "Match item cognitive complexity to the objective's Bloom's level, using scenario-based stems for application-level objectives instead of simple recall stems",
+        "Pilot a new item with a small group and check its difficulty and discrimination before trusting it in a live assessment"
+      ],
+      "habits": [
+        "Read a stem alone, without the options, and check it still poses a complete question",
+        "Ask what real misconception each distractor is supposed to catch",
+        "Scan a finished item for grammatical or length cues that give away the answer",
+        "Match item complexity to the objective instead of defaulting to recall-level questions because they're easier to write",
+        "Track which items actually discriminate well once real data comes in, and retire the ones that don't"
+      ],
+      "know_why": null,
+      "school_weights": { "behaviorist-mastery": "normal" },
+      "checkpoint": "Write five multiple-choice items for a set of objectives, each with a distractor tied to a specific misconception, with zero items containing a known item-writing flaw.",
+      "common_failure": "Writing distractors that are obviously wrong fillers instead of real misconceptions, which makes an item trivially easy for any test-taker with partial knowledge and tells you nothing about actual understanding.",
+      "sources": ["Thomas Haladyna, Developing and Validating Multiple-Choice Test Items", "James Popham, Classroom Assessment", "Susan Case & David Swanson, item-writing guidance"]
+    },
+    {
+      "id": "instructional-design.assessment.write-performance-tasks",
+      "label": "Writing Performance Tasks",
+      "tier": 2,
+      "cluster": "assessment",
+      "prereqs": ["instructional-design.assessment.formative-vs-summative"],
+      "soft_prereqs": [],
+      "one_line": "Design a task that requires demonstrating the skill itself, not recalling facts about it.",
+      "hours": 12,
+      "know_what": [
+        "Performance task — an assessment requiring the learner to actually do the skill, such as draft a document, run a procedure, or resolve a scenario, rather than answer questions about it",
+        "Authentic assessment — a performance task that mirrors a real-world context and constraint closely, as opposed to a simplified academic exercise",
+        "Task prompt — the instructions given to the learner, which must specify the deliverable, constraints, and available resources clearly enough that ambiguity doesn't become part of the difficulty",
+        "Scoring guide — the rubric or checklist a performance task requires to be scored consistently, since unlike selected-response items, a performance task has no single correct answer to key against",
+        "Task realism vs. scoring practicality — the tradeoff between a highly authentic task, which is harder and slower to score consistently, and a more controlled one, which is easier to score but less realistic",
+        "Construct-irrelevant difficulty — difficulty in a performance task caused by something other than the skill being measured, such as confusing instructions or an unfamiliar tool"
+      ],
+      "know_how": [
+        "Write a task prompt that specifies the deliverable, constraints, and available resources without leaving the actual requirement ambiguous",
+        "Design the task to require the target skill directly, not a proxy for it, such as writing the report rather than describing how you'd write it",
+        "Build the scoring guide alongside the task, not after learners have already completed it",
+        "Pilot a task prompt with a colleague to catch construct-irrelevant difficulty before using it live",
+        "Calibrate task realism to the assessment's stakes — higher fidelity for a capstone or certification task, lower fidelity acceptable for frequent formative checks",
+        "Pair every performance task with its scoring guide before the task is finalized, so both get checked against the same objective"
+      ],
+      "habits": [
+        "Ask whether a task requires the actual skill or just talking about the skill",
+        "Read a task prompt as a learner would and look for ambiguity that isn't part of the intended difficulty",
+        "Build the scoring guide at the same time as the task, not after",
+        "Check for construct-irrelevant difficulty before trusting a task's results",
+        "Weigh task realism against how consistently it can actually be scored"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Write a performance task prompt and its accompanying scoring guide for one objective, and pilot the prompt with a colleague to confirm it contains no construct-irrelevant difficulty.",
+      "common_failure": "Writing a task prompt so open-ended that scoring it consistently becomes impossible, or so constrained it stops requiring the actual skill and becomes a disguised selected-response item.",
+      "sources": ["Grant Wiggins, authentic assessment", "Kathleen Montgomery, performance assessment design", "Susan Brookhart, How to Create and Use Rubrics"]
+    },
+    {
+      "id": "instructional-design.assessment.rubric-design",
+      "label": "Rubric Design",
+      "tier": 3,
+      "cluster": "assessment",
+      "prereqs": ["instructional-design.assessment.write-performance-tasks"],
+      "soft_prereqs": [],
+      "one_line": "Write a rubric with performance levels distinct enough that two raters score the same work the same way.",
+      "hours": 12,
+      "know_what": [
+        "Analytic rubric — scores multiple criteria separately, giving diagnostic detail at the cost of more scoring time",
+        "Holistic rubric — scores overall performance with a single scale, faster but less diagnostic",
+        "Performance level descriptor — the specific, observable language distinguishing each level of a criterion, the part that actually drives rater agreement",
+        "Criterion — a single dimension of quality being scored, such as accuracy, organization, or technique, which should map to the objective, not to general impressions",
+        "Rater drift — a rater's scoring standard changing over the course of grading a batch, usually drifting more lenient or more strict as fatigue sets in",
+        "Anchor paper — a sample response at each performance level, used to calibrate raters before scoring begins and to resolve disagreements during scoring"
+      ],
+      "know_how": [
+        "Choose analytic vs. holistic scoring based on whether the assessment needs diagnostic detail or just an overall judgment",
+        "Write performance-level descriptors in specific, observable language instead of relative terms like 'good' or 'excellent'",
+        "Derive each criterion directly from the objective being assessed, not from a generic template unrelated to this specific task",
+        "Select anchor papers at each performance level before live scoring begins, and use them to calibrate multiple raters",
+        "Score a batch in randomized order and periodically re-score an early paper to check for rater drift",
+        "Pilot a rubric with two independent raters on the same set of responses and check their agreement before trusting it at scale"
+      ],
+      "habits": [
+        "Replace a vague level descriptor, such as 'good understanding', with a specific, observable one before finalizing a rubric",
+        "Check inter-rater agreement on real samples before trusting a new rubric",
+        "Watch for rater drift on long scoring sessions and re-anchor periodically",
+        "Ask whether a criterion is actually measuring the objective or just general impression",
+        "Get a second rater's independent score on a sample before finalizing a new rubric for live use"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Build an analytic rubric with three criteria and four performance levels for a performance task, each level backed by an anchor paper, and achieve at least 80% exact agreement between two independent raters on a five-response sample.",
+      "common_failure": "Writing performance-level descriptors that differ only by adjective, such as 'good', 'very good', and 'excellent', instead of by specific, observable criteria, which produces low inter-rater agreement no matter how carefully raters try.",
+      "sources": ["Susan Brookhart, How to Create and Use Rubrics", "Heidi Andrade, rubric research and student use of rubrics", "James Popham, Classroom Assessment"]
+    },
+    {
+      "id": "instructional-design.assessment.validity-and-reliability-check",
+      "label": "Validity & Reliability Checking",
+      "tier": 5,
+      "cluster": "assessment",
+      "prereqs": ["instructional-design.assessment.build-assessment-blueprint", "instructional-design.assessment.rubric-design"],
+      "soft_prereqs": [],
+      "one_line": "Check whether an assessment actually measures the objective it claims to, and whether it does so consistently.",
+      "hours": 16,
+      "know_what": [
+        "Validity — the degree to which an assessment actually measures the objective it claims to, not a general quality rating",
+        "Reliability — the degree to which an assessment produces consistent results across raters, occasions, or item forms",
+        "Content validity — whether the assessment's items adequately sample the domain defined by the objectives, checked directly against the blueprint",
+        "Construct-irrelevant variance — score variation caused by something other than the target skill, such as reading level, an unfamiliar interface, or ambiguous wording",
+        "Inter-rater reliability — agreement between two or more raters scoring the same performance, a specific reliability concern for rubric-scored tasks",
+        "Internal consistency, such as Cronbach's alpha — a statistic estimating how consistently a set of items measures a single underlying construct, relevant mainly for larger-scale selected-response assessments"
+      ],
+      "know_how": [
+        "Check content validity by mapping the finished assessment back against the blueprint and confirming coverage matches intent",
+        "Identify a source of construct-irrelevant variance, such as jargon-heavy wording or an unfamiliar tool, and revise the item or task to remove it",
+        "Calculate or estimate inter-rater reliability on a rubric-scored task using a sample scored by two or more raters",
+        "Run a basic internal consistency check on a selected-response assessment when volume and stakes justify the statistical overhead",
+        "Distinguish a validity problem, measuring the wrong thing, from a reliability problem, measuring inconsistently, before proposing a fix, since the fixes differ",
+        "Document validity and reliability evidence for a high-stakes assessment so its use can be defended if challenged"
+      ],
+      "habits": [
+        "Ask whether a low score reflects the wrong skill or the right skill measured badly",
+        "Check an assessment against its blueprint before trusting its content validity",
+        "Look for a source of construct-irrelevant variance before accepting a surprising score pattern at face value",
+        "Treat a validity problem and a reliability problem as different diagnoses requiring different fixes",
+        "Document validity and reliability evidence at the time an assessment ships, not only when it's later challenged"
+      ],
+      "know_why": null,
+      "school_weights": { "behaviorist-mastery": "high" },
+      "checkpoint": "Given a completed assessment and its blueprint, check and document content validity, identify at least one potential source of construct-irrelevant variance, and report an inter-rater reliability estimate for any rubric-scored component.",
+      "common_failure": "Treating a high overall score or pass rate as proof an assessment is working, without checking whether it's actually measuring the objective consistently or just producing consistently lenient results.",
+      "sources": ["Robert Linn & Norman Gronlund, Measurement and Assessment in Teaching", "Samuel Messick, validity as a unified concept", "AERA/APA/NCME, Standards for Educational and Psychological Testing"]
+    },
+    {
+      "id": "instructional-design.assessment.item-analysis-and-revision",
+      "label": "Item Analysis & Revision",
+      "tier": 6,
+      "cluster": "assessment",
+      "prereqs": ["instructional-design.assessment.validity-and-reliability-check"],
+      "soft_prereqs": [],
+      "one_line": "Read item-level data to find the question that's failing your best learners, and fix or cut it.",
+      "hours": 14,
+      "know_what": [
+        "Item difficulty (p-value) — the proportion of test-takers who answered an item correctly, used to flag items that are too easy or too hard to discriminate",
+        "Item discrimination — the correlation between performance on a single item and performance on the overall assessment, showing whether the item separates high performers from low performers",
+        "Distractor analysis — checking which incorrect options test-takers actually chose, to see whether each distractor is functioning, pulling from weaker performers, or dead, chosen by almost no one",
+        "Negative discrimination — an item that high scorers get wrong more often than low scorers, a strong signal of a flawed or mis-keyed item",
+        "Item retirement threshold — a stated discrimination or difficulty cutoff below which an item gets pulled or rewritten rather than left in rotation",
+        "Revision vs. retirement — the decision between fixing a flawed item's wording and simply removing it from the pool, based on whether the flaw is fixable"
+      ],
+      "know_how": [
+        "Calculate or pull item difficulty and discrimination statistics for each item after a live administration",
+        "Run a distractor analysis to find dead distractors and rewrite them to be more plausible",
+        "Flag any item showing negative discrimination for immediate review, since it may be mis-keyed or fundamentally ambiguous",
+        "Apply a stated retirement threshold consistently instead of keeping a weak item because it's already built",
+        "Decide between revising an item's wording and retiring it entirely based on whether the flaw is a wording problem or a construct problem",
+        "Re-pilot a revised item before returning it to live rotation, rather than assuming the fix worked"
+      ],
+      "habits": [
+        "Pull item statistics after every live administration instead of only when something feels wrong",
+        "Investigate negative discrimination immediately rather than letting a mis-keyed item stay live",
+        "Check for dead distractors and rewrite them instead of leaving an item with three real options and one nobody picks",
+        "Re-check a revised item's statistics after its next use instead of assuming the fix worked",
+        "Track an item's statistics over multiple administrations, not just one, before deciding it's stable"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given item-level statistics from a live administration, identify at least one item with negative discrimination and one with a dead distractor, and produce a revised or retired version of each.",
+      "common_failure": "Leaving a mis-keyed or ambiguous item in rotation because no one reviews item-level statistics after launch, quietly penalizing the strongest performers on every subsequent administration.",
+      "sources": ["Robert Linn & Norman Gronlund, Measurement and Assessment in Teaching", "Thomas Haladyna, item analysis guidance", "James Popham, Classroom Assessment"]
+    }
+  ]
+}

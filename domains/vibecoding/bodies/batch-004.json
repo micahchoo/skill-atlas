@@ -1,0 +1,272 @@
+{
+  "domain": "vibecoding",
+  "batch": "batch-004",
+  "ids": [
+    "vibecoding.iteration.session-scoping",
+    "vibecoding.iteration.git-checkpointing",
+    "vibecoding.iteration.context-window-management",
+    "vibecoding.iteration.diff-sized-commits",
+    "vibecoding.iteration.branch-per-feature",
+    "vibecoding.iteration.rollback-discipline",
+    "vibecoding.iteration.session-handoff-notes"
+  ],
+  "nodes": [
+    {
+      "id": "vibecoding.iteration.session-scoping",
+      "label": "Session scoping",
+      "tier": 1,
+      "cluster": "iteration",
+      "prereqs": [],
+      "one_line": "Keep one AI session focused on a single task so context doesn't drift across unrelated changes.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Session — one continuous conversation with a coding assistant, sharing one accumulating context until it's closed or reset",
+        "Task boundary — the natural edge of one unit of work, which should usually also be a session boundary so unrelated work doesn't share context",
+        "Scope bleed — a session drifting from its original task into an adjacent one because the conversation naturally wandered there",
+        "Session cost — the overhead of re-establishing context in a new session, which is real but smaller than the cost of a session that's lost coherence",
+        "Single responsibility per session — the session-level version of single responsibility per function: one session, one task, checkable as a unit"
+      ],
+      "know_how": [
+        "Open a new session for each distinct task instead of continuing an old session into unrelated territory",
+        "State the session's single task explicitly at the start, so drift is easier to notice",
+        "Recognize when a follow-up question is actually a new task and start a fresh session for it",
+        "Close out a session with a clear result (done, blocked, abandoned) rather than letting it trail off",
+        "Resist the urge to 'just quickly also fix' an unrelated thing noticed mid-session"
+      ],
+      "habits": [
+        "Ask 'is this still the same task' before continuing a long session",
+        "Start a new session rather than stretching one to cover a second unrelated ask",
+        "Note explicitly when a task's scope has expanded mid-session, and consider splitting it",
+        "End every session with an explicit outcome, not an open-ended trail-off",
+        "Treat a session that's touched five unrelated files as a signal scope bled somewhere"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a task that naturally suggests two unrelated follow-up asks, complete the original task in one session and correctly defer the follow-ups to new sessions.",
+      "common_failure": "Letting one session sprawl across several unrelated tasks because each felt like a small addition — the session's context becomes a mix of goals, and later turns start optimizing for the wrong one.",
+      "sources": ["Anthropic — Claude Code best practices", "software engineering context-switching literature"]
+    },
+    {
+      "id": "vibecoding.iteration.git-checkpointing",
+      "label": "Git checkpointing",
+      "tier": 1,
+      "cluster": "iteration",
+      "prereqs": [],
+      "one_line": "Commit after each verified AI change so a bad iteration is one git reset away, not a lost afternoon.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Checkpoint commit — a commit made specifically to create a safe return point, not necessarily a polished, final commit",
+        "git reset vs git revert — resetting to discard local history versus reverting to undo with a new commit, and which is safe once work might be shared",
+        "Working tree cleanliness — the state of having no uncommitted changes, the precondition for a checkpoint to actually be a reliable point to return to",
+        "Commit frequency vs commit quality — checkpoint commits favor frequency and safety over a clean, squashed history, which can be tidied later",
+        "Stash vs commit — git stash as a lighter-weight, more fragile alternative to a checkpoint commit, useful briefly but not a substitute for it"
+      ],
+      "know_how": [
+        "Commit immediately after any AI change has been verified, before starting the next change",
+        "Use git status before and after an AI session to confirm exactly what changed",
+        "Write a checkpoint commit message that says what was verified, not just what was asked for",
+        "Prefer many small checkpoint commits during a session, squashing or cleaning up history afterward if needed",
+        "Confirm the working tree is clean before starting a new AI-assisted change, so a bad change is easy to isolate"
+      ],
+      "habits": [
+        "Commit before, not after, starting the next risky AI prompt",
+        "Check git status reflexively after any AI tool finishes editing files",
+        "Never let more than one verified change sit uncommitted at a time",
+        "Treat an uncommitted, unverified change as work that doesn't exist yet if something goes wrong",
+        "Write commit messages precise enough that git log alone tells the story of what was tried"
+      ],
+      "know_why": null,
+      "school_weights": { "manual-gate": "high" },
+      "checkpoint": "Given a sequence of three AI-assisted changes, commit after each verified change such that any single change can be reverted independently without touching the others.",
+      "common_failure": "Letting an AI agent make several unrelated changes across one long uncommitted stretch — when one of them turns out wrong, there's no clean checkpoint to return to, and undoing it means manually picking apart a tangled diff.",
+      "sources": ["Pro Git book", "Anthropic — Claude Code best practices"]
+    },
+    {
+      "id": "vibecoding.iteration.context-window-management",
+      "label": "Context-window management",
+      "tier": 2,
+      "cluster": "iteration",
+      "prereqs": ["vibecoding.iteration.session-scoping"],
+      "one_line": "Recognize when a session's context is degrading — contradicting itself, forgetting earlier constraints — and start fresh instead of pushing through.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Context degradation — a session's answers becoming less reliable as more turns and content accumulate, distinct from the task itself getting harder",
+        "Self-contradiction signal — a session repeating or reversing an earlier decision without being asked to, a concrete symptom of degraded context, not a coincidence",
+        "Forgotten constraint — a session no longer respecting a boundary stated many turns earlier, another concrete symptom worth naming rather than just re-stating and moving on",
+        "Context compaction — a tool automatically summarizing older turns to make room for new ones, which can silently drop detail that later turns still needed",
+        "Fresh-session reset — starting a new session with a concise recap instead of continuing a degraded one, often faster than continuing to fight a confused session"
+      ],
+      "know_how": [
+        "Notice when a session repeats a question it already answered, or contradicts an earlier stated decision",
+        "Re-state a constraint that a session seems to have forgotten rather than assuming it's still in effect",
+        "Start a fresh session with a short, curated recap once degradation symptoms appear, instead of pushing further into a long session",
+        "Keep a running short summary of key decisions during a long session so a reset doesn't lose them",
+        "Distinguish a session that's degrading from a task that's just genuinely difficult before deciding to reset"
+      ],
+      "habits": [
+        "Watch for self-contradiction as the first sign a session needs a reset, not a later one",
+        "Keep a scratch note of key decisions during any session likely to run long",
+        "Prefer a fresh session with a tight recap over pushing a confused one further",
+        "Re-verify a forgotten constraint out loud rather than assuming a single restatement fixed it for good",
+        "Treat repeated re-explanation of the same point as a cost worth cutting with a reset, not a habit to normalize"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a long session that has started contradicting an earlier decision, recognize the degradation, capture the key decisions in a short recap, and continue the task correctly in a fresh session.",
+      "common_failure": "Continuing to push a degraded session with longer, more detailed prompts trying to 'remind' it — this usually adds more content to an already crowded context rather than fixing the underlying degradation, and a fresh session with a tight recap resolves it faster.",
+      "sources": ["Anthropic — Claude Code best practices", "context window / long-context model behavior writeups"]
+    },
+    {
+      "id": "vibecoding.iteration.diff-sized-commits",
+      "label": "Diff-sized commits",
+      "tier": 2,
+      "cluster": "iteration",
+      "prereqs": ["vibecoding.iteration.git-checkpointing"],
+      "one_line": "Keep each AI-assisted commit small enough to review and revert independently.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Diff-sized commit — a commit small enough that its entire diff can be read and understood in one sitting, the unit that keeps review and revert cheap",
+        "Atomic commit — a commit that represents one logical change, so reverting it doesn't also undo an unrelated fix bundled in alongside it",
+        "Commit granularity tradeoff — very small commits cost more overhead to create, very large ones cost more to review or revert; the right size is set by what's still reviewable in one pass",
+        "Squash vs preserve — combining several checkpoint commits into one clean commit before merging, versus preserving the granular history, a project-level convention choice",
+        "Revert blast radius — the amount of unrelated work a revert takes down with it, which is exactly what small, atomic commits are meant to minimize"
+      ],
+      "know_how": [
+        "Split an AI-generated diff that bundles two unrelated changes into two separate commits before committing",
+        "Ask an assistant to make one change at a time when its first attempt bundles more than was asked",
+        "Read a commit's full diff before committing to confirm it's actually one logical change",
+        "Choose commit boundaries at natural task boundaries, not arbitrary line counts",
+        "Prefer committing more often over letting a commit grow to cover several unrelated fixes"
+      ],
+      "habits": [
+        "Check a staged diff for more than one logical change before committing it",
+        "Split a commit rather than let 'small enough already' talk you out of it",
+        "Write each commit message to describe exactly one thing, as a forcing function for the commit's scope",
+        "Revert-test occasionally: could this specific commit be reverted cleanly on its own?",
+        "Treat a commit message that needs 'and' to describe it as a signal the commit should be split"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given an AI-generated diff that fixes a bug and also reformats an unrelated file, split it into two commits such that either could be reverted independently without affecting the other.",
+      "common_failure": "Committing an AI agent's entire multi-file diff as one commit because splitting it feels like extra work — when one part of that diff turns out wrong, the revert takes an unrelated, correct change down with it.",
+      "sources": ["Pro Git book", "Google engineering practices docs — small CLs"]
+    },
+    {
+      "id": "vibecoding.iteration.branch-per-feature",
+      "label": "Branch per feature",
+      "tier": 2,
+      "cluster": "iteration",
+      "prereqs": ["vibecoding.iteration.git-checkpointing"],
+      "one_line": "Run each AI-assisted feature on its own branch so a failed experiment doesn't contaminate main.",
+      "hours": 5,
+      "soft_prereqs": [],
+      "know_what": [
+        "Feature branch — a branch scoped to one feature or experiment, isolating its commits from main until it's ready",
+        "Throwaway branch — a branch created specifically to let an AI experiment freely, expected to possibly be discarded entirely rather than merged",
+        "Branch cost — the near-zero cost of creating a git branch, which makes 'just start a new branch' the correct default for any AI-assisted experiment",
+        "Merge vs rebase — two ways of bringing a feature branch's commits back to main, with different effects on history cleanliness",
+        "Contamination risk — an AI-assisted experiment gone wrong polluting main directly, the specific risk a feature branch exists to prevent"
+      ],
+      "know_how": [
+        "Create a new branch before starting any AI-assisted feature or experiment, by default",
+        "Keep unrelated features on separate branches even when both are small",
+        "Delete a branch outright when an AI-assisted experiment doesn't pan out, instead of trying to salvage pieces into main",
+        "Merge or rebase a feature branch only after its own checkpoints have been verified",
+        "Use a branch's existence as a natural session boundary — one branch, one task, one session"
+      ],
+      "habits": [
+        "Create the branch first, before the first AI prompt of a new feature, not after something goes wrong",
+        "Treat 'just try it on main real quick' as a decision to actively resist",
+        "Delete failed experiment branches without guilt once they've served their purpose",
+        "Keep a feature branch scoped to one feature, resisting the temptation to also fix something unrelated on it",
+        "Check which branch is active before starting any AI-assisted change"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a request to try a risky AI-assisted refactor, start it on its own branch, and if it fails, discard the branch cleanly with main untouched.",
+      "common_failure": "Running a risky AI-assisted experiment directly on main because it seemed small enough not to bother branching — when it goes wrong, undoing it means untangling main's history instead of just deleting a branch.",
+      "sources": ["Pro Git book", "GitHub flow documentation"]
+    },
+    {
+      "id": "vibecoding.iteration.rollback-discipline",
+      "label": "Rollback discipline",
+      "tier": 3,
+      "cluster": "iteration",
+      "prereqs": ["vibecoding.iteration.context-window-management", "vibecoding.iteration.diff-sized-commits"],
+      "one_line": "Recognize when an AI session has gone sideways and roll back to the last good checkpoint instead of prompting your way out.",
+      "hours": 8,
+      "soft_prereqs": [],
+      "know_what": [
+        "Sideways session — an AI session that's stopped converging: each new prompt fixes one thing while breaking or reintroducing another",
+        "Sunk-cost prompting — continuing to prompt a failing session because of the effort already invested in it, rather than because continuing is actually likely to work",
+        "Last good checkpoint — the most recent verified commit, the concrete point a rollback returns to, which is only usable if checkpointing discipline was followed",
+        "Rollback vs patch-forward — reverting to a known-good state versus trying to fix the current broken state in place; rollback is often faster once a session has genuinely gone sideways",
+        "Sideways-session signal — an increasing rate of new bugs per fix, or the same bug reappearing after being 'fixed' twice, both concrete, checkable signals rather than a vague feeling"
+      ],
+      "know_how": [
+        "Count fixes-per-new-bug during a session; a worsening ratio is a concrete signal to stop and roll back",
+        "Roll back to the last verified commit rather than trying one more prompt to fix a sideways session",
+        "Diagnose what actually went wrong after rolling back, before re-attempting the same task",
+        "Distinguish a session that's genuinely converging slowly from one that's actually gone sideways before deciding to roll back",
+        "Treat time already spent in a sideways session as sunk, not as a reason to keep pushing"
+      ],
+      "habits": [
+        "Name out loud when a fix reintroduces a previous bug — that's the rollback signal, not a reason to try harder",
+        "Roll back decisively rather than attempting 'one more fix' after noticing the sideways pattern",
+        "Re-diagnose from the last good checkpoint instead of resuming the same failing thread",
+        "Resist the sunk-cost pull of a long session that's stopped producing progress",
+        "Keep the last good checkpoint's commit hash noted or easy to find during any risky session"
+      ],
+      "know_why": {
+        "claim": "Rolling back to a checkpoint is usually faster than continuing to prompt a session that's gone sideways.",
+        "because": "A session that's stopped converging has already demonstrated it's optimizing for the wrong thing (patching symptoms of its own earlier mistakes), so more prompts in the same context tend to compound the confusion rather than resolve it.",
+        "disputed_by": "The agentic-autonomy school argues a capable agent can often self-correct given a clear enough error signal (a failing test, a stack trace), and treats an early rollback as underusing the agent's ability to recover on its own.",
+        "source": "Practitioner writing on AI-assisted debugging loops (Anthropic's agentic coding guidance)"
+      },
+      "school_weights": { "manual-gate": "high", "agentic-autonomy": "low" },
+      "checkpoint": "Given a session where the last two fixes each reintroduced a bug fixed by the other, recognize the sideways pattern and roll back to the last verified commit instead of attempting a third fix in place.",
+      "common_failure": "Continuing to prompt a sideways session because each individual fix seems reasonable in isolation — the session's own errors are compounding, and the fastest way out is often the rollback that was available three prompts ago.",
+      "sources": ["Anthropic — building effective agents", "software engineering writing on debugging loops and sunk cost"]
+    },
+    {
+      "id": "vibecoding.iteration.session-handoff-notes",
+      "label": "Session handoff notes",
+      "tier": 3,
+      "cluster": "iteration",
+      "prereqs": ["vibecoding.iteration.branch-per-feature"],
+      "one_line": "Write a short state note at the end of a session so the next session — yours or the AI's — resumes without re-deriving context.",
+      "hours": 6,
+      "soft_prereqs": [],
+      "know_what": [
+        "Handoff note — a short written summary of a session's state (what's done, what's next, what's blocked) written for whoever picks the work up next, human or AI",
+        "State vs history — a handoff note records current state and next steps, not a full transcript of everything tried, which is what makes it fast to read",
+        "Re-derivation cost — the time a new session spends reconstructing context that already existed in a previous session's head, which a handoff note exists to cut",
+        "Blocked-on note — a specific, named reason a task stalled, distinct from a vague 'didn't finish', so the next session knows exactly what to resolve first",
+        "Handoff location — where the note lives (a PR description, a project doc, a commit message) so it's actually findable by whoever needs it next"
+      ],
+      "know_how": [
+        "Write what's done, what's next, and what's blocked in three short sections before ending a session",
+        "Name the specific reason a task is blocked, not just that it is",
+        "Point to the exact file, branch, or commit the next session should start from",
+        "Keep the note short enough to read in under a minute, cutting narrative detail that isn't decision-relevant",
+        "Write the note before closing the session, not from memory afterward"
+      ],
+      "habits": [
+        "End every non-trivial session with a written handoff note, even a short one",
+        "Read the previous handoff note before starting a new session on the same task",
+        "Name blockers specifically rather than writing 'stuck, needs more work'",
+        "Point the note at a concrete file or commit rather than a vague area of the codebase",
+        "Update the note if the state changes further in the same sitting, rather than leaving it stale"
+      ],
+      "know_why": null,
+      "school_weights": {},
+      "checkpoint": "Given a session that ends mid-task, write a handoff note (done / next / blocked, with a specific pointer) that lets a fresh session resume correctly without re-reading the prior session's full transcript.",
+      "common_failure": "Ending a session with no note because the context feels fresh in the moment — a week later, or in an agent's next session, that context is gone, and the same ground gets re-explored from scratch instead of picked up where it left off.",
+      "sources": ["Anthropic — Claude Code best practices", "software engineering handoff / documentation practice"]
+    }
+  ]
+}

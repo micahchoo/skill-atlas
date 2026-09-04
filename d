@@ -1,0 +1,1 @@
+{"action": "run", "name": "atlas-headless", "code": "\nawait tab.goto('http' + '://' + 'localhost':4321'/');\ndisplay(await tab.title());\n"}
